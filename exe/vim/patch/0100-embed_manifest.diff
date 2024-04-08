@@ -1,0 +1,57 @@
+# HG changeset patch
+# Parent ae0837c7cccd3790f2ea18bd8e3e1e16495275e4
+embed manifest file to EXE and DLL when available (for MSVC9)
+
+diff --git a/src/Make_mvc.mak b/src/Make_mvc.mak
+index 811ab9eed..62bc43722 100644
+--- a/src/Make_mvc.mak
++++ b/src/Make_mvc.mak
+@@ -1390,13 +1390,16 @@ install.exe: dosinst.c dosinst.h version.h
+ 		-link -subsystem:$(SUBSYSTEM_TOOLS)
+ 	- if exist install.exe del install.exe
+ 	ren dosinst.exe install.exe
++	IF EXIST $@.manifest mt -nologo -manifest $@.manifest -outputresource:$@;1
+ 
+ uninstall.exe: uninstall.c dosinst.h version.h
+ 	$(CC) $(CFLAGS_INST) uninstall.c shell32.lib advapi32.lib \
+ 		-link -subsystem:$(SUBSYSTEM_TOOLS)
++	IF EXIST $@.manifest mt -nologo -manifest $@.manifest -outputresource:$@;1
+ 
+ vimrun.exe: vimrun.c
+ 	$(CC) /nologo -DNDEBUG vimrun.c -link -subsystem:$(SUBSYSTEM_TOOLS)
++	IF EXIST $@.manifest mt -nologo -manifest $@.manifest -outputresource:$@;1
+ 
+ xxd/xxd.exe: xxd/xxd.c
+ 	cd xxd
+@@ -1424,6 +1427,7 @@ clean: testclean
+ 	- if exist $(OUTDIR)/nul $(DEL_TREE) $(OUTDIR)
+ 	- if exist *.obj del *.obj
+ 	- if exist $(VIM).exe del $(VIM).exe
++	- if exist $(VIM).exe.manifest del $(VIM).exe.manifest
+ 	- if exist $(VIM).ilk del $(VIM).ilk
+ 	- if exist $(VIM).pdb del $(VIM).pdb
+ 	- if exist $(VIM).map del $(VIM).map
+diff --git a/src/tee/Make_mvc.mak b/src/tee/Make_mvc.mak
+index 950100d3c..179965600 100644
+--- a/src/tee/Make_mvc.mak
++++ b/src/tee/Make_mvc.mak
+@@ -10,6 +10,7 @@ CFLAGS=/O2 /nologo
+ 
+ tee.exe: tee.obj
+ 	$(CC) $(CFLAGS) /Fo$@ $** /link /subsystem:$(SUBSYSTEM)
++	IF EXIST $@.manifest mt -nologo -manifest $@.manifest -outputresource:$@;1
+ 
+ tee.obj: tee.c
+ 	$(CC) $(CFLAGS) /c $**
+diff --git a/src/xxd/Make_mvc.mak b/src/xxd/Make_mvc.mak
+index 0133d7311..dd71468af 100644
+--- a/src/xxd/Make_mvc.mak
++++ b/src/xxd/Make_mvc.mak
+@@ -10,6 +10,7 @@ xxd: xxd.exe
+ 
+ xxd.exe: xxd.c
+ 	cl /nologo -DWIN32 xxd.c -link -subsystem:$(SUBSYSTEM)
++	IF EXIST $@.manifest mt -nologo -manifest $@.manifest -outputresource:$@;1
+ 
+ # This was for an older compiler
+ #    cl /nologo -DWIN32 xxd.c /link setargv.obj

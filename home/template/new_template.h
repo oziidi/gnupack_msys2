@@ -1,0 +1,19 @@
+
+/* %file% */
+
+#ifndef %include-guard%
+#define %include-guard%
+
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
+
+
+
+
+#ifdef __cplusplus
+}
+#endif /* __cplusplus */
+
+#endif

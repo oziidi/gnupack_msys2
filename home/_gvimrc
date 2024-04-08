@@ -1,0 +1,33 @@
+" don't use viminfo file"
+set viminfo=
+
+" don't use swap file"
+set noswapfile
+
+" don't use backup file"
+set nobackup
+
+" enable highlight"
+syntax on
+
+" colorscheme PaperColor
+" colorscheme Kalisi
+" colorscheme amlight
+" colorscheme blandon
+" colorscheme open-color
+" colorscheme pencil
+" set background=light
+
+" colorscheme busybee
+colorscheme badwolf
+set background=dark
+
+set t_Co=256
+
+" setting IME behavior"
+set iminsert=0 imsearch=0
+inoremap <silent> <ESC> <ESC>
+
+" setting Font"
+set guifont=Migu_1M:h11
+

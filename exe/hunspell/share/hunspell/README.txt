@@ -1,0 +1,1 @@
+License: https://cgit.freedesktop.org/libreoffice/dictionaries/tree/
