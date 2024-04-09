@@ -107,6 +107,7 @@ $ pacman -S mingw-w64-x86_64-emacs
   + imenu-list
   + markdown-mode
   + moccur (color-moccur & moccur-edit)
+  + persistent-emacs
   + redo+
   + restart-emacs
   + text-adjust
@@ -156,6 +157,10 @@ $ pacman -S mingw-w64-x86_64-emacs
   + dark-laptop
   + badwolf
   + high-contrast
+
+* persistent-emacs  
+  
+  scratchバッファは、`gnupack_msys2\scratch\scratch.emacs`に保存され、このファイルから復元される。
 
 <br>
 
