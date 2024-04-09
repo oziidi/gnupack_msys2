@@ -6,6 +6,7 @@ set DICTIONARY=en_US
 set DICPATH=%DRIVE%:/gnupack_msys2/exe/hunspell/share/hunspell
 set MIGEDIC=%DRIVE%:/gnupack_msys2/exe/cmigemo/dict/utf-8/migemo-dict
 set MKDWCSS=%DRIVE%:/gnupack_msys2/script/github-markdown.css
+set SCRATCH=%DRIVE%:/gnupack_msys2/scratch/scratch.emacs
 set TMP=%DRIVE%:\gnupack_msys2\temp\emacs
 set TEMP=%DRIVE%:\gnupack_msys2\temp\emacs
 
