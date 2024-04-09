@@ -21,10 +21,19 @@ set DRIVE=C
 ```
   
 ↓  
-  
-emacs起動 ==> gnupack_msys2\startup_emacs.vbs  
-gvim起動 ==> gnupack_msys2\startup_gvim.vbs  
-MSYS2起動 ==> gnupack_msys2\startup_msys2.vbs  
+
+MSYS2を`gnupack_msys2\exe\msys64\`にインストール
+
+↓  
+
+emacs起動  
+==> gnupack_msys2\startup_emacs.vbs  
+
+gvim起動  
+==> gnupack_msys2\startup_gvim.vbs  
+
+MSYS2起動  
+==> gnupack_msys2\startup_msys2.vbs  
 
 <br>
 
@@ -46,7 +55,7 @@ KaoriYa ([https://www.kaoriya.net/software/cmigemo/](https://www.kaoriya.net/sof
 gnupack_msys2\exe\cmigemo
 ```
 
-migemo-dictの場所は、startup_emacs.batで下記のように設定して  
+migemo-dictの場所は、startup_emacs.cmdで下記のように設定して  
 
 ```
 set MIGEDIC=%DRIVE%:/gnupack_msys2/exe/cmigemo/dict/utf-8/migemo-dict
@@ -178,7 +187,7 @@ ispell-find-hunspell-dictionaries: Can’t find Hunspell dictionary with a .aff 
 ```
 を読んでみたところ、emacs 28.2では、hunspell-default-dictの設定が肝らしいことがわかり、下記のやり方で辞書が見つからないエラーが解消し、M-x ispellでhunspellを使えるようになった。  
 ※下記の%DRIVE%は適宜読み替えてください。  
-※下記の1, 2, 3はstartup_emacs.batにまとめてあります。  
+※下記の1, 2, 3はstartup_emacs.cmdにまとめてあります。  
 
 1. 環境変数 LANG=en_US.UTF-8 に設定
 
