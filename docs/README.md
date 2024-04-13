@@ -12,12 +12,11 @@ gnupack_msys2 を任意のドライブ直下に配置。
   
 ↓  
   
-配置したドライブに併せて gnupack_msys2\\adapt_drive.cmd を調整。  
-C:\\gnupack_msys2 にしているなら下記の通り。  
+配置したドライブに併せて `gnupack_msys2\script\adapt_drive.ps1` を調整。  
+`C:\gnupack_msys2` に配置しているなら下記の通り。  
 
 ```
-@echo off
-set DRIVE=C
+$env:DRIVE = "C"
 ```
   
 ↓  
@@ -27,13 +26,13 @@ MSYS2を`gnupack_msys2\exe\msys64\`にインストール
 ↓  
 
 emacs起動  
-==> gnupack_msys2\startup_emacs.vbs  
+==> `gnupack_msys2\startup_emacs.ps1`  
 
 gvim起動  
-==> gnupack_msys2\startup_gvim.vbs  
+==> `gnupack_msys2\startup_gvim.ps1`  
 
 MSYS2起動  
-==> gnupack_msys2\startup_msys2.vbs  
+==> `gnupack_msys2\startup_msys2.ps1`  
 
 <br>
 
@@ -55,13 +54,13 @@ KaoriYa ([https://www.kaoriya.net/software/cmigemo/](https://www.kaoriya.net/sof
 gnupack_msys2\exe\cmigemo
 ```
 
-migemo-dictの場所は、startup_emacs.cmdで下記のように設定して  
+migemo-dictの場所は、setenv_emacs.ps1で下記のように設定して  
 
 ```
-set MIGEDIC=%DRIVE%:/gnupack_msys2/exe/cmigemo/dict/utf-8/migemo-dict
+$env:MIGEDIC = $env:DRIVE + ":/gnupack_msys2/exe/cmigemo/dict/utf-8/migemo-dict"
 ```
 
-gnupack_msys2\home\.emacs.d\init.el で下記のように取り込み。
+`gnupack_msys2\home\.emacs.d\init.el` で下記のように取り込み。
 
 ``` emacs-lisp
 (setq migemo-dictionary (getenv "MIGEDIC"))
@@ -70,7 +69,7 @@ gnupack_msys2\home\.emacs.d\init.el で下記のように取り込み。
 <br>
 
 ## cscope
-Windows受けにビルドされたcscope-win32  
+Windows用にビルドされたcscope-win32  
 cscope-win32 ([https://code.google.com/archive/p/cscope-win32/downloads?authuser=0](https://code.google.com/archive/p/cscope-win32/downloads?authuser=0))  
 ここから、cscope-15.8a-win64rev1-static.zip をダウンロード、インストール、解凍して、  
 cscope.exe を下記に配置。  
@@ -191,58 +190,58 @@ ispell-find-hunspell-dictionaries: Can’t find Hunspell dictionary with a .aff 
 /emacs/share/emacs/28.2/lisp/textmodes/ispell.el  
 ```
 を読んでみたところ、emacs 28.2では、hunspell-default-dictの設定が肝らしいことがわかり、下記のやり方で辞書が見つからないエラーが解消し、M-x ispellでhunspellを使えるようになった。  
-※下記の%DRIVE%は適宜読み替えてください。  
-※下記の1, 2, 3はstartup_emacs.cmdにまとめてあります。  
+※下記の`$env:DRIVE`は適宜読み替えてください。  
+※下記の1, 2, 3はsetenv_emacs.ps1にまとめてあります。  
 
 1. 環境変数 LANG=en_US.UTF-8 に設定
 
-2. hunspell\binにパスを通す。このgnupack_msys2の場合は
-   ``` batchfile
-   set PATH=%DRIVE%:\gnupack_msys2\exe\hunspell\bin;%PATH%
+2. hunspell\binにパスを通す。このgnupack_msys2の場合は、setenv.ps1にて下記を実行
+   ``` powershell
+   $env:PATH = $env:DRIVE + ":\gnupack_msys2\exe\hunspell\bin;" + $env:PATH
    ```
 
-3. emacsの起動前に下記の環境変数を設定
-   ``` batchfile
-   set DICTIONARY=en_US
-   set DICPATH=%DRIVE%:/gnupack_msys2/exe/hunspell/share/hunspell
+3. emacsの起動前に下記の環境変数をsetenv_emacs.ps1にて設定
+   ``` powershell
+   $env:DICTIONARY = "en_US"
+   $env:DICPATH = $env:DRIVE + ":/gnupack_msys2/exe/hunspell/share/hunspell"
    ```
 
 4. home/.emacs.d/init.elに下記を記述。
    ``` emacs-lisp
-	(setq ispell-program-name "hunspell")
-	(setq ispell-local-dictionary "en_US")
-	
-	;; string        :tag "Dictionary name"          => "en_US"
-	;; regexp        :tag "Case characters"          => "[[:alpha:]]"
-	;; regexp        :tag "Non case characters"      => "[^[:alpha:]]"
-	;; regexp        :tag "Other characters"         => "[']"
-	;; boolean       :tag "Many other characters"    => nil
-	;; repeat        :tag "Ispell command line args" => ("-d" "en_US" "-i" "utf-8")
-	;; choice        :tag "Extended character mode"  => nil
-	;; coding-system :tag "Coding system"            => utf-8
-	(setq ispell-local-dictionary-alist
-	      '(("en_US"
-	         "[[:alpha:]]"
-	         "[^[:alpha:]]"
-	         "[']"
-	         nil
-	         ("-d" "en_US" "-i" "utf-8")
-	         nil
-	         utf-8)))
-	
-	;; new variable 'ispell-hunspell-dictionary-alist' is defined
-	;; in Emacs. If it's nil, Emacs tries to automatically set up
-	;; the dictionaries.
-	(setq ispell-hunspell-dictionary-alist ispell-local-dictionary-alist)
-	
-	;; With Emacs 28.2 may also need to set hunspell-default-dict
-	(setq hunspell-default-dict "en_US")
-	
-	(ispell-change-dictionary "en_US" t)
-	
-	;; skip Japanese words
-	(add-to-list 'ispell-skip-region-alist '("[^\000-\377]+"))
-	```
+   (setq ispell-program-name "hunspell")
+   (setq ispell-local-dictionary "en_US")
+   
+   ;; string        :tag "Dictionary name"          => "en_US"
+   ;; regexp        :tag "Case characters"          => "[[:alpha:]]"
+   ;; regexp        :tag "Non case characters"      => "[^[:alpha:]]"
+   ;; regexp        :tag "Other characters"         => "[']"
+   ;; boolean       :tag "Many other characters"    => nil
+   ;; repeat        :tag "Ispell command line args" => ("-d" "en_US" "-i" "utf-8")
+   ;; choice        :tag "Extended character mode"  => nil
+   ;; coding-system :tag "Coding system"            => utf-8
+   (setq ispell-local-dictionary-alist
+         '(("en_US"
+            "[[:alpha:]]"
+            "[^[:alpha:]]"
+            "[']"
+            nil
+            ("-d" "en_US" "-i" "utf-8")
+            nil
+            utf-8)))
+   
+   ;; new variable 'ispell-hunspell-dictionary-alist' is defined
+   ;; in Emacs. If it's nil, Emacs tries to automatically set up
+   ;; the dictionaries.
+   (setq ispell-hunspell-dictionary-alist ispell-local-dictionary-alist)
+   
+   ;; With Emacs 28.2 may also need to set hunspell-default-dict
+   (setq hunspell-default-dict "en_US")
+   
+   (ispell-change-dictionary "en_US" t)
+   
+   ;; skip Japanese words
+   (add-to-list 'ispell-skip-region-alist '("[^\000-\377]+"))
+   ```
   
   
 TODO  
@@ -276,13 +275,13 @@ pandoc.exe のファイルサイズが 100MB を超えているので pandoc.zip
 
 ### emacsとの関連付け
 
-gnupack_msys2\\script\\startup_emcas.cmd にて下記環境変数を設定。
+`gnupack_msys2\script\setenv_emcas.ps1`にて下記環境変数を設定。
 
-```
-set MKDWCSS=%DRIVE%:/gnupack_msys2/script/github-markdown.css
+```powershell
+$env:MKDWCSS = $env:DRIVE + ":/gnupack_msys2/script/github-markdown.css"
 ```
 
-この環境変数を gnupack_msys2\\home\\.emacs.d\\init.el で下記のように取り出して markdown-mode.el の markdown-command に css ファイルの所在を設定。
+この環境変数を`gnupack_msys2\home\.emacs.d\init.el`で下記のように取り出して markdown-mode.el の markdown-command に css ファイルの所在を設定。
 
 ``` emacs-lisp
 (with-eval-after-load 'markdown-mode
