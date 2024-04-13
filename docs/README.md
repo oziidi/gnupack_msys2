@@ -106,7 +106,7 @@ $ pacman -S mingw-w64-x86_64-emacs
   + imenu-list
   + markdown-mode
   + moccur (color-moccur & moccur-edit)
-  + persistent-emacs
+  + persistent-scratch
   + redo+
   + restart-emacs
   + text-adjust
