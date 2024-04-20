@@ -20,17 +20,37 @@ $env:DRIVE = "C"
 ```
   
 ↓  
-
-MSYS2を`gnupack_msys2\exe\msys64\`にインストール
-
+  
+MSYS2を`gnupack_msys2\exe\msys64\`にインストール  
+  
+↓
+  
+フォントをインストール：  
+`gnupack_msys2\font\FiraCode\distr\ttf\*.ttf`  
+`gnupack_msys2\font\IPAexfont\*.ttf`  
+  
 ↓  
-
+  
+`gnupack_msys2\change_execution_policy.cmd`を管理者として実行  
+  
+↓  
+  
+`gnupack_msys2\startup_msys2.ps1`を右クリックして  
+「プログラムから開く」 >> 「別のプログラムを選択」 >> 「PCでアプリを選択」  
+その後に表示されるエクスプローラで  
+```
+C:\Windows\system32\WindowsPowerShell\v1.0\powershell.exe
+```
+を選択
+  
+↓  
+  
 emacs起動  
 ==> `gnupack_msys2\startup_emacs.ps1`  
-
+  
 gvim起動  
 ==> `gnupack_msys2\startup_gvim.ps1`  
-
+  
 MSYS2起動  
 ==> `gnupack_msys2\startup_msys2.ps1`  
 
