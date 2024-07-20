@@ -1143,6 +1143,8 @@
 ;;; @ howm                                                          ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
+(global-unset-key (kbd "C-x ,"))
+(setq howm-prefix (kbd "C-x ,"))
 (global-set-key (kbd "C-x , ,") 'howm-menu)
 
 (autoload 'howm-menu "howm" "Hitori Otegaru Wiki Modoki" t)
@@ -1153,8 +1155,6 @@
   (setq howm-history-file (concat howm-home-directory ".howm-history"))
   (setq howm-view-use-grep t)
   (setq howm-use-color nil)
-  (global-unset-key (kbd "C-x ,"))
-  (setq howm-prefix (kbd "C-x ,"))
 )
 
 
