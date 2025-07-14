@@ -1,9 +1,9 @@
-This is semantic.info, produced by makeinfo version 6.7 from
+This is semantic.info, produced by makeinfo version 6.8 from
 semantic.texi.
 
 This manual documents the Semantic library and utilities.
 
-   Copyright © 1999–2005, 2007, 2009–2022 Free Software Foundation, Inc.
+   Copyright © 1999–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -36,11 +36,11 @@ parts of Emacs.
 
    To send bug reports, or participate in discussions about semantic,
 use the mailing list cedet-semantic@sourceforge.net via the URL:
-<http://lists.sourceforge.net/lists/listinfo/cedet-semantic>
+<https://lists.sourceforge.net/lists/listinfo/cedet-semantic>
 
    This manual documents the Semantic library and utilities.
 
-   Copyright © 1999–2005, 2007, 2009–2022 Free Software Foundation, Inc.
+   Copyright © 1999–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -315,11 +315,11 @@ the “current tag”, meaning the tag at (or around) point.
 ‘C-c , <SPC>’
      Display a list of possible completions for the symbol at point
      (‘semantic-complete-analyze-inline’).  This also activates a
-     special set of keybindings for choosing a completion: <RET> accepts
-     the current completion, ‘M-n’ and ‘M-p’ cycle through possible
-     completions, <TAB> completes as far as possible and then cycles,
-     and ‘C-g’ or any other key aborts the completion.  *Note Smart
-     Completion::.
+     special set of key bindings for choosing a completion: <RET>
+     accepts the current completion, ‘M-n’ and ‘M-p’ cycle through
+     possible completions, <TAB> completes as far as possible and then
+     cycles, and ‘C-g’ or any other key aborts the completion.  *Note
+     Smart Completion::.
 
 ‘C-c , C-w’
      Kill the current tag (‘senator-kill-tag’).  This removes the text
@@ -781,7 +781,7 @@ File: semantic.info,  Node: Idle Summary Mode,  Next: Idle Completions Mode,  Pr
 Semantic Idle Summary mode is a minor mode that displays a short summary
 of the symbol at point, such as its function prototype, in the echo
 area.  Its functionality is similar to what ElDoc mode provides for
-Emacs Lisp (*note (emacs)Lisp Doc::).
+Emacs Lisp (*note (emacs)Programming Language Doc::).
 
  -- global-semantic-idle-summary-mode: &optional arg
      This command toggles Semantic Idle Summary mode in all
@@ -816,7 +816,8 @@ File: semantic.info,  Node: Idle Completions Mode,  Prev: Idle Summary Mode,  Up
 
 Semantic Idle Completions mode is a minor mode for performing “code
 completions” during idle time.  The completions are displayed inline,
-with keybindings that allow you to cycle through different alternatives.
+with key bindings that allow you to cycle through different
+alternatives.
 
    Semantic Idle Completions mode performs completion based on the
 Semantic Analyzer (*note Analyzer::).
@@ -836,7 +837,7 @@ completion, and whether there are other possible completions, like this:
 
      besselj [1 of 6 matches]
 
-While the completion is being displayed, the following keybindings take
+While the completion is being displayed, the following key bindings take
 effect:
 
 ‘<RET>’
@@ -935,7 +936,7 @@ Semantic Analyzer.  *Note Idle Completions Mode::.)
      This command is bound to ‘C-c , <SPC>’ when Semantic mode is
      enabled (*note Semantic mode user commands::).  It displays a list
      of possible completions for the symbol at point, and activates a
-     special set of keybindings for choosing a completion.
+     special set of key bindings for choosing a completion.
 
      You can type <RET> to accept the current completion, ‘M-n’ and
      ‘M-p’ to cycle through the possible completions, <TAB> to complete
@@ -1249,9 +1250,9 @@ tables for you; you must manage them yourself.
      much slower than the others.
 
    The commands to display symbol references are ‘C-c , g’
-(‘semantic-symref-symbol’ and ‘C-c , G’ (‘semantic-symref’).  These
-keybindings are available whenever Semantic mode is enabled (*note
-Semantic mode user commands::).
+(‘semantic-symref-symbol’ and ‘C-c , G’ (‘semantic-symref’).  These key
+bindings are available whenever Semantic mode is enabled (*note Semantic
+mode user commands::).
 
  -- Command: semantic-symref-symbol sym
      This command (normally bound to ‘C-c , g’) prompts for a symbol
@@ -2268,7 +2269,7 @@ Index
 
 * &optional:                             Idle Summary Mode.    (line 11)
 * &optional <1>:                         Idle Completions Mode.
-                                                               (line 13)
+                                                               (line 14)
 * Analyzer:                              Analyzer.             (line  6)
 * define-semantic-decoration-style:      Tag Decoration Mode.  (line 73)
 * global-semantic-decoration-mode:       Tag Decoration Mode.  (line 10)
@@ -2290,9 +2291,9 @@ Index
                                                                (line 23)
 * semantic-complete-analyze-inline:      Smart Completion.     (line 31)
 * semantic-complete-analyze-inline-idle: Idle Completions Mode.
-                                                               (line 54)
+                                                               (line 55)
 * semantic-complete-inline-analyzer-idle-displayer-class: Idle Completions Mode.
-                                                               (line 60)
+                                                               (line 61)
 * semantic-complete-inline-analyzer-idle-displayer-class <1>: Smart Completion.
                                                                (line 47)
 * semantic-customize-system-include-path: Include paths.       (line 22)
@@ -2375,47 +2376,47 @@ Index
 
 
 Tag Table:
-Node: Top938
-Node: Introduction2521
-Node: Semantic Components5832
-Node: Using Semantic7189
-Node: Semantic mode8625
-Node: Semantic mode user commands11580
-Node: SemanticDB14918
-Node: Semanticdb Tag Storage16310
-Node: Semanticdb Search Configuration18953
-Node: Search Throttle20419
-Node: Semanticdb Roots22670
-Node: Include paths24184
-Node: Semanticdb search debugging commands25501
-Node: Changing Backends26905
-Node: Create System Databases27663
-Node: Idle Scheduler28302
-Node: Reparsing Options30019
-Node: Idle Working Options31520
-Node: Debugging Idle Time Issues32803
-Node: Idle Summary Mode33489
-Node: Idle Completions Mode35121
-Node: Analyzer38191
-Node: Smart Completion38743
-Node: Smart Summary41947
-Node: Smart Jump42864
-Node: Analyzer Debug43929
-Node: Speedbar50505
-Node: SymRef51793
-Node: MRU Bookmarks53820
-Node: Sticky Func Mode54787
-Node: Highlight Func Mode55966
-Node: Tag Decoration Mode57031
-Node: Semantic Internals61139
-Node: Parser code61810
-Node: Tag handling63483
-Node: Semanticdb Internals65209
-Node: Analyzer Internals67381
-Node: Tools69400
-Node: Glossary70896
-Node: GNU Free Documentation License72952
-Node: Index98302
+Node: Top919
+Node: Introduction2484
+Node: Semantic Components5795
+Node: Using Semantic7152
+Node: Semantic mode8588
+Node: Semantic mode user commands11543
+Node: SemanticDB14882
+Node: Semanticdb Tag Storage16274
+Node: Semanticdb Search Configuration18917
+Node: Search Throttle20383
+Node: Semanticdb Roots22634
+Node: Include paths24148
+Node: Semanticdb search debugging commands25465
+Node: Changing Backends26869
+Node: Create System Databases27627
+Node: Idle Scheduler28266
+Node: Reparsing Options29983
+Node: Idle Working Options31484
+Node: Debugging Idle Time Issues32767
+Node: Idle Summary Mode33453
+Node: Idle Completions Mode35101
+Node: Analyzer38173
+Node: Smart Completion38725
+Node: Smart Summary41930
+Node: Smart Jump42847
+Node: Analyzer Debug43912
+Node: Speedbar50488
+Node: SymRef51776
+Node: MRU Bookmarks53804
+Node: Sticky Func Mode54771
+Node: Highlight Func Mode55950
+Node: Tag Decoration Mode57015
+Node: Semantic Internals61123
+Node: Parser code61794
+Node: Tag handling63467
+Node: Semanticdb Internals65193
+Node: Analyzer Internals67365
+Node: Tools69384
+Node: Glossary70880
+Node: GNU Free Documentation License72936
+Node: Index98286
 
 End Tag Table
 

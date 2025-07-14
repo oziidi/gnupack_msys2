@@ -1,7 +1,7 @@
-This is pcl-cvs.info, produced by makeinfo version 6.7 from
+This is pcl-cvs.info, produced by makeinfo version 6.8 from
 pcl-cvs.texi.
 
-Copyright © 1991–2022 Free Software Foundation, Inc.
+Copyright © 1991–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -29,7 +29,7 @@ nowhere near complete, so you are advised to use ‘M-x customize-group
 <RET> pcl-cvs <RET>’ and to look at the documentation strings of the
 various commands and major modes for further information.
 
-   Copyright © 1991–2022 Free Software Foundation, Inc.
+   Copyright © 1991–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -431,8 +431,8 @@ File: pcl-cvs.info,  Node: Entering PCL-CVS,  Next: Setting flags,  Up: Commands
 Most commands in PCL-CVS require that you have a ‘*cvs*’ buffer.  The
 commands that you use to get one are listed below.  For each, a ‘cvs’
 process will be run, the output will be parsed by PCL-CVS, and the
-result will be printed in the ‘*cvs*’ buffer (see *note Buffer
-contents::, for a description of the buffer’s contents).
+result will be printed in the ‘*cvs*’ buffer (*note Buffer contents::,
+for a description of the buffer’s contents).
 
 ‘M-x cvs-update’
      Run a ‘cvs update’ command.  You will be asked for the directory in
@@ -1902,31 +1902,31 @@ Node: Buffer contents10293
 Node: Selected files14723
 Node: Commands16424
 Node: Entering PCL-CVS17843
-Node: Setting flags20153
-Node: Updating the buffer22727
-Node: Movement commands23868
-Node: Marking files24470
-Node: Committing changes25688
-Node: Editing files27685
-Node: Getting info about files28653
-Node: Adding and removing files29204
-Node: Undoing changes30539
-Node: Removing handled entries31025
-Node: Ignoring files31921
-Node: Viewing differences32497
-Node: Invoking Ediff34176
-Node: Updating files35077
-Node: Tagging files35359
-Node: Miscellaneous commands36183
-Node: Log Edit Mode37205
-Node: Log View Mode38577
-Node: Customization39177
-Node: Customizing Faces42972
-Node: Bugs43790
-Node: GNU Free Documentation License45236
-Node: Function and Variable Index70603
-Node: Concept Index78014
-Node: Key Index86438
+Node: Setting flags20149
+Node: Updating the buffer22723
+Node: Movement commands23864
+Node: Marking files24466
+Node: Committing changes25684
+Node: Editing files27681
+Node: Getting info about files28649
+Node: Adding and removing files29200
+Node: Undoing changes30535
+Node: Removing handled entries31021
+Node: Ignoring files31917
+Node: Viewing differences32493
+Node: Invoking Ediff34172
+Node: Updating files35073
+Node: Tagging files35355
+Node: Miscellaneous commands36179
+Node: Log Edit Mode37201
+Node: Log View Mode38573
+Node: Customization39173
+Node: Customizing Faces42968
+Node: Bugs43786
+Node: GNU Free Documentation License45232
+Node: Function and Variable Index70599
+Node: Concept Index78010
+Node: Key Index86434
 
 End Tag Table
 

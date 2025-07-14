@@ -1,11 +1,11 @@
-This is eudc.info, produced by makeinfo version 6.7 from eudc.texi.
+This is eudc.info, produced by makeinfo version 6.8 from eudc.texi.
 
 This file documents EUDC version 1.40.0.
 
    EUDC is the Emacs Unified Directory Client, a common interface to
 directory servers and contact information.
 
-   Copyright © 1998, 2000–2022 Free Software Foundation, Inc.
+   Copyright © 1998, 2000–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -33,7 +33,7 @@ This file documents EUDC version 1.40.0.
    EUDC is the Emacs Unified Directory Client, a common interface to
 directory servers and contact information.
 
-   Copyright © 1998, 2000–2022 Free Software Foundation, Inc.
+   Copyright © 1998, 2000–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -70,6 +70,8 @@ protocols.
    • LDAP, Lightweight Directory Access Protocol
    • BBDB, Big Brother’s Insidious Database
    • macOS Contacts
+   • ‘ecomplete’, Emacs’s electrical completion
+   • ‘mailabbrev’, Emacs’s abbrev-expansion of mail aliases
 
    The main features of the EUDC interface are:
 
@@ -88,6 +90,8 @@ protocols.
 * LDAP::                        What is LDAP ?
 * BBDB::                        What is BBDB ?
 * macOS Contacts::              What is macOS Contacts ?
+* ecomplete::                   What is ‘ecomplete’ ?
+* mailabbrev::                  What is ‘mailabbrev’?
 
 
 File: eudc.info,  Node: LDAP,  Next: BBDB,  Up: Overview
@@ -141,7 +145,7 @@ on multiple servers.
 into your own local BBDB (*note Creating BBDB Records::)
 
 
-File: eudc.info,  Node: macOS Contacts,  Prev: BBDB,  Up: Overview
+File: eudc.info,  Node: macOS Contacts,  Next: ecomplete,  Prev: BBDB,  Up: Overview
 
 1.3 macOS Contacts
 ==================
@@ -153,14 +157,72 @@ Book; the EUDC macOS Contacts back end also works on those older
 versions.
 
 
+File: eudc.info,  Node: ecomplete,  Next: mailabbrev,  Prev: macOS Contacts,  Up: Overview
+
+1.4 ‘ecomplete’
+===============
+
+‘ecomplete’ is Emacs’s “electric completion”, and it is part of Emacs.
+It stores all information in an ‘ecompleterc’ file, whose location, and
+name can be configured via the variable ‘ecomplete-database-file’ (which
+see).  The format of the file is:
+
+     ((TYPE_1 ITEM_1 ITEM_2 ...)
+      (TYPE_2 ITEM_N+1 ITEM_N+2 ...)
+      ...)
+
+   That is, it is an alist map where the key is the type of match (so
+that you can have one list of things for “mail”, and one for, say,
+“mastodon”).  In each of these sections you then have a list where each
+item is of the form:
+
+     (KEY TIMES-USED LAST-TIME-USED STRING)
+
+   When performing a query, the result will be all items where the
+search term matches all, or part of STRING.
+
+   When EUDC performs queries with ‘ecomplete’, the name of each
+attribute making up the query is used as the type in which the lookup is
+performed.  The mapping from EUDC attribute names to ‘ecomplete’ type
+names is performed according to the variable
+‘eudc-ecomplete-attributes-translation-alist’ (which see).
+
+
+File: eudc.info,  Node: mailabbrev,  Prev: ecomplete,  Up: Overview
+
+1.5 ‘mailabbrev’
+================
+
+‘mailabbrev’ is Emacs’s “abbrev-expansion of mail aliases”, and it is
+part of Emacs.  It stores all information in a ‘mailrc’ file, whose
+location, and name can be configured via the variable
+‘mail-personal-alias-file’ (which see).  The ‘mailrc’ file has the same
+format as the ‘mail’ and ‘mailx’ commands use for their startup
+configuration file.  ‘mailabbrev’ processes ‘alias’, and ‘source’
+statements in the ‘mailrc’ file.  ‘alias’ statements can define simple
+aliases and distribution lists, and can be nested in that the alias
+expansion can contain references to other alias definitions.  Forward
+references, that is references to aliases before they are actually
+defined, are possible, too.
+
+   Originally, ‘mailabbrev’ was designed to be used with ‘abbrev-mode’.
+The ‘mailabbrev’ EUDC backend does not use ‘abbrev-mode’, but queries
+‘mailabbrev’ for alias entries only, and returns these as EUDC results.
+All entries where the alias name exactly equals either the ‘email’,
+‘name’, or ‘firstname’ attribute value in the EUDC query, will be
+returned as matches.  When a ‘mailrc’ alias defines a distribution list,
+that is it expands to more than one email address, the EUDC result will
+contain a single entry, which will contain an email attribute only,
+whose value will be a comma-separated list of RFC 5322 formatted
+recipient specifications.
+
+
 File: eudc.info,  Node: Installation,  Next: Usage,  Prev: Overview,  Up: Top
 
 2 Installation
 **************
 
-Add the following to your ‘.emacs’ init file:
-     (require 'eudc)
-   This will install EUDC at startup.
+EUDC is built-in to Emacs, and its main functions are autoloaded.
 
    After installing EUDC you will find (the next time you launch Emacs)
 a new ‘Directory Search’ submenu in the ‘Tools’ menu that will give you
@@ -171,14 +233,16 @@ initialization file to add a shortcut for email address expansion in
 email composition buffers (*note Inline Query Expansion::)
 
      (with-eval-after-load "message"
-       (define-key message-mode-map [(control ?c) (tab)] 'eudc-expand-inline))
+       (define-key message-mode-map [(control ?c) (tab)] 'eudc-expand-try-all))
      (with-eval-after-load "sendmail"
-       (define-key mail-mode-map [(control ?c) (tab)] 'eudc-expand-inline))
+       (define-key mail-mode-map [(control ?c) (tab)] 'eudc-expand-try-all))
 
 * Menu:
 
 * LDAP Configuration::           EUDC needs external support for LDAP
 * macOS Contacts Configuration:: Enable the macOS Contacts backend
+* ecomplete Configuration::      Enable the ecomplete backend
+* mailabbrev Configuration::     Enable the mailabbrev backend
 
 
 File: eudc.info,  Node: LDAP Configuration,  Next: macOS Contacts Configuration,  Up: Installation
@@ -222,7 +286,8 @@ example, attempting to TAB-complete the following:
 
 will return all LDAP entries with surnames that begin with ‘Smith’.  In
 every LDAP query it makes, EUDC implicitly appends the wildcard
-character to the end of the last word.
+character to the end of the last word, except if the word corresponds to
+an attribute which is a member of ‘eudc-ldap-no-wildcard-attributes’.
 
 * Menu:
 
@@ -247,19 +312,19 @@ installation, this can be as simple as one line:
    In ‘.emacs’, these expressions suffice to configure EUDC for LDAP:
 
      (with-eval-after-load "message"
-       (define-key message-mode-map (kbd "TAB") 'eudc-expand-inline))
-     (customize-set-variable 'eudc-server-hotlist
-                             '(("" . bbdb)
-                               ("ldaps://ldap.gnu.org" . ldap)))
-     (customize-set-variable 'ldap-host-parameters-alist
-                             '(("ldaps://ldap.gnu.org"
-                                base "ou=people,dc=gnu,dc=org"
-                                binddn "gnu\\emacsuser"
-                                passwd ldap-password-read)))
+       (define-key message-mode-map (kbd "TAB") 'eudc-expand-try-all))
+     (setopt eudc-server-hotlist
+             '(("" . bbdb)
+               ("ldaps://ldap.gnu.org" . ldap)))
+     (setopt ldap-host-parameters-alist
+             '(("ldaps://ldap.gnu.org"
+                       base "ou=people,dc=gnu,dc=org"
+                       binddn "gnu\\emacsuser"
+                       passwd ldap-password-read)))
 
    Specifying the function ‘ldap-password-read’ for ‘passwd’ will cause
 Emacs to prompt interactively for the password.  The password will then
-be validated and cached, unless ‘password-cache’ is nil.  You can
+be validated and cached, unless ‘password-cache’ is ‘nil’.  You can
 customize ‘password-cache-expiry’ to control the duration for which the
 password is cached.  If you want to clear the cache, call
 ‘password-reset’.
@@ -287,13 +352,13 @@ can be specified in ‘~/.authinfo.gpg’ with the following line:
 configure EUDC for LDAP:
 
      (with-eval-after-load "message"
-       (define-key message-mode-map (kbd "TAB") 'eudc-expand-inline))
-     (customize-set-variable 'eudc-server-hotlist
-                             '(("" . bbdb)
-                               ("ldaps://ldap.gnu.org" . ldap)))
-     (customize-set-variable 'ldap-host-parameters-alist
-                             '(("ldaps://ldap.gnu.org"
-                                auth-source t)))
+       (define-key message-mode-map (kbd "TAB") 'eudc-expand-try-all))
+     (setopt eudc-server-hotlist
+             '(("" . bbdb)
+               ("ldaps://ldap.gnu.org" . ldap)))
+     (setopt ldap-host-parameters-alist
+             '(("ldaps://ldap.gnu.org"
+                       auth-source t)))
 
    For this example where we only care about one server, the server name
 can be omitted in ‘~/.authinfo.gpg’ and ‘.emacs’, in which case
@@ -306,11 +371,11 @@ can be omitted in ‘~/.authinfo.gpg’ and ‘.emacs’, in which case
 and the ‘.emacs’ expressions become:
 
      (with-eval-after-load "message"
-       (define-key message-mode-map (kbd "TAB") 'eudc-expand-inline))
-     (customize-set-variable 'eudc-server-hotlist
-                             '(("" . bbdb) ("" . ldap)))
-     (customize-set-variable 'ldap-host-parameters-alist
-                             '(("" auth-source t)))
+       (define-key message-mode-map (kbd "TAB") 'eudc-expand-try-all))
+     (setopt eudc-server-hotlist
+             '(("" . bbdb) ("" . ldap)))
+     (setopt ldap-host-parameters-alist
+             '(("" auth-source t)))
 
 
 File: eudc.info,  Node: Troubleshooting,  Prev: External Configuration,  Up: LDAP Configuration
@@ -331,7 +396,7 @@ pasted into a terminal.  Set the ‘ldapsearch’ debug level to 5 by
 appending ‘-d 5’ to the command line.
 
 
-File: eudc.info,  Node: macOS Contacts Configuration,  Prev: LDAP Configuration,  Up: Installation
+File: eudc.info,  Node: macOS Contacts Configuration,  Next: ecomplete Configuration,  Prev: LDAP Configuration,  Up: Installation
 
 2.2 macOS Contacts Configuration
 ================================
@@ -353,14 +418,45 @@ versions since 10.0 (which was released 2001).
 ‘eudcb-macos-contacts.el’ is hence recommended for all new
 configurations.
 
-   ‘eudcb-mab.el’ reverse engineers the format of the database file used
-by the macOS Contacts app, and accesses its contents directly.  While
-this may promise some performance advantages, it comes at the cost of
-using an undocumented interface.  Hence, users of ‘eudcb-mab.el’ are
-recommended to double check the compatibility of ‘eudcb-mab.el’ before
-upgrading to a new version of macOS. ‘eudcb-mab.el’ is retained for
-backwards compatibility with existing configurations, and may be removed
-in a future release.
+   ‘eudcb-mab.el’ reverse engineers the format of the database file
+using the external command-line utility named contacts, which needs to
+be installed separately.  While this may promise some performance
+advantages, it comes at the cost of using an undocumented interface.
+Hence, users of ‘eudcb-mab.el’ are recommended to double check the
+compatibility of ‘eudcb-mab.el’ and the required, external command-line
+utility before upgrading to a new version of macOS. ‘eudcb-mab.el’ is
+retained for backwards compatibility with existing configurations, and
+may be removed in a future release.
+
+
+File: eudc.info,  Node: ecomplete Configuration,  Next: mailabbrev Configuration,  Prev: macOS Contacts Configuration,  Up: Installation
+
+2.3 ‘ecomplete’ Configuration
+=============================
+
+‘ecomplete’ is Emacs’s “electrical completion”, and is part of Emacs.
+To use it, you will need to set up a database file (*note ecomplete::)
+first.
+
+   It will be autoloaded on demand.
+
+   You can also enable multi-server queries as described in *note
+Multi-server Queries::.
+
+
+File: eudc.info,  Node: mailabbrev Configuration,  Prev: ecomplete Configuration,  Up: Installation
+
+2.4 ‘mailabbrev’ Configuration
+==============================
+
+‘mailabbrev’ is Emacs’s “abbrev-expansion of mail aliases”, and it is
+part of Emacs.  To use it, you will need to set up a database file
+(*note mailabbrev::) first.
+
+   It will be autoloaded on demand.
+
+   You can also enable multi-server queries as described in *note
+Multi-server Queries::.
 
 
 File: eudc.info,  Node: Usage,  Next: Credits,  Prev: Installation,  Up: Top
@@ -637,21 +733,35 @@ File: eudc.info,  Node: Inline Query Expansion,  Next: The Server Hotlist,  Prev
 3.4 Inline Query Expansion
 ==========================
 
+3.4.1 Inline Query Expansion Using a Key Binding
+------------------------------------------------
+
 Inline query expansion is a powerful method to get completion from your
-directory server.  The most common usage is for expanding names to email
-addresses in mail message buffers.  The expansion is performed by the
-command ‘M-x eudc-expand-inline’ which is available from the ‘Expand
-Inline Query’ menu item but can also be conveniently bound to a key
-shortcut (*note Installation::).  The operation is controlled by the
-variables ‘eudc-inline-expansion-format’, ‘eudc-inline-query-format’,
-‘eudc-expanding-overwrites-query’ and
+directory servers.  The most common usage is for expanding names to
+email addresses in mail message buffers.  The expansion is performed by
+the command ‘M-x eudc-expand-try-all’ which is available from the
+‘Expand Inline Query Trying All Servers’ menu item but can also be
+conveniently bound to a key shortcut (*note Installation::).  The
+operation is controlled by the variables ‘eudc-inline-expansion-format’,
+‘eudc-inline-query-format’, ‘eudc-expanding-overwrites-query’ and
 ‘eudc-multiple-match-handling-method’.
 
    If the query fails for a server, other servers may be tried
 successively until one of them finds a match (*note Multi-server
-Queries::).
+Queries::), or all servers can be tried and all matches returned.
 
- -- Command: eudc-expand-inline replace-p
+ -- Command: eudc-expand-try-all try-all-servers-p
+     Query some or all servers and expand the query string before point.
+     The query string consists of the buffer substring from the point
+     back to the preceding comma, colon or beginning of line.
+     ‘eudc-inline-query-format’ controls how individual words are mapped
+     onto directory attribute names.  After querying the server or
+     servers for the given string, the expansion specified by
+     ‘eudc-inline-expansion-format’ is inserted in the buffer at point.
+     If multiple matches are available, a selection window is displayed.
+     If TRY-ALL-SERVERS-P is non-‘nil’ then all servers are queried.
+
+ -- Command: eudc-expand-inline save-query-as-kill-p
      Query the server and expand the query string before point.  The
      query string consists of the buffer substring from the point back
      to the preceding comma, colon or beginning of line.
@@ -659,9 +769,10 @@ Queries::).
      onto directory attribute names.  After querying the server for the
      given string, the expansion specified by
      ‘eudc-inline-expansion-format’ is inserted in the buffer at point.
-     If REPLACE-P is ‘t’ then this expansion replaces the query string
-     in the buffer.  If ‘eudc-expanding-overwrites-query’ is non-‘nil’
-     then the meaning of REPLACE-P is negated.
+     If multiple matches are available, a selection window is displayed.
+     If SAVE-QUERY-AS-KILL-P is ‘t’ then the query string is saved to
+     the kill ring.  If ‘eudc-expansion-save-query-as-kill’ is non-‘nil’
+     then the meaning of SAVE-QUERY-AS-KILL-P is negated.
 
  -- Variable: eudc-inline-query-format
      Format of an inline expansion query.  This is actually a list of
@@ -699,11 +810,69 @@ Queries::).
 
  -- Variable: eudc-inline-expansion-format
      This variable lets you control exactly what is inserted into the
-     buffer upon an inline expansion request.  It is a list whose first
-     element is a string passed to ‘format’.  Remaining elements are
-     symbols corresponding to directory attribute names.  The
-     corresponding attribute values are passed as additional arguments
-     to ‘format’.  Default is ‘("%s %s <%s>" firstname name email)’.
+     buffer upon an inline expansion request.  It can be set to ‘nil’,
+     to a function, or to a list.  Default is ‘nil’.
+
+     When the value is a list, the first element is a string passed to
+     ‘format’.  Remaining elements are symbols corresponding to
+     directory attribute names.  The corresponding attribute values are
+     passed as additional arguments to ‘format’.
+
+     When the value is ‘nil’, the expansion result will be formatted
+     according to RFC 5322
+     (https://datatracker.ietf.org/doc/html/rfc5322).  The PHRASE part
+     will be formatted as “firstname name”, quoting the result if
+     necessary.  No COMMENT part will be added in this case.  This will
+     produce any of the default formats
+                                ADDRESS
+                          FIRST ‘<’ADDRESS‘>’
+                          LAST ‘<’ADDRESS‘>’
+                       FIRST LAST ‘<’ADDRESS‘>’
+     depending on whether a first and/or last name are returned by the
+     query, or not.
+
+     When the value is a function, the expansion result will be
+     formatted according to RFC 5322
+     (https://datatracker.ietf.org/doc/html/rfc5322), and the referenced
+     function is called to format the PHRASE, and COMMENT parts,
+     respectively.  The formatted PHRASE part will be quoted if
+     necessary.  Thus one can produce any of the formats:
+                                ADDRESS
+                         PHRASE ‘<’ADDRESS‘>’
+                         ADDRESS ‘(’COMMENT‘)’
+                  PHRASE ‘<’ADDRESS‘>’ ‘(’COMMENT‘)’
+
+     Email address specifications, as are generated by inline expansion,
+     need to comply with RFC 5322 in order to be useful in email
+     messages.  When an invalid address specification is present in an
+     email message header, the message is likely to be rejected by a
+     receiving MTA. It is hence recommended to switch old
+     configurations, which use a list value, to the new ‘nil’, or
+     function value type since it ensures that the inserted address
+     specifications will be in line with RFC 5322
+     (https://datatracker.ietf.org/doc/html/rfc5322).  At minimum, and
+     to achieve the same semantics as with the old list default value,
+     this variable should now be set to ‘nil’:
+          (customize-set-variable 'eudc-inline-expansion-format nil)
+
+     A function value can for example be used to get _“last, first
+     <address>”_ instead of the default _“first last <address>”_:
+          (defun my-phrase-last-comma-first (search-res-alist)
+            (let* (phrase
+          	 (my-attrs (eudc-translate-attribute-list '(firstname name)))
+          	 (first-name (cdr (assq (nth 0 my-attrs) search-res-alist)))
+          	 (last-name (cdr (assq (nth 1 my-attrs) search-res-alist)))
+                   (comment nil))
+              (setq phrase (concat last-name ", " first-name))
+              (cons phrase comment)))
+
+          (customize-set-variable 'eudc-inline-expansion-format
+                                  #'my-phrase-last-comma-first)
+     To set the COMMENT part, too, instead of ‘nil’ as in this example,
+     also provide a string as the ‘cdr’ of the ‘cons’ being returned.
+     Do not include any double quotes in the PHRASE part, as they are
+     added automatically if needed.  Neither include parentheses in the
+     COMMENT part as they, too, are added automatically.
 
  -- Variable: eudc-multiple-match-handling-method
      This variable controls what to do when multiple entries match a
@@ -721,6 +890,29 @@ Queries::).
 
      Default is ‘select’
 
+3.4.2 Inline Query Expansion Using completion-at-point
+------------------------------------------------------
+
+In addition to providing a dedicated EUDC function for binding to a key
+shortcut (*note Inline Query Expansion::), EUDC also provides a function
+to contribute search results to the Emacs in-buffer completion system
+available via the function ‘completion-at-point’ (*note
+(maintaining)Identifier Inquiries::) in ‘message-mode’ buffers (*note
+Message: (message)Top.).  When using this mechanism, queries are made in
+the multi-server query mode of operation (*note Multi-server Queries::).
+
+   When a buffer in ‘message-mode’ is created, EUDC’s inline expansion
+function is automatically added to the variable
+‘completion-at-point-functions’.  As a result, whenever
+‘completion-at-point’ is invoked in a ‘message-mode’ buffer, EUDC will
+be queried for email addresses matching the words before point.  Since
+this will be useful only when editing specific message header fields
+that require specifying one or more email addresses, an additional check
+is performed whether point is actually in one of those header fields.
+Thus, any matching email addresses will be offered for completion in
+suitable message header fields only, and not in other places, like for
+example the body of the message.
+
 
 File: eudc.info,  Node: The Server Hotlist,  Next: Multi-server Queries,  Prev: Inline Query Expansion,  Up: Usage
 
@@ -728,13 +920,22 @@ File: eudc.info,  Node: The Server Hotlist,  Next: Multi-server Queries,  Prev: 
 ======================
 
 EUDC lets you maintain a list of frequently used servers so that you can
-easily switch from one to another.  This hotlist appears in the ‘Server’
-submenu.  You select a server in this list by clicking on its name.  You
-can add the current server to the list with the command ‘M-x
+easily switch from one to another.  Most users should configure the
+hotlist via Customize, and store the configuration in the main Emacs
+initialization file.  Configuring it dynamically can be confusing,
+particularly if the hotlist settings are saved to ‘eudc-options-file’
+automatically.  ‘eudc-options-file’ is historical and support for it is
+still maintained, but new EUDC users should set
+‘eudc-ignore-options-file’ to ‘t’.
+
+   However, this hotlist also appears in the ‘Server’ submenu.  You
+select a server in this list by clicking on its name.  You can add the
+current server to the list with the command ‘M-x
 eudc-bookmark-current-server’.  The list is contained in the variable
 ‘eudc-server-hotlist’ which is stored in and retrieved from the file
-designated by ‘eudc-options-file’.  EUDC also provides a facility to
-edit the hotlist interactively (*note The Hotlist Edit Buffer::).
+designated by ‘eudc-options-file’, or normal Emacs initialization if
+‘eudc-ignore-options-file’ is non-‘nil’.  EUDC also provides a facility
+to edit the hotlist interactively (*note The Hotlist Edit Buffer::).
 
    The hotlist is also used to make queries on multiple servers
 successively (*note Multi-server Queries::).  The order in which the
@@ -747,12 +948,19 @@ is important to sort the hotlist appropriately.
  -- Command: eudc-bookmark-current-server
      Add the current server to the hotlist of servers
 
+ -- Variable: eudc-ignore-options-file
+     If non-‘nil’, EUDC ignores ‘eudc-options-file’ and warns or issues
+     an error when an attempt is made to use it.  Most users should set
+     this, and keep their EUDC configuration in the main Emacs
+     initialization file instead.  The separate ‘eudc-options’ file has
+     created confusion for users in the past.
+
  -- Variable: eudc-options-file
      The name of a file where EUDC stores its internal variables (the
      hotlist and the current server).  EUDC will try to load that file
      upon initialization so, if you choose a file name different from
-     the defaults ‘~/.emacs.d/eudc-options’, be sure to set this
-     variable to the appropriate value _before_ EUDC is itself loaded.
+     the default ‘~/.emacs.d/eudc-options’, be sure to set this variable
+     to the appropriate value _before_ EUDC is itself loaded.
 
 * Menu:
 
@@ -1481,159 +1689,174 @@ Index
 * Menu:
 
 * bind distinguished name:               External Configuration.
-                                                               (line 13)
+                                                              (line  13)
 * binddn:                                External Configuration.
-                                                               (line 13)
+                                                              (line  13)
 * eudc-attribute-display-method-alist:   Display of Query Results.
-                                                               (line 16)
+                                                              (line  16)
 * eudc-batch-export-records-to-bbdb:     Creating BBDB Records.
-                                                               (line 14)
+                                                              (line  14)
 * eudc-bbdb-conversion-alist:            Creating BBDB Records.
-                                                               (line 25)
+                                                              (line  25)
 * eudc-bbdbify-address:                  Creating BBDB Records.
-                                                               (line 62)
+                                                              (line  62)
 * eudc-bbdbify-phone:                    Creating BBDB Records.
-                                                               (line 54)
-* eudc-bookmark-current-server:          The Server Hotlist.   (line 23)
-* eudc-bookmark-server:                  The Server Hotlist.   (line 20)
-* eudc-default-return-attributes:        Return Attributes.    (line 11)
+                                                              (line  54)
+* eudc-bookmark-current-server:          The Server Hotlist.  (line  32)
+* eudc-bookmark-server:                  The Server Hotlist.  (line  29)
+* eudc-default-return-attributes:        Return Attributes.   (line  11)
 * eudc-default-set:                      Manipulating local bindings.
-                                                               (line 21)
+                                                              (line  21)
 * eudc-display-generic-binary:           Display of Query Results.
-                                                               (line 38)
+                                                              (line  38)
 * eudc-display-jpeg-as-button:           Display of Query Results.
-                                                               (line 50)
+                                                              (line  50)
 * eudc-display-jpeg-inline:              Display of Query Results.
-                                                               (line 47)
+                                                              (line  47)
 * eudc-display-sound:                    Display of Query Results.
-                                                               (line 44)
+                                                              (line  44)
 * eudc-display-url:                      Display of Query Results.
-                                                               (line 41)
+                                                              (line  41)
 * eudc-duplicate-attribute-handling-method: Duplicate Attributes.
-                                                               (line 41)
+                                                              (line  41)
 * eudc-expand-inline:                    Emacs-only Configuration.
-                                                               (line 16)
+                                                              (line  16)
 * eudc-expand-inline <1>:                External Configuration.
-                                                               (line 22)
+                                                              (line  22)
 * eudc-expand-inline <2>:                External Configuration.
-                                                               (line 41)
+                                                              (line  41)
 * eudc-expand-inline <3>:                Inline Query Expansion.
-                                                               (line 20)
+                                                              (line  34)
+* eudc-expand-try-all:                   Emacs-only Configuration.
+                                                              (line  16)
+* eudc-expand-try-all <1>:               External Configuration.
+                                                              (line  22)
+* eudc-expand-try-all <2>:               External Configuration.
+                                                              (line  41)
+* eudc-expand-try-all <3>:               Inline Query Expansion.
+                                                              (line  23)
 * eudc-external-viewers:                 Display of Query Results.
-                                                               (line 61)
-* eudc-get-attribute-list:               Query Form.           (line 20)
+                                                              (line  61)
+* eudc-get-attribute-list:               Query Form.          (line  20)
 * eudc-hotlist-add-server:               The Hotlist Edit Buffer.
-                                                               (line 11)
+                                                              (line  11)
 * eudc-hotlist-delete-server:            The Hotlist Edit Buffer.
-                                                               (line 15)
+                                                              (line  15)
 * eudc-hotlist-quit-edit:                The Hotlist Edit Buffer.
-                                                               (line 26)
+                                                              (line  26)
 * eudc-hotlist-select-server:            The Hotlist Edit Buffer.
-                                                               (line 18)
+                                                              (line  18)
 * eudc-hotlist-transpose-servers:        The Hotlist Edit Buffer.
-                                                               (line 22)
+                                                              (line  22)
+* eudc-ignore-options-file:              The Server Hotlist.  (line  35)
 * eudc-inline-expansion-format:          Inline Query Expansion.
-                                                               (line 66)
-* eudc-inline-expansion-servers:         Multi-server Queries. (line 10)
+                                                              (line  81)
+* eudc-inline-expansion-servers:         Multi-server Queries.
+                                                              (line  10)
 * eudc-inline-query-format:              Inline Query Expansion.
-                                                               (line 32)
+                                                              (line  47)
 * eudc-insert-record-at-point-into-bbdb: Creating BBDB Records.
-                                                               (line  6)
-* eudc-max-servers-to-query:             Multi-server Queries. (line 25)
+                                                              (line   6)
+* eudc-max-servers-to-query:             Multi-server Queries.
+                                                              (line  25)
 * eudc-multiple-match-handling-method:   Inline Query Expansion.
-                                                               (line 74)
-* eudc-options-file:                     The Server Hotlist.   (line 26)
-* eudc-protocol:                         Selecting a Server.   (line 31)
+                                                              (line 147)
+* eudc-options-file:                     The Server Hotlist.  (line  42)
+* eudc-protocol:                         Selecting a Server.  (line  31)
 * eudc-protocol-local-variable-p:        Manipulating local bindings.
-                                                               (line 15)
+                                                              (line  15)
 * eudc-protocol-set:                     Manipulating local bindings.
-                                                               (line 25)
-* eudc-query-form:                       Query Form.           (line 27)
-* eudc-query-form-attributes:            Query Form.           (line 19)
-* eudc-server:                           Selecting a Server.   (line 22)
+                                                              (line  25)
+* eudc-query-form:                       Query Form.          (line  27)
+* eudc-query-form-attributes:            Query Form.          (line  19)
+* eudc-server:                           Selecting a Server.  (line  22)
 * eudc-server-hotlist:                   Emacs-only Configuration.
-                                                               (line 16)
+                                                              (line  16)
 * eudc-server-hotlist <1>:               External Configuration.
-                                                               (line 22)
+                                                              (line  22)
 * eudc-server-hotlist <2>:               External Configuration.
-                                                               (line 41)
+                                                              (line  41)
 * eudc-server-local-variable-p:          Manipulating local bindings.
-                                                               (line 12)
+                                                              (line  12)
 * eudc-server-set:                       Manipulating local bindings.
-                                                               (line 30)
+                                                              (line  30)
 * eudc-set:                              Manipulating local bindings.
-                                                               (line 35)
-* eudc-set-server:                       Selecting a Server.   (line 35)
-* eudc-strict-return-matches:            Return Attributes.    (line 21)
+                                                              (line  35)
+* eudc-set-server:                       Selecting a Server.  (line  35)
+* eudc-strict-return-matches:            Return Attributes.   (line  21)
 * eudc-try-bbdb-insert:                  Creating BBDB Records.
-                                                               (line  6)
+                                                              (line   6)
 * eudc-update-local-variables:           Manipulating local bindings.
-                                                               (line 61)
-* eudc-use-raw-directory-names:          Query Form.           (line 45)
-* eudc-user-attribute-names-alist:       Query Form.           (line 39)
+                                                              (line  61)
+* eudc-use-raw-directory-names:          Query Form.          (line  45)
+* eudc-user-attribute-names-alist:       Query Form.          (line  39)
 * eudc-variable-default-value:           Manipulating local bindings.
-                                                               (line 42)
+                                                              (line  42)
 * eudc-variable-protocol-value:          Manipulating local bindings.
-                                                               (line 47)
+                                                              (line  47)
 * eudc-variable-server-value:            Manipulating local bindings.
-                                                               (line 52)
-* ldap-host-parameters-alist:            LDAP Configuration.   (line 14)
+                                                              (line  52)
+* ldap-host-parameters-alist:            LDAP Configuration.  (line  14)
 * ldap-host-parameters-alist <1>:        Emacs-only Configuration.
-                                                               (line 16)
+                                                              (line  16)
 * ldap-host-parameters-alist <2>:        External Configuration.
-                                                               (line 22)
+                                                              (line  22)
 * ldap-host-parameters-alist <3>:        External Configuration.
-                                                               (line 41)
-* ldap-ldapsearch-args:                  LDAP Configuration.   (line 14)
+                                                              (line  41)
+* ldap-ldapsearch-args:                  LDAP Configuration.  (line  14)
 * ldap-password-read:                    Emacs-only Configuration.
-                                                               (line 27)
+                                                              (line  27)
 * message-mode-map:                      Emacs-only Configuration.
-                                                               (line 16)
+                                                              (line  16)
 * message-mode-map <1>:                  External Configuration.
-                                                               (line 22)
+                                                              (line  22)
 * message-mode-map <2>:                  External Configuration.
-                                                               (line 41)
+                                                              (line  41)
 * passwd:                                Emacs-only Configuration.
-                                                               (line 27)
+                                                              (line  27)
 * password-cache:                        Emacs-only Configuration.
-                                                               (line 27)
+                                                              (line  27)
 * password-cache-expiry:                 Emacs-only Configuration.
-                                                               (line 27)
+                                                              (line  27)
 * password-reset:                        Emacs-only Configuration.
-                                                               (line 27)
+                                                              (line  27)
 
 
 
 Tag Table:
 Node: Top1023
 Node: Overview2263
-Node: LDAP3359
-Node: BBDB4324
-Node: macOS Contacts5343
-Node: Installation5741
-Node: LDAP Configuration6712
-Node: Emacs-only Configuration8716
-Node: External Configuration10273
-Node: Troubleshooting12179
-Node: macOS Contacts Configuration12860
-Node: Usage14345
-Node: Querying Servers15210
-Node: Selecting a Server15722
-Node: Return Attributes17542
-Node: Duplicate Attributes18646
-Node: Query Form21053
-Node: Display of Query Results23626
-Node: Inline Query Expansion26621
-Node: The Server Hotlist31111
-Node: The Hotlist Edit Buffer32748
-Node: Multi-server Queries33814
-Node: Creating BBDB Records35128
-Ref: Creating BBDB Records-Footnote-138956
-Node: Server/Protocol Locals39093
-Node: Manipulating local bindings39605
-Node: Credits42290
-Node: GNU Free Documentation License42626
-Node: Index67971
+Node: LDAP3599
+Node: BBDB4564
+Node: macOS Contacts5583
+Node: ecomplete5999
+Node: mailabbrev7202
+Node: Installation8750
+Node: LDAP Configuration9805
+Node: Emacs-only Configuration11917
+Node: External Configuration13372
+Node: Troubleshooting15123
+Node: macOS Contacts Configuration15804
+Node: ecomplete Configuration17396
+Node: mailabbrev Configuration17888
+Node: Usage18362
+Node: Querying Servers19227
+Node: Selecting a Server19739
+Node: Return Attributes21559
+Node: Duplicate Attributes22663
+Node: Query Form25070
+Node: Display of Query Results27643
+Node: Inline Query Expansion30638
+Node: The Server Hotlist40532
+Node: The Hotlist Edit Buffer43055
+Node: Multi-server Queries44121
+Node: Creating BBDB Records45435
+Ref: Creating BBDB Records-Footnote-149263
+Node: Server/Protocol Locals49400
+Node: Manipulating local bindings49912
+Node: Credits52597
+Node: GNU Free Documentation License52933
+Node: Index78278
 
 End Tag Table
 

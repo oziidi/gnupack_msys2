@@ -1,9 +1,9 @@
-This is sieve.info, produced by makeinfo version 6.7 from sieve.texi.
+This is sieve.info, produced by makeinfo version 6.8 from sieve.texi.
 
 This file documents the Emacs Sieve package, for server-side mail
 filtering.
 
-   Copyright © 2001–2022 Free Software Foundation, Inc.
+   Copyright © 2001–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -36,7 +36,7 @@ language, so keep RFC 3028 around.
    This file documents the Emacs Sieve package, for server-side mail
 filtering.
 
-   Copyright © 2001–2022 Free Software Foundation, Inc.
+   Copyright © 2001–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -265,7 +265,7 @@ File: sieve.info,  Node: Standards,  Next: GNU Free Documentation License,  Prev
 The Emacs Sieve package implements all or parts of a small but hopefully
 growing number of RFCs and drafts documents.  This chapter lists the
 relevant ones.  They can all be fetched from
-<http://quimby.gnus.org/notes/>.
+<https://quimby.gnus.org/notes/>.
 
 “RFC3028”
      Sieve: A Mail Filtering Language.
@@ -804,8 +804,8 @@ Node: Managing Sieve4085
 Node: Examples5704
 Node: Manage Sieve API7062
 Node: Standards8540
-Node: GNU Free Documentation License9019
-Node: Index34367
+Node: GNU Free Documentation License9020
+Node: Index34368
 
 End Tag Table
 

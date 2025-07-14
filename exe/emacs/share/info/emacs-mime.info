@@ -1,9 +1,9 @@
-This is emacs-mime.info, produced by makeinfo version 6.7 from
+This is emacs-mime.info, produced by makeinfo version 6.8 from
 emacs-mime.texi.
 
 This file documents the Emacs MIME interface functionality.
 
-   Copyright © 1998–2022 Free Software Foundation, Inc.
+   Copyright © 1998–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -44,7 +44,7 @@ RFC2045 and RFC2047.
 
    This file documents the Emacs MIME interface functionality.
 
-   Copyright © 1998–2022 Free Software Foundation, Inc.
+   Copyright © 1998–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -333,9 +333,8 @@ File: emacs-mime.info,  Node: Display Customization,  Next: Files and Directorie
 ‘mm-text-html-renderer’
      This selects the function used to render HTML.  The predefined
      renderers are selected by the symbols ‘shr’, ‘gnus-w3m’, ‘w3m’(1),
-     ‘links’, ‘lynx’, ‘w3m-standalone’ or ‘html2text’.  You can also
-     specify a function, which will be called with a MIME handle as the
-     argument.
+     ‘links’, ‘lynx’, or ‘w3m-standalone’.  You can also specify a
+     function, which will be called with a MIME handle as the argument.
 
 ‘mm-html-inhibit-images’
      If this is non-‘nil’, inhibit displaying of images inline in the
@@ -375,7 +374,8 @@ File: emacs-mime.info,  Node: Display Customization,  Next: Files and Directorie
      setting this option to non-‘nil’.  The default value is ‘t’.
 
 ‘mm-external-terminal-program’
-     The program used to start an external terminal.
+     This should be a list of strings; typically something like
+     ‘("xterm" "-e")’ or ‘("gnome-terminal" "--")’.
 
 ‘mm-enable-external’
      Indicate whether external MIME handlers should be used.
@@ -2268,7 +2268,7 @@ File: emacs-mime.info,  Node: Index,  Prev: GNU Free Documentation License,  Up:
 * mm-enable-external:                    Display Customization.
                                                               (line 146)
 * mm-external-terminal-program:          Display Customization.
-                                                              (line 143)
+                                                              (line 142)
 * mm-file-name-collapse-whitespace:      Files and Directories.
                                                               (line  33)
 * mm-file-name-delete-control:           Files and Directories.
@@ -2293,9 +2293,9 @@ File: emacs-mime.info,  Node: Index,  Prev: GNU Free Documentation License,  Up:
 * mm-handle-type:                        Handles.             (line  15)
 * mm-handle-undisplayer:                 Handles.             (line  21)
 * mm-html-blocked-images:                Display Customization.
-                                                              (line 114)
+                                                              (line 113)
 * mm-html-inhibit-images:                Display Customization.
-                                                              (line 106)
+                                                              (line 105)
 * mm-inlinable-p:                        Display.             (line  15)
 * mm-inline-font-lock:                   Display Customization.
                                                               (line 161)
@@ -2308,9 +2308,9 @@ File: emacs-mime.info,  Node: Index,  Prev: GNU Free Documentation License,  Up:
 * mm-inline-override-types:              Display Customization.
                                                               (line  89)
 * mm-inline-text-html-with-images:       Display Customization.
-                                                              (line 106)
+                                                              (line 105)
 * mm-inline-text-html-with-w3m-keymap:   Display Customization.
-                                                              (line 139)
+                                                              (line 138)
 * mm-inlined-types:                      Display Customization.
                                                               (line  17)
 * mm-interactively-view-part:            Display.             (line  30)
@@ -2333,7 +2333,7 @@ File: emacs-mime.info,  Node: Index,  Prev: GNU Free Documentation License,  Up:
 * mm-uu-emacs-sources-regexp:            Non-MIME.            (line  45)
 * mm-uu-extract:                         Non-MIME.            (line  60)
 * mm-w3m-safe-url-regexp:                Display Customization.
-                                                              (line 131)
+                                                              (line 130)
 * MML:                                   Composing.           (line   6)
 * mml-generate-mime:                     Composing.           (line  10)
 * mml-to-mime:                           Conversion.          (line  12)
@@ -2388,34 +2388,34 @@ Node: Non-MIME4144
 Node: Handles5826
 Node: Display6726
 Node: Display Customization7483
-Ref: Display Customization-Footnote-115248
-Node: Files and Directories15328
-Node: New Viewers17151
-Node: Composing18298
-Node: Simple MML Example19272
-Node: MML Definition19930
-Node: Advanced MML Example25092
-Node: Encoding Customization27849
-Node: Charset Translation32323
-Node: Conversion34834
-Node: Flowed text35985
-Node: Interface Functions37281
-Node: Basic Functions43011
-Node: rfc204544075
-Node: rfc223144613
-Node: ietf-drums45945
-Node: rfc204747134
-Node: time-date50076
-Node: qp54397
-Node: base6455388
-Node: binhex56375
-Node: uudecode56787
-Node: yenc57160
-Node: rfc184357450
-Node: mailcap58071
-Node: Standards59844
-Node: GNU Free Documentation License61281
-Node: Index86616
+Ref: Display Customization-Footnote-115298
+Node: Files and Directories15378
+Node: New Viewers17201
+Node: Composing18348
+Node: Simple MML Example19322
+Node: MML Definition19980
+Node: Advanced MML Example25142
+Node: Encoding Customization27899
+Node: Charset Translation32373
+Node: Conversion34884
+Node: Flowed text36035
+Node: Interface Functions37331
+Node: Basic Functions43061
+Node: rfc204544125
+Node: rfc223144663
+Node: ietf-drums45995
+Node: rfc204747184
+Node: time-date50126
+Node: qp54447
+Node: base6455438
+Node: binhex56425
+Node: uudecode56837
+Node: yenc57210
+Node: rfc184357500
+Node: mailcap58121
+Node: Standards59894
+Node: GNU Free Documentation License61331
+Node: Index86666
 
 End Tag Table
 

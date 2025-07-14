@@ -1,7 +1,7 @@
-This is smtpmail.info, produced by makeinfo version 6.7 from
+This is smtpmail.info, produced by makeinfo version 6.8 from
 smtpmail.texi.
 
-Copyright © 2003–2022 Free Software Foundation, Inc.
+Copyright © 2003–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -24,7 +24,7 @@ File: smtpmail.info,  Node: Top,  Next: How Mail Works,  Up: (dir)
 Emacs SMTP Library
 ******************
 
-Copyright © 2003–2022 Free Software Foundation, Inc.
+Copyright © 2003–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -229,9 +229,9 @@ the ‘~/.authinfo’ file, *note auth-source: (auth)Top.
 
    The process by which the SMTP library authenticates you to the server
 is known as “Simple Authentication and Security Layer” (SASL).  There
-are various SASL mechanisms, and this library supports three of them:
+are various SASL mechanisms, and this library supports four of them:
 ‘cram-md5’, ‘plain’, ‘login’ and ‘xoauth2’, where the first uses a form
-of encryption to obscure your password, while the other two do not.  It
+of encryption to obscure your password, while the others do not.  It
 tries each of them, in that order, until one succeeds.  (‘xoauth2’
 requires using the ‘oauth2.el’ library.  You can override this by
 assigning a specific authentication mechanism to a server by including a
@@ -885,6 +885,8 @@ File: smtpmail.info,  Node: Index,  Prev: GNU Free Documentation License,  Up: T
 * MDA:                                   How Mail Works.       (line 26)
 * MTA:                                   How Mail Works.       (line  6)
 * MUA:                                   How Mail Works.       (line 14)
+* OAuth 2.0:                             Authentication.       (line 43)
+* OAuth2:                                Authentication.       (line 43)
 * password:                              Authentication.       (line  6)
 * PLAIN:                                 Authentication.       (line 43)
 * POP3:                                  How Mail Works.       (line 35)
@@ -926,13 +928,13 @@ Node: Top857
 Node: How Mail Works2179
 Node: Emacs Speaks SMTP4961
 Node: Authentication8605
-Node: Encryption11361
-Ref: Encryption-Footnote-113021
-Node: Queued delivery13068
-Node: Server workarounds14856
-Node: Debugging16419
-Node: GNU Free Documentation License17596
-Node: Index42929
+Node: Encryption11357
+Ref: Encryption-Footnote-113017
+Node: Queued delivery13064
+Node: Server workarounds14852
+Node: Debugging16415
+Node: GNU Free Documentation License17592
+Node: Index42925
 
 End Tag Table
 

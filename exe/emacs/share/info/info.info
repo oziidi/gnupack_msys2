@@ -1,9 +1,9 @@
-This is info.info, produced by makeinfo version 6.7 from info.texi.
+This is info.info, produced by makeinfo version 6.8 from info.texi.
 
 This file describes how to use Info, the menu-driven GNU documentation
 system.
 
-   Copyright © 1989, 1992, 1996–2022 Free Software Foundation, Inc.
+   Copyright © 1989, 1992, 1996–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -49,7 +49,7 @@ commands.  In the stand-alone Info reader, type ‘H’ instead.
    This file describes how to use Info, the menu-driven GNU
 documentation system.
 
-   Copyright © 1989, 1992, 1996–2022 Free Software Foundation, Inc.
+   Copyright © 1989, 1992, 1996–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -906,7 +906,9 @@ the one you want.
 for, try the ‘M-x info-apropos’ command in Emacs, or the ‘M-x
 index-apropos’ command in the stand-alone reader.  It prompts for a
 string and then looks up that string in all the indices of all the Info
-documents installed on your system.
+documents installed on your system.  In Emacs, giving a prefix argument
+to the command will try to search for a regular expression instead of a
+string.
 
 
 File: info.info,  Node: Go to node,  Next: Choose menu subtopic,  Prev: Search Index,  Up: Advanced
@@ -919,8 +921,8 @@ If you know a node’s name, you can go there by typing ‘g’, the name, and
 file.  (This is equivalent to ‘t’, see *note Help-Int::.)  ‘gGo to
 node<RET>’ would come back here.
 
-   Unlike ‘m’, ‘g’ does not allow the use of abbreviations.  But it does
-allow completion, so you can type <TAB> to complete a partial node name.
+   Like ‘m’, ‘g’ allows the use of abbreviations.  It also allows
+completion, so you can type <TAB> to complete a partial node name.
 
    To go to a node in another file, you can include the file name in the
 node name by putting it at the front, in parentheses.  Thus,
@@ -1004,8 +1006,9 @@ of variables, described in *note Manipulating Variables:
      The list of directories to search for Info files.  Each element is
      a string (directory name) or ‘nil’ (try default directory).  If not
      initialized Info uses the environment variable ‘INFOPATH’ to
-     initialize it, or ‘Info-default-directory-list’ if there is no
-     ‘INFOPATH’ variable in the environment.
+     initialize it, or ‘Info-default-directory-list’ in addition to the
+     value returned by the ‘Info--default-directory-list’ function if
+     there is no ‘INFOPATH’ variable in the environment.
 
      If you wish to customize the Info directory search list for both
      Emacs Info and stand-alone Info, it is best to set the ‘INFOPATH’
@@ -1599,15 +1602,16 @@ topics discussed in this document.
 * 6th menu item:                         Choose menu subtopic.
                                                               (line  14)
 * ? (Info mode):                         Help-^L.             (line  74)
-* abbreviating Info subnodes:            Help-M.              (line  89)
+* abbreviating Info subnodes:            Help-M.              (line  88)
 * b (Info mode):                         Help-^L.             (line  65)
 * BACKSPACE (Info mode):                 Help-^L.             (line  15)
 * C-l (Info mode):                       Help-^L.             (line  59)
 * C-q (Info mode):                       Advanced.            (line  11)
 * C-r (Info mode):                       Search Text.         (line  28)
 * C-s (Info mode):                       Search Text.         (line  28)
+* C-x x n:                               Create Info buffer.  (line   6)
 * clone-buffer:                          Create Info buffer.  (line   6)
-* completion of Info node names:         Help-M.              (line  97)
+* completion of Info node names:         Help-M.              (line  96)
 * cross references in Info documents:    Help-Xref.           (line   6)
 * d (Info mode):                         Help-Int.            (line  55)
 * DEL (Info mode):                       Help-^L.             (line  15)
@@ -1629,56 +1633,56 @@ topics discussed in this document.
 * Info documents as tutorials:           Help-^L.             (line  37)
 * Info menus:                            Help-M.              (line   6)
 * Info-additional-directory-list:        Emacs Info Variables.
-                                                              (line  24)
+                                                              (line  25)
 * info-apropos:                          Search Index.        (line  42)
 * Info-directory:                        Help-Int.            (line  55)
 * Info-directory-list:                   Emacs Info Variables.
                                                               (line  13)
 * info-display-manual:                   Create Info buffer.  (line  22)
 * Info-enable-active-nodes:              Emacs Info Variables.
-                                                              (line  80)
+                                                              (line  81)
 * Info-follow-reference:                 Help-Xref.           (line  12)
 * Info-fontify-maximum-menu-size:        Emacs Info Variables.
-                                                              (line  39)
+                                                              (line  40)
 * Info-fontify-visited-nodes:            Emacs Info Variables.
-                                                              (line  42)
+                                                              (line  43)
 * Info-goto-node:                        Go to node.          (line   6)
 * Info-hide-note-references:             Emacs Info Variables.
-                                                              (line  51)
+                                                              (line  52)
 * Info-history:                          Help-Int.            (line  51)
 * Info-history-back:                     Help-Int.            (line  26)
 * Info-history-forward:                  Help-Int.            (line  41)
 * Info-index:                            Search Index.        (line   6)
 * Info-isearch-search:                   Emacs Info Variables.
-                                                              (line  77)
-* Info-menu:                             Help-M.              (line  85)
+                                                              (line  78)
+* Info-menu:                             Help-M.              (line  84)
 * Info-mode-hook:                        Emacs Info Variables.
-                                                              (line  29)
-* Info-mouse-follow-nearest-node:        Help-M.              (line 170)
+                                                              (line  30)
+* Info-mouse-follow-nearest-node:        Help-M.              (line 169)
 * Info-nth-menu-item:                    Choose menu subtopic.
                                                               (line   6)
 * Info-scroll-down:                      Help-^L.             (line  15)
 * Info-scroll-prefer-subnodes:           Emacs Info Variables.
-                                                              (line  67)
+                                                              (line  68)
 * Info-scroll-up:                        Help-^L.             (line  15)
 * Info-search:                           Search Text.         (line  16)
 * Info-summary:                          Help-^L.             (line  74)
 * Info-top-node:                         Help-Int.            (line  65)
 * Info-up:                               Help-FOO.            (line  13)
 * Info-use-header-line:                  Emacs Info Variables.
-                                                              (line  46)
+                                                              (line  47)
 * Info-virtual-index:                    Search Index.        (line  37)
 * invisible text in Emacs:               Help-Inv.            (line  10)
 * isearch:                               Search Text.         (line  28)
 * l (Info mode):                         Help-Int.            (line  26)
 * L (Info mode):                         Help-Int.            (line  51)
-* m (Info mode):                         Help-M.              (line  62)
+* m (Info mode):                         Help-M.              (line  61)
 * M-n (Info mode):                       Create Info buffer.  (line   6)
 * menu items, select by their numbers:   Choose menu subtopic.
                                                               (line   6)
 * menus in an Info document:             Help-M.              (line   6)
-* mouse support in Info mode:            Help-M.              (line 154)
-* mouse-2 (Info mode):                   Help-M.              (line 154)
+* mouse support in Info mode:            Help-M.              (line 153)
+* mouse-2 (Info mode):                   Help-M.              (line 153)
 * multiple Info buffers:                 Create Info buffer.  (line   6)
 * n (Info mode):                         Help.                (line  27)
 * next (Info mode):                      Help-^L.             (line  52)
@@ -1731,13 +1735,13 @@ Node: Help-Q35264
 Node: Advanced36445
 Node: Search Text37668
 Node: Search Index39498
-Node: Go to node42015
-Node: Choose menu subtopic43134
-Node: Create Info buffer44382
-Node: Emacs Info Variables45962
-Node: Further Reading50519
-Node: GNU Free Documentation License51283
-Node: Index76636
+Node: Go to node42131
+Node: Choose menu subtopic43237
+Node: Create Info buffer44485
+Node: Emacs Info Variables46065
+Node: Further Reading50712
+Node: GNU Free Documentation License51476
+Node: Index76829
 
 End Tag Table
 

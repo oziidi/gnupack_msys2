@@ -1,7 +1,7 @@
-This is todo-mode.info, produced by makeinfo version 6.7 from
+This is todo-mode.info, produced by makeinfo version 6.8 from
 todo-mode.texi.
 
-Copyright © 2013–2022 Free Software Foundation, Inc.
+Copyright © 2013–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -27,7 +27,7 @@ Todo Mode User Manual
 This manual describes the version of Todo mode first appearing in Emacs
 24.4.
 
-   Copyright © 2013–2022 Free Software Foundation, Inc.
+   Copyright © 2013–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,

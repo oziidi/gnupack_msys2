@@ -1,7 +1,7 @@
-This is mairix-el.info, produced by makeinfo version 6.7 from
+This is mairix-el.info, produced by makeinfo version 6.8 from
 mairix-el.texi.
 
-Copyright © 2008–2022 Free Software Foundation, Inc.
+Copyright © 2008–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -33,7 +33,7 @@ the currently displayed mail, save regularly used searches in your
 ‘.emacs’ for future use and lets you call mairix for updating the
 database.
 
-   Copyright © 2008–2022 Free Software Foundation, Inc.
+   Copyright © 2008–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -54,6 +54,8 @@ database.
 * Using::                       List of interactive functions
 * Extending::                   Support your favorite mail reader!
 * GNU Free Documentation License::  The license for this documentation.
+* Function Index:               Function Index.
+* Variable Index:               Variable Index.
 
 
 File: mairix-el.info,  Node: About,  Next: Configuring mairix,  Prev: Top,  Up: Top
@@ -64,7 +66,7 @@ File: mairix-el.info,  Node: About,  Next: Configuring mairix,  Prev: Top,  Up: 
 Mairix is a tool for indexing and searching words in locally stored
 mail.  It was written by Richard Curnow and is licensed under the GPL.
 Mairix comes with most popular GNU/Linux distributions, but it also runs
-under Windows (with cygwin), macOS and Solaris.  The website can be
+under Windows (with Cygwin), macOS and Solaris.  The website can be
 found at <http://www.rpcurnow.force9.co.uk/mairix/index.html>
 
    Though mairix might not be as flexible as other search tools like
@@ -311,7 +313,7 @@ the following:
    And that’s it!
 
 
-File: mairix-el.info,  Node: GNU Free Documentation License,  Prev: Extending,  Up: Top
+File: mairix-el.info,  Node: GNU Free Documentation License,  Next: Function Index,  Prev: Extending,  Up: Top
 
 Appendix A GNU Free Documentation License
 *****************************************
@@ -792,16 +794,55 @@ recommend releasing these examples in parallel under your choice of free
 software license, such as the GNU General Public License, to permit
 their use in free software.
 
+
+File: mairix-el.info,  Node: Function Index,  Next: Variable Index,  Prev: GNU Free Documentation License,  Up: Top
+
+Function Index
+**************
+
+ [index ]
+* Menu:
+
+* mairix-edit-saved-searches:            Using.                (line 77)
+* mairix-edit-saved-searches-customize:  Using.                (line 88)
+* mairix-save-search:                    Using.                (line 65)
+* mairix-search:                         Using.                (line 29)
+* mairix-search-from-this-article:       Using.                (line 54)
+* mairix-search-thread-this-article:     Using.                (line 60)
+* mairix-update-database:                Using.                (line 93)
+* mairix-use-saved-search:               Using.                (line 73)
+* mairix-widget-search:                  Using.                (line 40)
+* mairix-widget-search-based-on-article: Using.                (line 49)
+
+
+File: mairix-el.info,  Node: Variable Index,  Prev: Function Index,  Up: Top
+
+Variable Index
+**************
+
+ [index ]
+* Menu:
+
+* mairix-command:                        Using.                (line 29)
+* mairix-file-path:                      Using.                (line 29)
+* mairix-search-file:                    Using.                (line 29)
+* mairix-search-options:                 Using.                (line 29)
+* mairix-synchronous-update:             Using.                (line 93)
+* mairix-update-options:                 Using.                (line 93)
+* mairix-widget-fields-list:             Using.                (line 40)
+
 
 
 Tag Table:
 Node: Top864
-Node: About2469
-Node: Configuring mairix4579
-Node: Setting up the mairix interface6610
-Node: Using7599
-Node: Extending12867
-Node: GNU Free Documentation License14196
+Node: About2565
+Node: Configuring mairix4675
+Node: Setting up the mairix interface6706
+Node: Using7695
+Node: Extending12963
+Node: GNU Free Documentation License14292
+Node: Function Index39653
+Node: Variable Index40555
 
 End Tag Table
 

@@ -1,10 +1,10 @@
-This is newsticker.info, produced by makeinfo version 6.7 from
+This is newsticker.info, produced by makeinfo version 6.8 from
 newsticker.texi.
 
 This manual documents Newsticker, a feed reader for Emacs.  It
-corresponds to Emacs version 28.2.
+corresponds to Emacs version 29.4.
 
-Copyright © 2004–2022 Free Software Foundation, Inc.
+Copyright © 2004–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -28,9 +28,9 @@ Newsticker
 **********
 
 This manual documents Newsticker, a feed reader for Emacs.  It
-corresponds to Emacs version 28.2.
+corresponds to Emacs version 29.4.
 
-Copyright © 2004–2022 Free Software Foundation, Inc.
+Copyright © 2004–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -157,8 +157,8 @@ automatically after a certain time.
 
 ‘newsticker-keep-obsolete-items’
      Obsolete headlines are removed immediately unless
-     ‘newsticker-keep-obsolete-items’ is non-nil in which case they are
-     kept until ‘newsticker-obsolete-item-max-age’ is reached.
+     ‘newsticker-keep-obsolete-items’ is non-‘nil’ in which case they
+     are kept until ‘newsticker-obsolete-item-max-age’ is reached.
 
 ‘newsticker-automatically-mark-items-as-old’
      If this is set to ‘t’ then a “new” item becomes “old” as soon as it
@@ -1053,16 +1053,16 @@ Node: Overview2427
 Node: Installation3450
 Node: Retrieving News3883
 Node: Headline Management5261
-Node: Reading News6972
-Node: Frontends7487
-Node: Navigation10905
-Node: Marking12100
-Node: More Actions12637
-Node: Automatic Processing13436
-Node: Configuration14570
-Node: Supported Formats17357
-Node: GNU Free Documentation License18043
-Node: Index43404
+Node: Reading News6978
+Node: Frontends7493
+Node: Navigation10911
+Node: Marking12106
+Node: More Actions12643
+Node: Automatic Processing13442
+Node: Configuration14576
+Node: Supported Formats17363
+Node: GNU Free Documentation License18049
+Node: Index43410
 
 End Tag Table
 

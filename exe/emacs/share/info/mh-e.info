@@ -1,8 +1,8 @@
-This is mh-e.info, produced by makeinfo version 6.7 from mh-e.texi.
+This is mh-e.info, produced by makeinfo version 6.8 from mh-e.texi.
 
 This is version 8.6 of ‘The MH-E Manual’, last updated 2016-04-29.
 
-   Copyright © 1995, 2001–2003, 2005–2022 Free Software Foundation, Inc.
+   Copyright © 1995, 2001–2003, 2005–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of either:
@@ -35,7 +35,7 @@ The MH-E Manual
 
 This is version 8.6 of ‘The MH-E Manual’, last updated 2016-04-29.
 
-   Copyright © 1995, 2001–2003, 2005–2022 Free Software Foundation, Inc.
+   Copyright © 1995, 2001–2003, 2005–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of either:
@@ -167,9 +167,9 @@ MH-E was the tip of the iceberg, and I discovered more and more niceties
 about GNU Emacs and MH.  Now I’m fully hooked on both of them.
 
    The MH-E package is distributed with Emacs(1), so you shouldn’t have
-to do anything special to use it.  Gnus is also required; version 5.10
-or higher is recommended.  This manual covers MH-E version 8.6.  To help
-you decide which version you have, see *note Getting Started::.
+to do anything special to use it.  Gnus is also required; it is bundled
+with Emacs.  This manual covers MH-E version 8.6.  To help you decide
+which version you have, see *note Getting Started::.
 
    If you don’t already use GNU Emacs but want to learn more, you can
 read a built-in tutorial by starting GNU Emacs and typing ‘C-h t’
@@ -198,11 +198,9 @@ Bill Wohler <wohler at newt.com>
 
    ---------- Footnotes ----------
 
-   (1) Version 8.6 of MH-E appeared in Emacs 24.4.  It is supported in
-GNU Emacs 23 and higher, as well as XEmacs 21.4.22 and 21.5.31.  MH-E is
-known not to work with GNU Emacs versions 20 and below, and XEmacs
-version 21.5.9–21.5.16.  It is compatible with MH versions 6.8.4 and
-higher, all versions of nmh, and GNU mailutils 1.0 and higher
+   (1) Version 8.6 of MH-E appeared in Emacs 24.4.  It is compatible
+with MH versions 6.8.4 and higher, all versions of nmh, and GNU
+mailutils 1.0 and higher
 
 
 File: mh-e.info,  Node: Conventions,  Next: Getting Started,  Prev: Preface,  Up: Top
@@ -673,18 +671,17 @@ find out how you can:
    • Edit bounced messages (*note Editing Again::).
    • Send multimedia messages (*note Adding Attachments::).
    • Read HTML messages (*note HTML::).
-   • Use aliases and identities (see *note Aliases::, *note
-     Identities::).
-   • Create different views of your mail (see *note Threading::, *note
+   • Use aliases and identities (*note Aliases::, *note Identities::).
+   • Create different views of your mail (*note Threading::, *note
      Limits::).
    • Deal with junk mail (*note Junk::).
-   • Handle signed and encrypted messages (see *note Reading PGP::,
-     *note Sending PGP::).
+   • Handle signed and encrypted messages (*note Reading PGP::, *note
+     Sending PGP::).
    • Process mail that was sent with ‘shar’ or ‘uuencode’ (*note Files
      and Pipes::).
    • Use sequences conveniently (*note Sequences::).
-   • Use the speedbar, tool bar, and menu bar (see *note Speedbar::, see
-     *note Tool Bar::, *note Menu Bar::).
+   • Use the speedbar, tool bar, and menu bar (*note Speedbar::, *note
+     Tool Bar::, *note Menu Bar::).
    • Show header fields in different fonts (*note Reading Mail::).
    • Find previously refiled messages (*note Searching::).
    • Place messages in a file (*note Files and Pipes::).
@@ -970,7 +967,7 @@ recipe in ‘.procmailrc’:
 ‘mh-e’, and a ‘Key Binding’ of ‘m’.
 
    You can use ‘xbuffy’ to automate the incorporation of this mail using
-the Emacs 23 command ‘emacsclient’ as follows:
+the Emacs command ‘emacsclient’ as follows:
 
      box ~/mail/mh-e
          title mh-e
@@ -978,8 +975,6 @@ the Emacs 23 command ‘emacsclient’ as follows:
          polltime 10
          headertime 0
          command emacsclient --eval '(mh-inc-spool-mh-e)'
-
-   In XEmacs, the command ‘gnuclient’ is used in a similar fashion.
 
    You can set the hook ‘mh-inc-folder-hook’, which is called after new
 mail is incorporated by the ‘i’ (‘mh-inc-folder’) command.  A good use
@@ -1300,7 +1295,7 @@ supports it.
    The first header field used, if present, is the Gnus-specific ‘Face:’
 field(1).
 
-   Next is the traditional ‘X-Face:’ header field(2).  MH-E renders the
+   Next is the traditional ‘X-Face:’ header field(2) MH-E renders the
 foreground and background of the image using the associated attributes
 of the face ‘mh-show-xface’.
 
@@ -1402,14 +1397,10 @@ yields a mode line of
 
    ---------- Footnotes ----------
 
-   (1) The ‘Face:’ field appeared in GNU Emacs 21 and XEmacs.  For more
-information, see <https://quimby.gnus.org/circus/face/>.
+   (1) For more information, see <https://quimby.gnus.org/circus/face/>.
 
    (2) The display of this field requires the ‘uncompface’ program
-(ftp://ftp.cs.indiana.edu/pub/faces/compface/compface.tar.Z). Recent
-versions of XEmacs have internal support for ‘X-Face:’ images.  If your
-version of XEmacs does not, then you’ll need both ‘uncompface’ and the
-‘x-face’ package (http://www.jpl.org/ftp/pub/elisp/).
+(ftp://ftp.cs.indiana.edu/pub/faces/compface/compface.tar.Z).
 
    (3) The display of the images requires the ‘wget’ program
 (https://www.gnu.org/software/wget/wget.html) to fetch the image and the
@@ -1607,10 +1598,6 @@ a brief description of each, sorted by name.
      produces pretty nice output, and it highlights links.  It renders
      ‘&ndash;’ and ‘&reg;’ okay.  It sometimes fails to wrap lines
      properly.  It always downloads remote images.
-‘html2text’
-     The ‘html2text’ browser requires an external program.  Some users
-     have reported problems with it, such as filling the entire message
-     as if it were one paragraph, or displaying chunks of raw HTML.
 ‘links’
      The ‘links’ browser requires an external program.  It’s quick, and
      produces nicer output than ‘lynx’ on single column mails in tables.
@@ -1771,13 +1758,9 @@ see this:
 depending on the validity of the signature.  The latter is used whether
 the signature is unknown or untrusted.
 
-   The ‘pgg’ customization group may have some settings which may
-interest you.  *Note The PGG Manual: (pgg)Top.
-
    ---------- Footnotes ----------
 
-   (1) This feature depends on post-5.10 versions of Gnus.  ‘MIME
-Security with OpenPGP’ is documented in RFC 3156
+   (1) ‘MIME Security with OpenPGP’ is documented in RFC 3156
 (https://www.rfc-editor.org/rfc/rfc3156.txt).  However, MH-E can also
 decrypt old-style PGP messages that are not in MIME format.
 
@@ -2021,7 +2004,7 @@ configuration is displayed.
 confirmation in ‘mh-kill-folder’.  Since this kept most users from
 setting this option, ‘mh-kill-folder’ was modified in version 6.0 to
 always ask for confirmation subject to
-‘mh-kill-folder-suppress-prompt-hook’.  *Note Folders::.
+‘mh-kill-folder-suppress-prompt-functions’.  *Note Folders::.
 
    (2) Stephen Gildea’s favorite binding is ‘(global-set-key "\C-cr"
 'mh-rmail)’.
@@ -2113,7 +2096,7 @@ The commands in this chapter are also found in the ‘Folder’ and
 ‘mh-folder-mode-hook’
      Hook run by ‘mh-folder-mode’ when visiting a new folder (default:
      ‘nil’).
-‘mh-kill-folder-suppress-prompt-hook’
+‘mh-kill-folder-suppress-prompt-functions’
      Abnormal hook run at the beginning of ‘mh-kill-folder’ (default:
      ‘'mh-search-p’).
 ‘mh-pack-folder-hook’
@@ -3480,14 +3463,6 @@ variety of mail security mechanisms.  The default is ‘PGP (MIME)’ if it
 is supported; otherwise, the default is ‘None’.  Other mechanisms
 include vanilla ‘PGP’ and ‘S/MIME’.
 
-   The ‘pgg’ customization group may have some settings which may
-interest you.  *Note The PGG Manual: (pgg)Top.
-
-   In particular, I turn on the option ‘pgg-encrypt-for-me’ so that all
-messages I encrypt are encrypted with my public key as well.  If you
-keep a copy of all of your outgoing mail with a ‘Fcc:’ header field,
-this setting is vital so that you can read the mail you write!
-
 
 File: mh-e.info,  Node: Checking Recipients,  Next: Sending Message,  Prev: Sending PGP,  Up: Editing Drafts
 
@@ -4025,14 +4000,8 @@ aspects of the tool bar via the ‘mh-tool-bar’ customization group.
 ‘mh-tool-bar-search-function’
      Function called by the tool bar search button (default:
      ‘mh-search’).
-‘mh-xemacs-tool-bar-position’
-     Tool bar location (default: ‘Same As Default Tool Bar’).
-‘mh-xemacs-use-tool-bar-flag’
-     If ‘on’, use tool bar (default: ‘on’, if supported).
 
-   In GNU Emacs, icons for some of MH-E’s functions are added to the
-tool bar.  In XEmacs, you have the opportunity to create a separate tool
-bar for the MH-E icons.
+   Icons for some of MH-E’s functions are added to the tool bar.
 
    In either case, you can select which of these functions you’d like to
 see by customizing the options ‘mh-tool-bar-folder-buttons’ and
@@ -4046,20 +4015,6 @@ those you don’t.
 option ‘mh-tool-bar-search-function’.  By default, this is set to
 ‘mh-search’.  *Note Searching::.  You can also choose ‘Other Function’
 from the ‘Value Menu’ and enter a function of your own choosing.
-
-   XEmacs provides a couple of extra options.  The first,
-‘mh-xemacs-use-tool-bar-flag’, controls whether to show the MH-E icons
-at all.  By default, this option is turned on if the window system
-supports tool bars.  If your system doesn’t support tool bars, then you
-won’t be able to turn on this option.
-
-   The second extra option is ‘mh-xemacs-tool-bar-position’ which
-controls the placement of the tool bar along the four edges of the
-frame.  You can choose from one of ‘Same As Default Tool Bar’, ‘Top’,
-‘Bottom’, ‘Left’, or ‘Right’.  If this variable is set to anything other
-than ‘Same As Default Tool Bar’ and the default tool bar is in a
-different location, then two tool bars will be displayed: the MH-E tool
-bar and the default tool bar.
 
 
 File: mh-e.info,  Node: Searching,  Next: Threading,  Prev: Tool Bar,  Up: Top
@@ -4724,8 +4679,8 @@ also available.
      Allowlisted message face
 
    MH-E depends on SpamAssassin (https://spamassassin.apache.org/),
-bogofilter (http://bogofilter.sourceforge.net/), or SpamProbe
-(http://spamprobe.sourceforge.net/) to throw the dreck away.  This
+bogofilter (https://bogofilter.sourceforge.net/), or SpamProbe
+(https://spamprobe.sourceforge.net/) to throw the dreck away.  This
 chapter describes briefly how to configure these programs to work well
 with MH-E and how to use MH-E’s interface that provides continuing
 education for these programs.
@@ -4846,7 +4801,7 @@ Bogofilter
 
 Bogofilter is a Bayesian spam filtering program.  Get it from your local
 distribution or from the bogofilter web site
-(http://bogofilter.sourceforge.net/).
+(https://bogofilter.sourceforge.net/).
 
    Bogofilter is taught by running:
 
@@ -4897,7 +4852,7 @@ SpamProbe
 
 SpamProbe is a Bayesian spam filtering program.  Get it from your local
 distribution or from the SpamProbe web site
-(http://spamprobe.sourceforge.net).
+(https://spamprobe.sourceforge.net).
 
    To use SpamProbe, add the following recipes to ‘~/.procmailrc’:
 
@@ -5420,9 +5375,7 @@ with ‘F n’ (‘mh-index-new-messages’).  *Note Folders::.
 impossible to read every message, it usually better to read the mailing
 list like a newsgroup in a news reader.  Emacs has a built-in newsreader
 called Gnus.  The remainder of this appendix talks about how to use Gnus
-with an MH message store.  The version of Gnus that was used to prepare
-this manual was 5.10.  Versions 5.8 through 5.10 should work but
-versions prior to 5.8 use different options.
+with an MH message store.
 
    This table contains a list of Gnus options that you will have to
 modify.  Note that for them to become accessible, you’ll have to load
@@ -5525,7 +5478,7 @@ C.3 MH FAQ and Support
 ======================
 
 The article ‘MH Frequently Asked Questions (FAQ) with Answers’
-(http://www.newt.com/faq/mh.html) appears monthly in the newsgroup
+(https://www.newt.com/faq/mh.html) appears monthly in the newsgroup
 ‘comp.mail.mh’.  While very little is there that deals with MH-E
 specifically, there is an incredible wealth of material about MH itself
 which you will find useful.
@@ -5541,21 +5494,10 @@ File: mh-e.info,  Node: Getting MH-E,  Prev: MH FAQ and Support,  Up: Odds and E
 C.4 Getting MH-E
 ================
 
-Because MH-E is undergoing a phase of sustained growth, the version of
-MH-E in your Emacs is likely to be out of date although it is most
-likely to be more up to date than the copy that comes with the MH
-distribution in ‘miscellany/mh-e’.
-
-   New MH-E releases are always available for downloading at SourceForge
-(https://sourceforge.net/projects/mh-e/files/) before they appear in an
-Emacs release.  You can read the release notes on that page to determine
-if the given release of MH-E is already installed in your version of
-Emacs.  You can also read the change log to see if you are interested in
-what the given release of MH-E has to offer (although we have no doubt
-that you will be extremely interested in all new releases).
-
-   If you use Debian, you can install the Debian mh-e package
-(https://packages.debian.org/unstable/mail/mh-e) instead.
+Since MH-E 8.6 was released in 2016, its development migrated to the
+Emacs repository.  MH-E is now only supported in the version of Emacs in
+which it appears.  Old releases of MH-E are still available for download
+at SourceForge (https://sourceforge.net/projects/mh-e/files/).
 
    After you download and extract the MH-E tarball, read the ‘README’
 file and ‘MH-E-NEWS’.  These correspond to the release notes and change
@@ -7105,7 +7047,7 @@ Key (Character) Index
 * C-c C-m C-u <1>:                       Adding Attachments.  (line 205)
 * C-c C-m C-x:                           Editing Drafts.      (line  91)
 * C-c C-m C-x <1>:                       Adding Attachments.  (line 138)
-* C-c C-m e e:                           Editing Drafts.      (line  94)
+* C-c C-m e e:                           Editing Drafts.      (line  95)
 * C-c C-m e e <1>:                       Sending PGP.         (line  11)
 * C-c C-m e s:                           Editing Drafts.      (line  96)
 * C-c C-m e s <1>:                       Sending PGP.         (line  11)
@@ -7248,7 +7190,7 @@ Key (Character) Index
                                                               (line  63)
 * i <1>:                                 Incorporating Mail.  (line  10)
 * i <2>:                                 Incorporating Mail.  (line  26)
-* i <3>:                                 Incorporating Mail.  (line  83)
+* i <3>:                                 Incorporating Mail.  (line  81)
 * I *:                                   Incorporating Mail.  (line  66)
 * J ?:                                   Junk.                (line  17)
 * J a:                                   Junk.                (line  21)
@@ -7307,12 +7249,12 @@ Key (Character) Index
 * M-x:                                   Conventions.         (line  96)
 * mouse-1:                               Reading Mail.        (line 122)
 * mouse-1 <1>:                           Viewing Attachments. (line  25)
-* mouse-2:                               Reading Mail.        (line 116)
+* mouse-2:                               Reading Mail.        (line 117)
 * mouse-2 <1>:                           Reading Mail.        (line 122)
 * mouse-2 <2>:                           Viewing.             (line   6)
 * mouse-2 <3>:                           Viewing.             (line 111)
 * mouse-2 <4>:                           Viewing Attachments. (line  25)
-* mouse-2 <5>:                           HTML.                (line  62)
+* mouse-2 <5>:                           HTML.                (line  58)
 * mouse-2 <6>:                           Speedbar.            (line   6)
 * mouse-3:                               Speedbar.            (line  34)
 * n:                                     Reading Mail Tour.   (line  19)
@@ -7389,7 +7331,7 @@ Key (Character) Index
 * S w:                                   Sequences.           (line  32)
 * S w <1>:                               Sequences.           (line  73)
 * S w <2>:                               Sequences.           (line 115)
-* S-mouse-2:                             HTML.                (line  84)
+* S-mouse-2:                             HTML.                (line  80)
 * S-TAB:                                 Editing Drafts.      (line  19)
 * S-TAB <1>:                             Editing Message.     (line  19)
 * S-TAB <2>:                             Searching.           (line  55)
@@ -7461,7 +7403,7 @@ Command Index
 * add-hook:                              Conventions.         (line  70)
 * backward-char:                         Processing Mail Tour.
                                                               (line  42)
-* browse-url-at-mouse:                   HTML.                (line  84)
+* browse-url-at-mouse:                   HTML.                (line  80)
 * call-process:                          Junk.                (line  90)
 * customize-face:                        Conventions.         (line  65)
 * customize-group:                       Conventions.         (line  60)
@@ -7532,14 +7474,14 @@ Command Index
 * mh-edit-again:                         Sending Mail.        (line  19)
 * mh-edit-again <1>:                     Redistributing.      (line  12)
 * mh-edit-again <2>:                     Editing Again.       (line   6)
-* mh-execute-commands:                   Incorporating Mail.  (line  89)
+* mh-execute-commands:                   Incorporating Mail.  (line  87)
 * mh-execute-commands <1>:               Navigating.          (line  46)
 * mh-execute-commands <2>:               Folders.             (line  52)
 * mh-execute-commands <3>:               Folders.             (line 186)
 * mh-execute-commands <4>:               Folders.             (line 315)
 * mh-extract-rejected-mail:              Sending Mail.        (line  20)
 * mh-extract-rejected-mail <1>:          Editing Again.       (line  17)
-* mh-find-path:                          Getting Started.     (line  70)
+* mh-find-path:                          Getting Started.     (line  67)
 * mh-first-msg:                          Reading Mail.        (line  83)
 * mh-first-msg <1>:                      Navigating.          (line   6)
 * mh-folder-inline-mime-part:            Reading Mail.        (line  72)
@@ -7566,7 +7508,7 @@ Command Index
 * mh-inc-folder:                         Incorporating Mail.  (line  10)
 * mh-inc-folder <1>:                     Incorporating Mail.  (line  22)
 * mh-inc-folder <2>:                     Incorporating Mail.  (line  26)
-* mh-inc-folder <3>:                     Incorporating Mail.  (line  83)
+* mh-inc-folder <3>:                     Incorporating Mail.  (line  81)
 * mh-inc-spool-*:                        Incorporating Mail.  (line  66)
 * mh-index-do-search:                    Searching.           (line  13)
 * mh-index-do-search <1>:                Searching.           (line 146)
@@ -7648,7 +7590,7 @@ Command Index
 * mh-mime-save-parts:                    Reading Mail.        (line  68)
 * mh-mime-save-parts <1>:                Viewing Attachments. (line  72)
 * mh-mml-secure-message-encrypt:         Editing Drafts.      (line  63)
-* mh-mml-secure-message-encrypt <1>:     Editing Drafts.      (line  94)
+* mh-mml-secure-message-encrypt <1>:     Editing Drafts.      (line  95)
 * mh-mml-secure-message-encrypt <2>:     Sending PGP.         (line  11)
 * mh-mml-secure-message-sign:            Editing Drafts.      (line  82)
 * mh-mml-secure-message-sign <1>:        Editing Drafts.      (line 102)
@@ -7748,7 +7690,7 @@ Command Index
 * mh-rescan-folder:                      Folders.             (line  32)
 * mh-rescan-folder <1>:                  Folders.             (line 266)
 * mh-rescan-folder <2>:                  Searching.           (line 161)
-* mh-rescan-folder, example:             Incorporating Mail.  (line  89)
+* mh-rescan-folder, example:             Incorporating Mail.  (line  87)
 * mh-rmail:                              Reading Mail Tour.   (line   6)
 * mh-rmail <1>:                          Reading Mail Tour.   (line  12)
 * mh-rmail <2>:                          Leaving MH-E.        (line  12)
@@ -7757,7 +7699,7 @@ Command Index
                                                               (line  42)
 * mh-search:                             Folders.             (line  34)
 * mh-search <1>:                         Folders.             (line 237)
-* mh-search <2>:                         Tool Bar.            (line  38)
+* mh-search <2>:                         Tool Bar.            (line  32)
 * mh-search <3>:                         Searching.           (line   6)
 * mh-search <4>:                         Searching.           (line 191)
 * mh-search-folder:                      Searching.           (line  78)
@@ -7768,11 +7710,11 @@ Command Index
 * mh-send-letter <1>:                    Sending Message.     (line   6)
 * mh-set-cmd-note:                       Scan Line Formats.   (line  32)
 * mh-set-cmd-note <1>:                   Scan Line Formats.   (line  93)
-* mh-set-cmd-note <2>:                   Scan Line Formats.   (line 241)
+* mh-set-cmd-note <2>:                   Scan Line Formats.   (line 240)
 * mh-show:                               Reading Mail.        (line  24)
 * mh-show <1>:                           Viewing.             (line   6)
-* mh-show, example:                      Incorporating Mail.  (line  89)
-* mh-show-mouse:                         Reading Mail.        (line 116)
+* mh-show, example:                      Incorporating Mail.  (line  87)
+* mh-show-mouse:                         Reading Mail.        (line 117)
 * mh-show-mouse <1>:                     Viewing.             (line   6)
 * mh-show-preferred-alternative:         Reading Mail.        (line  28)
 * mh-show-preferred-alternative <1>:     Viewing Attachments. (line 125)
@@ -7828,11 +7770,11 @@ Command Index
 * mh-undo-folder <1>:                    Folders.             (line 183)
 * mh-update-sequences:                   Sequences.           (line  34)
 * mh-update-sequences <1>:               Sequences.           (line 102)
-* mh-version:                            Getting Started.     (line  14)
+* mh-version:                            Getting Started.     (line  11)
 * mh-version <1>:                        Miscellaneous.       (line   8)
 * mh-version <2>:                        Miscellaneous.       (line  12)
 * mh-version <3>:                        Bug Reports.         (line   6)
-* mh-version <4>:                        Getting MH-E.        (line  22)
+* mh-version <4>:                        Getting MH-E.        (line  11)
 * mh-visit-folder:                       Folders.             (line  41)
 * mh-visit-folder <1>:                   Folders.             (line 224)
 * mh-visit-folder <2>:                   Speedbar.            (line   6)
@@ -7868,25 +7810,25 @@ Option (Variable) Index
  [index ]
 * Menu:
 
-* exec-path:                             Getting Started.     (line  47)
+* exec-path:                             Getting Started.     (line  44)
 * gnus-emphasis-alist:                   Viewing.             (line 118)
-* gnus-secondary-select-methods:         Procmail.            (line  84)
+* gnus-secondary-select-methods:         Procmail.            (line  82)
 * goto-address-highlight-p:              Viewing.             (line 111)
 * mail-citation-hook:                    Editing Drafts.      (line 165)
 * mail-citation-hook <1>:                Inserting Letter.    (line  24)
 * mail-citation-hook <2>:                Inserting Letter.    (line  36)
 * mail-citation-hook <3>:                Inserting Letter.    (line  65)
 * mail-mode-hook:                        Composing.           (line  34)
-* mail-sources:                          Procmail.            (line  88)
+* mail-sources:                          Procmail.            (line  86)
 * mail-user-agent:                       Sending Mail.        (line  11)
-* mail-user-agent <1>:                   Procmail.            (line  90)
-* message-mail-user-agent:               Procmail.            (line  91)
+* mail-user-agent <1>:                   Procmail.            (line  88)
+* message-mail-user-agent:               Procmail.            (line  89)
 * mh-adaptive-cmd-note-flag:             Scan Line Formats.   (line  13)
 * mh-adaptive-cmd-note-flag <1>:         Scan Line Formats.   (line  22)
 * mh-adaptive-cmd-note-flag <2>:         Scan Line Formats.   (line  32)
 * mh-adaptive-cmd-note-flag <3>:         Scan Line Formats.   (line  41)
-* mh-adaptive-cmd-note-flag <4>:         Scan Line Formats.   (line 241)
-* mh-adaptive-cmd-note-flag <5>:         Scan Line Formats.   (line 284)
+* mh-adaptive-cmd-note-flag <4>:         Scan Line Formats.   (line 240)
+* mh-adaptive-cmd-note-flag <5>:         Scan Line Formats.   (line 283)
 * mh-after-commands-processed-hook:      Folders.             (line  76)
 * mh-after-commands-processed-hook <1>:  Folders.             (line 193)
 * mh-alias-completion-ignore-case-flag:  Aliases.             (line  28)
@@ -7937,7 +7879,7 @@ Option (Variable) Index
 * mh-bury-show-buffer-flag, example:     Options.             (line  15)
 * mh-clean-message-header-flag:          Reading Mail.        (line 132)
 * mh-clean-message-header-flag <1>:      Viewing.             (line  30)
-* mh-cmd-note:                           Scan Line Formats.   (line 241)
+* mh-cmd-note:                           Scan Line Formats.   (line 240)
 * mh-compose-forward-as-mime-flag:       Sending Mail.        (line  41)
 * mh-compose-forward-as-mime-flag <1>:   Forwarding.          (line  14)
 * mh-compose-insertion:                  Editing Drafts.      (line 127)
@@ -7981,14 +7923,14 @@ Option (Variable) Index
 * mh-do-not-confirm-flag:                Reading Mail.        (line 143)
 * mh-do-not-confirm-flag <1>:            Miscellaneous Commands and Options.
                                                               (line  14)
-* mh-draft-folder:                       Getting Started.     (line  70)
+* mh-draft-folder:                       Getting Started.     (line  67)
 * mh-extract-from-attribution-verb:      Editing Drafts.      (line 138)
 * mh-extract-from-attribution-verb <1>:  Inserting Letter.    (line  18)
 * mh-extract-from-attribution-verb <2>:  Inserting Letter.    (line  46)
 * mh-fetch-x-image-url:                  Reading Mail.        (line 146)
 * mh-fetch-x-image-url <1>:              Viewing.             (line  59)
-* mh-find-path-hook:                     Getting Started.     (line  70)
-* mh-flists-present-flag:                Getting Started.     (line  59)
+* mh-find-path-hook:                     Getting Started.     (line  67)
+* mh-flists-present-flag:                Getting Started.     (line  56)
 * mh-folder-address:                     Folders.             (line 102)
 * mh-folder-address <1>:                 Scan Line Formats.   (line 185)
 * mh-folder-allowlisted:                 Junk.                (line  57)
@@ -8002,7 +7944,7 @@ Option (Variable) Index
 * mh-folder-deleted:                     Folders.             (line 110)
 * mh-folder-deleted <1>:                 Scan Line Formats.   (line 140)
 * mh-folder-followup:                    Folders.             (line 112)
-* mh-folder-followup <1>:                Scan Line Formats.   (line 220)
+* mh-folder-followup <1>:                Scan Line Formats.   (line 219)
 * mh-folder-font-lock-keywords:          Scan Line Formats.   (line 112)
 * mh-folder-font-lock-keywords <1>:      Scan Line Formats.   (line 119)
 * mh-folder-font-lock-keywords <2>:      Scan Line Formats.   (line 131)
@@ -8011,7 +7953,7 @@ Option (Variable) Index
 * mh-folder-font-lock-keywords <5>:      Scan Line Formats.   (line 185)
 * mh-folder-font-lock-keywords <6>:      Scan Line Formats.   (line 196)
 * mh-folder-font-lock-keywords <7>:      Scan Line Formats.   (line 207)
-* mh-folder-font-lock-keywords <8>:      Scan Line Formats.   (line 220)
+* mh-folder-font-lock-keywords <8>:      Scan Line Formats.   (line 219)
 * mh-folder-mode-hook:                   Folders.             (line  84)
 * mh-folder-mode-hook <1>:               Folders.             (line 135)
 * mh-folder-mode-hook, example:          Folders.             (line 139)
@@ -8023,7 +7965,7 @@ Option (Variable) Index
 * mh-folder-sent-to-me-hint:             Folders.             (line 118)
 * mh-folder-sent-to-me-sender:           Scan Line Formats.   (line 207)
 * mh-folder-subject:                     Folders.             (line 128)
-* mh-folder-subject <1>:                 Scan Line Formats.   (line 220)
+* mh-folder-subject <1>:                 Scan Line Formats.   (line 219)
 * mh-folder-tick:                        Folders.             (line 130)
 * mh-folder-to:                          Folders.             (line 132)
 * mh-folder-to <1>:                      Scan Line Formats.   (line 185)
@@ -8046,10 +7988,10 @@ Option (Variable) Index
 * mh-identity-list <2>:                  Identities.          (line 124)
 * mh-identity-list <3>:                  Identities.          (line 128)
 * mh-identity-list <4>:                  Identities.          (line 136)
-* mh-inbox:                              Getting Started.     (line  70)
+* mh-inbox:                              Getting Started.     (line  67)
 * mh-inc-folder-hook:                    Incorporating Mail.  (line  22)
-* mh-inc-folder-hook <1>:                Incorporating Mail.  (line  83)
-* mh-inc-folder-hook, example:           Incorporating Mail.  (line  89)
+* mh-inc-folder-hook <1>:                Incorporating Mail.  (line  81)
+* mh-inc-folder-hook, example:           Incorporating Mail.  (line  87)
 * mh-inc-prog:                           Incorporating Mail.  (line  15)
 * mh-inc-prog <1>:                       Incorporating Mail.  (line  40)
 * mh-inc-spool-list:                     Incorporating Mail.  (line  17)
@@ -8077,8 +8019,8 @@ Option (Variable) Index
 * mh-junk-disposition <1>:               Junk.                (line  73)
 * mh-junk-program:                       Junk.                (line  34)
 * mh-junk-program <1>:                   Junk.                (line  67)
-* mh-kill-folder-suppress-prompt-functions: Folders.          (line 287)
-* mh-kill-folder-suppress-prompt-hook:   Folders.             (line  87)
+* mh-kill-folder-suppress-prompt-functions: Folders.          (line  87)
+* mh-kill-folder-suppress-prompt-functions <1>: Folders.      (line 287)
 * mh-large-folder:                       Folders.             (line  63)
 * mh-large-folder <1>:                   Folders.             (line 224)
 * mh-large-folder <2>:                   Threading.           (line  40)
@@ -8092,8 +8034,8 @@ Option (Variable) Index
 * mh-letter-mode-hook:                   Sending Mail.        (line  70)
 * mh-letter-mode-hook <1>:               Composing.           (line  34)
 * mh-letter-mode-hook <2>:               Composing.           (line  65)
-* mh-lib:                                Getting Started.     (line  59)
-* mh-lib-progs:                          Getting Started.     (line  59)
+* mh-lib:                                Getting Started.     (line  56)
+* mh-lib-progs:                          Getting Started.     (line  56)
 * mh-lpr-command-format:                 Reading Mail.        (line 160)
 * mh-lpr-command-format <1>:             Printing.            (line   6)
 * mh-lpr-command-format <2>:             Printing.            (line  40)
@@ -8121,26 +8063,26 @@ Option (Variable) Index
 * mh-new-messages-folders <1>:           Folders.             (line 240)
 * mh-new-messages-folders <2>:           Folders.             (line 254)
 * mh-new-messages-folders <3>:           Folders.             (line 260)
-* mh-note-copied:                        Scan Line Formats.   (line 247)
+* mh-note-copied:                        Scan Line Formats.   (line 246)
 * mh-note-cur:                           Scan Line Formats.   (line 119)
-* mh-note-cur <1>:                       Scan Line Formats.   (line 250)
+* mh-note-cur <1>:                       Scan Line Formats.   (line 249)
 * mh-note-deleted:                       Scan Line Formats.   (line 140)
-* mh-note-deleted <1>:                   Scan Line Formats.   (line 254)
-* mh-note-dist:                          Scan Line Formats.   (line 257)
-* mh-note-forw:                          Scan Line Formats.   (line 260)
-* mh-note-printed:                       Scan Line Formats.   (line 263)
+* mh-note-deleted <1>:                   Scan Line Formats.   (line 253)
+* mh-note-dist:                          Scan Line Formats.   (line 256)
+* mh-note-forw:                          Scan Line Formats.   (line 259)
+* mh-note-printed:                       Scan Line Formats.   (line 262)
 * mh-note-refiled:                       Scan Line Formats.   (line 196)
-* mh-note-refiled <1>:                   Scan Line Formats.   (line 266)
-* mh-note-repl:                          Scan Line Formats.   (line 269)
-* mh-note-seq:                           Scan Line Formats.   (line 272)
+* mh-note-refiled <1>:                   Scan Line Formats.   (line 265)
+* mh-note-repl:                          Scan Line Formats.   (line 268)
+* mh-note-seq:                           Scan Line Formats.   (line 271)
 * mh-pack-folder-hook:                   Folders.             (line  90)
 * mh-pack-folder-hook <1>:               Folders.             (line 278)
-* mh-path:                               Getting Started.     (line  47)
-* mh-previous-seq:                       Getting Started.     (line  70)
+* mh-path:                               Getting Started.     (line  44)
+* mh-previous-seq:                       Getting Started.     (line  67)
 * mh-print-background-flag:              Reading Mail.        (line 173)
 * mh-print-background-flag <1>:          Printing.            (line   6)
 * mh-print-background-flag <2>:          Printing.            (line  40)
-* mh-progs:                              Getting Started.     (line  59)
+* mh-progs:                              Getting Started.     (line  56)
 * mh-progs <1>:                          Incorporating Mail.  (line  40)
 * mh-progs <2>:                          Scan Line Formats.   (line  86)
 * mh-quit-hook:                          Folders.             (line  93)
@@ -8163,20 +8105,20 @@ Option (Variable) Index
 * mh-reply-show-message-flag <1>:        Replying.            (line  51)
 * mh-scan-body-regexp:                   Scan Line Formats.   (line 112)
 * mh-scan-cur-msg-number-regexp:         Scan Line Formats.   (line 120)
-* mh-scan-cur-msg-number-regexp <1>:     Scan Line Formats.   (line 249)
-* mh-scan-cur-msg-number-regexp, example: Scan Line Formats.  (line 310)
+* mh-scan-cur-msg-number-regexp <1>:     Scan Line Formats.   (line 248)
+* mh-scan-cur-msg-number-regexp, example: Scan Line Formats.  (line 309)
 * mh-scan-date-regexp:                   Scan Line Formats.   (line 132)
 * mh-scan-deleted-msg-regexp:            Scan Line Formats.   (line 141)
-* mh-scan-deleted-msg-regexp <1>:        Scan Line Formats.   (line 253)
-* mh-scan-deleted-msg-regexp, example:   Scan Line Formats.   (line 315)
+* mh-scan-deleted-msg-regexp <1>:        Scan Line Formats.   (line 252)
+* mh-scan-deleted-msg-regexp, example:   Scan Line Formats.   (line 314)
 * mh-scan-format-file:                   Scan Line Formats.   (line  16)
 * mh-scan-format-file <1>:               Scan Line Formats.   (line  32)
 * mh-scan-format-file <2>:               Scan Line Formats.   (line  41)
 * mh-scan-format-file <3>:               Scan Line Formats.   (line  51)
 * mh-scan-format-file <4>:               Scan Line Formats.   (line 161)
 * mh-scan-format-file <5>:               Scan Line Formats.   (line 167)
-* mh-scan-format-file <6>:               Scan Line Formats.   (line 284)
-* mh-scan-format-file, example:          Scan Line Formats.   (line 284)
+* mh-scan-format-file <6>:               Scan Line Formats.   (line 283)
+* mh-scan-format-file, example:          Scan Line Formats.   (line 283)
 * mh-scan-format-mh:                     Scan Line Formats.   (line  41)
 * mh-scan-format-mh <1>:                 Scan Line Formats.   (line  51)
 * mh-scan-format-mh <2>:                 Scan Line Formats.   (line  72)
@@ -8186,27 +8128,27 @@ Option (Variable) Index
 * mh-scan-format-nmh <3>:                Scan Line Formats.   (line  51)
 * mh-scan-format-nmh <4>:                Scan Line Formats.   (line 207)
 * mh-scan-good-msg-regexp:               Scan Line Formats.   (line 152)
-* mh-scan-good-msg-regexp, example:      Scan Line Formats.   (line 304)
+* mh-scan-good-msg-regexp, example:      Scan Line Formats.   (line 303)
 * mh-scan-msg-format-regexp:             Scan Line Formats.   (line 162)
 * mh-scan-msg-format-string:             Scan Line Formats.   (line 168)
 * mh-scan-msg-number-regexp:             Scan Line Formats.   (line 173)
-* mh-scan-msg-number-regexp, example:    Scan Line Formats.   (line 299)
+* mh-scan-msg-number-regexp, example:    Scan Line Formats.   (line 298)
 * mh-scan-msg-overflow-regexp:           Scan Line Formats.   (line 178)
 * mh-scan-msg-search-regexp:             Scan Line Formats.   (line 181)
-* mh-scan-msg-search-regexp, example:    Scan Line Formats.   (line 299)
+* mh-scan-msg-search-regexp, example:    Scan Line Formats.   (line 298)
 * mh-scan-prog:                          Scan Line Formats.   (line  19)
 * mh-scan-prog <1>:                      Scan Line Formats.   (line  86)
 * mh-scan-rcpt-regexp:                   Scan Line Formats.   (line 186)
 * mh-scan-refiled-msg-regexp:            Scan Line Formats.   (line 197)
-* mh-scan-refiled-msg-regexp <1>:        Scan Line Formats.   (line 265)
-* mh-scan-refiled-msg-regexp, example:   Scan Line Formats.   (line 315)
+* mh-scan-refiled-msg-regexp <1>:        Scan Line Formats.   (line 264)
+* mh-scan-refiled-msg-regexp, example:   Scan Line Formats.   (line 314)
 * mh-scan-sent-to-me-sender-regexp:      Folders.             (line 117)
 * mh-scan-sent-to-me-sender-regexp <1>:  Folders.             (line 122)
 * mh-scan-sent-to-me-sender-regexp <2>:  Scan Line Formats.   (line 131)
 * mh-scan-sent-to-me-sender-regexp <3>:  Scan Line Formats.   (line 208)
-* mh-scan-subject-regexp:                Scan Line Formats.   (line 221)
+* mh-scan-subject-regexp:                Scan Line Formats.   (line 220)
 * mh-scan-valid-regexp:                  Scan Line Formats.   (line 105)
-* mh-scan-valid-regexp, example:         Scan Line Formats.   (line 292)
+* mh-scan-valid-regexp, example:         Scan Line Formats.   (line 291)
 * mh-search-folder:                      Searching.           (line  75)
 * mh-search-folder <1>:                  Searching.           (line 152)
 * mh-search-mode-hook:                   Searching.           (line  70)
@@ -8270,7 +8212,7 @@ Option (Variable) Index
 * mh-summary-height:                     Reading Mail.        (line 186)
 * mh-summary-height <1>:                 Miscellaneous Commands and Options.
                                                               (line  20)
-* mh-sys-path:                           Getting Started.     (line  47)
+* mh-sys-path:                           Getting Started.     (line  44)
 * mh-tick-seq:                           Sequences.           (line  44)
 * mh-tick-seq <1>:                       Sequences.           (line  68)
 * mh-tick-seq <2>:                       Sequences.           (line 102)
@@ -8278,26 +8220,22 @@ Option (Variable) Index
 * mh-ticked-messages-folders <1>:        Folders.             (line 248)
 * mh-ticked-messages-folders <2>:        Folders.             (line 260)
 * mh-tool-bar-folder-buttons:            Tool Bar.            (line  12)
-* mh-tool-bar-folder-buttons <1>:        Tool Bar.            (line  30)
+* mh-tool-bar-folder-buttons <1>:        Tool Bar.            (line  24)
 * mh-tool-bar-letter-buttons:            Tool Bar.            (line  15)
-* mh-tool-bar-letter-buttons <1>:        Tool Bar.            (line  30)
+* mh-tool-bar-letter-buttons <1>:        Tool Bar.            (line  24)
 * mh-tool-bar-search-function:           Tool Bar.            (line  18)
-* mh-tool-bar-search-function <1>:       Tool Bar.            (line  38)
-* mh-unseen-seq:                         Getting Started.     (line  70)
+* mh-tool-bar-search-function <1>:       Tool Bar.            (line  32)
+* mh-unseen-seq:                         Getting Started.     (line  67)
 * mh-unseen-updated-hook:                Sequences.           (line  55)
 * mh-unseen-updated-hook <1>:            Sequences.           (line 110)
 * mh-update-sequences-after-mh-show-flag: Sequences.          (line  46)
 * mh-update-sequences-after-mh-show-flag <1>: Sequences.      (line 102)
-* mh-user-path:                          Getting Started.     (line  70)
-* mh-variant:                            Getting Started.     (line  47)
-* mh-variant-in-use:                     Getting Started.     (line  47)
+* mh-user-path:                          Getting Started.     (line  67)
+* mh-variant:                            Getting Started.     (line  44)
+* mh-variant-in-use:                     Getting Started.     (line  44)
 * mh-x-face-file:                        Editing Drafts.      (line 156)
 * mh-x-face-file <1>:                    Picture.             (line   6)
 * mh-x-face-file <2>:                    Picture.             (line  31)
-* mh-xemacs-tool-bar-position:           Tool Bar.            (line  21)
-* mh-xemacs-tool-bar-position <1>:       Tool Bar.            (line  49)
-* mh-xemacs-use-tool-bar-flag:           Tool Bar.            (line  23)
-* mh-xemacs-use-tool-bar-flag <1>:       Tool Bar.            (line  43)
 * mh-yank-behavior:                      Replying.            (line  44)
 * mh-yank-behavior <1>:                  Editing Drafts.      (line 159)
 * mh-yank-behavior <2>:                  Inserting Letter.    (line  24)
@@ -8309,12 +8247,11 @@ Option (Variable) Index
 * mm-discouraged-alternatives:           Viewing Attachments. (line 120)
 * mm-text-html-renderer:                 HTML.                (line  17)
 * mm-text-html-renderer <1>:             HTML.                (line  26)
-* mm-text-html-renderer <2>:             HTML.                (line  79)
-* nnmail-keep-last-article:              Procmail.            (line  95)
-* pgg-encrypt-for-me:                    Sending PGP.         (line  42)
+* mm-text-html-renderer <2>:             HTML.                (line  75)
+* nnmail-keep-last-article:              Procmail.            (line  93)
 * ps-print-color-p:                      Printing.            (line  18)
 * read-mail-command:                     Reading Mail.        (line  11)
-* set-mh-cmd-note, example:              Scan Line Formats.   (line 310)
+* set-mh-cmd-note, example:              Scan Line Formats.   (line 309)
 * text-mode-hook:                        Composing.           (line  34)
 * transient-mark-mode:                   Ranges.              (line  35)
 
@@ -8345,9 +8282,9 @@ Concept Index
 * +inbox <1>:                            Reading Mail.        (line   6)
 * +mhe-index:                            Searching.           (line 152)
 * .emacs:                                Conventions.         (line  57)
-* .emacs <1>:                            Getting Started.     (line  63)
+* .emacs <1>:                            Getting Started.     (line  60)
 * .emacs <2>:                            Incorporating Mail.  (line  34)
-* .emacs <3>:                            HTML.                (line  84)
+* .emacs <3>:                            HTML.                (line  80)
 * .emacs <4>:                            Miscellaneous Commands and Options.
                                                               (line  35)
 * .emacs <5>:                            Composing.           (line   6)
@@ -8391,13 +8328,12 @@ Concept Index
 * Brian Reid:                            History.             (line   6)
 * Brian Reid <1>:                        From Brian Reid.     (line   6)
 * browser, gnus-w3m:                     HTML.                (line  29)
-* browser, html2text:                    HTML.                (line  33)
-* browser, links:                        HTML.                (line  37)
-* browser, lynx:                         HTML.                (line  45)
+* browser, links:                        HTML.                (line  33)
+* browser, lynx:                         HTML.                (line  41)
 * browser, w3m:                          HTML.                (line  29)
-* browser, w3m <1>:                      HTML.                (line  62)
-* browser, w3m <2>:                      HTML.                (line  72)
-* browser, w3m-standalone:               HTML.                (line  72)
+* browser, w3m <1>:                      HTML.                (line  58)
+* browser, w3m <2>:                      HTML.                (line  68)
+* browser, w3m-standalone:               HTML.                (line  68)
 * buffers, *MH-E Folders*:               Folders.             (line 266)
 * buffers, *MH-E Folders* <1>:           Miscellaneous.       (line  24)
 * buffers, *MH-E Help*:                  Miscellaneous.       (line  26)
@@ -8417,7 +8353,6 @@ Concept Index
 * burst:                                 Digests.             (line  13)
 * buttons:                               Viewing Attachments. (line  21)
 * Cc header field:                       Editing Message.     (line   6)
-* change log:                            Getting MH-E.        (line  11)
 * checking recipients:                   Checking Recipients. (line   6)
 * citations, highlighting:               Viewing.             (line 103)
 * commands:                              Conventions.         (line  10)
@@ -8434,7 +8369,7 @@ Concept Index
 * Content-Disposition header field:      Viewing Attachments. (line 104)
 * Content-Transfer-Encoding header field: Junk.               (line 265)
 * Content-Type header field:             Junk.                (line 265)
-* contributed software:                  Getting MH-E.        (line  29)
+* contributed software:                  Getting MH-E.        (line  18)
 * conventions, Emacs:                    Conventions.         (line   6)
 * conventions, key names:                Conventions.         (line  17)
 * convert:                               Viewing.             (line  59)
@@ -8460,25 +8395,22 @@ Concept Index
 * customization group, mh-speedbar:      Speedbar.            (line  37)
 * customization group, mh-thread:        Threading.           (line  35)
 * customization group, mh-tool-bar:      Tool Bar.            (line   9)
-* customization group, pgg:              Reading PGP.         (line  75)
-* customization group, pgg <1>:          Sending PGP.         (line  39)
 * customizing MH-E:                      Options.             (line   6)
 * Dcc header field:                      Editing Message.     (line   6)
-* Debian:                                Getting Started.     (line  26)
-* Debian <1>:                            Getting MH-E.        (line  19)
+* Debian:                                Getting Started.     (line  23)
 * decoding RFC 2047:                     Scan Line Formats.   (line  72)
 * decrypting messages:                   Reading PGP.         (line  31)
 * deleting messages:                     Navigating.          (line  23)
 * digests:                               Digests.             (line   6)
 * dist:                                  Redistributing.      (line   6)
-* documentation:                         Getting MH-E.        (line  29)
+* documentation:                         Getting MH-E.        (line  18)
 * draft:                                 Composing.           (line   6)
 * draft <1>:                             Replying.            (line  30)
 * draft <2>:                             Forwarding.          (line   6)
 * draft <3>:                             Editing Again.       (line   6)
 * draft <4>:                             Editing Drafts.      (line   6)
 * draft folder:                          Composing.           (line  16)
-* Draft-Folder MH profile component:     Getting Started.     (line  70)
+* Draft-Folder MH profile component:     Getting Started.     (line  67)
 * editing draft:                         Editing Drafts.      (line   6)
 * editing header:                        Editing Message.     (line   6)
 * editing message:                       Miscellaneous Commands and Options.
@@ -8528,15 +8460,14 @@ Concept Index
 * Face header field <1>:                 Picture.             (line  12)
 * faces:                                 Conventions.         (line  65)
 * FAQ:                                   MH FAQ and Support.  (line   6)
-* Fcc header field:                      Sending PGP.         (line  42)
-* Fcc header field <1>:                  Identities.          (line  92)
+* Fcc header field:                      Identities.          (line  92)
 * file:                                  Adding Attachments.  (line  32)
 * file completion:                       Conventions.         (line  88)
 * files:                                 Files and Pipes.     (line   6)
 * files, .emacs:                         Conventions.         (line  57)
-* files, .emacs <1>:                     Getting Started.     (line  63)
+* files, .emacs <1>:                     Getting Started.     (line  60)
 * files, .emacs <2>:                     Incorporating Mail.  (line  34)
-* files, .emacs <3>:                     HTML.                (line  84)
+* files, .emacs <3>:                     HTML.                (line  80)
 * files, .emacs <4>:                     Miscellaneous Commands and Options.
                                                               (line  35)
 * files, .emacs <5>:                     Composing.           (line   6)
@@ -8555,9 +8486,9 @@ Concept Index
 * files, /etc/passwd:                    Aliases.             (line 111)
 * files, components:                     Composing.           (line  34)
 * files, draft:                          Editing Again.       (line   6)
-* files, MH-E-NEWS:                      Getting MH-E.        (line  22)
+* files, MH-E-NEWS:                      Getting MH-E.        (line  11)
 * files, mhl.reply:                      Replying.            (line   6)
-* files, README:                         Getting MH-E.        (line  22)
+* files, README:                         Getting MH-E.        (line  11)
 * filling paragraphs:                    Editing Message.     (line  61)
 * filters:                               Limits.              (line   6)
 * flists:                                Speedbar.            (line  37)
@@ -8600,8 +8531,7 @@ Concept Index
 * getting MH-E:                          Getting MH-E.        (line   6)
 * Gildea, Stephen:                       History.             (line   6)
 * Gildea, Stephen <1>:                   From Stephen Gildea. (line   6)
-* GNU mailutils MH:                      Getting Started.     (line  26)
-* gnuclient:                             Incorporating Mail.  (line  71)
+* GNU mailutils MH:                      Getting Started.     (line  23)
 * GnuPG:                                 Reading PGP.         (line   6)
 * Gnus:                                  HTML.                (line   6)
 * Gnus <1>:                              Reading PGP.         (line   6)
@@ -8620,8 +8550,7 @@ Concept Index
 * header field, Dcc:                     Editing Message.     (line   6)
 * header field, Face:                    Viewing.             (line  43)
 * header field, Face <1>:                Picture.             (line  12)
-* header field, Fcc:                     Sending PGP.         (line  42)
-* header field, Fcc <1>:                 Identities.          (line  92)
+* header field, Fcc:                     Identities.          (line  92)
 * header field, From:                    Editing Message.     (line   6)
 * header field, From <1>:                Identities.          (line  45)
 * header field, Mail-Followup-To:        Editing Message.     (line   6)
@@ -8653,7 +8582,6 @@ Concept Index
 * history of MH-E:                       History.             (line   6)
 * hooks:                                 Conventions.         (line  70)
 * HTML:                                  HTML.                (line   6)
-* html2text:                             HTML.                (line  33)
 * identities:                            Identities.          (line   6)
 * Identity > Customize Identities menu item: Identities.      (line  72)
 * Identity > Insert Auto Fields menu item: Identities.        (line  14)
@@ -8679,7 +8607,7 @@ Concept Index
 * inline images:                         Viewing Attachments. (line 104)
 * inserting messages:                    Inserting Letter.    (line   6)
 * inserting messages <1>:                Inserting Messages.  (line   6)
-* install-mh:                            Getting Started.     (line  33)
+* install-mh:                            Getting Started.     (line  30)
 * interrupting:                          Conventions.         (line 109)
 * introduction:                          Tour Through MH-E.   (line   6)
 * italics, showing:                      Viewing.             (line 118)
@@ -8716,10 +8644,10 @@ Concept Index
 * Letter menu <1>:                       Menu Bar.            (line   6)
 * Letter menu <2>:                       Menu Bar.            (line   6)
 * limits:                                Limits.              (line   6)
-* links:                                 HTML.                (line  37)
+* links:                                 HTML.                (line  33)
 * links, following:                      Viewing.             (line 111)
 * lpr:                                   Printing.            (line  35)
-* lynx:                                  HTML.                (line  45)
+* lynx:                                  HTML.                (line  41)
 * Mail mode:                             Composing.           (line  34)
 * Mail-Followup-To header field:         Editing Message.     (line   6)
 * Mail-Followup-To header field <1>:     Identities.          (line  96)
@@ -8729,7 +8657,7 @@ Concept Index
 * mailing lists, reading:                Procmail.            (line   6)
 * mairix:                                Searching.           (line 191)
 * mairix <1>:                            Searching.           (line 280)
-* manual:                                Getting MH-E.        (line  29)
+* manual:                                Getting MH-E.        (line  18)
 * mark:                                  Conventions.         (line  80)
 * mark <1>:                              Sequences.           (line 115)
 * Marshall Rose:                         Junk.                (line   6)
@@ -8883,7 +8811,7 @@ Concept Index
 * message ranges:                        Ranges.              (line   6)
 * MH & nmh - Email for Users & Programmers: Preface.          (line  28)
 * MH book:                               Preface.             (line  28)
-* MH book <1>:                           Getting Started.     (line  33)
+* MH book <1>:                           Getting Started.     (line  30)
 * MH commands:                           Conventions.         (line  10)
 * MH commands, ali:                      Aliases.             (line 106)
 * MH commands, burst:                    Digests.             (line  13)
@@ -8894,7 +8822,7 @@ Concept Index
 * MH commands, inc:                      Reading Mail Tour.   (line   6)
 * MH commands, inc <1>:                  Incorporating Mail.  (line  40)
 * MH commands, inc <2>:                  Scan Line Formats.   (line 105)
-* MH commands, install-mh:               Getting Started.     (line  33)
+* MH commands, install-mh:               Getting Started.     (line  30)
 * MH commands, mark:                     Sequences.           (line 115)
 * MH commands, mhbuild:                  Adding Attachments.  (line   6)
 * MH commands, mhbuild <1>:              Adding Attachments.  (line 205)
@@ -8904,7 +8832,7 @@ Concept Index
 * MH commands, mhn:                      Viewing Attachments. (line  72)
 * MH commands, mhn <1>:                  Adding Attachments.  (line   6)
 * MH commands, mhn <2>:                  Adding Attachments.  (line 205)
-* MH commands, mhparam:                  Getting Started.     (line  47)
+* MH commands, mhparam:                  Getting Started.     (line  44)
 * MH commands, mhshow:                   Viewing Attachments. (line   6)
 * MH commands, mhstore:                  Viewing Attachments. (line  72)
 * MH commands, packf:                    Leaving MH-E.        (line  16)
@@ -8931,19 +8859,19 @@ Concept Index
 * MH commands, whom:                     Checking Recipients. (line   6)
 * mh customization group:                Options.             (line  33)
 * MH FAQ:                                MH FAQ and Support.  (line   6)
-* MH profile:                            Getting Started.     (line  41)
-* MH profile component:                  Getting Started.     (line  41)
+* MH profile:                            Getting Started.     (line  38)
+* MH profile component:                  Getting Started.     (line  38)
 * MH profile component, Aliasfile:       Aliases.             (line 106)
-* MH profile component, Draft-Folder:    Getting Started.     (line  70)
+* MH profile component, Draft-Folder:    Getting Started.     (line  67)
 * MH profile component, forw:            Forwarding.          (line  14)
-* MH profile component, Path:            Getting Started.     (line  41)
-* MH profile component, Path <1>:        Getting Started.     (line  70)
-* MH profile component, Previous-Sequence: Getting Started.   (line  70)
+* MH profile component, Path:            Getting Started.     (line  38)
+* MH profile component, Path <1>:        Getting Started.     (line  67)
+* MH profile component, Previous-Sequence: Getting Started.   (line  67)
 * MH profile component, Previous-Sequence <1>: Sequences.     (line  90)
 * MH profile component, Previous-Sequence <2>: Junk.          (line  85)
 * MH profile component, repl:            Replying.            (line  30)
 * MH profile component, sortm:           Folders.             (line 301)
-* MH profile component, Unseen-Sequence: Getting Started.     (line  70)
+* MH profile component, Unseen-Sequence: Getting Started.     (line  67)
 * MH profile component, Unseen-Sequence <1>: Sequences.       (line 102)
 * MH profile component, Unseen-Sequence <2>: Procmail.        (line  43)
 * mh-alias customization group:          Aliases.             (line  25)
@@ -8951,7 +8879,7 @@ Concept Index
 * MH-E, obtaining:                       Getting MH-E.        (line   6)
 * MH-E, versions:                        Getting Started.     (line   6)
 * MH-E, versions <1>:                    History.             (line   6)
-* MH-E-NEWS:                             Getting MH-E.        (line  22)
+* MH-E-NEWS:                             Getting MH-E.        (line  11)
 * mh-folder customization group:         Folders.             (line  57)
 * MH-Folder mode:                        Reading Mail Tour.   (line   6)
 * MH-Folder mode <1>:                    Processing Mail Tour.
@@ -9005,7 +8933,7 @@ Concept Index
 * mhn:                                   Viewing Attachments. (line  72)
 * mhn <1>:                               Adding Attachments.  (line   6)
 * mhn <2>:                               Adding Attachments.  (line 205)
-* mhparam:                               Getting Started.     (line  47)
+* mhparam:                               Getting Started.     (line  44)
 * mhshow:                                Viewing Attachments. (line   6)
 * mhstore:                               Viewing Attachments. (line  72)
 * MIME:                                  Viewing Attachments. (line   6)
@@ -9060,10 +8988,10 @@ Concept Index
 * namazu <1>:                            Searching.           (line 303)
 * navigation:                            Navigating.          (line   6)
 * new mail:                              Incorporating Mail.  (line  34)
-* news:                                  Getting MH-E.        (line  22)
+* news:                                  Getting MH-E.        (line  11)
 * nil:                                   Options.             (line  15)
 * NIS, obtaining local aliases from:     Aliases.             (line 142)
-* nmh:                                   Getting Started.     (line  26)
+* nmh:                                   Getting Started.     (line  23)
 * normal hooks:                          Conventions.         (line  70)
 * notations, scan line:                  Scan Line Formats.   (line  76)
 * notification of new mail:              Incorporating Mail.  (line  34)
@@ -9077,12 +9005,8 @@ Concept Index
 * Organization header field:             Identities.          (line  50)
 * packf:                                 Leaving MH-E.        (line  16)
 * paragraphs, filling:                   Editing Message.     (line  61)
-* Path MH profile component:             Getting Started.     (line  41)
-* Path MH profile component <1>:         Getting Started.     (line  70)
-* PGG:                                   Reading PGP.         (line  75)
-* PGG <1>:                               Sending PGP.         (line  39)
-* pgg customization group:               Reading PGP.         (line  75)
-* pgg customization group <1>:           Sending PGP.         (line  39)
+* Path MH profile component:             Getting Started.     (line  38)
+* Path MH profile component <1>:         Getting Started.     (line  67)
 * PGP:                                   Reading PGP.         (line   6)
 * pick:                                  Searching.           (line  84)
 * pick <1>:                              Searching.           (line 116)
@@ -9096,7 +9020,7 @@ Concept Index
 * prefix argument:                       Conventions.         (line  39)
 * prefix characters:                     Processing Mail Tour.
                                                               (line  75)
-* Previous-Sequence MH profile component: Getting Started.    (line  70)
+* Previous-Sequence MH profile component: Getting Started.    (line  67)
 * Previous-Sequence MH profile component <1>: Sequences.      (line  90)
 * Previous-Sequence MH profile component <2>: Junk.           (line  85)
 * printing:                              Printing.            (line   6)
@@ -9117,7 +9041,7 @@ Concept Index
 * reading mail <1>:                      Reading Mail.        (line   6)
 * reading mail <2>:                      Miscellaneous Commands and Options.
                                                               (line  35)
-* README:                                Getting MH-E.        (line  22)
+* README:                                Getting MH-E.        (line  11)
 * recipients, checking:                  Checking Recipients. (line   6)
 * redistributing:                        Redistributing.      (line   6)
 * refile:                                Processing Mail Tour.
@@ -9130,7 +9054,6 @@ Concept Index
 * regular expressions, scan line formats: Scan Line Formats.  (line  93)
 * Reid, Brian:                           History.             (line   6)
 * Reid, Brian <1>:                       From Brian Reid.     (line   6)
-* release notes:                         Getting MH-E.        (line  11)
 * renaming folders:                      Folders.             (line 340)
 * repl:                                  Composing.           (line  34)
 * repl <1>:                              Replying.            (line  21)
@@ -9199,7 +9122,7 @@ Concept Index
 * shar:                                  Files and Pipes.     (line  21)
 * shell commands:                        Conventions.         (line  10)
 * show:                                  Viewing Attachments. (line   6)
-* shr:                                   HTML.                (line  54)
+* shr:                                   HTML.                (line  50)
 * siblings, in threads:                  Threading.           (line  12)
 * signature:                             Signature.           (line   6)
 * signature <1>:                         Identities.          (line  59)
@@ -9275,7 +9198,6 @@ Concept Index
 * Unix commands, file:                   Adding Attachments.  (line  32)
 * Unix commands, ftp:                    Adding Attachments.  (line 120)
 * Unix commands, ftp <1>:                Adding Attachments.  (line 128)
-* Unix commands, gnuclient:              Incorporating Mail.  (line  71)
 * Unix commands, grep:                   Searching.           (line 191)
 * Unix commands, grep <1>:               Searching.           (line 336)
 * Unix commands, index:                  Searching.           (line 229)
@@ -9303,7 +9225,7 @@ Concept Index
 * Unix commands, xbuffy:                 Incorporating Mail.  (line  71)
 * unseen messages, viewing:              Folders.             (line 240)
 * unseen sequence:                       Folders.             (line 240)
-* Unseen-Sequence MH profile component:  Getting Started.     (line  70)
+* Unseen-Sequence MH profile component:  Getting Started.     (line  67)
 * Unseen-Sequence MH profile component <1>: Sequences.        (line 102)
 * Unseen-Sequence MH profile component <2>: Procmail.         (line  43)
 * URLs, highlighting:                    Viewing.             (line 111)
@@ -9319,9 +9241,9 @@ Concept Index
 * viewing attachments:                   Viewing Attachments. (line  37)
 * viruses:                               Junk.                (line  11)
 * w3m:                                   HTML.                (line  29)
-* w3m <1>:                               HTML.                (line  62)
-* w3m <2>:                               HTML.                (line  72)
-* w3m-standalone:                        HTML.                (line  72)
+* w3m <1>:                               HTML.                (line  58)
+* w3m <2>:                               HTML.                (line  68)
+* w3m-standalone:                        HTML.                (line  68)
 * wget:                                  Viewing.             (line  59)
 * whom:                                  Checking Recipients. (line   6)
 * Wohler, Bill:                          Preface.             (line  39)
@@ -9349,135 +9271,135 @@ Concept Index
 Tag Table:
 Node: Top1266
 Node: Preface4920
-Ref: Preface-Footnote-16970
-Node: Conventions7315
-Node: Getting Started13016
-Ref: Getting Started-Footnote-117226
-Ref: Getting Started-Footnote-217552
-Node: Tour Through MH-E17667
-Ref: Tour Through MH-E-Footnote-118411
-Node: Sending Mail Tour18653
-Ref: Sending Mail Tour-Footnote-120291
-Ref: Sending Mail Tour-Footnote-220379
-Ref: Sending Mail Tour-Footnote-320565
-Node: Reading Mail Tour20720
-Ref: Reading Mail Tour-Footnote-122378
-Ref: Reading Mail Tour-Footnote-222502
-Node: Processing Mail Tour22644
-Node: Leaving MH-E26629
-Node: More About MH-E27863
-Node: Using This Manual29392
-Ref: Using This Manual-Footnote-132213
-Ref: Using This Manual-Footnote-232301
-Node: Options32499
-Node: Ranges34516
-Node: Folder Selection36347
-Node: Incorporating Mail38704
-Node: Reading Mail42898
-Ref: Reading Mail-Footnote-151669
-Node: Viewing51946
-Ref: Viewing-Footnote-160517
-Ref: Viewing-Footnote-260651
-Ref: Viewing-Footnote-361003
-Node: Viewing Attachments61239
-Ref: Viewing Attachments-Footnote-169297
-Ref: Viewing Attachments-Footnote-269421
-Ref: Viewing Attachments-Footnote-369537
-Ref: Viewing Attachments-Footnote-469751
-Node: HTML69821
-Node: Digests74428
-Ref: Digests-Footnote-175892
-Node: Reading PGP76001
-Ref: Reading PGP-Footnote-178802
-Ref: Reading PGP-Footnote-279052
-Node: Printing79231
-Ref: Printing-Footnote-182131
-Node: Files and Pipes82239
-Node: Navigating84267
-Node: Miscellaneous Commands and Options87079
-Ref: Miscellaneous Commands and Options-Footnote-191067
-Ref: Miscellaneous Commands and Options-Footnote-291376
-Node: Folders91465
-Ref: Folders-Footnote-1107217
-Ref: Folders-Footnote-2107436
-Ref: Folders-Footnote-3107511
-Node: Sending Mail107626
-Node: Composing110818
-Ref: Composing-Footnote-1114250
-Ref: Composing-Footnote-2114504
-Node: Replying114684
-Ref: Replying-Footnote-1117530
-Node: Forwarding117648
-Ref: Forwarding-Footnote-1119657
-Node: Redistributing119774
-Ref: Redistributing-Footnote-1120976
-Ref: Redistributing-Footnote-2121099
-Node: Editing Again121219
-Node: Editing Drafts122350
-Node: Editing Message129577
-Node: Inserting Letter134611
-Ref: Inserting Letter-Footnote-1138697
-Ref: Inserting Letter-Footnote-2138820
-Ref: Inserting Letter-Footnote-3139001
-Node: Inserting Messages139103
-Node: Signature139989
-Node: Picture141735
-Node: Adding Attachments143336
-Ref: Adding Attachments-Footnote-1153319
-Ref: Adding Attachments-Footnote-2153401
-Ref: Adding Attachments-Footnote-3153517
-Ref: Adding Attachments-Footnote-4153574
-Ref: Adding Attachments-Footnote-5153661
-Node: Sending PGP153777
-Node: Checking Recipients155784
-Ref: Checking Recipients-Footnote-1156213
-Node: Sending Message156347
-Ref: Sending Message-Footnote-1157310
-Node: Killing Draft157430
-Node: Aliases157836
-Ref: Aliases-Footnote-1167196
-Node: Identities167294
-Ref: Identities-Footnote-1174638
-Node: Speedbar174691
-Ref: Speedbar-Footnote-1177257
-Node: Menu Bar177389
-Node: Tool Bar178381
-Node: Searching181046
-Node: Threading193298
-Ref: Threading-Footnote-1196341
-Node: Limits196940
-Ref: Limits-Footnote-1198945
-Node: Sequences199080
-Ref: Sequences-Footnote-1204540
-Ref: Sequences-Footnote-2204652
-Ref: Sequences-Footnote-3204686
-Node: Junk204809
-Ref: Junk-Footnote-1215739
-Node: Miscellaneous216079
-Node: Scan Line Formats217982
-Ref: Scan Line Formats-Footnote-1234717
-Ref: Scan Line Formats-Footnote-2234859
-Node: Procmail234983
-Ref: Procmail-Footnote-1240619
-Ref: Procmail-Footnote-2240766
-Ref: Procmail-Footnote-3240928
-Node: Odds and Ends241010
-Node: Bug Reports241428
-Node: Mailing Lists241915
-Node: MH FAQ and Support242433
-Node: Getting MH-E243161
-Node: History244832
-Node: From Brian Reid245508
-Ref: From Brian Reid-Footnote-1246664
-Node: From Jim Larus247145
-Node: From Stephen Gildea249439
-Node: From Bill Wohler251614
-Node: GFDL253552
-Node: GPL278869
-Node: Key Index316623
-Node: Command Index352116
-Node: Option Index381405
-Node: Concept Index414326
+Ref: Preface-Footnote-16957
+Node: Conventions7116
+Node: Getting Started12817
+Ref: Getting Started-Footnote-117027
+Ref: Getting Started-Footnote-217353
+Node: Tour Through MH-E17468
+Ref: Tour Through MH-E-Footnote-118212
+Node: Sending Mail Tour18454
+Ref: Sending Mail Tour-Footnote-120092
+Ref: Sending Mail Tour-Footnote-220180
+Ref: Sending Mail Tour-Footnote-320366
+Node: Reading Mail Tour20521
+Ref: Reading Mail Tour-Footnote-122179
+Ref: Reading Mail Tour-Footnote-222303
+Node: Processing Mail Tour22445
+Node: Leaving MH-E26430
+Node: More About MH-E27664
+Node: Using This Manual29168
+Ref: Using This Manual-Footnote-131989
+Ref: Using This Manual-Footnote-232077
+Node: Options32275
+Node: Ranges34292
+Node: Folder Selection36123
+Node: Incorporating Mail38480
+Node: Reading Mail42598
+Ref: Reading Mail-Footnote-151369
+Node: Viewing51646
+Ref: Viewing-Footnote-160215
+Ref: Viewing-Footnote-260289
+Ref: Viewing-Footnote-360423
+Node: Viewing Attachments60659
+Ref: Viewing Attachments-Footnote-168717
+Ref: Viewing Attachments-Footnote-268841
+Ref: Viewing Attachments-Footnote-368957
+Ref: Viewing Attachments-Footnote-469171
+Node: HTML69241
+Node: Digests73617
+Ref: Digests-Footnote-175081
+Node: Reading PGP75190
+Ref: Reading PGP-Footnote-177873
+Ref: Reading PGP-Footnote-278070
+Node: Printing78249
+Ref: Printing-Footnote-181149
+Node: Files and Pipes81257
+Node: Navigating83285
+Node: Miscellaneous Commands and Options86097
+Ref: Miscellaneous Commands and Options-Footnote-190085
+Ref: Miscellaneous Commands and Options-Footnote-290399
+Node: Folders90488
+Ref: Folders-Footnote-1106245
+Ref: Folders-Footnote-2106464
+Ref: Folders-Footnote-3106539
+Node: Sending Mail106654
+Node: Composing109846
+Ref: Composing-Footnote-1113278
+Ref: Composing-Footnote-2113532
+Node: Replying113712
+Ref: Replying-Footnote-1116558
+Node: Forwarding116676
+Ref: Forwarding-Footnote-1118685
+Node: Redistributing118802
+Ref: Redistributing-Footnote-1120004
+Ref: Redistributing-Footnote-2120127
+Node: Editing Again120247
+Node: Editing Drafts121378
+Node: Editing Message128605
+Node: Inserting Letter133639
+Ref: Inserting Letter-Footnote-1137725
+Ref: Inserting Letter-Footnote-2137848
+Ref: Inserting Letter-Footnote-3138029
+Node: Inserting Messages138131
+Node: Signature139017
+Node: Picture140763
+Node: Adding Attachments142364
+Ref: Adding Attachments-Footnote-1152347
+Ref: Adding Attachments-Footnote-2152429
+Ref: Adding Attachments-Footnote-3152545
+Ref: Adding Attachments-Footnote-4152602
+Ref: Adding Attachments-Footnote-5152689
+Node: Sending PGP152805
+Node: Checking Recipients154412
+Ref: Checking Recipients-Footnote-1154841
+Node: Sending Message154975
+Ref: Sending Message-Footnote-1155938
+Node: Killing Draft156058
+Node: Aliases156464
+Ref: Aliases-Footnote-1165824
+Node: Identities165922
+Ref: Identities-Footnote-1173266
+Node: Speedbar173319
+Ref: Speedbar-Footnote-1175885
+Node: Menu Bar176017
+Node: Tool Bar177009
+Node: Searching178586
+Node: Threading190838
+Ref: Threading-Footnote-1193881
+Node: Limits194480
+Ref: Limits-Footnote-1196485
+Node: Sequences196620
+Ref: Sequences-Footnote-1202080
+Ref: Sequences-Footnote-2202192
+Ref: Sequences-Footnote-3202226
+Node: Junk202349
+Ref: Junk-Footnote-1213283
+Node: Miscellaneous213623
+Node: Scan Line Formats215526
+Ref: Scan Line Formats-Footnote-1232261
+Ref: Scan Line Formats-Footnote-2232403
+Node: Procmail232527
+Ref: Procmail-Footnote-1238007
+Ref: Procmail-Footnote-2238154
+Ref: Procmail-Footnote-3238316
+Node: Odds and Ends238398
+Node: Bug Reports238816
+Node: Mailing Lists239303
+Node: MH FAQ and Support239821
+Node: Getting MH-E240550
+Node: History241643
+Node: From Brian Reid242319
+Ref: From Brian Reid-Footnote-1243475
+Node: From Jim Larus243956
+Node: From Stephen Gildea246250
+Node: From Bill Wohler248425
+Node: GFDL250363
+Node: GPL275680
+Node: Key Index313434
+Node: Command Index348927
+Node: Option Index378216
+Node: Concept Index410772
 
 End Tag Table
 

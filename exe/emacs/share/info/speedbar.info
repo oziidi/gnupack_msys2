@@ -1,7 +1,7 @@
-This is speedbar.info, produced by makeinfo version 6.7 from
+This is speedbar.info, produced by makeinfo version 6.8 from
 speedbar.texi.
 
-Copyright © 1999–2022 Free Software Foundation, Inc.
+Copyright © 1999–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -50,7 +50,7 @@ Expanding refers to clicking on an expansion button to display an
 expanded summary of the entry the expansion button is on.  *Note Basic
 Navigation::.
 
-   Copyright © 1999–2022 Free Software Foundation, Inc.
+   Copyright © 1999–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -1680,7 +1680,7 @@ Concept Index
 * speedbar-mode-hook:                    Hooks.                (line 21)
 * speedbar-obj-alist:                    Directory Display.    (line 53)
 * speedbar-prefix-group-tag-hierarchy:   Tag Hierarchy Methods.
-                                                               (line 17)
+                                                               (line 18)
 * speedbar-reconfigure-keymaps-hook:     Hooks.                (line 12)
 * speedbar-scanner-reset-hook:           Hooks.                (line 25)
 * speedbar-selected-face:                Frames and Faces.     (line 19)

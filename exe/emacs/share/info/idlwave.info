@@ -1,4 +1,4 @@
-This is idlwave.info, produced by makeinfo version 6.7 from
+This is idlwave.info, produced by makeinfo version 6.8 from
 idlwave.texi.
 
 This file documents IDLWAVE, a major mode for editing IDL files with
@@ -6,7 +6,7 @@ Emacs, and interacting with an IDL shell run as a subprocess.
 
    This is edition 6.1 of the IDLWAVE User Manual for IDLWAVE 6.1.
 
-   Copyright © 1999–2022 Free Software Foundation, Inc.
+   Copyright © 1999–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -37,7 +37,7 @@ Emacs, and interacting with an IDL shell run as a subprocess.
 
    This is edition 6.1 of the IDLWAVE User Manual for IDLWAVE 6.1.
 
-   Copyright © 1999–2022 Free Software Foundation, Inc.
+   Copyright © 1999–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -183,7 +183,7 @@ development environment.  Here is a brief summary of what IDLWAVE does:
      standards.
    • Integrity checks and auto-termination of logical blocks.
    • Routine name space conflict search with likelihood-of-use ranking.
-   • Support for ‘imenu’ (Emacs) and ‘func-menu’ (XEmacs).
+   • Support for ‘imenu’.
    • Documentation support.
    • Running IDL as an inferior Shell with history search, command line
      editing and all the completion and routine info capabilities
@@ -698,16 +698,16 @@ subprogram).  The command ‘C-M-q’ reindents the entire current routine.
 *Note Actions::, for information how to impose additional formatting
 conventions on foreign code.
 
- -- User Option: idlwave-main-block-indent (‘2’)
+ -- User Option: idlwave-main-block-indent (2)
      Extra indentation for the main block of code.  That is the block
      between the FUNCTION/PRO statement and the END statement for that
      program unit.
 
- -- User Option: idlwave-block-indent (‘3’)
+ -- User Option: idlwave-block-indent (3)
      Extra indentation applied to block lines.  If you change this, you
      probably also want to change ‘idlwave-end-offset’.
 
- -- User Option: idlwave-end-offset (‘-3’)
+ -- User Option: idlwave-end-offset (-3)
      Extra indentation applied to block END lines.  A value equal to
      negative ‘idlwave-block-indent’ will make END lines line up with
      the block BEGIN lines.
@@ -761,10 +761,10 @@ will re-indent all lines in the current statement.  Note that
 ‘idlwave-max-extra-continuation-indent’ limit, for parentheses only,
 forcing them always to line up.
 
- -- User Option: idlwave-continuation-indent (‘2’)
+ -- User Option: idlwave-continuation-indent (2)
      Extra indentation applied to normal continuation lines.
 
- -- User Option: idlwave-max-extra-continuation-indent (‘20’)
+ -- User Option: idlwave-max-extra-continuation-indent (20)
      The maximum additional indentation (over the basic
      continuation-indent) that will be permitted for special continues.
      To effectively disable special continuation indentation, set to
@@ -773,7 +773,7 @@ forcing them always to line up.
      decreases from line to line, outside of nested parentheses
      statements.
 
- -- User Option: idlwave-indent-to-open-paren (‘t’)
+ -- User Option: idlwave-indent-to-open-paren (t)
      Non-‘nil’ means indent continuation lines to innermost open
      parenthesis, regardless of whether the
      ‘idlwave-max-extra-continuation-indent’ limit is satisfied.
@@ -843,26 +843,26 @@ Comment delimiting lines as in the above example, consisting of one or
 more ‘;’ followed by one or more of the characters ‘+=-_*’, are kept in
 place, as is.
 
- -- User Option: idlwave-fill-comment-line-only (‘t’)
+ -- User Option: idlwave-fill-comment-line-only (t)
      Non-‘nil’ means auto fill will only operate on comment lines.
 
- -- User Option: idlwave-auto-fill-split-string (‘t’)
+ -- User Option: idlwave-auto-fill-split-string (t)
      Non-‘nil’ means auto fill will split strings with the IDL ‘+’
      operator.
 
- -- User Option: idlwave-split-line-string (‘t’)
+ -- User Option: idlwave-split-line-string (t)
      Non-‘nil’ means ‘idlwave-split-line’ will split strings with ‘+’.
 
- -- User Option: idlwave-hanging-indent (‘t’)
+ -- User Option: idlwave-hanging-indent (t)
      Non-‘nil’ means comment paragraphs are indented under the hanging
      indent given by ‘idlwave-hang-indent-regexp’ match in the first
      line of the paragraph.
 
- -- User Option: idlwave-hang-indent-regexp (‘"- "’)
+ -- User Option: idlwave-hang-indent-regexp ("- ")
      Regular expression matching the position of the hanging indent in
      the first line of a comment paragraph.
 
- -- User Option: idlwave-use-last-hang-indent (‘nil’)
+ -- User Option: idlwave-use-last-hang-indent (nil)
      Non-‘nil’ means use last match on line for ‘idlwave-indent-regexp’.
 
 
@@ -1033,14 +1033,14 @@ Classes     The Classes line is only included in the routine info
             routine info about the current method in other classes on
             the inheritance chain, if such a method exists there.
 
- -- User Option: idlwave-resize-routine-help-window (‘t’)
+ -- User Option: idlwave-resize-routine-help-window (t)
      Non-‘nil’ means resize the Routine-info ‘*Help*’ window to fit the
      content.
 
  -- User Option: idlwave-special-lib-alist
      Alist of regular expressions matching special library directories.
 
- -- User Option: idlwave-rinfo-max-source-lines (‘5’)
+ -- User Option: idlwave-rinfo-max-source-lines (5)
      Maximum number of source files displayed in the Routine Info
      window.
 
@@ -1157,15 +1157,15 @@ choose among, with differing advantages and disadvantages.  The variable
 (as long as ‘idlwave-help-use-assistant’ is not set).  This function is
 used to set the variable ‘browse-url-browser-function’ locally for
 IDLWAVE help only.  Customize the latter variable to see what choices of
-browsers your system offers.  Certain browsers like ‘w3’ (bundled with
-many versions of Emacs) and ‘w3m’ (<http://emacs-w3m.namazu.org/>) are
-run within Emacs, and use Emacs buffers to display the HTML help.  This
-can be convenient, especially on small displays, and images can even be
-displayed in-line on newer Emacs versions.  However, better formatting
-results are often achieved with external browsers, like Mozilla.
-IDLWAVE assumes any browser function containing "w3" is displayed in a
-local buffer.  If you are using another Emacs-local browser for which
-this is not true, set the variable ‘idlwave-help-browser-is-local’.
+browsers your system offers.  Certain browsers like EWW (*note EWW:
+(eww)Top.) are run within Emacs, and use Emacs buffers to display the
+HTML help.  This can be convenient, especially on small displays, and
+images can even be displayed in-line on newer Emacs versions.  However,
+better formatting results are often achieved with external browsers,
+like Mozilla.  IDLWAVE assumes any browser function containing "w3" is
+displayed in a local buffer.  If you are using another Emacs-local
+browser for which this is not true, set the variable
+‘idlwave-help-browser-is-local’.
 
    With IDL 6.2 or later, it is important to ensure that the variable
 ‘idlwave-system-directory’ is set (*note Catalogs::).  One easy way to
@@ -1176,17 +1176,17 @@ use.
    *Note HTML Help Browser Tips::, for more information on selecting and
 configuring a browser for use with IDL’s HTML help system.
 
- -- User Option: idlwave-html-system-help-location ‘help/online_help’
+ -- User Option: idlwave-html-system-help-location help/online_help
      Relative directory of the system-supplied HTML help directory,
      considered with respect to ‘idlwave-system-directory’.  Relevant
      for IDL 6.2 and greater.  Should not change.
 
- -- User Option: idlwave-html-help-location ‘/usr/local/etc/’
+ -- User Option: idlwave-html-help-location /usr/local/etc/
      The directory where the ‘idl_html_help’ HTML directory live.
      Obsolete and ignored for IDL 6.2 and greater
      (‘idlwave-html-system-help-location’ is used instead).
 
- -- User Option: idlwave-help-use-assistant ‘t’
+ -- User Option: idlwave-help-use-assistant t
      If set, use the IDL Assistant if possible for online HTML help,
      otherwise use the browser function specified in
      ‘idlwave-help-browser-function’.
@@ -1243,30 +1243,30 @@ navigate inside the help system for source files:
             ‘idlwave-help-fontify-source-code’.
 ‘q’         Kill the help window.
 
- -- User Option: idlwave-help-use-dedicated-frame (‘nil’)
+ -- User Option: idlwave-help-use-dedicated-frame (nil)
      Non-‘nil’ means use a separate frame for Online Help if possible.
 
  -- User Option: idlwave-help-frame-parameters
      The frame parameters for the special Online Help frame.
 
- -- User Option: idlwave-max-popup-menu-items (‘20’)
+ -- User Option: idlwave-max-popup-menu-items (20)
      Maximum number of items per pane in pop-up menus.
 
  -- User Option: idlwave-extra-help-function
      Function to call for help if the normal help fails.
 
- -- User Option: idlwave-help-fontify-source-code (‘nil’)
+ -- User Option: idlwave-help-fontify-source-code (nil)
      Non-‘nil’ means fontify source code displayed as help.
 
- -- User Option: idlwave-help-source-try-header (‘t’)
+ -- User Option: idlwave-help-source-try-header (t)
      Non-‘nil’ means try to find help in routine header when displaying
      source file.
 
- -- User Option: idlwave-help-doclib-name (‘"name"’)
+ -- User Option: idlwave-help-doclib-name ("name")
      The case-insensitive heading word in doclib headers to locate the
      _name_ section.  Can be a regexp, e.g., ‘"\\(name\\|nom\\)"’.
 
- -- User Option: idlwave-help-doclib-keyword (‘"KEYWORD"’)
+ -- User Option: idlwave-help-doclib-keyword ("KEYWORD")
      The case-insensitive heading word in doclib headers to locate the
      _keywords_ section.  Can be a regexp.
 
@@ -1332,20 +1332,20 @@ a completion, ‘C-g’ will remove the buffer and restore the window
 configuration.  You can also remove the buffer at any time with no
 negative consequences.
 
- -- User Option: idlwave-keyword-completion-adds-equal (‘t’)
+ -- User Option: idlwave-keyword-completion-adds-equal (t)
      Non-‘nil’ means completion automatically adds ‘=’ after completed
      keywords.
 
- -- User Option: idlwave-function-completion-adds-paren (‘t’)
+ -- User Option: idlwave-function-completion-adds-paren (t)
      Non-‘nil’ means completion automatically adds ‘(’ after completed
      function.  A value of 2 means also add the closing parenthesis and
      position the cursor between the two.
 
- -- User Option: idlwave-completion-restore-window-configuration (‘t’)
+ -- User Option: idlwave-completion-restore-window-configuration (t)
      Non-‘nil’ means restore window configuration after successful
      completion.
 
- -- User Option: idlwave-highlight-help-links-in-completion (‘t’)
+ -- User Option: idlwave-highlight-help-links-in-completion (t)
      Non-‘nil’ means highlight completions for which system help is
      available.
 
@@ -1383,13 +1383,13 @@ items, independent of buffer context, set
      Association list setting the case
      (UPPER/lower/Capitalized/MixedCase...)  of completed words.
 
- -- User Option: idlwave-completion-force-default-case (‘nil’)
+ -- User Option: idlwave-completion-force-default-case (nil)
      Non-‘nil’ means completion will always honor the settings in
      ‘idlwave-completion-case’.  When ‘nil’ (the default), entirely
      lower case strings will always be completed to lower case, no
      matter what the settings in ‘idlwave-completion-case’.
 
- -- User Option: idlwave-complete-empty-string-as-lower-case (‘nil’)
+ -- User Option: idlwave-complete-empty-string-as-lower-case (nil)
      Non-‘nil’ means the empty string is considered lower case for
      completion.
 
@@ -1429,18 +1429,18 @@ operator will be shown in a different face (bold by default).  The
 variable ‘idlwave-store-inquired-class’ can be used to turn it off or
 on.
 
- -- User Option: idlwave-completion-show-classes (‘1’)
+ -- User Option: idlwave-completion-show-classes (1)
      Non-‘nil’ means show up to that many classes in ‘*Completions*’
      buffer when completing object methods and keywords.
 
- -- User Option: idlwave-completion-fontify-classes (‘t’)
+ -- User Option: idlwave-completion-fontify-classes (t)
      Non-‘nil’ means fontify the classes in completions buffer.
 
- -- User Option: idlwave-query-class (‘nil’)
+ -- User Option: idlwave-query-class (nil)
      Association list governing query for object classes during
      completion.
 
- -- User Option: idlwave-store-inquired-class (‘t’)
+ -- User Option: idlwave-store-inquired-class (t)
      Non-‘nil’ means store class of a method call as text property on
      ‘->’.
 
@@ -1500,7 +1500,7 @@ methods have keyword inheritance treated in this simple, class-driven
 way.  By default, only ‘Init’ and ‘(Get|Set)Property’ are.  The
 completion buffer will label keywords based on their originating class.
 
- -- User Option: idlwave-support-inheritance (‘t’)
+ -- User Option: idlwave-support-inheritance (t)
      Non-‘nil’ means consider inheritance during completion, online help
      etc.
 
@@ -1717,12 +1717,12 @@ parentheses).
 the variables ‘idlwave-abbrev-change-case’ and, for reserved word
 templates, ‘idlwave-reserved-word-upcase’ (*note Case Changes::).
 
- -- User Option: idlwave-abbrev-start-char (‘"\"’)
+ -- User Option: idlwave-abbrev-start-char ("\")
      A single character string used to start abbreviations in abbrev
      mode.  Beware of common characters which might naturally occur in
      sequence with abbreviation strings.
 
- -- User Option: idlwave-abbrev-move (‘t’)
+ -- User Option: idlwave-abbrev-move (t)
      Non-‘nil’ means the abbrev hook can move point, e.g., to end up
      between the parentheses of a function call.
 
@@ -1757,7 +1757,7 @@ can be helpful.
      (the current subprogram).  *Note Code Indentation::, for
      information how to adjust the indentation of the code.
 
- -- User Option: idlwave-do-actions (‘nil’)
+ -- User Option: idlwave-do-actions (nil)
      Non-‘nil’ means performs actions when indenting.  Individual action
      settings are described below and set separately.
 
@@ -1784,14 +1784,14 @@ generic ‘END’ statements automatically expanded to the appropriate type.
 You can also type ‘C-c ]’ to close the current block by inserting the
 appropriate ‘END’ statement.
 
- -- User Option: idlwave-show-block (‘t’)
+ -- User Option: idlwave-show-block (t)
      Non-‘nil’ means point blinks to block beginning for
      ‘idlwave-show-begin’.
 
- -- User Option: idlwave-expand-generic-end (‘t’)
+ -- User Option: idlwave-expand-generic-end (t)
      Non-‘nil’ means expand generic END to ENDIF/ENDELSE/ENDWHILE etc.
 
- -- User Option: idlwave-reindent-end (‘t’)
+ -- User Option: idlwave-reindent-end (t)
      Non-‘nil’ means re-indent line after END was typed.
 
 
@@ -1828,12 +1828,12 @@ on the right as well (otherwise you must insert spaces to pad right
 yourself, or press simply press Tab to repad everything if
 ‘idlwave-do-actions’ is on).
 
- -- User Option: idlwave-surround-by-blank (‘nil’)
+ -- User Option: idlwave-surround-by-blank (nil)
      Non-‘nil’ means enable ‘idlwave-surround’.  If non-‘nil’, ‘=’, ‘<’,
      ‘>’, ‘&’, ‘,’, ‘->’, and the modified assignment operators (‘AND=’,
      ‘OR=’, etc.) are surrounded with spaces by ‘idlwave-surround’.
 
- -- User Option: idlwave-pad-keyword (‘t’)
+ -- User Option: idlwave-pad-keyword (t)
      Non-‘nil’ means space-pad the ‘=’ in keyword assignments.
 
 
@@ -1864,11 +1864,11 @@ your ‘.emacs’ file:
 of routines, keywords, classes, and methods as they are completed, see
 *note Completion::.
 
- -- User Option: idlwave-abbrev-change-case (‘nil’)
+ -- User Option: idlwave-abbrev-change-case (nil)
      Non-‘nil’ means all abbrevs will be forced to either upper or lower
      case.  Valid values are ‘nil’, ‘t’, and ‘down’.
 
- -- User Option: idlwave-reserved-word-upcase (‘nil’)
+ -- User Option: idlwave-reserved-word-upcase (nil)
      Non-‘nil’ means reserved words will be made upper case via abbrev
      expansion.
 
@@ -1888,7 +1888,7 @@ the current routine or file and inserts the user name with a timestamp.
  -- User Option: idlwave-file-header
      The doc-header template or a path to a file containing it.
 
- -- User Option: idlwave-header-to-beginning-of-file (‘nil’)
+ -- User Option: idlwave-header-to-beginning-of-file (nil)
      Non-‘nil’ means the documentation header will always be at start of
      file.
 
@@ -1911,10 +1911,10 @@ File: idlwave.info,  Node: Motion Commands,  Next: Misc Options,  Prev: Doc Head
 4.11 Motion Commands
 ====================
 
-IDLWAVE supports both ‘Imenu’ and ‘Func-menu’, two packages which make
-it easy to jump to the definitions of functions and procedures in the
-current file with a pop-up selection.  To bind ‘Imenu’ to a mouse-press,
-use in your ‘.emacs’:
+IDLWAVE supports ‘Imenu’, a package which make it easy to jump to the
+definitions of functions and procedures in the current file with a
+pop-up selection.  To bind ‘Imenu’ to a mouse-press, use in your
+‘.emacs’:
 
      (define-key global-map [S-down-mouse-3] 'imenu)
 
@@ -1944,7 +1944,7 @@ File: idlwave.info,  Node: Misc Options,  Prev: Motion Commands,  Up: The IDLWAV
  -- User Option: idlwave-help-application
      The external application providing reference help for programming.
 
- -- User Option: idlwave-startup-message (‘t’)
+ -- User Option: idlwave-startup-message (t)
      Non-‘nil’ means display a startup message when ‘idlwave-mode’’ is
      first called.
 
@@ -2013,7 +2013,7 @@ which defaults to ‘"^ ?IDL> "’.  Normally, you can just replace the
 which matches the prompt for both ENVI and IDL simultaneously is ‘"^
 ?\\(ENVI\\|IDL\\)> "’.
 
- -- User Option: idlwave-shell-explicit-file-name (‘idl’)
+ -- User Option: idlwave-shell-explicit-file-name (idl)
      This is the command to run IDL.
 
  -- User Option: idlwave-shell-command-line-options
@@ -2025,34 +2025,34 @@ which matches the prompt for both ENVI and IDL simultaneously is ‘"^
  -- User Option: idlwave-shell-process-name
      Name to be associated with the IDL process.
 
- -- User Option: idlwave-shell-automatic-start (‘nil’)
+ -- User Option: idlwave-shell-automatic-start (nil)
      Non-‘nil’ means attempt to invoke idlwave-shell if not already
      running.
 
  -- User Option: idlwave-shell-initial-commands
      Initial commands, separated by newlines, to send to IDL.
 
- -- User Option: idlwave-shell-save-command-history (‘t’)
+ -- User Option: idlwave-shell-save-command-history (t)
      Non-‘nil’ means preserve command history between sessions.
 
  -- User Option: idlwave-shell-command-history-file
-          (‘~/.emacs.d/idlwave/.idlwhist’)
+          (~/.emacs.d/idlwave/.idlwhist)
      The file in which the command history of the idlwave shell is
      saved.  Unless it’s an absolute path, it goes in
      ‘idlwave-config-directory’.
 
- -- User Option: idlwave-shell-use-dedicated-frame (‘nil’)
+ -- User Option: idlwave-shell-use-dedicated-frame (nil)
      Non-‘nil’ means IDLWAVE should use a special frame to display the
      shell buffer.
 
- -- User Option: idlwave-shell-use-dedicated-window (‘nil’)
+ -- User Option: idlwave-shell-use-dedicated-window (nil)
      Non-‘nil’ means use a dedicated window for the shell, taking care
      not it replace it with other buffers.
 
  -- User Option: idlwave-shell-frame-parameters
      The frame parameters for a dedicated idlwave-shell frame.
 
- -- User Option: idlwave-shell-raise-frame (‘t’)
+ -- User Option: idlwave-shell-raise-frame (t)
      Non-‘nil’ means ‘idlwave-shell’ raises the frame showing the shell
      window.
 
@@ -2122,7 +2122,7 @@ C-v’
 C-t’      file (‘idlwave-find-module-this-file’).
 ‘C-c =’   Compile a library routine (‘idlwave-resolve’)
 
- -- User Option: idlwave-shell-arrows-do-history (‘t’)
+ -- User Option: idlwave-shell-arrows-do-history (t)
      Non-‘nil’ means <UP> and <DOWN> arrows move through command history
      like xterm.
 
@@ -2151,7 +2151,7 @@ IDL command is finished.  Check the documentation of the two variables
 described below for a way to make IDL programs trigger automatic
 switches of the input mode.
 
- -- User Option: idlwave-shell-use-input-mode-magic (‘nil’)
+ -- User Option: idlwave-shell-use-input-mode-magic (nil)
      Non-‘nil’ means IDLWAVE should check for input mode spells in
      output.
 
@@ -2192,7 +2192,7 @@ sent to the shell are shown there.  For a related customization for
 separating the output of _examine_ commands, see *note Examining
 Variables::.
 
- -- User Option: idlwave-shell-show-commands (‘'(run misc breakpoint)’)
+ -- User Option: idlwave-shell-show-commands ('(run misc breakpoint))
      A list of command types to echo in the shell when sent.  Possible
      values are ‘run’ for ‘.run’, ‘.compile’ and other run commands,
      ‘misc’ for lesser used commands like ‘window’, ‘retall’,‘close’,
@@ -2228,7 +2228,7 @@ compiled).  On Emacs versions which support it, a debugging toolbar is
 also installed.  The toolbar display can be toggled with ‘C-c C-d C-t’
 (‘idlwave-shell-toggle-toolbar’).
 
- -- User Option: idlwave-shell-use-toolbar (‘t’)
+ -- User Option: idlwave-shell-use-toolbar (t)
      Non-‘nil’ means use the debugging toolbar in all IDL related
      buffers.
 
@@ -2289,15 +2289,15 @@ II---Customization::).  A much simpler and faster form of debugging for
 running code is also available by default; see *note Electric Debug
 Mode::.
 
- -- User Option: idlwave-shell-prefix-key (‘C-c C-d’)
+ -- User Option: idlwave-shell-prefix-key (C-c C-d)
      The prefix key for the debugging map
      ‘idlwave-shell-mode-prefix-map’.
 
- -- User Option: idlwave-shell-activate-prefix-keybindings (‘t’)
+ -- User Option: idlwave-shell-activate-prefix-keybindings (t)
      Non-‘nil’ means debug commands will be bound to the prefix key,
      like ‘C-c C-d C-b’.
 
- -- User Option: idlwave-shell-debug-modifiers (‘nil’)
+ -- User Option: idlwave-shell-debug-modifiers (nil)
      List of modifier keys to use for additional, alternative binding of
      debugging commands in the shell and source buffers.  Can be one or
      more of ‘control’, ‘meta’, ‘super’, ‘hyper’, ‘alt’, and ‘shift’.
@@ -2388,7 +2388,7 @@ to mark the stop line (as it is by default), when stepping through code,
 the face color is temporarily changed to gray, until IDL completes the
 next command and moves to the new line.
 
- -- User Option: idlwave-shell-mark-breakpoints (‘t’)
+ -- User Option: idlwave-shell-mark-breakpoints (t)
      Non-‘nil’ means mark breakpoints in the source file buffers.  The
      value indicates the preferred method.  Valid values are ‘nil’, ‘t’,
      ‘face’, and ‘glyph’.
@@ -2397,16 +2397,16 @@ next command and moves to the new line.
      The face for breakpoint lines in the source code if
      ‘idlwave-shell-mark-breakpoints’ has the value ‘face’.
 
- -- User Option: idlwave-shell-breakpoint-popup-menu (‘t’)
+ -- User Option: idlwave-shell-breakpoint-popup-menu (t)
      Whether to pop-up a menu and present a tooltip description on
      breakpoint lines.
 
- -- User Option: idlwave-shell-mark-stop-line (‘t’)
+ -- User Option: idlwave-shell-mark-stop-line (t)
      Non-‘nil’ means mark the source code line where IDL is currently
      stopped.  The value specifies the preferred method.  Valid values
      are ‘nil’, ‘t’, ‘arrow’, and ‘face’.
 
- -- User Option: idlwave-shell-overlay-arrow (‘">"’)
+ -- User Option: idlwave-shell-overlay-arrow (">")
      The overlay arrow to display at source lines where execution halts,
      if configured in ‘idlwave-shell-mark-stop-line’.
 
@@ -2553,7 +2553,7 @@ setting the variable ‘idlwave-shell-automatic-electric-debug’ to ‘nil’,
 or ‘'breakpoint’.  If you’d like the convenient electric debug shortcuts
 available also when run-time errors are encountered, set to ‘t’.
 
- -- User Option: idlwave-shell-automatic-electric-debug (‘'breakpoint’)
+ -- User Option: idlwave-shell-automatic-electric-debug ('breakpoint)
      Whether to enter electric debug mode automatically when a
      breakpoint or run-time error is encountered, and then disable it in
      all buffers when the $MAIN$ level is reached (either through normal
@@ -2569,7 +2569,7 @@ available also when run-time errors are encountered, set to ‘t’.
      The face to use for the stopped line.  Defaults to a face similar
      to the modeline, with color ‘idlwave-shell-electric-stop-color’.
 
- -- User Option: idlwave-shell-electric-zap-to-file (‘t’)
+ -- User Option: idlwave-shell-electric-zap-to-file (t)
      If set, when entering electric debug mode, select the window
      displaying the file where point is stopped.  This takes point away
      from the shell window, but is useful for immediate stepping, etc.
@@ -2661,7 +2661,7 @@ except the current:
      font, color and other properties for the most recent output of IDL
      when examining an expression."
 
- -- User Option: idlwave-shell-separate-examine-output (‘t’)
+ -- User Option: idlwave-shell-separate-examine-output (t)
      If non-‘nil’, re-direct the output of examine commands to a special
      ‘*Examine*’ buffer, instead of in the shell itself.
 
@@ -2895,15 +2895,15 @@ gets into your way, set the variable
 documented in library and user catalogs, the slower the loading will be,
 so reducing this number can help alleviate any long load times.
 
- -- User Option: idlwave-init-rinfo-when-idle-after (‘10’)
+ -- User Option: idlwave-init-rinfo-when-idle-after (10)
      Seconds of idle time before routine info is automatically
      initialized.
 
- -- User Option: idlwave-scan-all-buffers-for-routine-info (‘t’)
+ -- User Option: idlwave-scan-all-buffers-for-routine-info (t)
      Non-‘nil’ means scan all buffers for IDL programs when updating
      info.
 
- -- User Option: idlwave-query-shell-for-routine-info (‘t’)
+ -- User Option: idlwave-query-shell-for-routine-info (t)
      Non-‘nil’ means query the shell for info about compiled routines.
 
  -- User Option: idlwave-auto-routine-info-updates
@@ -2942,7 +2942,7 @@ only know about the IDL search path by consulting the file pointed to by
 ‘idlwave-auto-write-path’ is enabled (which is the default), the paths
 are written out whenever the IDLWAVE shell is started.
 
- -- User Option: idlwave-auto-write-path (‘t’)
+ -- User Option: idlwave-auto-write-path (t)
      Write out information on the !PATH and !DIR paths from IDL
      automatically when they change and when the Shell is closed.  These
      paths are needed to locate library catalogs.
@@ -2957,7 +2957,7 @@ are written out whenever the IDLWAVE shell is started.
      Under Unix/macOS, will be obtained from the Shell and recorded, if
      run.
 
- -- User Option: idlwave-config-directory (‘~/.emacs.d/idlwave’)
+ -- User Option: idlwave-config-directory (~/.emacs.d/idlwave)
      Default path where IDLWAVE saves configuration information, a user
      catalog (if any), and a cached scan of the XML catalog (IDL v6.2
      and later).
@@ -3021,7 +3021,7 @@ there with the name library “MyLib”.  The full usage information:
 routine info update using a single prefix to
 ‘idlwave-update-routine-info’: ‘C-u C-c C-i’.
 
- -- User Option: idlwave-use-library-catalogs (‘t’)
+ -- User Option: idlwave-use-library-catalogs (t)
      Whether to search for and load library catalogs.  Disable if load
      performance is a problem and/or the catalogs are not needed.
 
@@ -3197,7 +3197,7 @@ configuration is not possible, but choices abound.  The default
 ‘idlwave-help-browser-function’ inherits the browser configured in
 ‘browse-url-browser-function’.
 
-   Note that the HTML files decompiled from the help sources contain
+   Note that the HTML files recompiled from the help sources contain
 specific references to the ‘Symbol’ font, which by default is not
 permitted in normal encodings (it’s invalid, technically).  Though it
 only impacts a few symbols, you can trick Mozilla-based browsers into
@@ -3442,18 +3442,7 @@ common problems and their solutions are documented below.
      ‘~/.MacOSX/environment.plist’.  Either include your path settings
      there, or start Emacs and IDLWAVE from the shell.
 
-  4. *I’m getting errors like ‘Symbol's value as variable is void:
-     cl-builtin-gethash’ on completion or routine info.*
-
-     This error arises if you upgraded Emacs from 20.x to 21.x without
-     re-installing IDLWAVE.  Old Emacs and new Emacs are not
-     byte-compatible in compiled lisp files.  Presumably, you kept the
-     original .elc files in place, and this is the source of the error.
-     If you recompile (or just "make; make install") from source, it
-     should resolve this problem.  Another option is to recompile the
-     ‘idlw*.el’ files by hand using ‘M-x byte-compile-file’.
-
-  5. *‘M-<TAB>’ doesn’t complete words, it switches windows on my
+  4. *‘M-<TAB>’ doesn’t complete words, it switches windows on my
      desktop.*
 
      Your system is trapping ‘M-<TAB>’ and using it for its own
@@ -3462,7 +3451,7 @@ common problems and their solutions are documented below.
      sequence for switching among windows.  Another option is to use the
      equivalent sequence ‘<ESC>-<TAB>’.
 
-  6. *When stopping at breakpoints or errors, IDLWAVE does not seem to
+  5. *When stopping at breakpoints or errors, IDLWAVE does not seem to
      highlight the relevant line in the source.*
 
      IDLWAVE scans for error and halt messages and highlights the stop
@@ -3470,7 +3459,7 @@ common problems and their solutions are documented below.
      system variable ‘!ERROR_STATE.MSG_PREFIX’, it is unable to parse
      these message correctly.  Don’t do that.
 
-  7. *IDLWAVE doesn’t work correctly when using ENVI.*
+  6. *IDLWAVE doesn’t work correctly when using ENVI.*
 
      Though IDLWAVE was not written with ENVI in mind, it works just
      fine with it, as long as you update the prompt it’s looking for
@@ -3480,7 +3469,7 @@ common problems and their solutions are documented below.
 
           (setq idlwave-shell-prompt-pattern "^\r? ?\\(ENVI\\|IDL\\)> ")
 
-  8. *Attempts to set breakpoints fail: no breakpoint is indicated in
+  7. *Attempts to set breakpoints fail: no breakpoint is indicated in
      the IDLWAVE buffer.*
 
      IDL changed its breakpoint reporting format starting with IDLv5.5.
@@ -3491,7 +3480,7 @@ common problems and their solutions are documented below.
      list the version being used with ‘C-h v idlwave-mode-version
      <RET>’.
 
-  9. *I installed a new version of IDLWAVE, but the old version is still
+  8. *I installed a new version of IDLWAVE, but the old version is still
      being used* or *IDLWAVE works, but when I tried to install the
      optional modules ‘idlw-roprompt.el’ or ‘idlw-complete-structtag’, I
      get errors like ‘Cannot open load file’*.
@@ -3510,7 +3499,7 @@ common problems and their solutions are documented below.
      <RET>’, and ‘C-h m’ in an IDLWAVE buffer should show you the
      version Emacs is using.
 
-  10. *IDLWAVE is screwing up the formatting of my ‘.idl’ files.*
+  9. *IDLWAVE is screwing up the formatting of my ‘.idl’ files.*
 
      Actually, this isn’t IDLWAVE at all, but ‘idl-mode’, an unrelated
      programming mode for CORBA’s Interface Definition Language (you
@@ -3521,7 +3510,7 @@ common problems and their solutions are documented below.
 
           (setcdr (rassoc 'idl-mode auto-mode-alist) 'idlwave-mode)
 
-  11. *The routine info for my local routines is out of date!*
+  10. *The routine info for my local routines is out of date!*
 
      IDLWAVE collects routine info from various locations (*note Routine
      Information Sources::).  Routines in files visited in a buffer or
@@ -3541,7 +3530,7 @@ common problems and their solutions are documented below.
      and the most recent information will be available to all users.
      Since the scanning is very fast, there is very little impact.
 
-  12. *All the Greek-font characters in the HTML help are displayed as
+  11. *All the Greek-font characters in the HTML help are displayed as
      Latin characters!*
 
      Unfortunately, the HTMLHelp files RSI provides attempt to switch to
@@ -3549,7 +3538,7 @@ common problems and their solutions are documented below.
      permitted method for doing this in HTML.  There is a "workaround"
      for some browsers: *Note HTML Help Browser Tips::.
 
-  13. *In the shell, my long commands are truncated at 256 characters!*
+  12. *In the shell, my long commands are truncated at 256 characters!*
 
      This actually happens when running IDL in an XTerm as well.  There
      are a couple of workarounds: ‘define_key,/control,'^d'’ (e.g., in
@@ -3560,7 +3549,7 @@ common problems and their solutions are documented below.
      disables the processing of background widget events (those with
      ‘/NO_BLOCK’ passed to ‘XManager’).
 
-  14. *When I invoke IDL HTML help on a routine, the page which is
+  13. *When I invoke IDL HTML help on a routine, the page which is
      loaded is one page off, e.g., for ‘CONVERT_COORD’, I get
      ‘CONTOUR’.*
 
@@ -4078,7 +4067,7 @@ Index
 * Acknowledgments:                       Acknowledgments.     (line   6)
 * Actions:                               Actions.             (line   6)
 * Actions, applied to foreign code:      Actions.             (line  24)
-* Active text, in routine info:          Routine Info.        (line  93)
+* Active text, in routine info:          Routine Info.        (line  90)
 * Application, testing for shadowing:    Load-Path Shadows.   (line   6)
 * Authors, of IDLWAVE:                   Acknowledgments.     (line   6)
 * auto-fill-mode:                        Continuation Lines.  (line  14)
@@ -4211,7 +4200,6 @@ Index
 * Foreign code, adapting <1>:            Actions.             (line  24)
 * Formatting, of code:                   Code Formatting.     (line   6)
 * Frame, for shell buffer:               Starting the Shell.  (line   6)
-* Func-menu, XEmacs package:             Motion Commands.     (line   6)
 * Function definitions, jumping to:      Motion Commands.     (line   6)
 * Function name completion:              Completion.          (line   6)
 * Getting Started:                       Getting Started.     (line   6)
@@ -4319,7 +4307,7 @@ Index
 * idlwave-init-rinfo-when-idle-after:    Routine Information Sources.
                                                               (line  56)
 * idlwave-keyword-class-inheritance:     Class and Keyword Inheritance.
-                                                              (line  41)
+                                                              (line  40)
 * idlwave-keyword-completion-adds-equal: Completion.          (line  62)
 * idlwave-library-path:                  Catalogs.            (line  37)
 * idlwave-main-block-indent:             Code Indentation.    (line  20)
@@ -4336,8 +4324,8 @@ Index
 * idlwave-reindent-end:                  Block Boundary Check.
                                                               (line  24)
 * idlwave-reserved-word-upcase:          Case Changes.        (line  32)
-* idlwave-resize-routine-help-window:    Routine Info.        (line 120)
-* idlwave-rinfo-max-source-lines:        Routine Info.        (line 127)
+* idlwave-resize-routine-help-window:    Routine Info.        (line 117)
+* idlwave-rinfo-max-source-lines:        Routine Info.        (line 124)
 * idlwave-scan-all-buffers-for-routine-info: Routine Information Sources.
                                                               (line  60)
 * idlwave-shell-activate-prefix-keybindings: Debug Key Bindings.
@@ -4393,21 +4381,21 @@ Index
                                                               (line  22)
 * idlwave-show-block:                    Block Boundary Check.
                                                               (line  17)
-* idlwave-special-lib-alist:             Routine Info.        (line 124)
+* idlwave-special-lib-alist:             Routine Info.        (line 121)
 * idlwave-special-lib-alist <1>:         User Catalog.        (line  59)
 * idlwave-split-line-string:             Continuation Lines.  (line  43)
 * idlwave-startup-message:               Misc Options.        (line   9)
 * idlwave-store-inquired-class:          Object Method Completion and Class Ambiguity.
                                                               (line  47)
 * idlwave-support-inheritance:           Class and Keyword Inheritance.
-                                                              (line  37)
+                                                              (line  36)
 * idlwave-surround-by-blank:             Padding Operators.   (line  34)
 * idlwave-system-directory:              Catalogs.            (line  41)
 * idlwave-timestamp-hook:                Doc Header.          (line  20)
 * idlwave-use-last-hang-indent:          Continuation Lines.  (line  55)
 * idlwave-use-library-catalogs:          Library Catalogs.    (line  54)
 * idlwave_catalog:                       Library Catalogs.    (line   6)
-* Imenu, Emacs package:                  Motion Commands.     (line   6)
+* Imenu:                                 Motion Commands.     (line   6)
 * Indentation:                           Code Indentation.    (line   6)
 * Indentation, continued statement:      Continued Statement Indentation.
                                                               (line   6)
@@ -4417,7 +4405,7 @@ Index
 * Inheritance, keyword:                  Class and Keyword Inheritance.
                                                               (line   6)
 * Input mode:                            Using the Shell.     (line  75)
-* Inserting keywords, from routine info: Routine Info.        (line  93)
+* Inserting keywords, from routine info: Routine Info.        (line  90)
 * Installing online help:                Online Help.         (line   6)
 * Interactive Data Language:             Introduction.        (line   6)
 * Interface Definition Language:         Introduction.        (line   6)
@@ -4425,7 +4413,7 @@ Index
                                                               (line   6)
 * Introduction:                          Introduction.        (line   6)
 * Key bindings:                          Debug Key Bindings.  (line   6)
-* Keybindings for debugging:             Debugging IDL Programs.
+* Key bindings for debugging:            Debugging IDL Programs.
                                                               (line   6)
 * Keyword completion:                    Completion.          (line   6)
 * Keyword inheritance:                   Class and Keyword Inheritance.
@@ -4468,7 +4456,7 @@ Index
                                                               (line   6)
 * OBJ_NEW, special online help:          Online Help.         (line  55)
 * Online Help:                           Online Help.         (line   6)
-* Online Help from the routine info buffer: Routine Info.     (line  93)
+* Online Help from the routine info buffer: Routine Info.     (line  90)
 * Online Help in *Completions* buffer:   Completion.          (line  47)
 * Online Help, in the shell:             Using the Shell.     (line  44)
 * Online Help, Installation:             Online Help.         (line   6)
@@ -4518,7 +4506,7 @@ Index
 * Showing commands in shell:             Commands Sent to the Shell.
                                                               (line   6)
 * Source code, as online help:           Help with Source.    (line   6)
-* Source file, access from routine info: Routine Info.        (line  93)
+* Source file, access from routine info: Routine Info.        (line  90)
 * Source file, of a routine:             Routine Source.      (line   6)
 * Sources of routine information:        Sources of Routine Info.
                                                               (line   6)
@@ -4564,76 +4552,76 @@ Index
 Tag Table:
 Node: Top1052
 Node: Introduction5532
-Ref: Introduction-Footnote-18759
-Node: IDLWAVE in a Nutshell8882
-Node: Getting Started11808
-Node: Lesson I---Development Cycle12087
-Node: Lesson II---Customization20216
-Node: Lesson III---User Catalog25330
-Node: The IDLWAVE Major Mode28149
-Node: Code Formatting29243
-Node: Code Indentation30524
-Node: Continued Statement Indentation32088
-Node: Comment Indentation35397
-Node: Continuation Lines36405
-Node: Syntax Highlighting38972
-Node: Octals and Highlighting40020
-Node: Routine Info41114
-Ref: Routine Info-Footnote-147930
-Node: Online Help48096
-Node: Help with HTML Documentation52238
-Node: Help with Source55868
-Node: Completion58903
-Node: Case of Completed Words63140
-Node: Object Method Completion and Class Ambiguity64985
-Node: Object Method Completion in the Shell67751
-Node: Class and Keyword Inheritance68610
-Node: Structure Tag Completion70991
-Node: Routine Source72758
-Node: Resolving Routines73898
-Node: Code Templates74901
-Node: Abbreviations75436
-Node: Actions79851
-Node: Block Boundary Check81735
-Node: Padding Operators82832
-Node: Case Changes85117
-Node: Doc Header86655
-Node: Motion Commands87947
-Node: Misc Options89091
-Node: The IDLWAVE Shell89619
-Node: Starting the Shell90631
-Node: Using the Shell94315
-Ref: Using the Shell-Footnote-198358
-Node: Commands Sent to the Shell98550
-Node: Debugging IDL Programs100749
-Node: A Tale of Two Modes102179
-Node: Debug Key Bindings103282
-Node: Breakpoints and Stepping105268
-Node: Compiling Programs111406
-Node: Walking the Calling Stack112917
-Node: Electric Debug Mode114036
-Ref: Electric Debug Mode-Footnote-1120338
-Node: Examining Variables120473
-Ref: Examining Variables-Footnote-1125428
-Node: Custom Expression Examination125522
-Ref: Custom Expression Examination-Footnote-1129064
-Node: Acknowledgments129272
-Node: Sources of Routine Info131329
-Node: Routine Definitions132043
-Node: Routine Information Sources133408
-Node: Catalogs136973
-Node: Library Catalogs139636
-Node: User Catalog142537
-Ref: User Catalog-Footnote-1145645
-Ref: User Catalog-Footnote-2145732
-Node: Load-Path Shadows145768
-Node: Documentation Scan148399
-Node: HTML Help Browser Tips149906
-Node: Configuration Examples151385
-Node: Windows and macOS158492
-Node: Troubleshooting160686
-Node: GNU Free Documentation License169606
-Node: Index194962
+Ref: Introduction-Footnote-18722
+Node: IDLWAVE in a Nutshell8845
+Node: Getting Started11771
+Node: Lesson I---Development Cycle12050
+Node: Lesson II---Customization20179
+Node: Lesson III---User Catalog25293
+Node: The IDLWAVE Major Mode28112
+Node: Code Formatting29206
+Node: Code Indentation30487
+Node: Continued Statement Indentation32033
+Node: Comment Indentation35324
+Node: Continuation Lines36332
+Node: Syntax Highlighting38863
+Node: Octals and Highlighting39911
+Node: Routine Info41005
+Ref: Routine Info-Footnote-147809
+Node: Online Help47975
+Node: Help with HTML Documentation52117
+Node: Help with Source55663
+Node: Completion58662
+Node: Case of Completed Words62875
+Node: Object Method Completion and Class Ambiguity64708
+Node: Object Method Completion in the Shell67450
+Node: Class and Keyword Inheritance68309
+Node: Structure Tag Completion70684
+Node: Routine Source72451
+Node: Resolving Routines73591
+Node: Code Templates74594
+Node: Abbreviations75129
+Node: Actions79532
+Node: Block Boundary Check81410
+Node: Padding Operators82489
+Node: Case Changes84762
+Node: Doc Header86288
+Node: Motion Commands87574
+Node: Misc Options88690
+Node: The IDLWAVE Shell89212
+Node: Starting the Shell90224
+Node: Using the Shell93866
+Ref: Using the Shell-Footnote-197897
+Node: Commands Sent to the Shell98089
+Node: Debugging IDL Programs100282
+Node: A Tale of Two Modes101706
+Node: Debug Key Bindings102809
+Node: Breakpoints and Stepping104777
+Node: Compiling Programs110891
+Node: Walking the Calling Stack112402
+Node: Electric Debug Mode113521
+Ref: Electric Debug Mode-Footnote-1119811
+Node: Examining Variables119946
+Ref: Examining Variables-Footnote-1124895
+Node: Custom Expression Examination124989
+Ref: Custom Expression Examination-Footnote-1128531
+Node: Acknowledgments128739
+Node: Sources of Routine Info130796
+Node: Routine Definitions131510
+Node: Routine Information Sources132875
+Node: Catalogs136422
+Node: Library Catalogs139073
+Node: User Catalog141968
+Ref: User Catalog-Footnote-1145076
+Ref: User Catalog-Footnote-2145163
+Node: Load-Path Shadows145199
+Node: Documentation Scan147830
+Node: HTML Help Browser Tips149337
+Node: Configuration Examples150816
+Node: Windows and macOS157923
+Node: Troubleshooting160117
+Node: GNU Free Documentation License168421
+Node: Index193777
 
 End Tag Table
 

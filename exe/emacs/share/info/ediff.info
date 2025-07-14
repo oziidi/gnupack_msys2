@@ -1,9 +1,9 @@
-This is ediff.info, produced by makeinfo version 6.7 from ediff.texi.
+This is ediff.info, produced by makeinfo version 6.8 from ediff.texi.
 
 This file documents Ediff, a comprehensive visual interface to Unix diff
 and patch utilities.
 
-   Copyright © 1995–2022 Free Software Foundation, Inc.
+   Copyright © 1995–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -30,7 +30,7 @@ Ediff
 This file documents Ediff, a comprehensive visual interface to Unix diff
 and patch utilities.
 
-   Copyright © 1995–2022 Free Software Foundation, Inc.
+   Copyright © 1995–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -1218,13 +1218,13 @@ File: ediff.info,  Node: Window and Frame Configuration,  Next: Selective Browsi
 7.3 Window and Frame Configuration
 ==================================
 
-On a non-windowing display, Ediff sets things up in one frame, splitting
+On a non-graphical display, Ediff sets things up in one frame, splitting
 it between a small control window and the windows for buffers A, B, and
 C.  The split between these windows can be horizontal or vertical, which
 can be changed interactively by typing ‘|’ while the cursor is in the
 control window.
 
-   On a window display, Ediff sets up a dedicated frame for Ediff
+   On a graphical display, Ediff sets up a dedicated frame for Ediff
 Control Panel and then it chooses windows as follows: If one of the
 buffers is invisible, it is displayed in the currently selected frame.
 If a buffer is visible, it is displayed in the frame where it is
@@ -1311,7 +1311,7 @@ depend on your window manager, though).
      ‘ediff-setup-windows-multiframe’ function, which is the default on
      windowing displays.  The plain setup, one where all windows are
      always in one frame, is done by ‘ediff-setup-windows-plain’, which
-     is the default on a non-windowing display (or in an xterm window).
+     is the default on a non-graphical display (or in an xterm window).
      In fact, under Emacs, you can switch freely between these two
      setups by executing the command ‘ediff-toggle-multiframe’ using the
      Minibuffer of the Menubar.
@@ -1658,7 +1658,8 @@ the fine difference regions):
      In ‘ediff-diff-options’, it may be useful to specify options such
      as ‘-w’ that ignore certain kinds of changes.  However, Ediff does
      not let you use the option ‘-c’, as it doesn’t recognize this
-     format yet.
+     format yet.  (If you alter this variable, it should be done via the
+     Customize interface instead of using ‘setq’ directly.)
 
 ‘ediff-coding-system-for-read’
      This variable specifies the coding system to use when reading the
@@ -2826,7 +2827,7 @@ Index
 * ediff-buffers3:                        Major Entry Points.  (line  42)
 * ediff-cleanup-hook:                    Hooks.               (line  46)
 * ediff-coding-system-for-read:          Patch and Diff Programs.
-                                                              (line  25)
+                                                              (line  26)
 * ediff-combination-pattern:             Merging and diff3.   (line  39)
 * ediff-control-buffer:                  Quick Help Customization.
                                                               (line   6)
@@ -2844,9 +2845,9 @@ Index
                                                               (line  22)
 * ediff-current-file:                    Major Entry Points.  (line  31)
 * ediff-custom-diff-options:             Patch and Diff Programs.
-                                                              (line  74)
+                                                              (line  75)
 * ediff-custom-diff-program:             Patch and Diff Programs.
-                                                              (line  74)
+                                                              (line  75)
 * ediff-default-variant:                 Merging and diff3.   (line  21)
 * ediff-diff-options:                    Patch and Diff Programs.
                                                               (line  17)
@@ -2942,7 +2943,7 @@ Index
                                                               (line  39)
 * ediff-patch-buffer:                    Major Entry Points.  (line 120)
 * ediff-patch-default-directory:         Patch and Diff Programs.
-                                                              (line  92)
+                                                              (line  93)
 * ediff-patch-file:                      Major Entry Points.  (line  88)
 * ediff-patch-options:                   Patch and Diff Programs.
                                                               (line  17)
@@ -2967,7 +2968,7 @@ Index
                                                               (line  33)
 * ediff-revision:                        Major Entry Points.  (line  83)
 * ediff-save-buffer:                     Patch and Diff Programs.
-                                                              (line  74)
+                                                              (line  75)
 * ediff-select-hook:                     Hooks.               (line  83)
 * ediff-setup:                           Notes on Heavy-duty Customization.
                                                               (line  27)
@@ -3089,19 +3090,19 @@ Node: Customization47055
 Node: Hooks49037
 Node: Quick Help Customization54485
 Node: Window and Frame Configuration55533
-Node: Selective Browsing61658
-Node: Highlighting Difference Regions66963
-Node: Narrowing71587
-Node: Refinement of Difference Regions72922
-Node: Patch and Diff Programs75922
-Node: Merging and diff380549
-Node: Support for Version Control90634
-Node: Customizing the Mode Line92298
-Node: Miscellaneous93185
-Node: Notes on Heavy-duty Customization98594
-Node: Credits101259
-Node: GNU Free Documentation License106670
-Node: Index132016
+Node: Selective Browsing61661
+Node: Highlighting Difference Regions66966
+Node: Narrowing71590
+Node: Refinement of Difference Regions72925
+Node: Patch and Diff Programs75925
+Node: Merging and diff380672
+Node: Support for Version Control90757
+Node: Customizing the Mode Line92421
+Node: Miscellaneous93308
+Node: Notes on Heavy-duty Customization98717
+Node: Credits101382
+Node: GNU Free Documentation License106793
+Node: Index132139
 
 End Tag Table
 
