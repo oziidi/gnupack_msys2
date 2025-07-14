@@ -599,7 +599,7 @@ COMMANDS is a list of alternating OLDDEF NEWDEF command names."
 (org-defkey org-mode-map (kbd "C-c C-y") #'org-evaluate-time-range)
 (org-defkey org-mode-map (kbd "C-c >") #'org-goto-calendar)
 (org-defkey org-mode-map (kbd "C-c <") #'org-date-from-calendar)
-(org-defkey org-mode-map (kbd "C-,") #'org-cycle-agenda-files)
+;; (org-defkey org-mode-map (kbd "C-,") #'org-cycle-agenda-files)
 (org-defkey org-mode-map (kbd "C-'") #'org-cycle-agenda-files)
 (org-defkey org-mode-map (kbd "C-c [") #'org-agenda-file-to-front)
 (org-defkey org-mode-map (kbd "C-c ]") #'org-remove-file)
