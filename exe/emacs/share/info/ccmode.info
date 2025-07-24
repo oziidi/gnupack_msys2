@@ -1,8 +1,8 @@
-This is ccmode.info, produced by makeinfo version 6.7 from cc-mode.texi.
+This is ccmode.info, produced by makeinfo version 6.8 from cc-mode.texi.
 
 This manual is for CC Mode in Emacs.
 
-   Copyright © 1995–2022 Free Software Foundation, Inc.
+   Copyright © 1995–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -35,7 +35,7 @@ classes, etc.; there are other packages for that.
 
    This manual is for CC Mode in Emacs.
 
-   Copyright © 1995–2022 Free Software Foundation, Inc.
+   Copyright © 1995–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -94,6 +94,7 @@ Font Locking
 * Font Locking Preliminaries::
 * Faces::
 * Doc Comments::
+* Wrong Comment Style::
 * Misc Font Locking::
 * AWK Mode Font Locking::
 
@@ -341,7 +342,7 @@ to be editing AWK files, ‘README’ describes how to configure your
 (X)Emacs so that CC Mode will supersede the obsolete ‘awk-mode.el’ which
 might have been supplied with your (X)Emacs.  CC Mode might not work
 with older versions of Emacs or XEmacs.  See the CC Mode release notes
-at <http://cc-mode.sourceforge.net> for the latest information on Emacs
+at <https://cc-mode.sourceforge.net> for the latest information on Emacs
 version and package compatibility (*note Updating CC Mode::).
 
  -- Command: c-version
@@ -590,7 +591,7 @@ CC Mode contains some useful commands for moving around in C code.
 ‘C-M-e’ (‘c-end-of-defun’)
 
      Move to the beginning or end of the current or next function.
-     Other constructs (such as a structs or classes) which have a brace
+     Other constructs (such as structs or classes) which have a brace
      block also count as “functions” here.  To move over several
      functions, you can give these commands a repeat count.
 
@@ -1588,10 +1589,10 @@ the identifiers, like:
 ‘c-asymmetry-fontification-flag’.
 
  -- Variable: c-asymmetry-fontification-flag
-     When ‘c-asymmetry-fontification-flag’ is non-nil (which it is by
+     When ‘c-asymmetry-fontification-flag’ is non-‘nil’ (which it is by
      default), code like the above, with white space either before or
      after the operator, but not both, is fontified as a declaration.
-     When the variable is nil, such a construct gets the default face.
+     When the variable is ‘nil’, such a construct gets the default face.
 
    When the construct is an expression there will often be white space
 both before and after the operator or there will be no white space
@@ -4284,7 +4285,7 @@ system are given in *note Style Variables::.
 
           )
 
- -- Command: c-set-offset (‘C-c C-o’)
+ -- Command: c-set-offset (C-c C-o)
      This command changes the entry for a syntactic symbol in the
      current binding of ‘c-offsets-alist’, or it inserts a new entry if
      there isn’t already one for that syntactic symbol.
@@ -4769,8 +4770,8 @@ contained within parentheses.
      Symbols::).
 
      This function is intended for use in a list.  If the construct
-     being analyzed isn’t like the preceding, the function returns nil.
-     Otherwise it returns the function
+     being analyzed isn’t like the preceding, the function returns
+     ‘nil’.  Otherwise it returns the function
      ‘c-lineup-arglist-intro-after-paren’, which the caller then uses to
      perform indentation.
 
@@ -4800,7 +4801,7 @@ contained within parentheses.
      Brace List Symbols::).
 
      This function is intended for use in a list.  If the above
-     structure isn’t present, the function returns nil, allowing a
+     structure isn’t present, the function returns ‘nil’, allowing a
      different offset specification to indent the line.
 
      Works with: ‘brace-list-intro’.
@@ -4830,7 +4831,7 @@ contained within parentheses.
      the caller then uses to perform the indentation.
 
      This function is intended for use in a list.  If the above
-     structure isn’t present, the function returns nil, allowing a
+     structure isn’t present, the function returns ‘nil’, allowing a
      different offset specification to indent the line.
 
      Works with: ‘brace-list-intro’.
@@ -4948,6 +4949,24 @@ line.
 
      Only continuation lines like this are touched, ‘nil’ is returned on
      lines which are the start of an argument.
+
+     Within a gcc ‘asm’ block, ‘:’ is recognized as an argument
+     separator, but of course only between operand specifications, not
+     in the expressions for the operands.
+
+     Works with: ‘arglist-cont’, ‘arglist-cont-nonempty’.
+
+ -- Function: c-lineup-argcont-+
+     Indent a continued argument ‘c-basic-offset’ spaces from the start
+     of the first argument at the current level of nesting on a previous
+     line.
+
+          foo (xyz, uvw, aaa + bbb + ccc
+                   + ddd + eee + fff);    <- c-lineup-argcont-+
+               <-->                          c-basic-offset
+
+     Only continuation lines like this are touched, ‘nil’ being returned
+     on lines which are the start of an argument.
 
      Within a gcc ‘asm’ block, ‘:’ is recognized as an argument
      separator, but of course only between operand specifications, not
@@ -5634,7 +5653,7 @@ then enable the “indent to body” feature with
 
    ---------- Footnotes ----------
 
-   (1) Note that the removal of directives doesn’t work satisfactorally
+   (1) Note that the removal of directives doesn’t work satisfactorily
 on XEmacs or on very old versions of Emacs
 
 
@@ -6001,7 +6020,7 @@ have old versions of CC Mode and so should be upgraded.  Access to the
 CC Mode source code, as well as more detailed information on Emacsen
 compatibility, etc. are all available on the web site:
 
-     <http://cc-mode.sourceforge.net/>
+     <https://cc-mode.sourceforge.net/>
 
 
 File: ccmode.info,  Node: Mailing Lists and Bug Reports,  Next: GNU Free Documentation License,  Prev: Updating CC Mode,  Up: Top
@@ -6030,7 +6049,7 @@ Tracker at <https://debbugs.gnu.org>, then sends it on to
 <bug-cc-mode@gnu.org>.  You can also send reports, other questions, and
 suggestions (kudos? ;-) to that address.  It’s a mailing list which you
 can join or browse an archive of; see the web site at
-<http://cc-mode.sourceforge.net/> for further details.
+<https://cc-mode.sourceforge.net/> for further details.
 
    If you want to get announcements of new CC Mode releases, send the
 word _subscribe_ in the body of a message to
@@ -6619,13 +6638,14 @@ appears under its ‘c-THING’ name and its ‘THING (c-)’ name.
 * c-lineup-2nd-brace-entry-in-arglist:   List Line-Up.        (line  40)
 * c-lineup-after-whitesmith-blocks:      Brace/Paren Line-Up. (line 117)
 * c-lineup-argcont:                      Operator Line-Up.    (line  10)
+* c-lineup-argcont-+:                    Operator Line-Up.    (line  25)
 * c-lineup-arglist:                      List Line-Up.        (line  13)
 * c-lineup-arglist-close-under-paren:    Brace/Paren Line-Up. (line  31)
 * c-lineup-arglist-intro-after-paren:    List Line-Up.        (line  33)
-* c-lineup-arglist-operators:            Operator Line-Up.    (line  25)
-* c-lineup-assignments:                  Operator Line-Up.    (line  49)
+* c-lineup-arglist-operators:            Operator Line-Up.    (line  43)
+* c-lineup-assignments:                  Operator Line-Up.    (line  67)
 * c-lineup-C-comments:                   Comment Line-Up.     (line   9)
-* c-lineup-cascaded-calls:               Operator Line-Up.    (line  80)
+* c-lineup-cascaded-calls:               Operator Line-Up.    (line  98)
 * c-lineup-class-decl-init-+:            List Line-Up.        (line  65)
 * c-lineup-class-decl-init-after-brace:  List Line-Up.        (line  94)
 * c-lineup-close-paren:                  Brace/Paren Line-Up. (line   9)
@@ -6637,16 +6657,16 @@ appears under its ‘c-THING’ name and its ‘THING (c-)’ name.
 * c-lineup-java-inher:                   List Line-Up.        (line 146)
 * c-lineup-java-throws:                  List Line-Up.        (line 165)
 * c-lineup-knr-region-comment:           Comment Line-Up.     (line  58)
-* c-lineup-math:                         Operator Line-Up.    (line  59)
+* c-lineup-math:                         Operator Line-Up.    (line  77)
 * c-lineup-multi-inher:                  List Line-Up.        (line 124)
 * c-lineup-ObjC-method-args:             List Line-Up.        (line 206)
 * c-lineup-ObjC-method-args-2:           List Line-Up.        (line 213)
 * c-lineup-ObjC-method-call:             List Line-Up.        (line 196)
 * c-lineup-runin-statements:             Brace/Paren Line-Up. (line  91)
-* c-lineup-streamop:                     Operator Line-Up.    (line  96)
-* c-lineup-string-cont:                  Operator Line-Up.    (line 101)
+* c-lineup-streamop:                     Operator Line-Up.    (line 114)
+* c-lineup-string-cont:                  Operator Line-Up.    (line 119)
 * c-lineup-template-args:                List Line-Up.        (line 186)
-* c-lineup-ternary-bodies:               Operator Line-Up.    (line  68)
+* c-lineup-ternary-bodies:               Operator Line-Up.    (line  86)
 * c-lineup-topmost-intro-cont:           Misc Line-Up.        (line 111)
 * c-lineup-under-anchor:                 Misc Line-Up.        (line  15)
 * c-lineup-whitesmith-in-block:          Brace/Paren Line-Up. (line 150)
@@ -6759,13 +6779,14 @@ appears under its ‘c-THING’ name and its ‘THING (c-)’ name.
 * lineup-2nd-brace-entry-in-arglist (c-): List Line-Up.       (line  41)
 * lineup-after-whitesmith-blocks (c-):   Brace/Paren Line-Up. (line 118)
 * lineup-argcont (c-):                   Operator Line-Up.    (line  11)
+* lineup-argcont-+ (c-):                 Operator Line-Up.    (line  26)
 * lineup-arglist (c-):                   List Line-Up.        (line  14)
 * lineup-arglist-close-under-paren (c-): Brace/Paren Line-Up. (line  32)
 * lineup-arglist-intro-after-paren (c-): List Line-Up.        (line  34)
-* lineup-arglist-operators (c-):         Operator Line-Up.    (line  26)
-* lineup-assignments (c-):               Operator Line-Up.    (line  50)
+* lineup-arglist-operators (c-):         Operator Line-Up.    (line  44)
+* lineup-assignments (c-):               Operator Line-Up.    (line  68)
 * lineup-C-comments (c-):                Comment Line-Up.     (line  10)
-* lineup-cascaded-calls (c-):            Operator Line-Up.    (line  81)
+* lineup-cascaded-calls (c-):            Operator Line-Up.    (line  99)
 * lineup-class-decl-init-+ (c-):         List Line-Up.        (line  66)
 * lineup-class-decl-init-after-brace (c-): List Line-Up.      (line  95)
 * lineup-close-paren (c-):               Brace/Paren Line-Up. (line  10)
@@ -6777,16 +6798,16 @@ appears under its ‘c-THING’ name and its ‘THING (c-)’ name.
 * lineup-java-inher (c-):                List Line-Up.        (line 147)
 * lineup-java-throws (c-):               List Line-Up.        (line 166)
 * lineup-knr-region-comment (c-):        Comment Line-Up.     (line  59)
-* lineup-math (c-):                      Operator Line-Up.    (line  60)
+* lineup-math (c-):                      Operator Line-Up.    (line  78)
 * lineup-multi-inher (c-):               List Line-Up.        (line 125)
 * lineup-ObjC-method-args (c-):          List Line-Up.        (line 207)
 * lineup-ObjC-method-args-2 (c-):        List Line-Up.        (line 214)
 * lineup-ObjC-method-call (c-):          List Line-Up.        (line 197)
 * lineup-runin-statements (c-):          Brace/Paren Line-Up. (line  92)
-* lineup-streamop (c-):                  Operator Line-Up.    (line  97)
-* lineup-string-cont (c-):               Operator Line-Up.    (line 102)
+* lineup-streamop (c-):                  Operator Line-Up.    (line 115)
+* lineup-string-cont (c-):               Operator Line-Up.    (line 120)
 * lineup-template-args (c-):             List Line-Up.        (line 187)
-* lineup-ternary-bodies (c-):            Operator Line-Up.    (line  69)
+* lineup-ternary-bodies (c-):            Operator Line-Up.    (line  87)
 * lineup-topmost-intro-cont (c-):        Misc Line-Up.        (line 112)
 * lineup-whitesmith-in-block (c-):       Brace/Paren Line-Up. (line 151)
 * macro-expand (c-):                     Other Commands.      (line  65)
@@ -7404,143 +7425,143 @@ Concept and Key Index
 
 Tag Table:
 Node: Top968
-Node: Introduction4125
-Ref: Introduction-Footnote-16139
-Node: Overview6273
-Node: Getting Started8218
-Ref: Getting Started-Footnote-112455
-Node: Commands12533
-Node: Indentation Commands13367
-Ref: Indentation Commands-Footnote-120099
-Node: Comment Commands20220
-Ref: Comment Commands-Footnote-122863
-Node: Movement Commands22930
-Ref: Movement Commands-Footnote-128532
-Node: Filling and Breaking28593
-Ref: Filling and Breaking-Footnote-132094
-Ref: Filling and Breaking-Footnote-232239
-Node: Minor Modes32303
-Ref: Minor Modes-Footnote-136571
-Ref: Minor Modes-Footnote-236724
-Ref: Minor Modes-Footnote-336846
-Ref: Minor Modes-Footnote-436918
-Node: Electric Keys36990
-Node: Auto-newlines42797
-Ref: Auto-newlines-Footnote-144659
-Node: Hungry WS Deletion44868
-Ref: Hungry WS Deletion-Footnote-150618
-Ref: Hungry WS Deletion-Footnote-250767
-Node: Subword Movement50836
-Node: Other Commands53244
-Node: Font Locking56747
-Node: Font Locking Preliminaries57645
-Node: Faces61693
-Node: Doc Comments64416
-Node: Wrong Comment Style67632
-Node: Misc Font Locking68472
-Node: AWK Mode Font Locking70048
-Node: Config Basics72545
-Ref: Config Basics-Footnote-179423
-Ref: Config Basics-Footnote-279472
-Node: CC Hooks79614
-Node: Style Variables82045
-Ref: Style Variables-Footnote-185432
-Ref: Style Variables-Footnote-285838
-Node: Styles85883
-Node: Built-in Styles87237
-Ref: Built-in Styles-Footnote-189169
-Ref: Built-in Styles-Footnote-289275
-Node: Choosing a Style89420
-Node: Adding Styles91525
-Ref: Adding Styles-Footnote-194915
-Ref: Adding Styles-Footnote-294989
-Node: Guessing the Style95223
-Node: File Styles99465
-Ref: File Styles-Footnote-1101076
-Node: Custom Filling and Breaking101378
-Ref: Custom Filling and Breaking-Footnote-1108155
-Ref: Custom Filling and Breaking-Footnote-2108411
-Ref: Custom Filling and Breaking-Footnote-3108702
-Ref: Custom Filling and Breaking-Footnote-4108886
-Node: Custom Auto-newlines109165
-Node: Hanging Braces111031
-Ref: Hanging Braces-Footnote-1116578
-Ref: Hanging Braces-Footnote-2116665
-Ref: Hanging Braces-Footnote-3116824
-Node: Custom Braces117041
-Node: Hanging Colons120445
-Node: Hanging Semicolons and Commas122040
-Ref: Hanging Semicolons and Commas-Footnote-1125132
-Node: Clean-ups125183
-Ref: Clean-ups-Footnote-1132003
-Node: Indentation Engine Basics132208
-Node: Syntactic Analysis134526
-Ref: Syntactic Analysis-Footnote-1138457
-Ref: Syntactic Analysis-Footnote-2138734
-Ref: Syntactic Analysis-Footnote-3138837
-Ref: Syntactic Analysis-Footnote-4138972
-Node: Syntactic Symbols139208
-Node: Function Symbols149407
-Node: Class Symbols150583
-Ref: Class Symbols-Footnote-1155033
-Node: Conditional Construct Symbols155260
-Ref: Conditional Construct Symbols-Footnote-1157594
-Node: Switch Statement Symbols157727
-Node: Brace List Symbols158671
-Ref: Brace List Symbols-Footnote-1160581
-Node: External Scope Symbols160902
-Ref: External Scope Symbols-Footnote-1162372
-Node: Paren List Symbols162520
-Node: Literal Symbols164641
-Node: Multiline Macro Symbols167235
-Ref: Multiline Macro Symbols-Footnote-1168831
-Node: Objective-C Method Symbols168893
-Node: Java Symbols169675
-Node: Statement Block Symbols170981
-Ref: Statement Block Symbols-Footnote-1173682
-Node: K&R Symbols174007
-Ref: K&R Symbols-Footnote-1174642
-Node: Indentation Calculation174689
-Node: Customizing Indentation178009
-Node: c-offsets-alist179653
-Ref: c-offsets-alist-Footnote-1186353
-Ref: c-offsets-alist-Footnote-2186472
-Node: Interactive Customization186819
-Ref: Interactive Customization-Footnote-1189827
-Node: Line-Up Functions189970
-Node: Brace/Paren Line-Up191840
-Ref: c-lineup-arglist-close-under-paren192901
-Ref: Brace/Paren Line-Up-Footnote-1198470
-Node: List Line-Up198612
-Node: Operator Line-Up206882
-Node: Comment Line-Up211585
-Node: Misc Line-Up214443
-Ref: Misc Line-Up-Footnote-1219377
-Node: Custom Line-Up219700
-Ref: Custom Line-Up-Footnote-1224356
-Node: Other Indentation224517
-Ref: Other Indentation-Footnote-1226569
-Node: Custom Macros226771
-Node: Macro Backslashes228551
-Node: Macros with ;230530
-Node: Noise Macros232723
-Ref: Noise Macros-Footnote-1235165
-Node: Indenting Directives235275
-Ref: Indenting Directives-Footnote-1236809
-Node: Odds and Ends236927
-Node: Sample Init File238620
-Node: Performance Issues240960
-Ref: Performance Issues-Footnote-1246553
-Ref: Performance Issues-Footnote-2246630
-Node: Limitations and Known Bugs246694
-Node: FAQ249219
-Ref: FAQ-Footnote-1253181
-Node: Updating CC Mode253253
-Node: Mailing Lists and Bug Reports253853
-Node: GNU Free Documentation License255898
-Node: Command and Function Index281288
-Node: Variable Index303249
-Node: Concept and Key Index318747
+Node: Introduction4149
+Ref: Introduction-Footnote-16163
+Node: Overview6297
+Node: Getting Started8242
+Ref: Getting Started-Footnote-112480
+Node: Commands12558
+Node: Indentation Commands13392
+Ref: Indentation Commands-Footnote-120124
+Node: Comment Commands20245
+Ref: Comment Commands-Footnote-122888
+Node: Movement Commands22955
+Ref: Movement Commands-Footnote-128555
+Node: Filling and Breaking28616
+Ref: Filling and Breaking-Footnote-132117
+Ref: Filling and Breaking-Footnote-232262
+Node: Minor Modes32326
+Ref: Minor Modes-Footnote-136594
+Ref: Minor Modes-Footnote-236747
+Ref: Minor Modes-Footnote-336869
+Ref: Minor Modes-Footnote-436941
+Node: Electric Keys37013
+Node: Auto-newlines42820
+Ref: Auto-newlines-Footnote-144682
+Node: Hungry WS Deletion44891
+Ref: Hungry WS Deletion-Footnote-150641
+Ref: Hungry WS Deletion-Footnote-250790
+Node: Subword Movement50859
+Node: Other Commands53267
+Node: Font Locking56770
+Node: Font Locking Preliminaries57668
+Node: Faces61716
+Node: Doc Comments64439
+Node: Wrong Comment Style67655
+Node: Misc Font Locking68495
+Node: AWK Mode Font Locking70083
+Node: Config Basics72580
+Ref: Config Basics-Footnote-179458
+Ref: Config Basics-Footnote-279507
+Node: CC Hooks79649
+Node: Style Variables82080
+Ref: Style Variables-Footnote-185467
+Ref: Style Variables-Footnote-285873
+Node: Styles85918
+Node: Built-in Styles87272
+Ref: Built-in Styles-Footnote-189204
+Ref: Built-in Styles-Footnote-289310
+Node: Choosing a Style89455
+Node: Adding Styles91560
+Ref: Adding Styles-Footnote-194950
+Ref: Adding Styles-Footnote-295024
+Node: Guessing the Style95258
+Node: File Styles99500
+Ref: File Styles-Footnote-1101111
+Node: Custom Filling and Breaking101413
+Ref: Custom Filling and Breaking-Footnote-1108190
+Ref: Custom Filling and Breaking-Footnote-2108446
+Ref: Custom Filling and Breaking-Footnote-3108737
+Ref: Custom Filling and Breaking-Footnote-4108921
+Node: Custom Auto-newlines109200
+Node: Hanging Braces111066
+Ref: Hanging Braces-Footnote-1116613
+Ref: Hanging Braces-Footnote-2116700
+Ref: Hanging Braces-Footnote-3116859
+Node: Custom Braces117076
+Node: Hanging Colons120480
+Node: Hanging Semicolons and Commas122075
+Ref: Hanging Semicolons and Commas-Footnote-1125167
+Node: Clean-ups125218
+Ref: Clean-ups-Footnote-1132038
+Node: Indentation Engine Basics132243
+Node: Syntactic Analysis134561
+Ref: Syntactic Analysis-Footnote-1138492
+Ref: Syntactic Analysis-Footnote-2138769
+Ref: Syntactic Analysis-Footnote-3138872
+Ref: Syntactic Analysis-Footnote-4139007
+Node: Syntactic Symbols139243
+Node: Function Symbols149442
+Node: Class Symbols150618
+Ref: Class Symbols-Footnote-1155068
+Node: Conditional Construct Symbols155295
+Ref: Conditional Construct Symbols-Footnote-1157629
+Node: Switch Statement Symbols157762
+Node: Brace List Symbols158706
+Ref: Brace List Symbols-Footnote-1160616
+Node: External Scope Symbols160937
+Ref: External Scope Symbols-Footnote-1162407
+Node: Paren List Symbols162555
+Node: Literal Symbols164676
+Node: Multiline Macro Symbols167270
+Ref: Multiline Macro Symbols-Footnote-1168866
+Node: Objective-C Method Symbols168928
+Node: Java Symbols169710
+Node: Statement Block Symbols171016
+Ref: Statement Block Symbols-Footnote-1173717
+Node: K&R Symbols174042
+Ref: K&R Symbols-Footnote-1174677
+Node: Indentation Calculation174724
+Node: Customizing Indentation178044
+Node: c-offsets-alist179688
+Ref: c-offsets-alist-Footnote-1186382
+Ref: c-offsets-alist-Footnote-2186501
+Node: Interactive Customization186848
+Ref: Interactive Customization-Footnote-1189856
+Node: Line-Up Functions189999
+Node: Brace/Paren Line-Up191869
+Ref: c-lineup-arglist-close-under-paren192930
+Ref: Brace/Paren Line-Up-Footnote-1198499
+Node: List Line-Up198641
+Node: Operator Line-Up206930
+Node: Comment Line-Up212374
+Node: Misc Line-Up215232
+Ref: Misc Line-Up-Footnote-1220166
+Node: Custom Line-Up220489
+Ref: Custom Line-Up-Footnote-1225145
+Node: Other Indentation225306
+Ref: Other Indentation-Footnote-1227358
+Node: Custom Macros227560
+Node: Macro Backslashes229340
+Node: Macros with ;231319
+Node: Noise Macros233512
+Ref: Noise Macros-Footnote-1235954
+Node: Indenting Directives236064
+Ref: Indenting Directives-Footnote-1237598
+Node: Odds and Ends237715
+Node: Sample Init File239408
+Node: Performance Issues241748
+Ref: Performance Issues-Footnote-1247341
+Ref: Performance Issues-Footnote-2247418
+Node: Limitations and Known Bugs247482
+Node: FAQ250007
+Ref: FAQ-Footnote-1253969
+Node: Updating CC Mode254041
+Node: Mailing Lists and Bug Reports254642
+Node: GNU Free Documentation License256688
+Node: Command and Function Index282078
+Node: Variable Index304185
+Node: Concept and Key Index319683
 
 End Tag Table
 

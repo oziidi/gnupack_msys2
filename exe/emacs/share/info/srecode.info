@@ -1,7 +1,7 @@
-This is srecode.info, produced by makeinfo version 6.7 from
+This is srecode.info, produced by makeinfo version 6.8 from
 srecode.texi.
 
-Copyright © 2007–2022 Free Software Foundation, Inc.
+Copyright © 2007–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -36,7 +36,7 @@ in choosing a template to insert, this is not the main goal of SRecode.
 someone can write a complex code generator, and the underlying template
 commonality allows it to work in multiple languages with ease.
 
-   Copyright © 2007–2022 Free Software Foundation, Inc.
+   Copyright © 2007–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -266,13 +266,13 @@ simple access to different templates or template applications.
    The most important key is bound to ‘srecode-insert’ which is ‘C-c /
 /’, or ‘<INSERT> <INSERT>’.  *note Quick Start::.
 
-   Major keybindings are:
+   Major key bindings are:
 
 ‘C-c / /’
      Insert a template whose name is typed into the minibuffer.
 ‘C-c / <lower case letter>’
-     Reserved for direct binding of simple templates to keys using a
-     keybinding command in the template file.
+     Reserved for direct binding of simple templates to keys using a key
+     binding command in the template file.
 ‘C-c / <upper case letter>’
      Reserved for template applications (Such as comment or get/set
      inserter.)
@@ -1000,9 +1000,9 @@ methods:
        "Wrap up a collection of semantic tag information.
      This class will be used to derive dictionary values.")
 
-     (defmethod srecode-compound-toString((cp srecode-semantic-tag)
-                                          function
-                                          dictionary)
+     (cl-defmethod srecode-compound-toString ((cp srecode-semantic-tag)
+                                              function
+                                              dictionary)
        "Convert the compound dictionary value CP to a string.
      If FUNCTION is non-nil, then FUNCTION is somehow applied to an
      aspect of the compound value."
@@ -1512,9 +1512,9 @@ from a user perspective during basic interactive insertion via
 
    NOTES ON THIS CHAPTER:
 
-   These conventions are being worked on.  Check w/ CEDET-DEVEL mailing
-list if you want to support a language, or write an application and
-provide your opinions on this topic.  Any help is appreciated.
+   These conventions are being worked on.  Check with CEDET-DEVEL
+mailing list if you want to support a language, or write an application
+and provide your opinions on this topic.  Any help is appreciated.
 
 8.1 Context: File
 =================
@@ -2222,54 +2222,54 @@ Node: User Templates4271
 Ref: srecode-map-save-file4657
 Node: Parts of SRecode6209
 Node: SRecode Minor Mode10162
-Ref: srecode-insert-ask-variable-method11600
-Node: Template Writing12737
-Ref: SRecode-template-mode12881
-Node: Variables14007
-Node: String Values15036
-Node: Multi-string Values15477
-Node: Section Show16319
-Node: Special Variables16849
-Node: Automatic Loop Variables19973
-Node: Compound Variable Values20617
-Node: Templates21107
-Node: Template Section Dictionaries21984
-Node: Template Macros24514
-Node: Contexts28007
-Node: Prompts29067
-Node: Dictionaries30976
-Node: Create a Dictionary31919
-Ref: srecode-create-dictionary32128
-Node: Setting Dictionary Values32402
-Ref: srecode-dictionary-set-value32878
-Ref: srecode-dictionary-show-section33109
-Ref: srecode-dictionary-add-section-dictionary33276
-Node: Compound Dictionary Values34235
-Ref: srecode-dictionary-compound-value34707
-Ref: srecode-compound-toString35163
-Ref: srecode-dump35539
-Node: Argument Resolution36610
-Ref: srecode-resolve-arguments37080
-Node: Creating new Arguments37194
-Node: Querying a Dictionary38192
-Ref: srecode-dictionary-lookup-name38699
-Node: Template Argument Dictionary Entries38958
-Node: Base Arguments39584
-Node: Semantic Arguments43035
-Ref: srecode-semantic-selected-tag43681
-Node: Language Arguments45474
-Node: Developing Template Functions47895
-Ref: srecode-read-template-name50330
-Ref: srecode-table50709
-Ref: srecode-template-get-table50943
-Ref: srecode-insert-fcn52157
-Node: Template Naming Conventions52268
-Node: Inserting Tag Lists56006
-Ref: srecode-semantic-insert-tag56595
-Node: Application Writing58318
-Ref: srecode-load-tables-for-mode59272
-Node: GNU Free Documentation License59600
-Node: Index84960
+Ref: srecode-insert-ask-variable-method11602
+Node: Template Writing12739
+Ref: SRecode-template-mode12883
+Node: Variables14009
+Node: String Values15038
+Node: Multi-string Values15479
+Node: Section Show16321
+Node: Special Variables16851
+Node: Automatic Loop Variables19975
+Node: Compound Variable Values20619
+Node: Templates21109
+Node: Template Section Dictionaries21986
+Node: Template Macros24516
+Node: Contexts28009
+Node: Prompts29069
+Node: Dictionaries30978
+Node: Create a Dictionary31921
+Ref: srecode-create-dictionary32130
+Node: Setting Dictionary Values32404
+Ref: srecode-dictionary-set-value32880
+Ref: srecode-dictionary-show-section33111
+Ref: srecode-dictionary-add-section-dictionary33278
+Node: Compound Dictionary Values34237
+Ref: srecode-dictionary-compound-value34709
+Ref: srecode-compound-toString35165
+Ref: srecode-dump35541
+Node: Argument Resolution36624
+Ref: srecode-resolve-arguments37094
+Node: Creating new Arguments37208
+Node: Querying a Dictionary38206
+Ref: srecode-dictionary-lookup-name38713
+Node: Template Argument Dictionary Entries38972
+Node: Base Arguments39598
+Node: Semantic Arguments43049
+Ref: srecode-semantic-selected-tag43695
+Node: Language Arguments45488
+Node: Developing Template Functions47909
+Ref: srecode-read-template-name50344
+Ref: srecode-table50723
+Ref: srecode-template-get-table50957
+Ref: srecode-insert-fcn52171
+Node: Template Naming Conventions52282
+Node: Inserting Tag Lists56022
+Ref: srecode-semantic-insert-tag56611
+Node: Application Writing58334
+Ref: srecode-load-tables-for-mode59288
+Node: GNU Free Documentation License59616
+Node: Index84976
 
 End Tag Table
 

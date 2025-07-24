@@ -1,8 +1,8 @@
-This is calc.info, produced by makeinfo version 6.7 from calc.texi.
+This is calc.info, produced by makeinfo version 6.8 from calc.texi.
 
 This file documents Calc, the GNU Emacs calculator.
 
-   Copyright © 1990–1991, 2001–2022 Free Software Foundation, Inc.
+   Copyright © 1990–1991, 2001–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -41,7 +41,7 @@ tutorial.)
 
    This file documents Calc, the GNU Emacs calculator.
 
-   Copyright © 1990–1991, 2001–2022 Free Software Foundation, Inc.
+   Copyright © 1990–1991, 2001–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -120,7 +120,8 @@ File: calc.info,  Node: What is Calc,  Next: About This Manual,  Prev: Getting S
 of the GNU Emacs environment.  Very roughly based on the HP-28/48 series
 of calculators, its many features include:
 
-   • Choice of algebraic or RPN (stack-based) entry of calculations.
+   • Choice of algebraic or Reverse Polish notation (RPN), i.e.
+     stack-based, entry of calculations.
 
    • Arbitrary precision integers and floating-point numbers.
 
@@ -281,8 +282,8 @@ ways of starting the Calculator.)
 difference between lower-case and upper-case letters.  Remember, <RET>,
 <TAB>, <DEL>, and <SPC> are the Return, Tab, Delete, and Space keys.
 
-   *RPN calculation.*  In RPN, you type the input number(s) first, then
-the command to operate on the numbers.
+   *RPN calculation.*  In Reverse Polish notation (RPN), you type the
+input number(s) first, then the command to operate on the numbers.
 
 Type ‘2 <RET> 3 + Q’ to compute the square root of 2+3, which is
 2.2360679775.
@@ -1078,10 +1079,10 @@ File: calc.info,  Node: RPN Tutorial,  Next: Algebraic Tutorial,  Up: Basic Tuto
 3.1.1 RPN Calculations and the Stack
 ------------------------------------
 
-Calc normally uses RPN notation.  You may be familiar with the RPN
-system from Hewlett-Packard calculators, FORTH, or PostScript.  (Reverse
-Polish Notation, RPN, is named after the Polish mathematician Jan
-Lukasiewicz.)
+Calc normally uses Reverse Polish notation (RPN). You may be familiar
+with the RPN system from Hewlett-Packard calculators, FORTH, or
+PostScript.  (Reverse Polish Notation is named after the Polish
+mathematician Jan Lukasiewicz.)
 
    The central component of an RPN calculator is the “stack”.  A
 calculator stack is like a stack of dishes.  New dishes (numbers) are
@@ -4030,7 +4031,7 @@ variable containing a vector of rules.
      1:  [merge, secsqr]          1:  [a/x + b/x := (a + b)/x, ... ]
          .                                 .
 
-         ' [merge,sinsqr] <RET>          =
+         ' [merge,secsqr] <RET>          =
 
      1:  2 sec(x)^2 / tan(x)^2 - 2 / tan(x)^2     1:  2
          .                                 .
@@ -7847,9 +7848,6 @@ is also an ‘I M’ (‘calc-less-recursion-depth’) command which decreases
 this limit by a factor of two, down to a minimum value of 200.  The
 default value is 1000.
 
-   These commands also double or halve ‘max-specpdl-size’, another
-internal Lisp recursion limit.  The minimum value for this limit is 600.
-
 
 File: calc.info,  Node: Caches,  Next: Debugging Calc,  Prev: Recursion Depth,  Up: Troubleshooting Commands
 
@@ -9094,7 +9092,7 @@ the selected number.  The following commands operate on the trail
 pointer in various ways.
 
    The ‘t y’ (‘calc-trail-yank’) command reads the selected value in the
-trail and pushes it onto the Calculator stack.  It allows you to re-use
+trail and pushes it onto the Calculator stack.  It allows you to reuse
 any previously computed value without retyping.  With a numeric prefix
 argument N, it yanks the value N lines above the current trail pointer.
 
@@ -14219,7 +14217,7 @@ some values of the arguments.
 function.  For positive integer arguments, this is related to the
 factorial function: ‘gamma(n+1) = fact(n)’.  For general complex
 arguments the gamma function can be defined by the following definite
-integral: ‘gamma(a) = integ(t^(a-1) exp(t), t, 0, inf)’.  (The actual
+integral: ‘gamma(a) = integ(t^(a-1) exp(-t), t, 0, inf)’.  (The actual
 implementation uses far more efficient computational methods.)
 
    The ‘f G’ (‘calc-inc-gamma’) [‘gammaP’] command computes the
@@ -14251,9 +14249,10 @@ integ(t^(a-1) (1-t)^(b-1), t, 0, x) / beta(a,b)’.  Once again, the ‘H’
 [‘betaB’].
 
    The ‘f e’ (‘calc-erf’) [‘erf’] command computes the error function
-‘erf(x) = 2 integ(exp(-(t^2)), t, 0, x) / sqrt(pi)’.  The complementary
-error function ‘I f e’ (‘calc-erfc’) [‘erfc’] is the corresponding
-integral from ‘x’ to infinity; the sum ‘erf(x) + erfc(x) = 1’.
+‘erf(x) = 2 integ(exp(-(t^(2))), t, 0, x) / sqrt(pi)’.  The
+complementary error function ‘I f e’ (‘calc-erfc’) [‘erfc’] is the
+corresponding integral from ‘x’ to infinity; the sum ‘erf(x) + erfc(x) =
+1’.
 
    The ‘f j’ (‘calc-bessel-J’) [‘besJ’] and ‘f y’ (‘calc-bessel-Y’)
 [‘besY’] commands compute the Bessel functions of the first and second
@@ -21594,12 +21593,12 @@ through G, possibly followed by a flat or sharp) with a subscript
 indicating an octave number.  Each octave starts with C and ends with B
 and the octave numbered 0 was chosen to correspond to the lowest audible
 frequency.  Using this system, middle C (about 261.625 Hz) corresponds
-to the note ‘C’ in octave 4 and is denoted ‘C_4’.  Any frequency can be
+to the note C in octave 4 and is denoted C_{4}.  Any frequency can be
 described by giving a note plus an offset in cents (where a cent is a
 ratio of frequencies so that a semitone consists of 100 cents).
 
-   The midi note number system assigns numbers to notes so that ‘C_(-1)’
-corresponds to the midi note number 0 and ‘G_9’ corresponds to the midi
+   The midi note number system assigns numbers to notes so that C_{-1}
+corresponds to the midi note number 0 and G_{9} corresponds to the midi
 note number 127.  A midi controller can have up to 128 keys and each
 midi note number from 0 to 127 corresponds to a possible key.
 
@@ -22667,6 +22666,11 @@ current line.  Again this mirrors the behavior of the standard Emacs
 ‘C-k’ command.  Although a whole line is always deleted, ‘C-k’ with no
 argument copies only the number itself into the kill ring, whereas ‘C-k’
 with a prefix argument of 1 copies the number with its trailing newline.
+
+   You can customize ‘calc-kill-line-numbering’ to ‘nil’ to exclude line
+numbering from kills and copies made by ‘calc-kill’ and
+‘calc-copy-as-kill’.  This option does not affect calc kill and copy
+commands which operate on the region, as that would not make sense.
 
 
 File: calc.info,  Node: Yanking Into Stack,  Next: Saving Into Registers,  Prev: Killing From Stack,  Up: Kill and Yank
@@ -24602,6 +24606,9 @@ File: calc.info,  Node: Lisp Definitions,  Prev: Algebraic Definitions,  Up: Pro
 18.5 Programming with Lisp
 ==========================
 
+18.6 Programming Calc, with Lisp
+================================
+
 The Calculator can be programmed quite extensively in Lisp.  All you do
 is write a normal Lisp function definition, but with ‘defmath’ in place
 of ‘defun’.  This has the same form as ‘defun’, but it automagically
@@ -24637,7 +24644,7 @@ for the true Lisp enthusiast.
 
 File: calc.info,  Node: Defining Functions,  Next: Defining Simple Commands,  Up: Lisp Definitions
 
-18.5.1 Defining New Functions
+18.6.1 Defining New Functions
 -----------------------------
 
 The ‘defmath’ function (actually a Lisp macro) is like ‘defun’ except
@@ -24822,7 +24829,7 @@ Ordinary ‘defun’s need not be enclosed with ‘calc-define’.
 
 File: calc.info,  Node: Defining Simple Commands,  Next: Defining Stack Commands,  Prev: Defining Functions,  Up: Lisp Definitions
 
-18.5.2 Defining New Simple Commands
+18.6.2 Defining New Simple Commands
 -----------------------------------
 
 If a ‘defmath’ form contains an ‘interactive’ clause, it defines a
@@ -24941,9 +24948,9 @@ precision.
      (put 'calc-define 'inc-prec '(progn
 
      (define-key calc-mode-map (format "Y%sI" inc-prec-base-key)
-                 'increase-precision)
+                 'calc-increase-precision)
      (define-key calc-mode-map (format "Y%sD" inc-prec-base-key)
-                 'decrease-precision)
+                 'calc-decrease-precision)
 
      (setq calc-Y-help-msgs
            (cons (format "%s + Inc-prec, Dec-prec" inc-prec-base-key)
@@ -24966,7 +24973,7 @@ precision.
 
 File: calc.info,  Node: Defining Stack Commands,  Next: Argument Qualifiers,  Prev: Defining Simple Commands,  Up: Lisp Definitions
 
-18.5.3 Defining New Stack-Based Commands
+18.6.3 Defining New Stack-Based Commands
 ----------------------------------------
 
 To define a new computational command which takes and/or leaves
@@ -25056,7 +25063,7 @@ used when no prefix is supplied.
 
 File: calc.info,  Node: Argument Qualifiers,  Next: Example Definitions,  Prev: Defining Stack Commands,  Up: Lisp Definitions
 
-18.5.4 Argument Qualifiers
+18.6.4 Argument Qualifiers
 --------------------------
 
 Anywhere a parameter name can appear in the parameter list you can also
@@ -25129,7 +25136,7 @@ body of the function.
 
 File: calc.info,  Node: Example Definitions,  Next: Calling Calc from Your Programs,  Prev: Argument Qualifiers,  Up: Lisp Definitions
 
-18.5.5 Example Definitions
+18.6.5 Example Definitions
 --------------------------
 
 This section includes some Lisp programming examples on a larger scale.
@@ -25144,7 +25151,7 @@ These programs make use of some of the Calculator’s internal functions;
 
 File: calc.info,  Node: Bit Counting Example,  Next: Sine Example,  Up: Example Definitions
 
-18.5.5.1 Bit-Counting
+18.6.5.1 Bit-Counting
 .....................
 
 Calc does not include a built-in function for counting the number of
@@ -25177,7 +25184,7 @@ Lisp function:
 
 File: calc.info,  Node: Sine Example,  Prev: Bit Counting Example,  Up: Example Definitions
 
-18.5.5.2 The Sine Function
+18.6.5.2 The Sine Function
 ..........................
 
 A somewhat limited sine function could be defined as follows, using the
@@ -25252,7 +25259,7 @@ shown is fine.
 
 File: calc.info,  Node: Calling Calc from Your Programs,  Next: Internals,  Prev: Example Definitions,  Up: Lisp Definitions
 
-18.5.6 Calling Calc from Your Lisp Programs
+18.6.6 Calling Calc from Your Lisp Programs
 -------------------------------------------
 
 A later section (*note Internals::) gives a full description of Calc’s
@@ -25279,7 +25286,7 @@ evaluating the expression and formatting the result.
 
 
 
-18.5.6.1 Additional Arguments to ‘calc-eval’
+18.6.6.1 Additional Arguments to ‘calc-eval’
 ............................................
 
 If the input string parses to a list of expressions, Calc returns the
@@ -25298,7 +25305,7 @@ as a placeholder for the item-separator argument.
 
 
 
-18.5.6.2 Error Handling
+18.6.6.2 Error Handling
 .......................
 
 If ‘calc-eval’ encounters an error, it returns a list containing the
@@ -25323,7 +25330,7 @@ with ‘setq’.
 
 
 
-18.5.6.3 Numbers Only
+18.6.6.3 Numbers Only
 .....................
 
 Sometimes it is preferable to treat ‘1 / 0’ as an error rather than
@@ -25338,7 +25345,7 @@ the components must themselves be constants.
 
 
 
-18.5.6.4 Default Modes
+18.6.6.4 Default Modes
 ......................
 
 If the first argument to ‘calc-eval’ is a list whose first element is a
@@ -25376,7 +25383,7 @@ formats which would be hard to test for conveniently: ‘"1"’, ‘"8#1"’,
 
 
 
-18.5.6.5 Raw Numbers
+18.6.6.5 Raw Numbers
 ....................
 
 Normally all input and output for ‘calc-eval’ is done with strings.  You
@@ -25416,7 +25423,7 @@ various kinds of error returns discussed above.
 
 
 
-18.5.6.6 Predicates
+18.6.6.6 Predicates
 ...................
 
 If the separator symbol is ‘pred’, the result of the formula is treated
@@ -25434,7 +25441,7 @@ error register as “false”, use something like ‘(eq (calc-eval ...) t)’.
 
 
 
-18.5.6.7 Variable Values
+18.6.6.7 Variable Values
 ........................
 
 Variables in the formula passed to ‘calc-eval’ are not normally replaced
@@ -25454,7 +25461,7 @@ more efficient.  For example, to increment the Calc variable ‘a’:
 
 
 
-18.5.6.8 Stack Access
+18.6.6.8 Stack Access
 .....................
 
 If the separator symbol is ‘push’, the formula argument is evaluated
@@ -25494,7 +25501,7 @@ stack buffer if necessary.
 
 
 
-18.5.6.9 Keyboard Macros
+18.6.6.9 Keyboard Macros
 ........................
 
 If the separator symbol is ‘macro’, the first argument must be a string
@@ -25518,7 +25525,7 @@ tag string.  Normally the Trail is unaffected.
 
 
 
-18.5.6.10 Lisp Evaluation
+18.6.6.10 Lisp Evaluation
 .........................
 
 Finally, if the separator symbol is ‘eval’, then the Lisp ‘eval’
@@ -25548,7 +25555,7 @@ by the evaluated Lisp expression.
 
 
 
-18.5.6.11 Example
+18.6.6.11 Example
 .................
 
 Here is a sample Emacs command that uses ‘calc-eval’.  Suppose you have
@@ -25590,7 +25597,7 @@ it.
 
 File: calc.info,  Node: Internals,  Prev: Calling Calc from Your Programs,  Up: Lisp Definitions
 
-18.5.7 Calculator Internals
+18.6.7 Calculator Internals
 ---------------------------
 
 This section describes the Lisp functions defined by the Calculator that
@@ -25632,7 +25639,7 @@ already be loaded.
 
 File: calc.info,  Node: Data Type Formats,  Next: Interactive Lisp Functions,  Up: Internals
 
-18.5.7.1 Data Type Formats
+18.6.7.1 Data Type Formats
 ..........................
 
 Integers are stored as standard Lisp integers.  This is the only storage
@@ -25747,7 +25754,7 @@ used by any built-in Calc functions.)
 
 File: calc.info,  Node: Interactive Lisp Functions,  Next: Stack Lisp Functions,  Prev: Data Type Formats,  Up: Internals
 
-18.5.7.2 Interactive Functions
+18.6.7.2 Interactive Functions
 ..............................
 
 The functions described here are used in implementing interactive Calc
@@ -25804,7 +25811,7 @@ command.
 
 File: calc.info,  Node: Stack Lisp Functions,  Next: Predicates,  Prev: Interactive Lisp Functions,  Up: Internals
 
-18.5.7.3 Stack-Oriented Functions
+18.6.7.3 Stack-Oriented Functions
 .................................
 
 The functions described here perform various operations on the Calc
@@ -25977,7 +25984,7 @@ stack and trail.  They are to be used in interactive Calc commands.
 
 File: calc.info,  Node: Predicates,  Next: Computational Lisp Functions,  Prev: Stack Lisp Functions,  Up: Internals
 
-18.5.7.4 Predicates
+18.6.7.4 Predicates
 ...................
 
 The functions described here are predicates, that is, they return a
@@ -26204,7 +26211,7 @@ types.
 
 File: calc.info,  Node: Computational Lisp Functions,  Next: Vector Lisp Functions,  Prev: Predicates,  Up: Internals
 
-18.5.7.5 Computational Functions
+18.6.7.5 Computational Functions
 ................................
 
 The functions described here do the actual computational work of the
@@ -26482,7 +26489,7 @@ unary ‘-’, respectively, instead.
 
 File: calc.info,  Node: Vector Lisp Functions,  Next: Symbolic Lisp Functions,  Prev: Computational Lisp Functions,  Up: Internals
 
-18.5.7.6 Vector Functions
+18.6.7.6 Vector Functions
 .........................
 
 The functions described here perform various operations on vectors and
@@ -26598,7 +26605,7 @@ matrices.
 
 File: calc.info,  Node: Symbolic Lisp Functions,  Next: Formatting Lisp Functions,  Prev: Vector Lisp Functions,  Up: Internals
 
-18.5.7.7 Symbolic Functions
+18.6.7.7 Symbolic Functions
 ...........................
 
 The functions described here operate on symbolic formulas in the
@@ -27095,7 +27102,7 @@ Calculator.
 
 File: calc.info,  Node: Formatting Lisp Functions,  Next: Hooks,  Prev: Symbolic Lisp Functions,  Up: Internals
 
-18.5.7.8 I/O and Formatting Functions
+18.6.7.8 I/O and Formatting Functions
 .....................................
 
 The functions described here are responsible for parsing and formatting
@@ -27218,7 +27225,7 @@ Calc numbers and formulas.
 
 File: calc.info,  Node: Hooks,  Prev: Formatting Lisp Functions,  Up: Internals
 
-18.5.7.9 Hooks
+18.6.7.9 Hooks
 ..............
 
 Hooks are variables which contain Lisp functions (or lists of functions)
@@ -28842,11 +28849,11 @@ regular expressions work.
      See *note Displaying Selections::.
      The variable ‘calc-highlight-selections-with-faces’ determines how
      selected sub-formulas are distinguished.  If
-     ‘calc-highlight-selections-with-faces’ is nil, then a selected
+     ‘calc-highlight-selections-with-faces’ is ‘nil’, then a selected
      sub-formula is distinguished either by changing every character not
      part of the sub-formula with a dot or by changing every character
      in the sub-formula with a ‘#’ sign.  If
-     ‘calc-highlight-selections-with-faces’ is t, then a selected
+     ‘calc-highlight-selections-with-faces’ is ‘t’, then a selected
      sub-formula is distinguished either by displaying the non-selected
      portion of the formula with ‘calc-nonselected-face’ or by
      displaying the selected sub-formula with ‘calc-nonselected-face’.
@@ -29976,24 +29983,24 @@ Index of Key Sequences
 * ":                                     Strings.             (line   6)
 * " (HMS forms):                         HMS Forms.           (line  13)
 * #:                                     Integers.            (line  18)
-* $:                                     Algebraic Entry.     (line  58)
-* %:                                     Basic Arithmetic.    (line 147)
-* &:                                     Basic Arithmetic.    (line 185)
+* $:                                     Algebraic Entry.     (line  57)
+* %:                                     Basic Arithmetic.    (line 146)
+* &:                                     Basic Arithmetic.    (line 184)
 * & (matrices):                          Vector and Matrix Arithmetic.
                                                               (line  42)
 * ':                                     Algebraic Entry.     (line   6)
 * ' (HMS forms):                         HMS Forms.           (line  13)
 * (:                                     Incomplete Objects.  (line   6)
 * ):                                     Incomplete Objects.  (line   6)
-* *:                                     Basic Arithmetic.    (line  71)
+* *:                                     Basic Arithmetic.    (line  70)
 * +:                                     Basic Arithmetic.    (line   6)
 * ,:                                     Incomplete Objects.  (line   6)
-* -:                                     Basic Arithmetic.    (line  66)
+* -:                                     Basic Arithmetic.    (line  65)
 * .:                                     Numeric Entry.       (line   6)
 * ..:                                    Incomplete Objects.  (line  32)
-* /:                                     Basic Arithmetic.    (line  90)
+* /:                                     Basic Arithmetic.    (line  89)
 * 0-9:                                   Numeric Entry.       (line   6)
-* ::                                     Basic Arithmetic.    (line 154)
+* ::                                     Basic Arithmetic.    (line 153)
 * ;:                                     Incomplete Objects.  (line  27)
 * <:                                     Basic Commands.      (line  95)
 * =:                                     Variables.           (line  30)
@@ -30001,9 +30008,9 @@ Index of Key Sequences
 * ?:                                     Help Commands.       (line   6)
 * @:                                     HMS Forms.           (line  13)
 * [:                                     Incomplete Objects.  (line   6)
-* \:                                     Basic Arithmetic.    (line 140)
+* \:                                     Basic Arithmetic.    (line 139)
 * ]:                                     Incomplete Objects.  (line   6)
-* ^:                                     Basic Arithmetic.    (line 129)
+* ^:                                     Basic Arithmetic.    (line 128)
 * _:                                     Numeric Entry.       (line  12)
 * `:                                     Editing Stack Entries.
                                                               (line   6)
@@ -30011,42 +30018,42 @@ Index of Key Sequences
 * |:                                     Building Vectors.    (line   9)
 * }:                                     Basic Commands.      (line 101)
 * ~:                                     Prefix Arguments.    (line  39)
-* A:                                     Basic Arithmetic.    (line 166)
-* a !:                                   Logical Operations.  (line  88)
+* A:                                     Basic Arithmetic.    (line 165)
+* a !:                                   Logical Operations.  (line  85)
 * a ":                                   Algebraic Manipulation.
                                                               (line  59)
-* a #:                                   Logical Operations.  (line  47)
-* a %:                                   Polynomials.         (line 134)
-* a &:                                   Logical Operations.  (line  77)
+* a #:                                   Logical Operations.  (line  45)
+* a %:                                   Polynomials.         (line 133)
+* a &:                                   Logical Operations.  (line  74)
 * A (vectors):                           Vector and Matrix Arithmetic.
                                                               (line  19)
-* a *:                                   Summations.          (line 117)
+* a *:                                   Summations.          (line 116)
 * a +:                                   Summations.          (line   6)
-* a -:                                   Summations.          (line 105)
-* a .:                                   Logical Operations.  (line  67)
-* a /:                                   Polynomials.         (line 140)
-* a ::                                   Logical Operations.  (line  92)
-* a <:                                   Logical Operations.  (line  52)
-* a =:                                   Logical Operations.  (line  22)
-* a >:                                   Logical Operations.  (line  52)
+* a -:                                   Summations.          (line 104)
+* a .:                                   Logical Operations.  (line  64)
+* a /:                                   Polynomials.         (line 139)
+* a ::                                   Logical Operations.  (line  89)
+* a <:                                   Logical Operations.  (line  50)
+* a =:                                   Logical Operations.  (line  20)
+* a >:                                   Logical Operations.  (line  50)
 * a ?:                                   Help Commands.       (line   6)
-* a a:                                   Polynomials.         (line 106)
+* a a:                                   Polynomials.         (line 105)
 * a b:                                   Algebraic Manipulation.
-                                                              (line 110)
-* a c:                                   Polynomials.         (line  69)
+                                                              (line 109)
+* a c:                                   Polynomials.         (line  68)
 * a d:                                   Differentiation.     (line   6)
 * a e:                                   Unsafe Simplifications.
                                                               (line   6)
 * a f:                                   Polynomials.         (line  13)
 * a F:                                   Linear Fits.         (line   6)
-* a g:                                   Polynomials.         (line 146)
+* a g:                                   Polynomials.         (line 145)
 * a i:                                   Integration.         (line   6)
 * a I:                                   Numerical Integration.
                                                               (line   6)
 * a M:                                   Algebraic Manipulation.
                                                               (line  73)
 * a m:                                   Matching Commands.   (line   6)
-* a n:                                   Polynomials.         (line 113)
+* a n:                                   Polynomials.         (line 112)
 * a N:                                   Minimization.        (line   6)
 * a P:                                   Multiple Solutions.  (line  62)
 * a p:                                   Interpolation.       (line   6)
@@ -30058,17 +30065,17 @@ Index of Key Sequences
                                                               (line   6)
 * a S:                                   Solving Equations.   (line   6)
 * a t:                                   Taylor Series.       (line   6)
-* a T:                                   Summations.          (line 123)
+* a T:                                   Summations.          (line 122)
 * a v:                                   Algebraic Manipulation.
                                                               (line  15)
-* a x:                                   Polynomials.         (line  84)
+* a x:                                   Polynomials.         (line  83)
 * a X:                                   Minimization.        (line   6)
-* a [:                                   Logical Operations.  (line  52)
-* a \:                                   Polynomials.         (line 120)
-* a ]:                                   Logical Operations.  (line  52)
+* a [:                                   Logical Operations.  (line  50)
+* a \:                                   Polynomials.         (line 119)
+* a ]:                                   Logical Operations.  (line  50)
 * a _:                                   Extracting Elements. (line  24)
-* a {:                                   Logical Operations.  (line 111)
-* a |:                                   Logical Operations.  (line  83)
+* a {:                                   Logical Operations.  (line 108)
+* a |:                                   Logical Operations.  (line  80)
 * B:                                     Logarithmic Functions.
                                                               (line  22)
 * b #:                                   Related Financial Functions.
@@ -30091,7 +30098,7 @@ Index of Key Sequences
 * b n:                                   Binary Functions.    (line  77)
 * b o:                                   Binary Functions.    (line  65)
 * b P:                                   Present Value.       (line   6)
-* b p:                                   Set Operations.      (line 111)
+* b p:                                   Set Operations.      (line 110)
 * b r:                                   Binary Functions.    (line  94)
 * b R:                                   Binary Functions.    (line 103)
 * b S:                                   Depreciation Functions.
@@ -30099,7 +30106,7 @@ Index of Key Sequences
 * b T:                                   Related Financial Functions.
                                                               (line  38)
 * b t:                                   Binary Functions.    (line 116)
-* b u:                                   Set Operations.      (line 111)
+* b u:                                   Set Operations.      (line 110)
 * b w:                                   Binary Functions.    (line  37)
 * b x:                                   Binary Functions.    (line  69)
 * b Y:                                   Depreciation Functions.
@@ -30124,7 +30131,7 @@ Index of Key Sequences
 * C-x * *:                               Basic Commands.      (line  19)
 * C-x * 0:                               Basic Commands.      (line 105)
 * C-x * ::                               Grabbing From Buffers.
-                                                              (line  77)
+                                                              (line  76)
 * C-x * a:                               Assignments in Embedded Mode.
                                                               (line  93)
 * C-x * b:                               Basic Commands.      (line  53)
@@ -30162,7 +30169,7 @@ Index of Key Sequences
                                                               (line  50)
 * C-x * z:                               Invocation Macros.   (line   6)
 * C-x * _:                               Grabbing From Buffers.
-                                                              (line  77)
+                                                              (line  76)
 * C-x * `:                               More About Embedded Mode.
                                                               (line 134)
 * C-xC-t:                                Stack Manipulation.  (line  83)
@@ -30227,9 +30234,9 @@ Index of Key Sequences
 * d Y:                                   Yacas Language Mode. (line   6)
 * d z:                                   Radix Modes.         (line  23)
 * d [:                                   Truncating the Stack.
-                                                              (line  25)
+                                                              (line  24)
 * d ]:                                   Truncating the Stack.
-                                                              (line  25)
+                                                              (line  24)
 * d {:                                   Labels.              (line   6)
 * d }:                                   Labels.              (line  16)
 * DEL:                                   Stack Manipulation.  (line  23)
@@ -30238,7 +30245,7 @@ Index of Key Sequences
                                                               (line  11)
 * F:                                     Integer Truncation.  (line  15)
 * f ?:                                   Help Commands.       (line   6)
-* f A:                                   Basic Arithmetic.    (line 176)
+* f A:                                   Basic Arithmetic.    (line 175)
 * f b:                                   Advanced Math Functions.
                                                               (line  42)
 * f B:                                   Advanced Math Functions.
@@ -30251,30 +30258,30 @@ Index of Key Sequences
                                                               (line  18)
 * f G:                                   Advanced Math Functions.
                                                               (line  25)
-* f h:                                   Basic Arithmetic.    (line 193)
+* f h:                                   Basic Arithmetic.    (line 192)
 * f i:                                   Complex Number Functions.
                                                               (line  28)
 * f I:                                   Logarithmic Functions.
                                                               (line  29)
 * f j:                                   Advanced Math Functions.
-                                                              (line  58)
+                                                              (line  59)
 * f L:                                   Logarithmic Functions.
                                                               (line  41)
-* f M:                                   Basic Arithmetic.    (line 211)
-* f n:                                   Basic Arithmetic.    (line 205)
-* f Q:                                   Basic Arithmetic.    (line 198)
+* f M:                                   Basic Arithmetic.    (line 210)
+* f n:                                   Basic Arithmetic.    (line 204)
+* f Q:                                   Basic Arithmetic.    (line 197)
 * f r:                                   Complex Number Functions.
                                                               (line  24)
-* f s:                                   Basic Arithmetic.    (line 179)
-* f S:                                   Basic Arithmetic.    (line 222)
+* f s:                                   Basic Arithmetic.    (line 178)
+* f S:                                   Basic Arithmetic.    (line 221)
 * f T:                                   Trigonometric and Hyperbolic Functions.
                                                               (line  48)
-* f x:                                   Basic Arithmetic.    (line 205)
-* f X:                                   Basic Arithmetic.    (line 211)
+* f x:                                   Basic Arithmetic.    (line 204)
+* f X:                                   Basic Arithmetic.    (line 210)
 * f y:                                   Advanced Math Functions.
-                                                              (line  58)
-* f [:                                   Basic Arithmetic.    (line 228)
-* f ]:                                   Basic Arithmetic.    (line 228)
+                                                              (line  59)
+* f [:                                   Basic Arithmetic.    (line 227)
+* f ]:                                   Basic Arithmetic.    (line 227)
 * G:                                     Complex Number Functions.
                                                               (line  12)
 * g ?:                                   Help Commands.       (line   6)
@@ -30296,15 +30303,15 @@ Index of Key Sequences
 * g h:                                   Graphics Options.    (line  44)
 * g j:                                   Managing Curves.     (line  87)
 * g k:                                   Graphics Options.    (line  17)
-* g K:                                   Devices.             (line 150)
+* g K:                                   Devices.             (line 149)
 * g l:                                   Graphics Options.    (line  72)
 * g L:                                   Graphics Options.    (line  72)
 * g N:                                   Graphics Options.    (line  22)
 * g n:                                   Graphics Options.    (line  48)
 * g O:                                   Devices.             (line  45)
-* g p:                                   Managing Curves.     (line  94)
-* g P:                                   Managing Curves.     (line 124)
-* g q:                                   Devices.             (line 143)
+* g p:                                   Managing Curves.     (line  93)
+* g P:                                   Managing Curves.     (line 123)
+* g q:                                   Devices.             (line 142)
 * g r:                                   Graphics Options.    (line  63)
 * g R:                                   Graphics Options.    (line  63)
 * g s:                                   Graphics Options.    (line  87)
@@ -30320,13 +30327,13 @@ Index of Key Sequences
 * H:                                     Inverse and Hyperbolic.
                                                               (line  12)
 * h (HMS forms):                         HMS Forms.           (line  13)
-* H a /:                                 Polynomials.         (line 140)
+* H a /:                                 Polynomials.         (line 139)
 * H a d:                                 Differentiation.     (line   6)
-* H a f:                                 Polynomials.         (line  57)
+* H a f:                                 Polynomials.         (line  56)
 * H a F:                                 Error Estimates for Fits.
                                                               (line   6)
 * H a M:                                 Algebraic Manipulation.
-                                                              (line  99)
+                                                              (line  98)
 * H a N:                                 Minimization.        (line   6)
 * H a p:                                 Interpolation.       (line  35)
 * H a R:                                 Root Finding.        (line  52)
@@ -30410,7 +30417,7 @@ Index of Key Sequences
 * H k e:                                 Combinatorial Functions.
                                                               (line  61)
 * H k s:                                 Combinatorial Functions.
-                                                              (line  66)
+                                                              (line  65)
 * H L:                                   Logarithmic Functions.
                                                               (line  16)
 * h n:                                   Help Commands.       (line  80)
@@ -30463,7 +30470,7 @@ Index of Key Sequences
 * I a F:                                 Error Estimates for Fits.
                                                               (line  49)
 * I a M:                                 Algebraic Manipulation.
-                                                              (line 105)
+                                                              (line 104)
 * I a m:                                 Matching Commands.   (line  26)
 * I a s:                                 Simplifying Formulas.
                                                               (line   6)
@@ -30492,19 +30499,19 @@ Index of Key Sequences
 * I f G:                                 Advanced Math Functions.
                                                               (line  25)
 * I k B:                                 Probability Distribution Functions.
-                                                              (line  23)
+                                                              (line  22)
 * I k C:                                 Probability Distribution Functions.
-                                                              (line  41)
+                                                              (line  40)
 * I k F:                                 Probability Distribution Functions.
-                                                              (line  45)
+                                                              (line  44)
 * I k n:                                 Combinatorial Functions.
-                                                              (line 117)
+                                                              (line 116)
 * I k N:                                 Probability Distribution Functions.
-                                                              (line  50)
+                                                              (line  49)
 * I k P:                                 Probability Distribution Functions.
-                                                              (line  54)
+                                                              (line  53)
 * I k T:                                 Probability Distribution Functions.
-                                                              (line  58)
+                                                              (line  57)
 * I L:                                   Logarithmic Functions.
                                                               (line  11)
 * I M:                                   Recursion Depth.     (line   6)
@@ -30539,7 +30546,7 @@ Index of Key Sequences
                                                               (line  37)
 * I v U:                                 Reducing.            (line  27)
 * I V U:                                 Reducing.            (line  27)
-* I ^:                                   Basic Arithmetic.    (line 136)
+* I ^:                                   Basic Arithmetic.    (line 135)
 * I |:                                   Building Vectors.    (line  28)
 * J:                                     Complex Number Functions.
                                                               (line   6)
@@ -30559,9 +30566,9 @@ Index of Key Sequences
                                                               (line 116)
 * j 1-9:                                 Changing Selections. (line  35)
 * j ?:                                   Help Commands.       (line   6)
-* j a:                                   Making Selections.   (line  71)
-* j b:                                   Making Selections.   (line 101)
-* j c:                                   Making Selections.   (line 122)
+* j a:                                   Making Selections.   (line  70)
+* j b:                                   Making Selections.   (line 100)
+* j c:                                   Making Selections.   (line 121)
 * j C:                                   Rearranging with Selections.
                                                               (line  74)
 * j d:                                   Displaying Selections.
@@ -30582,12 +30589,12 @@ Index of Key Sequences
 * j m:                                   Changing Selections. (line   6)
 * j M:                                   Rearranging with Selections.
                                                               (line  68)
-* j n:                                   Changing Selections. (line  50)
+* j n:                                   Changing Selections. (line  49)
 * j N:                                   Rearranging with Selections.
                                                               (line  90)
-* j o:                                   Making Selections.   (line  78)
-* j O:                                   Making Selections.   (line  88)
-* j p:                                   Changing Selections. (line  50)
+* j o:                                   Making Selections.   (line  77)
+* j O:                                   Making Selections.   (line  87)
+* j p:                                   Changing Selections. (line  49)
 * j R:                                   Rearranging with Selections.
                                                               (line   6)
 * j r:                                   Selections with Rewrite Rules.
@@ -30595,8 +30602,8 @@ Index of Key Sequences
 * j RET:                                 Operating on Selections.
                                                               (line  82)
 * j s:                                   Making Selections.   (line   6)
-* j S:                                   Making Selections.   (line  88)
-* j u:                                   Making Selections.   (line 117)
+* j S:                                   Making Selections.   (line  87)
+* j u:                                   Making Selections.   (line 116)
 * j U:                                   Rearranging with Selections.
                                                               (line 166)
 * j v:                                   Rearranging with Selections.
@@ -30609,11 +30616,11 @@ Index of Key Sequences
 * k b:                                   Combinatorial Functions.
                                                               (line  53)
 * k B:                                   Probability Distribution Functions.
-                                                              (line  23)
+                                                              (line  22)
 * k c:                                   Combinatorial Functions.
                                                               (line  43)
 * k C:                                   Probability Distribution Functions.
-                                                              (line  41)
+                                                              (line  40)
 * k d:                                   Combinatorial Functions.
                                                               (line  35)
 * k E:                                   Combinatorial Functions.
@@ -30621,31 +30628,31 @@ Index of Key Sequences
 * k e:                                   Combinatorial Functions.
                                                               (line  61)
 * k f:                                   Combinatorial Functions.
-                                                              (line  95)
+                                                              (line  94)
 * k F:                                   Probability Distribution Functions.
-                                                              (line  45)
+                                                              (line  44)
 * k g:                                   Combinatorial Functions.
                                                               (line   9)
 * k h:                                   Random Numbers.      (line  64)
 * k l:                                   Combinatorial Functions.
                                                               (line  16)
 * k m:                                   Combinatorial Functions.
-                                                              (line 124)
+                                                              (line 123)
 * k n:                                   Combinatorial Functions.
-                                                              (line 105)
+                                                              (line 104)
 * k N:                                   Probability Distribution Functions.
-                                                              (line  50)
+                                                              (line  49)
 * k p:                                   Combinatorial Functions.
-                                                              (line  73)
+                                                              (line  72)
 * k P:                                   Probability Distribution Functions.
-                                                              (line  54)
+                                                              (line  53)
 * k r:                                   Random Numbers.      (line   6)
 * k s:                                   Combinatorial Functions.
-                                                              (line  66)
+                                                              (line  65)
 * k t:                                   Combinatorial Functions.
-                                                              (line 120)
+                                                              (line 119)
 * k T:                                   Probability Distribution Functions.
-                                                              (line  58)
+                                                              (line  57)
 * L:                                     Logarithmic Functions.
                                                               (line   6)
 * l *:                                   Logarithmic Units.   (line  71)
@@ -30718,7 +30725,7 @@ Index of Key Sequences
 * M-w:                                   Killing From Stack.  (line   6)
 * M-x:                                   Basic Commands.      (line  23)
 * N:                                     Symbolic Mode.       (line  17)
-* n:                                     Basic Arithmetic.    (line 162)
+* n:                                     Basic Arithmetic.    (line 161)
 * o:                                     Stack Basics.        (line  30)
 * O:                                     Inverse and Hyperbolic.
                                                               (line  23)
@@ -30728,7 +30735,7 @@ Index of Key Sequences
                                                               (line  12)
 * p (error forms):                       Error Forms.         (line  47)
 * q:                                     Basic Commands.      (line  77)
-* Q:                                     Basic Arithmetic.    (line 189)
+* Q:                                     Basic Arithmetic.    (line 188)
 * R:                                     Integer Truncation.  (line  23)
 * r 0-9:                                 Recalling Variables. (line  18)
 * r ?:                                   Help Commands.       (line   6)
@@ -30753,7 +30760,7 @@ Index of Key Sequences
 * s ?:                                   Help Commands.       (line   6)
 * s A:                                   Operations on Variables.
                                                               (line  25)
-* s c:                                   Storing Variables.   (line 115)
+* s c:                                   Storing Variables.   (line 114)
 * s d:                                   Declaration Basics.  (line   6)
 * s D:                                   Operations on Variables.
                                                               (line  25)
@@ -30771,11 +30778,11 @@ Index of Key Sequences
                                                               (line  25)
 * s i:                                   Operations on Variables.
                                                               (line  75)
-* s k:                                   Storing Variables.   (line 137)
+* s k:                                   Storing Variables.   (line 136)
 * s L:                                   Operations on Variables.
                                                               (line  25)
 * s l:                                   Let Command.         (line   6)
-* s m:                                   Storing Variables.   (line  84)
+* s m:                                   Storing Variables.   (line  83)
 * s n:                                   Storing Variables.   (line  40)
 * s P:                                   Operations on Variables.
                                                               (line  25)
@@ -30788,10 +30795,10 @@ Index of Key Sequences
 * s t:                                   Storing Variables.   (line  12)
 * s T:                                   Operations on Variables.
                                                               (line  25)
-* s u:                                   Storing Variables.   (line 110)
+* s u:                                   Storing Variables.   (line 109)
 * s U:                                   Operations on Variables.
                                                               (line  25)
-* s x:                                   Storing Variables.   (line 102)
+* s x:                                   Storing Variables.   (line 101)
 * s X:                                   Operations on Variables.
                                                               (line  25)
 * s [:                                   Storing Variables.   (line  40)
@@ -30845,18 +30852,18 @@ Index of Key Sequences
 * u 0-9:                                 User-Defined Units.  (line   9)
 * u ?:                                   Help Commands.       (line   6)
 * u a:                                   Basic Operations on Units.
-                                                              (line 145)
+                                                              (line 144)
 * u b:                                   Basic Operations on Units.
-                                                              (line 130)
+                                                              (line 129)
 * u C:                                   Paired-Sample Statistics.
                                                               (line  13)
 * u c:                                   Basic Operations on Units.
                                                               (line  49)
 * u d:                                   User-Defined Units.  (line  27)
-* u e:                                   The Units Table.     (line  46)
+* u e:                                   The Units Table.     (line  45)
 * u G:                                   Single-Variable Statistics.
                                                               (line 102)
-* u g:                                   The Units Table.     (line  36)
+* u g:                                   The Units Table.     (line  35)
 * u M:                                   Single-Variable Statistics.
                                                               (line  55)
 * u N:                                   Single-Variable Statistics.
@@ -30867,7 +30874,7 @@ Index of Key Sequences
 * u R:                                   Single-Variable Statistics.
                                                               (line 112)
 * u r:                                   Basic Operations on Units.
-                                                              (line 138)
+                                                              (line 137)
 * u S:                                   Single-Variable Statistics.
                                                               (line 116)
 * u s:                                   Basic Operations on Units.
@@ -30880,9 +30887,9 @@ Index of Key Sequences
 * u X:                                   Single-Variable Statistics.
                                                               (line  48)
 * u x:                                   Basic Operations on Units.
-                                                              (line 138)
-* v #:                                   Set Operations.      (line  96)
-* V #:                                   Set Operations.      (line  96)
+                                                              (line 137)
+* v #:                                   Set Operations.      (line  95)
+* V #:                                   Set Operations.      (line  95)
 * v (:                                   Vector and Matrix Formats.
                                                               (line  17)
 * V (:                                   Vector and Matrix Formats.
@@ -31036,9 +31043,9 @@ Index of Key Sequences
 * V T:                                   Vector and Matrix Arithmetic.
                                                               (line  62)
 * v u:                                   Packing and Unpacking.
-                                                              (line 125)
+                                                              (line 124)
 * V u:                                   Packing and Unpacking.
-                                                              (line 125)
+                                                              (line 124)
 * v U:                                   Reducing.            (line  21)
 * V U:                                   Reducing.            (line  21)
 * v u (complex):                         Complex Number Functions.
@@ -31141,21 +31148,21 @@ has been provided as a variant of ‘M-x’ which automatically types
 * another-calc:                          Multiple Calculators.
                                                               (line   6)
 * calc:                                  Basic Commands.      (line   6)
-* calc-abs:                              Basic Arithmetic.    (line 166)
+* calc-abs:                              Basic Arithmetic.    (line 165)
 * calc-abs (vectors):                    Vector and Matrix Arithmetic.
                                                               (line  19)
-* calc-abssqr:                           Basic Arithmetic.    (line 176)
+* calc-abssqr:                           Basic Arithmetic.    (line 175)
 * calc-alg-evaluate:                     Algebraic Manipulation.
                                                               (line  15)
 * calc-alg-simplify-mode:                Simplification Modes.
                                                               (line  50)
 * calc-algebraic-entry:                  Algebraic Entry.     (line   6)
 * calc-algebraic-mode:                   Algebraic Entry.     (line  28)
-* calc-alt-summation:                    Summations.          (line 105)
+* calc-alt-summation:                    Summations.          (line 104)
 * calc-always-load-extensions:           General Mode Commands.
                                                               (line  47)
 * calc-and:                              Binary Functions.    (line  59)
-* calc-apart:                            Polynomials.         (line 106)
+* calc-apart:                            Polynomials.         (line 105)
 * calc-append-to-register:               Saving Into Registers.
                                                               (line   6)
 * calc-apply:                            Reducing and Mapping.
@@ -31186,17 +31193,17 @@ has been provided as a variant of ‘M-x’ which automatically types
                                                               (line  41)
 * calc-auto-why:                         Error Messages.      (line  20)
 * calc-autorange-units:                  Basic Operations on Units.
-                                                              (line 145)
+                                                              (line 144)
 * calc-base-units:                       Basic Operations on Units.
-                                                              (line 130)
+                                                              (line 129)
 * calc-basic-simplify-mode:              Simplification Modes.
                                                               (line  38)
 * calc-bernoulli-number:                 Combinatorial Functions.
                                                               (line  53)
 * calc-bessel-J:                         Advanced Math Functions.
-                                                              (line  58)
+                                                              (line  59)
 * calc-bessel-Y:                         Advanced Math Functions.
-                                                              (line  58)
+                                                              (line  59)
 * calc-beta:                             Advanced Math Functions.
                                                               (line  42)
 * calc-big-language:                     Normal Language Modes.
@@ -31204,7 +31211,7 @@ has been provided as a variant of ‘M-x’ which automatically types
 * calc-bin-simplify-mode:                Simplification Modes.
                                                               (line  43)
 * calc-break:                            Loops in Macros.     (line  26)
-* calc-break-selections:                 Making Selections.   (line 101)
+* calc-break-selections:                 Making Selections.   (line 100)
 * calc-break-vectors:                    Vector and Matrix Formats.
                                                               (line  86)
 * calc-build-vector:                     Building Vectors.    (line  80)
@@ -31213,16 +31220,16 @@ has been provided as a variant of ‘M-x’ which automatically types
 * calc-c-language:                       C FORTRAN Pascal.    (line   6)
 * calc-ceiling:                          Integer Truncation.  (line  19)
 * calc-center-justify:                   Justification.       (line   6)
-* calc-change-sign:                      Basic Arithmetic.    (line 162)
+* calc-change-sign:                      Basic Arithmetic.    (line 161)
 * calc-choose:                           Combinatorial Functions.
                                                               (line  43)
 * calc-clean:                            Conversions.         (line  81)
 * calc-clean-num:                        Conversions.         (line 101)
-* calc-clear-selections:                 Making Selections.   (line 122)
+* calc-clear-selections:                 Making Selections.   (line 121)
 * calc-clip:                             Binary Functions.    (line  28)
 * calc-cnorm:                            Vector and Matrix Arithmetic.
                                                               (line  31)
-* calc-collect:                          Polynomials.         (line  69)
+* calc-collect:                          Polynomials.         (line  68)
 * calc-commute-left:                     Rearranging with Selections.
                                                               (line  32)
 * calc-commute-right:                    Rearranging with Selections.
@@ -31244,12 +31251,12 @@ has been provided as a variant of ‘M-x’ which automatically types
                                                               (line  49)
 * calc-copy-as-kill:                     Killing From Stack.  (line   6)
 * calc-copy-region-as-kill:              Killing From Stack.  (line   6)
-* calc-copy-special-constant:            Storing Variables.   (line 137)
+* calc-copy-special-constant:            Storing Variables.   (line 136)
 * calc-copy-to-buffer:                   Yanking Into Buffers.
                                                               (line   6)
 * calc-copy-to-register:                 Saving Into Registers.
                                                               (line   6)
-* calc-copy-variable:                    Storing Variables.   (line 115)
+* calc-copy-variable:                    Storing Variables.   (line 114)
 * calc-cos:                              Trigonometric and Hyperbolic Functions.
                                                               (line  43)
 * calc-cosh:                             Trigonometric and Hyperbolic Functions.
@@ -31270,7 +31277,7 @@ has been provided as a variant of ‘M-x’ which automatically types
 * calc-date-part:                        Date Functions.      (line  11)
 * calc-db:                               Logarithmic Units.   (line  63)
 * calc-declare-variable:                 Declaration Basics.  (line   6)
-* calc-decrement:                        Basic Arithmetic.    (line 228)
+* calc-decrement:                        Basic Arithmetic.    (line 227)
 * calc-define-unit:                      User-Defined Units.  (line  27)
 * calc-degrees-mode:                     Angular Modes.       (line  20)
 * calc-del-selection:                    Operating on Selections.
@@ -31283,7 +31290,7 @@ has been provided as a variant of ‘M-x’ which automatically types
 * calc-diag:                             Building Vectors.    (line  32)
 * calc-diff:                             Binary Functions.    (line  73)
 * calc-display-strings:                  Strings.             (line  25)
-* calc-divide:                           Basic Arithmetic.    (line  90)
+* calc-divide:                           Basic Arithmetic.    (line  89)
 * calc-dots:                             Incomplete Objects.  (line  32)
 * calc-double-factorial:                 Combinatorial Functions.
                                                               (line  35)
@@ -31324,7 +31331,7 @@ has been provided as a variant of ‘M-x’ which automatically types
                                                               (line  43)
 * calc-enter-units-table:                The Units Table.     (line   6)
 * calc-eqn-language:                     Eqn Language Mode.   (line   6)
-* calc-equal-to:                         Logical Operations.  (line  22)
+* calc-equal-to:                         Logical Operations.  (line  20)
 * calc-erf:                              Advanced Math Functions.
                                                               (line  53)
 * calc-euler-number:                     Combinatorial Functions.
@@ -31336,12 +31343,12 @@ has been provided as a variant of ‘M-x’ which automatically types
 * calc-execute-extended-command:         Basic Commands.      (line  23)
 * calc-exp:                              Logarithmic Functions.
                                                               (line  11)
-* calc-expand:                           Polynomials.         (line  84)
+* calc-expand:                           Polynomials.         (line  83)
 * calc-expand-formula:                   Algebraic Manipulation.
                                                               (line  59)
 * calc-expand-vector:                    Manipulating Vectors.
                                                               (line 125)
-* calc-explain-units:                    The Units Table.     (line  46)
+* calc-explain-units:                    The Units Table.     (line  45)
 * calc-expm1:                            Logarithmic Functions.
                                                               (line  37)
 * calc-ext-simplify-mode:                Simplification Modes.
@@ -31349,11 +31356,11 @@ has been provided as a variant of ‘M-x’ which automatically types
 * calc-extended-gcd:                     Combinatorial Functions.
                                                               (line  21)
 * calc-extract-units:                    Basic Operations on Units.
-                                                              (line 138)
+                                                              (line 137)
 * calc-factor:                           Polynomials.         (line  13)
 * calc-factorial:                        Combinatorial Functions.
                                                               (line  25)
-* calc-fdiv:                             Basic Arithmetic.    (line 154)
+* calc-fdiv:                             Basic Arithmetic.    (line 153)
 * calc-fin-ddb:                          Depreciation Functions.
                                                               (line  29)
 * calc-fin-fv:                           Future Value.        (line   6)
@@ -31395,7 +31402,7 @@ has been provided as a variant of ‘M-x’ which automatically types
 * calc-gcd:                              Combinatorial Functions.
                                                               (line   9)
 * calc-get-modes:                        Modes Variable.      (line   6)
-* calc-get-unit-definition:              The Units Table.     (line  36)
+* calc-get-unit-definition:              The Units Table.     (line  35)
 * calc-get-user-defn:                    Algebraic Definitions.
                                                               (line  73)
 * calc-giac-language:                    Giac Language Mode.  (line   6)
@@ -31406,9 +31413,9 @@ has been provided as a variant of ‘M-x’ which automatically types
 * calc-grab-selection:                   Operating on Selections.
                                                               (line  82)
 * calc-grab-sum-across:                  Grabbing From Buffers.
-                                                              (line  77)
+                                                              (line  76)
 * calc-grab-sum-down:                    Grabbing From Buffers.
-                                                              (line  77)
+                                                              (line  76)
 * calc-grade:                            Manipulating Vectors.
                                                               (line  51)
 * calc-graph-add:                        Managing Curves.     (line  10)
@@ -31428,7 +31435,7 @@ has been provided as a variant of ‘M-x’ which automatically types
 * calc-graph-hide:                       Managing Curves.     (line  82)
 * calc-graph-juggle:                     Managing Curves.     (line  87)
 * calc-graph-key:                        Graphics Options.    (line  17)
-* calc-graph-kill:                       Devices.             (line 150)
+* calc-graph-kill:                       Devices.             (line 149)
 * calc-graph-line-style:                 Graphics Options.    (line  87)
 * calc-graph-log-x:                      Graphics Options.    (line  72)
 * calc-graph-log-y:                      Graphics Options.    (line  72)
@@ -31436,10 +31443,10 @@ has been provided as a variant of ‘M-x’ which automatically types
 * calc-graph-name:                       Graphics Options.    (line  48)
 * calc-graph-num-points:                 Graphics Options.    (line  22)
 * calc-graph-output:                     Devices.             (line  45)
-* calc-graph-plot:                       Managing Curves.     (line  94)
+* calc-graph-plot:                       Managing Curves.     (line  93)
 * calc-graph-point-style:                Graphics Options.    (line  96)
-* calc-graph-print:                      Managing Curves.     (line 124)
-* calc-graph-quit:                       Devices.             (line 143)
+* calc-graph-print:                      Managing Curves.     (line 123)
+* calc-graph-quit:                       Devices.             (line 142)
 * calc-graph-range-x:                    Graphics Options.    (line  63)
 * calc-graph-range-y:                    Graphics Options.    (line  63)
 * calc-graph-range-z:                    Graphics Options.    (line  76)
@@ -31450,8 +31457,8 @@ has been provided as a variant of ‘M-x’ which automatically types
 * calc-graph-view-trail:                 Devices.             (line 117)
 * calc-graph-zero-x:                     Graphics Options.    (line  80)
 * calc-graph-zero-y:                     Graphics Options.    (line  80)
-* calc-greater-equal:                    Logical Operations.  (line  52)
-* calc-greater-than:                     Logical Operations.  (line  52)
+* calc-greater-equal:                    Logical Operations.  (line  50)
+* calc-greater-than:                     Logical Operations.  (line  50)
 * calc-group-char:                       Grouping Digits.     (line  20)
 * calc-group-digits:                     Grouping Digits.     (line   6)
 * calc-head:                             Building Vectors.    (line  87)
@@ -31462,23 +31469,23 @@ has been provided as a variant of ‘M-x’ which automatically types
 * calc-hms-notation:                     HMS Formats.         (line   6)
 * calc-hyperbolic:                       Inverse and Hyperbolic.
                                                               (line  12)
-* calc-hypot:                            Basic Arithmetic.    (line 193)
+* calc-hypot:                            Basic Arithmetic.    (line 192)
 * calc-i-notation:                       Complex Formats.     (line  11)
 * calc-ident:                            Building Vectors.    (line  45)
-* calc-idiv:                             Basic Arithmetic.    (line 140)
+* calc-idiv:                             Basic Arithmetic.    (line 139)
 * calc-ilog:                             Logarithmic Functions.
                                                               (line  29)
 * calc-im:                               Complex Number Functions.
                                                               (line  28)
 * calc-imaginary:                        Complex Number Functions.
                                                               (line  19)
-* calc-in-set:                           Logical Operations.  (line 111)
+* calc-in-set:                           Logical Operations.  (line 108)
 * calc-inc-beta:                         Advanced Math Functions.
                                                               (line  47)
 * calc-inc-gamma:                        Advanced Math Functions.
                                                               (line  25)
 * calc-inc-month:                        Date Functions.      (line  96)
-* calc-increment:                        Basic Arithmetic.    (line 228)
+* calc-increment:                        Basic Arithmetic.    (line 227)
 * calc-index:                            Building Vectors.    (line  61)
 * calc-infinite-mode:                    Infinite Mode.       (line  10)
 * calc-info:                             Help Commands.       (line  20)
@@ -31490,12 +31497,12 @@ has been provided as a variant of ‘M-x’ which automatically types
 * calc-insert-variables:                 Operations on Variables.
                                                               (line  75)
 * calc-integral:                         Integration.         (line   6)
-* calc-inv:                              Basic Arithmetic.    (line 185)
+* calc-inv:                              Basic Arithmetic.    (line 184)
 * calc-inv (matrices):                   Vector and Matrix Arithmetic.
                                                               (line  42)
 * calc-inverse:                          Inverse and Hyperbolic.
                                                               (line   6)
-* calc-isqrt:                            Basic Arithmetic.    (line 198)
+* calc-isqrt:                            Basic Arithmetic.    (line 197)
 * calc-j-notation:                       Complex Formats.     (line  11)
 * calc-julian:                           Date Conversions.    (line  35)
 * calc-kbd-else:                         Conditionals in Macros.
@@ -31531,9 +31538,9 @@ has been provided as a variant of ‘M-x’ which automatically types
 * calc-leading-zeros:                    Radix Modes.         (line  23)
 * calc-left-justify:                     Justification.       (line   6)
 * calc-left-label:                       Labels.              (line   6)
-* calc-less-equal:                       Logical Operations.  (line  52)
+* calc-less-equal:                       Logical Operations.  (line  50)
 * calc-less-recursion-depth:             Recursion Depth.     (line   6)
-* calc-less-than:                        Logical Operations.  (line  52)
+* calc-less-than:                        Logical Operations.  (line  50)
 * calc-let:                              Let Command.         (line   6)
 * calc-line-breaking:                    Normal Language Modes.
                                                               (line  16)
@@ -31548,20 +31555,20 @@ has been provided as a variant of ‘M-x’ which automatically types
                                                               (line  22)
 * calc-log10:                            Logarithmic Functions.
                                                               (line  16)
-* calc-logical-and:                      Logical Operations.  (line  77)
-* calc-logical-if:                       Logical Operations.  (line  92)
-* calc-logical-not:                      Logical Operations.  (line  88)
-* calc-logical-or:                       Logical Operations.  (line  83)
+* calc-logical-and:                      Logical Operations.  (line  74)
+* calc-logical-if:                       Logical Operations.  (line  89)
+* calc-logical-not:                      Logical Operations.  (line  85)
+* calc-logical-or:                       Logical Operations.  (line  80)
 * calc-lshift-arith:                     Binary Functions.    (line  98)
 * calc-lshift-binary:                    Binary Functions.    (line  80)
 * calc-ltpt:                             Probability Distribution Functions.
-                                                              (line  58)
+                                                              (line  57)
 * calc-lu-divide:                        Logarithmic Units.   (line  71)
 * calc-lu-minus:                         Logarithmic Units.   (line  71)
 * calc-lu-plus:                          Logarithmic Units.   (line  71)
 * calc-lu-quant:                         Logarithmic Units.   (line  53)
 * calc-lu-times:                         Logarithmic Units.   (line  71)
-* calc-mant-part:                        Basic Arithmetic.    (line 211)
+* calc-mant-part:                        Basic Arithmetic.    (line 210)
 * calc-map:                              Mapping.             (line   6)
 * calc-map-equation:                     Algebraic Manipulation.
                                                               (line  73)
@@ -31580,23 +31587,23 @@ has been provided as a variant of ‘M-x’ which automatically types
 * calc-matrix-mode:                      Matrix Mode.         (line  11)
 * calc-matrix-right-justify:             Vector and Matrix Formats.
                                                               (line  12)
-* calc-max:                              Basic Arithmetic.    (line 205)
+* calc-max:                              Basic Arithmetic.    (line 204)
 * calc-maxima-language:                  Maxima Language Mode.
                                                               (line   6)
 * calc-mcol:                             Extracting Elements. (line  43)
 * calc-mdet:                             Vector and Matrix Arithmetic.
                                                               (line  52)
 * calc-midi:                             Musical Notes.       (line  29)
-* calc-min:                              Basic Arithmetic.    (line 205)
-* calc-minus:                            Basic Arithmetic.    (line  66)
+* calc-min:                              Basic Arithmetic.    (line 204)
+* calc-minus:                            Basic Arithmetic.    (line  65)
 * calc-mlud:                             Vector and Matrix Arithmetic.
                                                               (line  55)
-* calc-mod:                              Basic Arithmetic.    (line 147)
+* calc-mod:                              Basic Arithmetic.    (line 146)
 * calc-mode:                             Basic Commands.      (line   6)
 * calc-mode-record-mode:                 General Mode Commands.
                                                               (line  17)
 * calc-moebius:                          Combinatorial Functions.
-                                                              (line 124)
+                                                              (line 123)
 * calc-more-recursion-depth:             Recursion Depth.     (line   6)
 * calc-mrow:                             Extracting Elements. (line   6)
 * calc-mtrace:                           Vector and Matrix Arithmetic.
@@ -31605,15 +31612,15 @@ has been provided as a variant of ‘M-x’ which automatically types
 * calc-new-week:                         Date Functions.      (line  68)
 * calc-new-year:                         Date Functions.      (line  59)
 * calc-next-prime:                       Combinatorial Functions.
-                                                              (line 105)
+                                                              (line 104)
 * calc-no-simplify-mode:                 Simplification Modes.
                                                               (line  21)
 * calc-normal-language:                  Normal Language Modes.
                                                               (line   6)
 * calc-normal-notation:                  Float Formats.       (line  12)
-* calc-normalize-rat:                    Polynomials.         (line 113)
+* calc-normalize-rat:                    Polynomials.         (line 112)
 * calc-not:                              Binary Functions.    (line  77)
-* calc-not-equal-to:                     Logical Operations.  (line  47)
+* calc-not-equal-to:                     Logical Operations.  (line  45)
 * calc-now:                              Date Functions.      (line   6)
 * calc-np:                               Logarithmic Units.   (line  63)
 * calc-num-integral:                     Numerical Integration.
@@ -31633,7 +31640,7 @@ has been provided as a variant of ‘M-x’ which automatically types
                                                               (line  32)
 * calc-pack <1>:                         Packing and Unpacking.
                                                               (line  11)
-* calc-pack-bits:                        Set Operations.      (line 111)
+* calc-pack-bits:                        Set Operations.      (line 110)
 * calc-pascal-language:                  C FORTRAN Pascal.    (line  30)
 * calc-percent:                          Percentages.         (line   6)
 * calc-percent-change:                   Percentages.         (line  43)
@@ -31648,25 +31655,25 @@ has been provided as a variant of ‘M-x’ which automatically types
 * calc-point-char:                       Float Formats.       (line  49)
 * calc-polar:                            Conversions.         (line  73)
 * calc-polar-mode:                       Polar Mode.          (line  12)
-* calc-poly-div:                         Polynomials.         (line 120)
-* calc-poly-div-rem:                     Polynomials.         (line 140)
-* calc-poly-gcd:                         Polynomials.         (line 146)
+* calc-poly-div:                         Polynomials.         (line 119)
+* calc-poly-div-rem:                     Polynomials.         (line 139)
+* calc-poly-gcd:                         Polynomials.         (line 145)
 * calc-poly-interp:                      Interpolation.       (line   6)
-* calc-poly-rem:                         Polynomials.         (line 134)
+* calc-poly-rem:                         Polynomials.         (line 133)
 * calc-poly-roots:                       Multiple Solutions.  (line  62)
 * calc-pop:                              Stack Manipulation.  (line  23)
 * calc-pop-above:                        Stack Manipulation.  (line  33)
-* calc-power:                            Basic Arithmetic.    (line 129)
+* calc-power:                            Basic Arithmetic.    (line 128)
 * calc-precision:                        Precision.           (line   6)
 * calc-prepend-to-register:              Saving Into Registers.
                                                               (line   6)
 * calc-prev-prime:                       Combinatorial Functions.
-                                                              (line 117)
+                                                              (line 116)
 * calc-prime-factors:                    Combinatorial Functions.
-                                                              (line  95)
+                                                              (line  94)
 * calc-prime-test:                       Combinatorial Functions.
-                                                              (line  73)
-* calc-product:                          Summations.          (line 117)
+                                                              (line  72)
+* calc-product:                          Summations.          (line 116)
 * calc-quick-units:                      User-Defined Units.  (line   9)
 * calc-quit:                             Basic Commands.      (line  77)
 * calc-radians-mode:                     Angular Modes.       (line  20)
@@ -31682,9 +31689,9 @@ has been provided as a variant of ‘M-x’ which automatically types
 * calc-refresh:                          Basic Commands.      (line  88)
 * calc-refresh-top:                      Display Modes.       (line  19)
 * calc-remove-duplicates:                Set Operations.      (line  34)
-* calc-remove-equal:                     Logical Operations.  (line  67)
+* calc-remove-equal:                     Logical Operations.  (line  64)
 * calc-remove-units:                     Basic Operations on Units.
-                                                              (line 138)
+                                                              (line 137)
 * calc-reset:                            Basic Commands.      (line 105)
 * calc-reverse-vector:                   Manipulating Vectors.
                                                               (line 112)
@@ -31704,7 +31711,7 @@ has been provided as a variant of ‘M-x’ which automatically types
 * calc-rshift-binary:                    Binary Functions.    (line  94)
 * calc-save-modes:                       General Mode Commands.
                                                               (line   6)
-* calc-scale-float:                      Basic Arithmetic.    (line 222)
+* calc-scale-float:                      Basic Arithmetic.    (line 221)
 * calc-sci-notation:                     Float Formats.       (line  27)
 * calc-scroll-down:                      Basic Commands.      (line 101)
 * calc-scroll-left:                      Basic Commands.      (line  95)
@@ -31742,17 +31749,17 @@ has been provided as a variant of ‘M-x’ which automatically types
                                                               (line 160)
 * calc-sel-unpack:                       Rearranging with Selections.
                                                               (line 166)
-* calc-select-additional:                Making Selections.   (line  71)
+* calc-select-additional:                Making Selections.   (line  70)
 * calc-select-here:                      Making Selections.   (line   6)
-* calc-select-here-maybe:                Making Selections.   (line  88)
+* calc-select-here-maybe:                Making Selections.   (line  87)
 * calc-select-less:                      Changing Selections. (line  29)
 * calc-select-more:                      Changing Selections. (line   6)
-* calc-select-next:                      Changing Selections. (line  50)
-* calc-select-once:                      Making Selections.   (line  78)
-* calc-select-once-maybe:                Making Selections.   (line  88)
+* calc-select-next:                      Changing Selections. (line  49)
+* calc-select-once:                      Making Selections.   (line  77)
+* calc-select-once-maybe:                Making Selections.   (line  87)
 * calc-select-part:                      Changing Selections. (line  35)
-* calc-select-previous:                  Changing Selections. (line  50)
-* calc-set-cardinality:                  Set Operations.      (line  96)
+* calc-select-previous:                  Changing Selections. (line  49)
+* calc-set-cardinality:                  Set Operations.      (line  95)
 * calc-set-complement:                   Set Operations.      (line  70)
 * calc-set-difference:                   Set Operations.      (line  55)
 * calc-set-enumerate:                    Set Operations.      (line  84)
@@ -31770,7 +31777,7 @@ has been provided as a variant of ‘M-x’ which automatically types
 * calc-show-selections:                  Displaying Selections.
                                                               (line   6)
 * calc-shuffle:                          Random Numbers.      (line  64)
-* calc-sign:                             Basic Arithmetic.    (line 179)
+* calc-sign:                             Basic Arithmetic.    (line 178)
 * calc-simplify:                         Simplifying Formulas.
                                                               (line   6)
 * calc-simplify-extended:                Unsafe Simplifications.
@@ -31787,9 +31794,9 @@ has been provided as a variant of ‘M-x’ which automatically types
 * calc-sort:                             Manipulating Vectors.
                                                               (line  37)
 * calc-spn:                              Musical Notes.       (line  25)
-* calc-sqrt:                             Basic Arithmetic.    (line 189)
+* calc-sqrt:                             Basic Arithmetic.    (line 188)
 * calc-stirling-number:                  Combinatorial Functions.
-                                                              (line  66)
+                                                              (line  65)
 * calc-store:                            Storing Variables.   (line   6)
 * calc-store-AlgSimpRules:               Operations on Variables.
                                                               (line  25)
@@ -31800,7 +31807,7 @@ has been provided as a variant of ‘M-x’ which automatically types
 * calc-store-div:                        Storing Variables.   (line  40)
 * calc-store-EvalRules:                  Operations on Variables.
                                                               (line  25)
-* calc-store-exchange:                   Storing Variables.   (line 102)
+* calc-store-exchange:                   Storing Variables.   (line 101)
 * calc-store-ExtSimpRules:               Operations on Variables.
                                                               (line  25)
 * calc-store-FitRules:                   Operations on Variables.
@@ -31816,7 +31823,7 @@ has been provided as a variant of ‘M-x’ which automatically types
 * calc-store-inv:                        Storing Variables.   (line  40)
 * calc-store-LineStyles:                 Operations on Variables.
                                                               (line  25)
-* calc-store-map:                        Storing Variables.   (line  84)
+* calc-store-map:                        Storing Variables.   (line  83)
 * calc-store-minus:                      Storing Variables.   (line  40)
 * calc-store-neg:                        Storing Variables.   (line  40)
 * calc-store-PlotRejects:                Operations on Variables.
@@ -31832,11 +31839,11 @@ has been provided as a variant of ‘M-x’ which automatically types
                                                               (line  25)
 * calc-subscript:                        Extracting Elements. (line  24)
 * calc-substitute:                       Algebraic Manipulation.
-                                                              (line 110)
+                                                              (line 109)
 * calc-subvector:                        Extracting Elements. (line  55)
 * calc-summation:                        Summations.          (line   6)
 * calc-symbolic-mode:                    Symbolic Mode.       (line  12)
-* calc-tabulate:                         Summations.          (line 123)
+* calc-tabulate:                         Summations.          (line 122)
 * calc-tail:                             Building Vectors.    (line  87)
 * calc-tan:                              Trigonometric and Hyperbolic Functions.
                                                               (line  43)
@@ -31847,14 +31854,14 @@ has been provided as a variant of ‘M-x’ which automatically types
                                                               (line   6)
 * calc-time:                             HMS Forms.           (line  29)
 * calc-time-zone:                        Time Zones.          (line  30)
-* calc-times:                            Basic Arithmetic.    (line  71)
+* calc-times:                            Basic Arithmetic.    (line  70)
 * calc-timing:                           Debugging Calc.      (line  10)
 * calc-to-degrees:                       Conversions.         (line  56)
 * calc-to-hms:                           Conversions.         (line  64)
 * calc-to-radians:                       Conversions.         (line  61)
 * calc-total-algebraic-mode:             Algebraic Entry.     (line  42)
 * calc-totient:                          Combinatorial Functions.
-                                                              (line 120)
+                                                              (line 119)
 * calc-trail-backward:                   Trail Commands.      (line  39)
 * calc-trail-display:                    Trail Commands.      (line   9)
 * calc-trail-first:                      Trail Commands.      (line  46)
@@ -31877,11 +31884,11 @@ has been provided as a variant of ‘M-x’ which automatically types
 * calc-transpose-lines:                  Stack Manipulation.  (line  83)
 * calc-trunc:                            Integer Truncation.  (line  29)
 * calc-truncate-down:                    Truncating the Stack.
-                                                              (line  25)
+                                                              (line  24)
 * calc-truncate-stack:                   Truncating the Stack.
                                                               (line   6)
 * calc-truncate-up:                      Truncating the Stack.
-                                                              (line  25)
+                                                              (line  24)
 * calc-tutorial:                         Help Commands.       (line  29)
 * calc-undefine-unit:                    User-Defined Units.  (line  40)
 * calc-undo:                             Undo.                (line   6)
@@ -31893,10 +31900,10 @@ has been provided as a variant of ‘M-x’ which automatically types
 * calc-unpack:                           Complex Number Functions.
                                                               (line  38)
 * calc-unpack <1>:                       Packing and Unpacking.
-                                                              (line 125)
-* calc-unpack-bits:                      Set Operations.      (line 111)
-* calc-unselect:                         Making Selections.   (line 117)
-* calc-unstore:                          Storing Variables.   (line 110)
+                                                              (line 124)
+* calc-unpack-bits:                      Set Operations.      (line 110)
+* calc-unselect:                         Making Selections.   (line 116)
+* calc-unstore:                          Storing Variables.   (line 109)
 * calc-user-define:                      Creating User Keys.  (line   6)
 * calc-user-define-composition:          User-Defined Compositions.
                                                               (line   6)
@@ -31910,15 +31917,15 @@ has been provided as a variant of ‘M-x’ which automatically types
 * calc-user-invocation:                  Invocation Macros.   (line   6)
 * calc-user-undefine:                    Creating User Keys.  (line  32)
 * calc-utpb:                             Probability Distribution Functions.
-                                                              (line  23)
+                                                              (line  22)
 * calc-utpc:                             Probability Distribution Functions.
-                                                              (line  41)
+                                                              (line  40)
 * calc-utpf:                             Probability Distribution Functions.
-                                                              (line  45)
+                                                              (line  44)
 * calc-utpn:                             Probability Distribution Functions.
-                                                              (line  50)
+                                                              (line  49)
 * calc-utpp:                             Probability Distribution Functions.
-                                                              (line  54)
+                                                              (line  53)
 * calc-vector-braces:                    Vector and Matrix Formats.
                                                               (line  17)
 * calc-vector-brackets:                  Vector and Matrix Formats.
@@ -31970,7 +31977,7 @@ has been provided as a variant of ‘M-x’ which automatically types
 * calc-word-size:                        Binary Functions.    (line  37)
 * calc-working:                          Working Message.     (line  14)
 * calc-xor:                              Binary Functions.    (line  69)
-* calc-xpon-part:                        Basic Arithmetic.    (line 211)
+* calc-xpon-part:                        Basic Arithmetic.    (line 210)
 * calc-yacas-language:                   Yacas Language Mode. (line   6)
 * calc-yank:                             Yanking Into Stack.  (line   6)
 * describe-bindings:                     Help Commands.       (line  77)
@@ -31995,54 +32002,54 @@ expressions.  Their full Lisp names are derived by adding the prefix
 
 * !:                                     Combinatorial Functions.
                                                               (line  25)
-* ! <1>:                                 Logical Operations.  (line  88)
+* ! <1>:                                 Logical Operations.  (line  85)
 * !!:                                    Combinatorial Functions.
                                                               (line  35)
 * !!!:                                   Other Features of Rewrite Rules.
                                                               (line  80)
-* !=:                                    Logical Operations.  (line  47)
-* %:                                     Basic Arithmetic.    (line 147)
+* !=:                                    Logical Operations.  (line  45)
+* %:                                     Basic Arithmetic.    (line 146)
 * % <1>:                                 Percentages.         (line   6)
-* &&:                                    Logical Operations.  (line  77)
+* &&:                                    Logical Operations.  (line  74)
 * &&&:                                   Other Features of Rewrite Rules.
                                                               (line  71)
-* *:                                     Basic Arithmetic.    (line  71)
+* *:                                     Basic Arithmetic.    (line  70)
 * +:                                     Basic Arithmetic.    (line   6)
 * +/-:                                   Error Forms.         (line  47)
-* -:                                     Basic Arithmetic.    (line  66)
-* /:                                     Basic Arithmetic.    (line  90)
-* ::                                     Logical Operations.  (line  92)
+* -:                                     Basic Arithmetic.    (line  65)
+* /:                                     Basic Arithmetic.    (line  89)
+* ::                                     Logical Operations.  (line  89)
 * :::                                    Other Features of Rewrite Rules.
                                                               (line  67)
 * :=:                                    Evaluates-To Operator.
                                                               (line  89)
-* <:                                     Logical Operations.  (line  52)
-* <=:                                    Logical Operations.  (line  52)
-* =:                                     Logical Operations.  (line  22)
-* ==:                                    Logical Operations.  (line  22)
+* <:                                     Logical Operations.  (line  50)
+* <=:                                    Logical Operations.  (line  50)
+* =:                                     Logical Operations.  (line  20)
+* ==:                                    Logical Operations.  (line  20)
 * =>:                                    Evaluates-To Operator.
                                                               (line   6)
-* >:                                     Logical Operations.  (line  52)
-* >=:                                    Logical Operations.  (line  52)
-* ?:                                     Logical Operations.  (line  92)
-* \:                                     Basic Arithmetic.    (line 140)
-* ^:                                     Basic Arithmetic.    (line 129)
+* >:                                     Logical Operations.  (line  50)
+* >=:                                    Logical Operations.  (line  50)
+* ?:                                     Logical Operations.  (line  89)
+* \:                                     Basic Arithmetic.    (line 139)
+* ^:                                     Basic Arithmetic.    (line 128)
 * _:                                     Extracting Elements. (line  24)
 * |:                                     Building Vectors.    (line   9)
-* ||:                                    Logical Operations.  (line  83)
+* ||:                                    Logical Operations.  (line  80)
 * |||:                                   Other Features of Rewrite Rules.
                                                               (line  76)
-* abs:                                   Basic Arithmetic.    (line 166)
+* abs:                                   Basic Arithmetic.    (line 165)
 * abs (vectors):                         Vector and Matrix Arithmetic.
                                                               (line  19)
-* abssqr:                                Basic Arithmetic.    (line 176)
+* abssqr:                                Basic Arithmetic.    (line 175)
 * accum:                                 Reducing.            (line  21)
 * acute:                                 TeX and LaTeX Language Modes.
                                                               (line  95)
 * Acute:                                 TeX and LaTeX Language Modes.
                                                               (line  95)
 * add:                                   Specifying Operators.
-                                                              (line  94)
+                                                              (line  91)
 * afixp:                                 Nesting and Fixed Points.
                                                               (line  22)
 * agmean:                                Single-Variable Statistics.
@@ -32053,7 +32060,7 @@ expressions.  Their full Lisp names are derived by adding the prefix
 * and:                                   Binary Functions.    (line  59)
 * anest:                                 Nesting and Fixed Points.
                                                               (line  13)
-* apart:                                 Polynomials.         (line 106)
+* apart:                                 Polynomials.         (line 105)
 * append:                                Building Vectors.    (line  22)
 * apply:                                 Reducing and Mapping.
                                                               (line   9)
@@ -32083,7 +32090,7 @@ expressions.  Their full Lisp names are derived by adding the prefix
 * ash:                                   Binary Functions.    (line  98)
 * assign:                                Evaluates-To Operator.
                                                               (line  89)
-* asum:                                  Summations.          (line 105)
+* asum:                                  Summations.          (line 104)
 * badd:                                  Business Days.       (line  13)
 * bar:                                   TeX and LaTeX Language Modes.
                                                               (line  95)
@@ -32094,9 +32101,9 @@ expressions.  Their full Lisp names are derived by adding the prefix
 * bern:                                  Combinatorial Functions.
                                                               (line  53)
 * besJ:                                  Advanced Math Functions.
-                                                              (line  58)
+                                                              (line  59)
 * besY:                                  Advanced Math Functions.
-                                                              (line  58)
+                                                              (line  59)
 * beta:                                  Advanced Math Functions.
                                                               (line  42)
 * betaB:                                 Advanced Math Functions.
@@ -32110,7 +32117,7 @@ expressions.  Their full Lisp names are derived by adding the prefix
 * bstring:                               Strings.             (line  54)
 * bsub:                                  Business Days.       (line  13)
 * call:                                  Specifying Operators.
-                                                              (line 102)
+                                                              (line  99)
 * cascent:                               Information about Compositions.
                                                               (line  19)
 * cbase:                                 Vertical Compositions.
@@ -32138,7 +32145,7 @@ expressions.  Their full Lisp names are derived by adding the prefix
                                                               (line  59)
 * cnorm:                                 Vector and Matrix Arithmetic.
                                                               (line  31)
-* collect:                               Polynomials.         (line  69)
+* collect:                               Polynomials.         (line  68)
 * condition:                             Other Features of Rewrite Rules.
                                                               (line  67)
 * conj:                                  Complex Number Functions.
@@ -32146,7 +32153,7 @@ expressions.  Their full Lisp names are derived by adding the prefix
 * cons:                                  Building Vectors.    (line  92)
 * cons (rewrites):                       Other Features of Rewrite Rules.
                                                               (line  84)
-* constant:                              Logical Operations.  (line 143)
+* constant:                              Logical Operations.  (line 140)
 * cos:                                   Trigonometric and Hyperbolic Functions.
                                                               (line  43)
 * cosh:                                  Trigonometric and Hyperbolic Functions.
@@ -32192,7 +32199,7 @@ expressions.  Their full Lisp names are derived by adding the prefix
                                                               (line  95)
 * dddot:                                 TeX and LaTeX Language Modes.
                                                               (line  95)
-* decr:                                  Basic Arithmetic.    (line 228)
+* decr:                                  Basic Arithmetic.    (line 227)
 * deg:                                   Conversions.         (line  56)
 * deriv:                                 Differentiation.     (line   6)
 * det:                                   Vector and Matrix Arithmetic.
@@ -32208,7 +32215,7 @@ expressions.  Their full Lisp names are derived by adding the prefix
 * dint:                                  Functions for Declarations.
                                                               (line  22)
 * div:                                   Specifying Operators.
-                                                              (line  94)
+                                                              (line  91)
 * dnatnum:                               Functions for Declarations.
                                                               (line  22)
 * dneg:                                  Functions for Declarations.
@@ -32252,7 +32259,7 @@ expressions.  Their full Lisp names are derived by adding the prefix
                                                               (line  29)
 * ends:                                  Composing Patterns in Rewrite Rules.
                                                               (line  25)
-* eq:                                    Logical Operations.  (line  22)
+* eq:                                    Logical Operations.  (line  20)
 * erf:                                   Advanced Math Functions.
                                                               (line  53)
 * erfc:                                  Advanced Math Functions.
@@ -32277,18 +32284,18 @@ expressions.  Their full Lisp names are derived by adding the prefix
                                                               (line  11)
 * exp10:                                 Logarithmic Functions.
                                                               (line  16)
-* expand:                                Polynomials.         (line  84)
+* expand:                                Polynomials.         (line  83)
 * expm1:                                 Logarithmic Functions.
                                                               (line  37)
 * fact:                                  Combinatorial Functions.
                                                               (line  25)
 * factor:                                Polynomials.         (line  13)
-* factors:                               Polynomials.         (line  57)
+* factors:                               Polynomials.         (line  56)
 * fceil:                                 Integer Truncation.  (line  19)
-* fdiv:                                  Basic Arithmetic.    (line 154)
+* fdiv:                                  Basic Arithmetic.    (line 153)
 * ffinv:                                 Multiple Solutions.  (line  55)
 * ffloor:                                Integer Truncation.  (line  15)
-* fib:                                   Rewrites Tutorial.   (line 174)
+* fib:                                   Rewrites Tutorial.   (line 173)
 * find:                                  Manipulating Vectors.
                                                               (line  15)
 * finv:                                  Multiple Solutions.  (line  55)
@@ -32329,7 +32336,7 @@ expressions.  Their full Lisp names are derived by adding the prefix
                                                               (line  25)
 * gcd:                                   Combinatorial Functions.
                                                               (line   9)
-* geq:                                   Logical Operations.  (line  52)
+* geq:                                   Logical Operations.  (line  50)
 * getdiag:                               Extracting Elements. (line  39)
 * gpoly:                                 Decomposing Polynomials.
                                                               (line  24)
@@ -32339,7 +32346,7 @@ expressions.  Their full Lisp names are derived by adding the prefix
                                                               (line  95)
 * Grave:                                 TeX and LaTeX Language Modes.
                                                               (line  95)
-* gt:                                    Logical Operations.  (line  52)
+* gt:                                    Logical Operations.  (line  50)
 * hasfitparams:                          Curve Fitting Details.
                                                               (line 234)
 * hasfitvars:                            Curve Fitting Details.
@@ -32354,78 +32361,78 @@ expressions.  Their full Lisp names are derived by adding the prefix
 * hms:                                   Conversions.         (line  64)
 * holiday:                               Business Days.       (line 114)
 * hour:                                  Date Functions.      (line  28)
-* hypot:                                 Basic Arithmetic.    (line 193)
-* idiv:                                  Basic Arithmetic.    (line 140)
+* hypot:                                 Basic Arithmetic.    (line 192)
+* idiv:                                  Basic Arithmetic.    (line 139)
 * idn:                                   Building Vectors.    (line  45)
 * ierf:                                  Other Features of Rewrite Rules.
                                                               (line 241)
-* if:                                    Logical Operations.  (line  92)
+* if:                                    Logical Operations.  (line  89)
 * ilog:                                  Logarithmic Functions.
                                                               (line  29)
 * im:                                    Complex Number Functions.
                                                               (line  28)
 * import:                                Other Features of Rewrite Rules.
                                                               (line  11)
-* in:                                    Logical Operations.  (line 111)
+* in:                                    Logical Operations.  (line 108)
 * incmonth:                              Date Functions.      (line  96)
-* incr:                                  Basic Arithmetic.    (line 228)
+* incr:                                  Basic Arithmetic.    (line 227)
 * incyear:                               Date Functions.      (line 105)
 * index:                                 Building Vectors.    (line  61)
 * inner:                                 Generalized Products.
                                                               (line  14)
 * integ:                                 Integration.         (line   6)
-* integer:                               Logical Operations.  (line 143)
+* integer:                               Logical Operations.  (line 140)
 * intv:                                  Interval Forms.      (line  67)
-* inv:                                   Basic Arithmetic.    (line 185)
+* inv:                                   Basic Arithmetic.    (line 184)
 * inv (matrices):                        Vector and Matrix Arithmetic.
                                                               (line  42)
 * irr:                                   Related Financial Functions.
                                                               (line  50)
 * irrb:                                  Related Financial Functions.
                                                               (line  55)
-* islin:                                 Logical Operations.  (line 184)
-* islinnt:                               Logical Operations.  (line 184)
-* isqrt:                                 Basic Arithmetic.    (line 198)
-* istrue:                                Logical Operations.  (line 214)
+* islin:                                 Logical Operations.  (line 181)
+* islinnt:                               Logical Operations.  (line 181)
+* isqrt:                                 Basic Arithmetic.    (line 197)
+* istrue:                                Logical Operations.  (line 211)
 * iterations:                            Nested Formulas with Rewrite Rules.
                                                               (line  44)
 * julian:                                Date Conversions.    (line  35)
 * kron:                                  Vector and Matrix Arithmetic.
                                                               (line  66)
 * lambda:                                Specifying Operators.
-                                                              (line  82)
-* land:                                  Logical Operations.  (line  77)
+                                                              (line  79)
+* land:                                  Logical Operations.  (line  74)
 * lcm:                                   Combinatorial Functions.
                                                               (line  16)
-* leq:                                   Logical Operations.  (line  52)
+* leq:                                   Logical Operations.  (line  50)
 * let:                                   Other Features of Rewrite Rules.
                                                               (line 199)
-* lin:                                   Logical Operations.  (line 184)
-* linnt:                                 Logical Operations.  (line 184)
+* lin:                                   Logical Operations.  (line 181)
+* linnt:                                 Logical Operations.  (line 181)
 * ln:                                    Logarithmic Functions.
                                                               (line   6)
-* lnot:                                  Logical Operations.  (line  88)
+* lnot:                                  Logical Operations.  (line  85)
 * lnp1:                                  Logarithmic Functions.
                                                               (line  41)
 * log:                                   Logarithmic Functions.
                                                               (line  22)
 * log10:                                 Logarithmic Functions.
                                                               (line  16)
-* lor:                                   Logical Operations.  (line  83)
+* lor:                                   Logical Operations.  (line  80)
 * lsh:                                   Binary Functions.    (line  80)
-* lt:                                    Logical Operations.  (line  52)
+* lt:                                    Logical Operations.  (line  50)
 * ltpb:                                  Probability Distribution Functions.
-                                                              (line  23)
+                                                              (line  22)
 * ltpc:                                  Probability Distribution Functions.
-                                                              (line  41)
+                                                              (line  40)
 * ltpf:                                  Probability Distribution Functions.
-                                                              (line  45)
+                                                              (line  44)
 * ltpn:                                  Probability Distribution Functions.
-                                                              (line  50)
+                                                              (line  49)
 * ltpp:                                  Probability Distribution Functions.
-                                                              (line  54)
+                                                              (line  53)
 * ltpt:                                  Probability Distribution Functions.
-                                                              (line  58)
+                                                              (line  57)
 * lud:                                   Vector and Matrix Arithmetic.
                                                               (line  55)
 * lufadd:                                Logarithmic Units.   (line  71)
@@ -32438,8 +32445,8 @@ expressions.  Their full Lisp names are derived by adding the prefix
 * lupmul:                                Logarithmic Units.   (line  71)
 * lupquant:                              Logarithmic Units.   (line  53)
 * lupsub:                                Logarithmic Units.   (line  71)
-* makemod:                               Modulo Forms.        (line  61)
-* mant:                                  Basic Arithmetic.    (line 211)
+* makemod:                               Modulo Forms.        (line  59)
+* mant:                                  Basic Arithmetic.    (line 210)
 * map:                                   Mapping.             (line   6)
 * mapa:                                  Mapping.             (line  73)
 * mapc:                                  Mapping.             (line  39)
@@ -32447,48 +32454,48 @@ expressions.  Their full Lisp names are derived by adding the prefix
 * mapeq:                                 Algebraic Manipulation.
                                                               (line  73)
 * mapeqp:                                Algebraic Manipulation.
-                                                              (line  99)
+                                                              (line  98)
 * mapeqr:                                Algebraic Manipulation.
-                                                              (line 105)
+                                                              (line 104)
 * mapr:                                  Mapping.             (line  24)
 * match:                                 Matching Commands.   (line   6)
 * matches:                               Matching Commands.   (line  29)
 * matchnot:                              Matching Commands.   (line  26)
-* max:                                   Basic Arithmetic.    (line 205)
+* max:                                   Basic Arithmetic.    (line 204)
 * maximize:                              Minimization.        (line   6)
 * mcol:                                  Extracting Elements. (line  43)
 * mdims:                                 Manipulating Vectors.
                                                               (line  10)
 * midi:                                  Musical Notes.       (line  29)
-* min:                                   Basic Arithmetic.    (line 205)
+* min:                                   Basic Arithmetic.    (line 204)
 * minimize:                              Minimization.        (line   6)
 * minute:                                Date Functions.      (line  33)
 * mod:                                   Specifying Operators.
-                                                              (line  94)
+                                                              (line  91)
 * mod (operator):                        Modulo Forms.        (line  12)
 * moebius:                               Combinatorial Functions.
-                                                              (line 124)
+                                                              (line 123)
 * month:                                 Date Functions.      (line  22)
 * mrcol:                                 Extracting Elements. (line  43)
 * mrow:                                  Extracting Elements. (line   6)
 * mrrow:                                 Extracting Elements. (line  33)
 * mul:                                   Specifying Operators.
-                                                              (line  94)
+                                                              (line  91)
 * mysin:                                 Sine Example.        (line   6)
 * neg:                                   Specifying Operators.
-                                                              (line  94)
-* negative:                              Logical Operations.  (line 165)
-* neq:                                   Logical Operations.  (line  47)
+                                                              (line  91)
+* negative:                              Logical Operations.  (line 162)
+* neq:                                   Logical Operations.  (line  45)
 * nest:                                  Nesting and Fixed Points.
                                                               (line   6)
 * newmonth:                              Date Functions.      (line  51)
 * newweek:                               Date Functions.      (line  68)
 * newyear:                               Date Functions.      (line  59)
 * nextprime:                             Combinatorial Functions.
-                                                              (line 105)
+                                                              (line 104)
 * ninteg:                                Numerical Integration.
                                                               (line   6)
-* nonvar:                                Logical Operations.  (line 179)
+* nonvar:                                Logical Operations.  (line 176)
 * not:                                   Binary Functions.    (line  77)
 * now:                                   Date Functions.      (line   6)
 * nper:                                  Related Financial Functions.
@@ -32501,8 +32508,8 @@ expressions.  Their full Lisp names are derived by adding the prefix
 * nppower:                               Logarithmic Units.   (line  63)
 * npv:                                   Present Value.       (line  45)
 * npvb:                                  Present Value.       (line  64)
-* nrat:                                  Polynomials.         (line 113)
-* nroot:                                 Basic Arithmetic.    (line 136)
+* nrat:                                  Polynomials.         (line 112)
+* nroot:                                 Basic Arithmetic.    (line 135)
 * nterms:                                Rewrites Answer 5.   (line   6)
 * opt:                                   Other Features of Rewrite Rules.
                                                               (line  47)
@@ -32518,15 +32525,15 @@ expressions.  Their full Lisp names are derived by adding the prefix
                                                               (line  82)
 * pdeg:                                  Decomposing Polynomials.
                                                               (line  65)
-* pdiv:                                  Polynomials.         (line 120)
-* pdivide:                               Polynomials.         (line 140)
-* pdivrem:                               Polynomials.         (line 140)
+* pdiv:                                  Polynomials.         (line 119)
+* pdivide:                               Polynomials.         (line 139)
+* pdivrem:                               Polynomials.         (line 139)
 * percent:                               Percentages.         (line   6)
 * perm:                                  Combinatorial Functions.
                                                               (line  50)
 * pfloat:                                Conversions.         (line   9)
 * pfrac:                                 Conversions.         (line  40)
-* pgcd:                                  Polynomials.         (line 146)
+* pgcd:                                  Polynomials.         (line 145)
 * phase:                                 Multi-Phase Rewrite Rules.
                                                               (line  11)
 * plain:                                 Other Features of Rewrite Rules.
@@ -32546,19 +32553,19 @@ expressions.  Their full Lisp names are derived by adding the prefix
 * por:                                   Other Features of Rewrite Rules.
                                                               (line  76)
 * pow:                                   Specifying Operators.
-                                                              (line  94)
+                                                              (line  91)
 * pprim:                                 Decomposing Polynomials.
                                                               (line 101)
-* prem:                                  Polynomials.         (line 134)
+* prem:                                  Polynomials.         (line 133)
 * prevprime:                             Combinatorial Functions.
-                                                              (line 117)
+                                                              (line 116)
 * prfac:                                 Combinatorial Functions.
-                                                              (line  95)
+                                                              (line  94)
 * Prime:                                 TeX and LaTeX Language Modes.
                                                               (line  95)
 * prime:                                 Combinatorial Functions.
-                                                              (line  88)
-* prod:                                  Summations.          (line 117)
+                                                              (line  87)
+* prod:                                  Summations.          (line 116)
 * pv:                                    Present Value.       (line   6)
 * pvb:                                   Present Value.       (line  27)
 * pvl:                                   Present Value.       (line  33)
@@ -32582,14 +32589,14 @@ expressions.  Their full Lisp names are derived by adding the prefix
 * rdup:                                  Set Operations.      (line  34)
 * re:                                    Complex Number Functions.
                                                               (line  24)
-* real:                                  Logical Operations.  (line 143)
+* real:                                  Logical Operations.  (line 140)
 * rect:                                  Conversions.         (line  73)
 * reduce:                                Reducing.            (line   6)
 * reducea:                               Reducing.            (line  31)
 * reducec:                               Reducing.            (line  51)
 * reduced:                               Reducing.            (line  31)
 * reducer:                               Reducing.            (line  40)
-* refers:                                Logical Operations.  (line 158)
+* refers:                                Logical Operations.  (line 155)
 * relch:                                 Percentages.         (line  43)
 * remember:                              Other Features of Rewrite Rules.
                                                               (line 287)
@@ -32599,7 +32606,7 @@ expressions.  Their full Lisp names are derived by adding the prefix
 * rgrade:                                Manipulating Vectors.
                                                               (line  51)
 * rhead:                                 Building Vectors.    (line  98)
-* rmeq:                                  Logical Operations.  (line  67)
+* rmeq:                                  Logical Operations.  (line  64)
 * rms:                                   Single-Variable Statistics.
                                                               (line 112)
 * rnorm:                                 Vector and Matrix Arithmetic.
@@ -32620,7 +32627,7 @@ expressions.  Their full Lisp names are derived by adding the prefix
                                                               (line  37)
 * rsubvec:                               Extracting Elements. (line  71)
 * rtail:                                 Building Vectors.    (line  98)
-* scf:                                   Basic Arithmetic.    (line 222)
+* scf:                                   Basic Arithmetic.    (line 221)
 * schedule:                              Multi-Phase Rewrite Rules.
                                                               (line  53)
 * sdev:                                  Error Forms.         (line  65)
@@ -32635,7 +32642,7 @@ expressions.  Their full Lisp names are derived by adding the prefix
 * shuffle:                               Random Numbers.      (line  64)
 * Si:                                    Programming Tutorial.
                                                               (line  46)
-* sign:                                  Basic Arithmetic.    (line 179)
+* sign:                                  Basic Arithmetic.    (line 178)
 * simplify:                              Simplifying Formulas.
                                                               (line   6)
 * sin:                                   Trigonometric and Hyperbolic Functions.
@@ -32652,22 +32659,22 @@ expressions.  Their full Lisp names are derived by adding the prefix
 * spn:                                   Musical Notes.       (line  25)
 * sqr:                                   Scientific Functions.
                                                               (line  23)
-* sqrt:                                  Basic Arithmetic.    (line 189)
+* sqrt:                                  Basic Arithmetic.    (line 188)
 * stir1:                                 Combinatorial Functions.
-                                                              (line  66)
+                                                              (line  65)
 * stir2:                                 Combinatorial Functions.
-                                                              (line  66)
+                                                              (line  65)
 * string:                                Strings.             (line  40)
 * sub:                                   Specifying Operators.
-                                                              (line  94)
+                                                              (line  91)
 * subscr:                                Extracting Elements. (line  24)
 * subst:                                 Algebraic Manipulation.
-                                                              (line 110)
+                                                              (line 109)
 * subvec:                                Extracting Elements. (line  55)
 * sum:                                   Summations.          (line   6)
 * syd:                                   Depreciation Functions.
                                                               (line  22)
-* table:                                 Summations.          (line 123)
+* table:                                 Summations.          (line 122)
 * tail:                                  Building Vectors.    (line  87)
 * tan:                                   Trigonometric and Hyperbolic Functions.
                                                               (line  43)
@@ -32675,49 +32682,49 @@ expressions.  Their full Lisp names are derived by adding the prefix
                                                               (line  43)
 * taylor:                                Taylor Series.       (line   6)
 * tderiv:                                Differentiation.     (line   6)
-* thecoefs:                              Polynomials.         (line  39)
-* thefactors:                            Polynomials.         (line  39)
+* thecoefs:                              Polynomials.         (line  38)
+* thefactors:                            Polynomials.         (line  38)
 * tilde:                                 TeX and LaTeX Language Modes.
                                                               (line  95)
 * Tilde:                                 TeX and LaTeX Language Modes.
                                                               (line  95)
 * time:                                  Date Functions.      (line  48)
 * totient:                               Combinatorial Functions.
-                                                              (line 120)
+                                                              (line 119)
 * tr:                                    Vector and Matrix Arithmetic.
                                                               (line  62)
 * trn:                                   Manipulating Vectors.
                                                               (line 107)
 * trunc:                                 Integer Truncation.  (line  29)
-* typeof:                                Logical Operations.  (line 120)
+* typeof:                                Logical Operations.  (line 117)
 * tzconv:                                Date Conversions.    (line  60)
 * tzone:                                 Time Zones.          (line  30)
 * under:                                 TeX and LaTeX Language Modes.
                                                               (line  95)
 * unixtime:                              Date Conversions.    (line  50)
 * unpack:                                Packing and Unpacking.
-                                                              (line 167)
+                                                              (line 166)
 * unpackt:                               Packing and Unpacking.
-                                                              (line 173)
+                                                              (line 172)
 * usimplify:                             Basic Operations on Units.
                                                               (line  29)
 * utpb:                                  Probability Distribution Functions.
-                                                              (line  23)
+                                                              (line  22)
 * utpc:                                  Probability Distribution Functions.
-                                                              (line  41)
+                                                              (line  40)
 * utpf:                                  Probability Distribution Functions.
-                                                              (line  45)
+                                                              (line  44)
 * utpn:                                  Probability Distribution Functions.
-                                                              (line  50)
+                                                              (line  49)
 * utpp:                                  Probability Distribution Functions.
-                                                              (line  54)
+                                                              (line  53)
 * utpt:                                  Probability Distribution Functions.
-                                                              (line  58)
-* variable:                              Logical Operations.  (line 174)
-* vcard:                                 Set Operations.      (line  96)
+                                                              (line  57)
+* variable:                              Logical Operations.  (line 171)
+* vcard:                                 Set Operations.      (line  95)
 * vcompl:                                Set Operations.      (line  70)
 * vconcat:                               Specifying Operators.
-                                                              (line  94)
+                                                              (line  91)
 * vcorr:                                 Paired-Sample Statistics.
                                                               (line  28)
 * vcount:                                Single-Variable Statistics.
@@ -32757,7 +32764,7 @@ expressions.  Their full Lisp names are derived by adding the prefix
                                                               (line  84)
 * vmin:                                  Single-Variable Statistics.
                                                               (line  48)
-* vpack:                                 Set Operations.      (line 111)
+* vpack:                                 Set Operations.      (line 110)
 * vpcov:                                 Paired-Sample Statistics.
                                                               (line  24)
 * vprod:                                 Single-Variable Statistics.
@@ -32772,7 +32779,7 @@ expressions.  Their full Lisp names are derived by adding the prefix
 * vsum:                                  Single-Variable Statistics.
                                                               (line  42)
 * vunion:                                Set Operations.      (line  42)
-* vunpack:                               Set Operations.      (line 111)
+* vunpack:                               Set Operations.      (line 110)
 * vvar:                                  Single-Variable Statistics.
                                                               (line 143)
 * vxor:                                  Set Operations.      (line  65)
@@ -32783,7 +32790,7 @@ expressions.  Their full Lisp names are derived by adding the prefix
 * xfit:                                  Error Estimates for Fits.
                                                               (line  49)
 * xor:                                   Binary Functions.    (line  69)
-* xpon:                                  Basic Arithmetic.    (line 211)
+* xpon:                                  Basic Arithmetic.    (line 210)
 * xy:                                    Basic Graphics.      (line  33)
 * xyz:                                   Three Dimensional Graphics.
                                                               (line  38)
@@ -32809,20 +32816,20 @@ Concept Index
 * Algebraic simplifications:             Algebraic Simplifications.
                                                               (line   6)
 * AlgSimpRules variable:                 Automatic Rewrites.  (line 134)
-* Alternating sums:                      Summations.          (line 105)
-* Angle and slope of a line:             Types Tutorial.      (line 180)
+* Alternating sums:                      Summations.          (line 104)
+* Angle and slope of a line:             Types Tutorial.      (line 179)
 * Angular mode:                          Angular Modes.       (line   6)
 * Area under a curve:                    Basic Algebra Tutorial.
-                                                              (line 225)
-* Arguments, not evaluated:              Logical Operations.  (line  92)
+                                                              (line 223)
+* Arguments, not evaluated:              Logical Operations.  (line  89)
 * Arguments, restoring:                  Undo.                (line  31)
 * Arranging a matrix:                    Manipulating Vectors.
                                                               (line  22)
 * Basic simplifications:                 Basic Simplifications.
                                                               (line   6)
-* Beatles:                               Types Tutorial.      (line 142)
+* Beatles:                               Types Tutorial.      (line 141)
 * Bernoulli numbers, approximate:        Programming Tutorial.
-                                                              (line 237)
+                                                              (line 236)
 * Bibliography:                          History and Acknowledgments.
                                                               (line  77)
 * Binary numbers:                        Binary Functions.    (line   9)
@@ -32839,6 +32846,8 @@ Concept Index
 * Calc init file, variables:             Operations on Variables.
                                                               (line  58)
 * calc-ext module:                       Basic Commands.      (line  35)
+* Calling Calc from Lisp:                Calling Calc from Your Programs.
+                                                              (line   6)
 * Character strings:                     Strings.             (line   6)
 * Clearing the stack:                    RPN Tutorial.        (line 298)
 * Coefficients of polynomial:            Decomposing Polynomials.
@@ -32852,7 +32861,7 @@ Concept Index
 * Conditional structures:                Conditionals in Macros.
                                                               (line   6)
 * Continued fractions:                   Programming Tutorial.
-                                                              (line 162)
+                                                              (line 161)
 * Continuous memory:                     General Mode Commands.
                                                               (line   6)
 * Correlation coefficient:               Paired-Sample Statistics.
@@ -32875,14 +32884,14 @@ Concept Index
 * Demonstration of Calc:                 Demonstration of Calc.
                                                               (line   6)
 * Digamma function:                      Programming Tutorial.
-                                                              (line 374)
+                                                              (line 372)
 * Digit grouping:                        Grouping Digits.     (line   6)
-* Digits, vectors of:                    List Tutorial.       (line 433)
+* Digits, vectors of:                    List Tutorial.       (line 429)
 * Division of integers:                  Fraction Mode.       (line   6)
-* Divisor functions:                     List Tutorial.       (line 388)
+* Divisor functions:                     List Tutorial.       (line 384)
 * Dot product:                           Vector Analysis Tutorial.
                                                               (line  30)
-* Duplicate values in a list:            List Tutorial.       (line 394)
+* Duplicate values in a list:            List Tutorial.       (line 390)
 * Duplicating a stack entry:             RPN Tutorial.        (line 118)
 * Duplicating stack entries:             Stack Manipulation.  (line   6)
 * e variable:                            Variables.           (line  39)
@@ -32899,7 +32908,7 @@ Concept Index
 * Errors, messages:                      Error Messages.      (line   6)
 * Errors, undoing:                       Undo.                (line   6)
 * Euler’s gamma constant:                Programming Tutorial.
-                                                              (line 374)
+                                                              (line 372)
 * Euler’s gamma constant <1>:            Scientific Functions.
                                                               (line  12)
 * EvalRules variable:                    Automatic Rewrites.  (line   6)
@@ -32915,30 +32924,30 @@ Concept Index
                                                               (line   6)
 * Extensions module:                     Basic Commands.      (line  35)
 * ExtSimpRules variable:                 Automatic Rewrites.  (line 147)
-* Fermat, primality test of:             Types Tutorial.      (line 273)
-* Fibonacci numbers:                     Rewrites Tutorial.   (line 174)
+* Fermat, primality test of:             Types Tutorial.      (line 271)
+* Fibonacci numbers:                     Rewrites Tutorial.   (line 173)
 * Fibonacci numbers <1>:                 Programming Tutorial.
-                                                              (line 137)
+                                                              (line 136)
 * Fitting data to a line:                List Tutorial.       (line 111)
 * Fixed points:                          Nesting and Fixed Points.
                                                               (line  18)
 * Flattening a matrix:                   Manipulating Vectors.
                                                               (line  22)
 * Floating-point numbers:                Floats.              (line   6)
-* Floats vs. fractions:                  Modes Tutorial.      (line 343)
+* Floats vs. fractions:                  Modes Tutorial.      (line 341)
 * Flushing caches:                       Caches.              (line   6)
 * Formulas:                              Formulas.            (line   6)
 * Formulas, entering:                    Algebraic Entry.     (line   6)
 * Formulas, evaluation:                  Variables.           (line  30)
-* Formulas, referring to stack:          Algebraic Entry.     (line  58)
+* Formulas, referring to stack:          Algebraic Entry.     (line  57)
 * FORTRAN language:                      C FORTRAN Pascal.    (line  40)
 * Fraction mode:                         Fraction Mode.       (line   6)
 * Fractional part of a number:           Integer Truncation.  (line  62)
 * Fractions:                             Fractions.           (line   6)
-* Fractions vs. floats:                  Modes Tutorial.      (line 343)
-* Function call notation:                Formulas.            (line 103)
+* Fractions vs. floats:                  Modes Tutorial.      (line 341)
+* Function call notation:                Formulas.            (line 100)
 * Gamma constant, Euler’s:               Programming Tutorial.
-                                                              (line 374)
+                                                              (line 372)
 * Gamma constant, Euler’s <1>:           Scientific Functions.
                                                               (line  12)
 * gamma variable:                        Variables.           (line  39)
@@ -32947,23 +32956,23 @@ Concept Index
 * Garbled displays, refreshing:          Basic Commands.      (line  88)
 * GenCount variable:                     Multiple Solutions.  (line  35)
 * Generic functions:                     Specifying Operators.
-                                                              (line  54)
+                                                              (line  53)
 * Geometric mean:                        List Tutorial.       (line 315)
 * Geometric mean <1>:                    Single-Variable Statistics.
                                                               (line 102)
 * Giac language:                         Giac Language Mode.  (line   6)
 * Golden ratio:                          Programming Tutorial.
-                                                              (line 151)
+                                                              (line 150)
 * Golden ratio <1>:                      Scientific Functions.
                                                               (line  12)
 * Gregorian calendar:                    Date Forms.          (line  51)
 * Grouping digits:                       Grouping Digits.     (line   6)
-* Guard digits:                          Modes Tutorial.      (line 104)
-* Guard digits <1>:                      Modes Tutorial.      (line 110)
+* Guard digits:                          Modes Tutorial.      (line 103)
+* Guard digits <1>:                      Modes Tutorial.      (line 109)
 * Harmonic mean:                         Single-Variable Statistics.
                                                               (line  98)
 * Harmonic numbers:                      Programming Tutorial.
-                                                              (line 176)
+                                                              (line 175)
 * Hash tables:                           Arithmetic Tutorial. (line 263)
 * Help commands:                         Help Commands.       (line   6)
 * Hexadecimal integers:                  Radix Modes.         (line  12)
@@ -32990,9 +32999,9 @@ Concept Index
 * Integer part of a number:              Integer Truncation.  (line  15)
 * Integers:                              Integers.            (line   6)
 * Integration by Simpson’s rule:         Basic Algebra Tutorial.
-                                                              (line 312)
+                                                              (line 310)
 * Integration, numerical:                Basic Algebra Tutorial.
-                                                              (line 253)
+                                                              (line 251)
 * Interval forms:                        Interval Forms.      (line   6)
 * Inverse of permutation:                Manipulating Vectors.
                                                               (line  51)
@@ -33008,8 +33017,8 @@ Concept Index
 * Knuth, Art of Computer Programming:    History and Acknowledgments.
                                                               (line  77)
 * Lambda expressions:                    Specifying Operators.
-                                                              (line  82)
-* Large numbers, readability:            Modes Tutorial.      (line 173)
+                                                              (line  79)
+* Large numbers, readability:            Modes Tutorial.      (line 172)
 * Last-arguments feature:                Undo.                (line  31)
 * LaTeX language:                        TeX and LaTeX Language Modes.
                                                               (line   6)
@@ -33025,14 +33034,14 @@ Concept Index
                                                               (line  28)
 * Linear equations, systems of:          Matrix Tutorial.     (line 115)
 * Linear regression:                     Linear Fits.         (line   6)
-* Linearity testing:                     Logical Operations.  (line 184)
+* Linearity testing:                     Logical Operations.  (line 181)
 * LineStyles variable:                   Graphics Options.    (line 103)
 * Lists:                                 List Tutorial.       (line   6)
 * Local variables:                       Local Values in Macros.
                                                               (line   6)
 * Looping structures:                    Loops in Macros.     (line   6)
 * Maple language:                        Maple Language Mode. (line   6)
-* Matchstick problem:                    List Tutorial.       (line 456)
+* Matchstick problem:                    List Tutorial.       (line 452)
 * Mathematica language:                  Mathematica Language Mode.
                                                               (line   6)
 * Matrices:                              Vectors and Matrices.
@@ -33041,10 +33050,9 @@ Concept Index
                                                               (line  11)
 * Matrix mode:                           Matrix Mode.         (line   6)
 * max-lisp-eval-depth:                   Recursion Depth.     (line   6)
-* max-specpdl-size:                      Recursion Depth.     (line   6)
 * Maxima language:                       Maxima Language Mode.
                                                               (line   6)
-* Maximizing a function over a list of values: List Tutorial. (line 425)
+* Maximizing a function over a list of values: List Tutorial. (line 421)
 * Maximum of a function using Calculus:  Basic Algebra Tutorial.
                                                               (line  48)
 * Mean of data values:                   Single-Variable Statistics.
@@ -33061,7 +33069,7 @@ Concept Index
 * Moving stack entries:                  Stack Manipulation.  (line  83)
 * Multiplication, implicit:              Formulas.            (line  64)
 * Nameless functions:                    Specifying Operators.
-                                                              (line  54)
+                                                              (line  53)
 * nan variable:                          Infinities.          (line   6)
 * Narrowing the stack:                   Truncating the Stack.
                                                               (line   6)
@@ -33071,10 +33079,10 @@ Concept Index
 * Normalizing a vector:                  Vector Analysis Tutorial.
                                                               (line  84)
 * Numerator of a fraction, extracting:   Packing and Unpacking.
-                                                              (line 181)
+                                                              (line 180)
 * Numeric entry:                         Numeric Entry.       (line   6)
 * Numerical integration:                 Basic Algebra Tutorial.
-                                                              (line 253)
+                                                              (line 251)
 * Numerical Recipes:                     History and Acknowledgments.
                                                               (line  77)
 * Numerical root-finding:                Root Finding.        (line   6)
@@ -33103,7 +33111,7 @@ Concept Index
 * phi variable <1>:                      Scientific Functions.
                                                               (line  12)
 * Phi, golden ratio:                     Programming Tutorial.
-                                                              (line 151)
+                                                              (line 150)
 * Phi, golden ratio <1>:                 Scientific Functions.
                                                               (line  12)
 * pi variable:                           Variables.           (line  39)
@@ -33115,22 +33123,23 @@ Concept Index
 * PointStyles variable:                  Graphics Options.    (line 103)
 * Polar mode:                            Polar Mode.          (line   6)
 * Polynomial, list of coefficients:      Programming Tutorial.
-                                                              (line 395)
+                                                              (line 393)
 * Population statistics:                 Single-Variable Statistics.
                                                               (line 130)
 * Positive Infinite mode:                Infinite Mode.       (line  25)
 * Precedence of operators:               Formulas.            (line   6)
 * Precision of calculations:             Precision.           (line   6)
 * Primes:                                Combinatorial Functions.
-                                                              (line  73)
+                                                              (line  72)
 * Principal values:                      Branch Cuts.         (line   6)
-* Product of a sequence:                 Summations.          (line 117)
-* Programming with algebraic formulas:   Algebraic Definitions.
+* Product of a sequence:                 Summations.          (line 116)
+* Programming Calc:                      Programming.         (line   6)
+* Programming Calc, with algebraic formulas: Algebraic Definitions.
                                                               (line   6)
-* Programming with keyboard macros:      Keyboard Macros.     (line   6)
+* Programming Calc, with keyboard macros: Keyboard Macros.    (line   6)
 * Pythagorean Theorem:                   RPN Tutorial.        (line 183)
 * Quaternions:                           Examples of Rewrite Rules.
-                                                              (line  41)
+                                                              (line  40)
 * Quick Calculator:                      Quick Calculator.    (line   6)
 * Quick units:                           User-Defined Units.  (line   9)
 * Quick variables:                       Storing Variables.   (line   6)
@@ -33139,9 +33148,9 @@ Concept Index
 * Rank tables:                           Manipulating Vectors.
                                                               (line  51)
 * Recalling variables:                   Recalling Variables. (line   6)
-* Reciprocal:                            Basic Arithmetic.    (line 185)
+* Reciprocal:                            Basic Arithmetic.    (line 184)
 * Recursion:                             Programming Tutorial.
-                                                              (line 403)
+                                                              (line 401)
 * Recursion depth:                       Recursion Depth.     (line   6)
 * Redoing after an Undo:                 Undo.                (line  23)
 * Refreshing a garbled display:          Basic Commands.      (line  88)
@@ -33153,15 +33162,16 @@ Concept Index
 * Restoring saved modes:                 Local Values in Macros.
                                                               (line   6)
 * Retrieving previous results:           Trail Commands.      (line  30)
+* Reverse Polish notation:               RPN Tutorial.        (line   6)
 * Rewrite rules:                         Rewrite Rules.       (line   6)
 * Root-mean-square:                      Single-Variable Statistics.
                                                               (line 112)
 * Roots of equations:                    Root Finding.        (line   6)
-* Round-off errors:                      Modes Tutorial.      (line  89)
+* Round-off errors:                      Modes Tutorial.      (line  88)
 * Roundoff errors, correcting:           Conversions.         (line  96)
-* Roundoff errors, examples:             Modes Tutorial.      (line 289)
+* Roundoff errors, examples:             Modes Tutorial.      (line 287)
 * Roundoff errors, examples <1>:         Arithmetic Tutorial. (line 162)
-* Roundoff errors, in non-decimal numbers: Modes Tutorial.    (line 251)
+* Roundoff errors, in non-decimal numbers: Modes Tutorial.    (line 249)
 * RPN notation:                          RPN Tutorial.        (line   6)
 * Running the Calculator:                Basic Commands.      (line   6)
 * Sample statistics:                     Single-Variable Statistics.
@@ -33170,24 +33180,24 @@ Concept Index
                                                               (line   6)
 * Scalar mode:                           Matrix Mode.         (line   6)
 * Scientific notation, display of:       Float Formats.       (line  27)
-* Scientific notation, entry of:         Modes Tutorial.      (line  78)
+* Scientific notation, entry of:         Modes Tutorial.      (line  77)
 * Scientific notation, in non-decimal numbers: Modes Tutorial.
-                                                              (line 259)
+                                                              (line 257)
 * Scrolling:                             Basic Commands.      (line  95)
 * Selections:                            Selecting Subformulas.
                                                               (line   6)
-* Sets, as binary numbers:               Set Operations.      (line 101)
+* Sets, as binary numbers:               Set Operations.      (line 100)
 * Sets, as vectors:                      Set Operations.      (line   6)
 * Simpson’s rule:                        Basic Algebra Tutorial.
-                                                              (line 312)
+                                                              (line 310)
 * Sine integral Si(x):                   Programming Tutorial.
                                                               (line  46)
-* Slope and angle of a line:             Types Tutorial.      (line 180)
+* Slope and angle of a line:             Types Tutorial.      (line 179)
 * Solving equations:                     Solving Equations.   (line   6)
 * Sorting data:                          Manipulating Vectors.
                                                               (line  37)
-* Speed of light:                        Types Tutorial.      (line 383)
-* Square-free numbers:                   List Tutorial.       (line 394)
+* Speed of light:                        Types Tutorial.      (line 380)
+* Square-free numbers:                   List Tutorial.       (line 390)
 * Stack basics:                          Stack Basics.        (line   6)
 * Stack levels:                          RPN Tutorial.        (line  44)
 * Standalone Operation:                  Standalone Operation.
@@ -33213,7 +33223,7 @@ Concept Index
 * Summations (statistical):              Single-Variable Statistics.
                                                               (line  42)
 * Summing rows and columns of data:      Grabbing From Buffers.
-                                                              (line  77)
+                                                              (line  76)
 * Symbolic mode:                         Symbolic Mode.       (line   6)
 * Syntax tables:                         Syntax Tables.       (line   6)
 * Systems of equations, numerical:       Numerical Systems of Equations.
@@ -33231,17 +33241,17 @@ Concept Index
 * Time zones:                            Time Zones.          (line   6)
 * Time Zones, converting between:        Date Conversions.    (line  60)
 * TimeZone variable:                     Time Zones.          (line  72)
-* Torus, volume of:                      Types Tutorial.      (line 197)
+* Torus, volume of:                      Types Tutorial.      (line 196)
 * Total Algebraic Mode:                  Algebraic Entry.     (line  42)
 * Trail buffer:                          Trail Commands.      (line   6)
 * Trail pointer:                         Trail Commands.      (line  25)
 * Transformations:                       Rewrite Rules.       (line   6)
-* Triangular lists:                      List Tutorial.       (line 401)
+* Triangular lists:                      List Tutorial.       (line 397)
 * Truncating the stack:                  Truncating the Stack.
                                                               (line   6)
 * Two’s complements:                     Radix Modes.         (line  32)
 * uinf variable:                         Infinities.          (line   6)
-* Un-storing variables:                  Storing Variables.   (line 110)
+* Un-storing variables:                  Storing Variables.   (line 109)
 * Unary operators:                       Arithmetic Tutorial. (line  32)
 * Undoing mistakes:                      Undo.                (line   6)
 * Unit vectors:                          Vector Analysis Tutorial.
@@ -33261,7 +33271,7 @@ Concept Index
 * Vectors:                               Vectors and Matrices.
                                                               (line   6)
 * Vertical scrolling:                    Basic Commands.      (line 101)
-* Void variables:                        Storing Variables.   (line 110)
+* Void variables:                        Storing Variables.   (line 109)
 * Why did an error occur?:               Error Messages.      (line   6)
 * Wide text, scrolling:                  Basic Commands.      (line  95)
 * Word size for binary operations:       Binary Functions.    (line  15)
@@ -33388,7 +33398,7 @@ your Calc init file or ‘.emacs’ file.
                                                               (line  12)
 * EvalRules:                             Automatic Rewrites.  (line   6)
 * ExtSimpRules:                          Automatic Rewrites.  (line 147)
-* FactorRules:                           Polynomials.         (line  39)
+* FactorRules:                           Polynomials.         (line  38)
 * FitRules:                              Curve Fitting Details.
                                                               (line 149)
 * gamma:                                 Variables.           (line  39)
@@ -33859,374 +33869,374 @@ Tag Table:
 Node: Top974
 Node: Getting Started4284
 Node: What is Calc4752
-Node: About This Manual6842
-Node: Notations Used in This Manual10151
-Node: Demonstration of Calc12161
-Node: Using Calc17333
-Node: Starting Calc17851
-Node: The Standard Interface19320
-Node: Quick Mode Overview24052
-Node: Keypad Mode Overview25150
-Node: Standalone Operation28044
-Node: Embedded Mode Overview28709
-Node: Other C-x * Commands32660
-Node: History and Acknowledgments37348
-Node: Interactive Tutorial42427
-Node: Tutorial43506
-Node: Basic Tutorial45296
-Node: RPN Tutorial45853
-Node: Algebraic Tutorial60413
-Node: Undo Tutorial71377
-Node: Modes Tutorial77471
-Node: Arithmetic Tutorial94311
-Node: Vector/Matrix Tutorial106962
-Node: Vector Analysis Tutorial107443
-Node: Matrix Tutorial111549
-Node: List Tutorial118924
-Node: Types Tutorial140668
-Node: Algebra Tutorial159126
-Node: Basic Algebra Tutorial159508
-Node: Rewrites Tutorial174007
-Node: Programming Tutorial189773
-Node: Answers to Exercises211709
-Node: RPN Answer 1215269
-Node: RPN Answer 2215506
-Node: RPN Answer 3217155
-Node: RPN Answer 4218239
-Node: Algebraic Answer 1219611
-Node: Algebraic Answer 2220145
-Node: Algebraic Answer 3220615
-Node: Modes Answer 1221472
-Node: Modes Answer 2225076
-Node: Modes Answer 3226250
-Node: Modes Answer 4227641
-Node: Arithmetic Answer 1228699
-Node: Arithmetic Answer 2229657
-Node: Vector Answer 1230256
-Node: Vector Answer 2230876
-Node: Matrix Answer 1231314
-Node: Matrix Answer 2231650
-Node: Matrix Answer 3232434
-Node: List Answer 1234639
-Node: List Answer 2235456
-Node: List Answer 3237170
-Node: List Answer 4238276
-Node: List Answer 5239464
-Node: List Answer 6240789
-Node: List Answer 7241077
-Node: List Answer 8242835
-Node: List Answer 9245471
-Node: List Answer 10248225
-Node: List Answer 11249003
-Node: List Answer 12250866
-Node: List Answer 13253976
-Node: List Answer 14257408
-Node: Types Answer 1259641
-Node: Types Answer 2260953
-Node: Types Answer 3262651
-Node: Types Answer 4263795
-Node: Types Answer 5264441
-Node: Types Answer 6265884
-Node: Types Answer 7267494
-Node: Types Answer 8268553
-Node: Types Answer 9270204
-Node: Types Answer 10271049
-Node: Types Answer 11272704
-Node: Types Answer 12273855
-Node: Types Answer 13274411
-Node: Types Answer 14274669
-Node: Types Answer 15275432
-Node: Algebra Answer 1276354
-Node: Algebra Answer 2276902
-Node: Algebra Answer 3277953
-Node: Algebra Answer 4278769
-Node: Rewrites Answer 1280268
-Node: Rewrites Answer 2281426
-Node: Rewrites Answer 3282879
-Node: Rewrites Answer 4284154
-Node: Rewrites Answer 5285926
-Node: Rewrites Answer 6286529
-Node: Programming Answer 1289953
-Node: Programming Answer 2290612
-Node: Programming Answer 3291375
-Node: Programming Answer 4292385
-Node: Programming Answer 5292659
-Node: Programming Answer 6293159
-Node: Programming Answer 7294040
-Node: Programming Answer 8295321
-Node: Programming Answer 9298277
-Node: Programming Answer 10301806
-Node: Programming Answer 11304489
-Node: Programming Answer 12307914
-Node: Introduction308926
-Node: Basic Commands309441
-Node: Help Commands315887
-Node: Stack Basics320658
-Node: Numeric Entry322981
-Node: Algebraic Entry324516
-Node: Quick Calculator329865
-Node: Prefix Arguments333235
-Node: Undo335776
-Node: Error Messages338077
-Node: Multiple Calculators339408
-Node: Troubleshooting Commands340683
-Node: Autoloading Problems341146
-Node: Recursion Depth341917
-Node: Caches342957
-Node: Debugging Calc344242
-Node: Data Types346862
-Node: Integers348148
-Node: Fractions349327
-Node: Floats350226
-Node: Complex Numbers354064
-Node: Infinities355433
-Node: Vectors and Matrices359624
-Node: Strings361364
-Node: HMS Forms364117
-Node: Date Forms365699
-Node: Modulo Forms374237
-Node: Error Forms377610
-Node: Interval Forms381553
-Node: Incomplete Objects386214
-Node: Variables388290
-Node: Formulas391214
-Node: Stack and Trail397850
-Node: Stack Manipulation398311
-Node: Editing Stack Entries403958
-Node: Trail Commands406708
-Node: Keep Arguments410560
-Node: Mode Settings412767
-Node: General Mode Commands413313
-Node: Precision417311
-Node: Inverse and Hyperbolic420167
-Node: Calculation Modes422007
-Node: Angular Modes422578
-Node: Polar Mode423776
-Node: Fraction Mode424453
-Node: Infinite Mode425484
-Node: Symbolic Mode427366
-Node: Matrix Mode428662
-Node: Automatic Recomputation432404
-Node: Working Message433480
-Node: Simplification Modes434630
-Node: Declarations438230
-Node: Declaration Basics438717
-Node: Kinds of Declarations441509
-Node: Functions for Declarations449824
-Node: Display Modes454361
-Node: Radix Modes456156
-Node: Grouping Digits458953
-Node: Float Formats460704
-Node: Complex Formats463673
-Node: Fraction Formats464824
-Node: HMS Formats466707
-Node: Date Formats468156
-Node: ISO 8601469310
-Node: Date Formatting Codes472514
-Node: Free-Form Dates478233
-Node: Standard Date Formats481341
-Node: Truncating the Stack482718
-Node: Justification484216
-Node: Labels487004
-Node: Language Modes488278
-Node: Normal Language Modes490732
-Node: C FORTRAN Pascal494211
-Node: TeX and LaTeX Language Modes497966
-Node: Eqn Language Mode505768
-Node: Yacas Language Mode509703
-Node: Maxima Language Mode511052
-Node: Giac Language Mode512187
-Node: Mathematica Language Mode513355
-Node: Maple Language Mode514397
-Node: Compositions515832
-Node: Composition Basics517401
-Node: Horizontal Compositions522413
-Node: Vertical Compositions523945
-Node: Other Compositions526608
-Node: Information about Compositions528930
-Node: User-Defined Compositions530310
-Node: Syntax Tables535453
-Node: Syntax Table Basics536438
-Node: Precedence in Syntax Tables542753
-Node: Advanced Syntax Patterns544020
-Node: Conditional Syntax Rules548591
-Node: Modes Variable551750
-Node: Calc Mode Line555602
-Node: Arithmetic561100
-Node: Basic Arithmetic562268
-Node: Integer Truncation576530
-Node: Complex Number Functions580374
-Node: Conversions582427
-Node: Date Arithmetic589384
-Node: Date Conversions590437
-Node: Date Functions593991
-Node: Business Days600551
-Node: Time Zones607297
-Node: Financial Functions617352
-Node: Percentages618380
-Node: Future Value621262
-Node: Present Value624146
-Node: Related Financial Functions627879
-Node: Depreciation Functions630933
-Node: Definitions of Financial Functions633667
-Node: Binary Functions639178
-Node: Scientific Functions646218
-Node: Logarithmic Functions647920
-Node: Trigonometric and Hyperbolic Functions650138
-Node: Advanced Math Functions654114
-Node: Branch Cuts657737
-Node: Random Numbers664203
-Node: Random Number Generator669583
-Node: Combinatorial Functions674382
-Node: Probability Distribution Functions681579
-Node: Matrix Functions685385
-Node: Packing and Unpacking686421
-Node: Building Vectors695263
-Node: Extracting Elements700992
-Node: Manipulating Vectors705462
-Node: Vector and Matrix Arithmetic714451
-Node: Set Operations718011
-Node: Statistical Operations725446
-Node: Single-Variable Statistics726462
-Node: Paired-Sample Statistics734990
-Node: Reducing and Mapping736787
-Node: Specifying Operators737823
-Node: Mapping744352
-Node: Reducing749242
-Node: Nesting and Fixed Points752539
-Node: Generalized Products756234
-Node: Vector and Matrix Formats757921
-Node: Algebra762687
-Node: Selecting Subformulas764054
-Node: Making Selections764886
-Node: Changing Selections771009
-Node: Displaying Selections775071
-Node: Operating on Selections776151
-Node: Rearranging with Selections782291
-Node: Algebraic Manipulation793121
-Node: Simplifying Formulas801179
-Node: Basic Simplifications803331
-Node: Algebraic Simplifications816859
-Node: Unsafe Simplifications826596
-Node: Simplification of Units830321
-Node: Polynomials834190
-Node: Calculus844307
-Node: Differentiation844841
-Node: Integration847462
-Node: Customizing the Integrator851248
-Node: Numerical Integration857841
-Node: Taylor Series859865
-Node: Solving Equations860748
-Node: Multiple Solutions862202
-Node: Solving Systems of Equations867623
-Node: Decomposing Polynomials870798
-Node: Numerical Solutions876985
-Node: Root Finding877653
-Node: Minimization881279
-Node: Numerical Systems of Equations883954
-Node: Curve Fitting885330
-Node: Linear Fits886346
-Node: Polynomial and Multilinear Fits891766
-Node: Error Estimates for Fits896088
-Node: Standard Nonlinear Models900933
-Node: Curve Fitting Details908372
-Node: Interpolation922930
-Node: Summations925806
-Node: Logical Operations933327
-Node: Rewrite Rules945916
-Node: Entering Rewrite Rules947361
-Node: Basic Rewrite Rules950273
-Node: Conditional Rewrite Rules952556
-Node: Algebraic Properties of Rewrite Rules957209
-Node: Other Features of Rewrite Rules968501
-Node: Composing Patterns in Rewrite Rules984220
-Node: Nested Formulas with Rewrite Rules989261
-Node: Multi-Phase Rewrite Rules993023
-Node: Selections with Rewrite Rules998567
-Node: Matching Commands1002303
-Node: Automatic Rewrites1004138
-Node: Debugging Rewrites1013029
-Node: Examples of Rewrite Rules1013980
-Node: Units1018744
-Node: Basic Operations on Units1019325
-Node: The Units Table1029480
-Node: Predefined Units1032281
-Node: User-Defined Units1037379
-Node: Logarithmic Units1041289
-Node: Musical Notes1046967
-Node: Store and Recall1049640
-Node: Storing Variables1050161
-Node: Recalling Variables1058366
-Node: Operations on Variables1059304
-Node: Let Command1063329
-Node: Evaluates-To Operator1065145
-Node: Graphics1070875
-Node: Basic Graphics1072112
-Node: Three Dimensional Graphics1076243
-Node: Managing Curves1079439
-Node: Graphics Options1087170
-Node: Devices1093971
-Ref: Devices-Footnote-11102878
-Node: Kill and Yank1103178
-Node: Killing From Stack1103745
-Node: Yanking Into Stack1105694
-Node: Saving Into Registers1107491
-Node: Inserting From Registers1109017
-Node: Grabbing From Buffers1109603
-Node: Yanking Into Buffers1115332
-Node: X Cut and Paste1118426
-Node: Keypad Mode1119940
-Node: Keypad Main Menu1122059
-Node: Keypad Functions Menu1126826
-Node: Keypad Binary Menu1128111
-Node: Keypad Vectors Menu1129326
-Node: Keypad Modes Menu1132665
-Node: Embedded Mode1134760
-Node: Basic Embedded Mode1135313
-Node: More About Embedded Mode1142329
-Node: Assignments in Embedded Mode1148970
-Node: Mode Settings in Embedded Mode1157873
-Node: Customizing Embedded Mode1164063
-Node: Programming1171515
-Node: Creating User Keys1173449
-Node: Keyboard Macros1176847
-Node: Naming Keyboard Macros1178838
-Node: Conditionals in Macros1181389
-Node: Loops in Macros1184981
-Node: Local Values in Macros1189133
-Node: Queries in Macros1192171
-Node: Invocation Macros1193724
-Node: Algebraic Definitions1195338
-Node: Lisp Definitions1201441
-Node: Defining Functions1202972
-Node: Defining Simple Commands1212158
-Node: Defining Stack Commands1218010
-Node: Argument Qualifiers1222071
-Node: Example Definitions1224446
-Node: Bit Counting Example1224857
-Node: Sine Example1225897
-Node: Calling Calc from Your Programs1229517
-Node: Internals1244447
-Node: Data Type Formats1246254
-Node: Interactive Lisp Functions1252858
-Node: Stack Lisp Functions1255818
-Node: Predicates1265217
-Node: Computational Lisp Functions1274880
-Node: Vector Lisp Functions1287767
-Node: Symbolic Lisp Functions1292924
-Node: Formatting Lisp Functions1319344
-Node: Hooks1325523
-Node: Copying1331996
-Node: GNU Free Documentation License1369782
-Node: Customizing Calc1395138
-Node: Reporting Bugs1413225
-Node: Summary1414354
-Node: Key Index1464877
-Node: Command Index1547287
-Node: Function Index1607844
-Node: Concept Index1665304
-Node: Variable Index1698773
-Node: Lisp Function Index1710434
+Node: About This Manual6878
+Node: Notations Used in This Manual10187
+Node: Demonstration of Calc12197
+Node: Using Calc17395
+Node: Starting Calc17913
+Node: The Standard Interface19382
+Node: Quick Mode Overview24114
+Node: Keypad Mode Overview25212
+Node: Standalone Operation28106
+Node: Embedded Mode Overview28771
+Node: Other C-x * Commands32722
+Node: History and Acknowledgments37410
+Node: Interactive Tutorial42489
+Node: Tutorial43568
+Node: Basic Tutorial45358
+Node: RPN Tutorial45915
+Node: Algebraic Tutorial60485
+Node: Undo Tutorial71449
+Node: Modes Tutorial77543
+Node: Arithmetic Tutorial94383
+Node: Vector/Matrix Tutorial107034
+Node: Vector Analysis Tutorial107515
+Node: Matrix Tutorial111621
+Node: List Tutorial118996
+Node: Types Tutorial140740
+Node: Algebra Tutorial159198
+Node: Basic Algebra Tutorial159580
+Node: Rewrites Tutorial174079
+Node: Programming Tutorial189845
+Node: Answers to Exercises211781
+Node: RPN Answer 1215341
+Node: RPN Answer 2215578
+Node: RPN Answer 3217227
+Node: RPN Answer 4218311
+Node: Algebraic Answer 1219683
+Node: Algebraic Answer 2220217
+Node: Algebraic Answer 3220687
+Node: Modes Answer 1221544
+Node: Modes Answer 2225148
+Node: Modes Answer 3226322
+Node: Modes Answer 4227713
+Node: Arithmetic Answer 1228771
+Node: Arithmetic Answer 2229729
+Node: Vector Answer 1230328
+Node: Vector Answer 2230948
+Node: Matrix Answer 1231386
+Node: Matrix Answer 2231722
+Node: Matrix Answer 3232506
+Node: List Answer 1234711
+Node: List Answer 2235528
+Node: List Answer 3237242
+Node: List Answer 4238348
+Node: List Answer 5239536
+Node: List Answer 6240861
+Node: List Answer 7241149
+Node: List Answer 8242907
+Node: List Answer 9245543
+Node: List Answer 10248297
+Node: List Answer 11249075
+Node: List Answer 12250938
+Node: List Answer 13254048
+Node: List Answer 14257480
+Node: Types Answer 1259713
+Node: Types Answer 2261025
+Node: Types Answer 3262723
+Node: Types Answer 4263867
+Node: Types Answer 5264513
+Node: Types Answer 6265956
+Node: Types Answer 7267566
+Node: Types Answer 8268625
+Node: Types Answer 9270276
+Node: Types Answer 10271121
+Node: Types Answer 11272776
+Node: Types Answer 12273927
+Node: Types Answer 13274483
+Node: Types Answer 14274741
+Node: Types Answer 15275504
+Node: Algebra Answer 1276426
+Node: Algebra Answer 2276974
+Node: Algebra Answer 3278025
+Node: Algebra Answer 4278841
+Node: Rewrites Answer 1280340
+Node: Rewrites Answer 2281498
+Node: Rewrites Answer 3282951
+Node: Rewrites Answer 4284226
+Node: Rewrites Answer 5285998
+Node: Rewrites Answer 6286601
+Node: Programming Answer 1290025
+Node: Programming Answer 2290684
+Node: Programming Answer 3291447
+Node: Programming Answer 4292457
+Node: Programming Answer 5292731
+Node: Programming Answer 6293231
+Node: Programming Answer 7294112
+Node: Programming Answer 8295393
+Node: Programming Answer 9298349
+Node: Programming Answer 10301878
+Node: Programming Answer 11304561
+Node: Programming Answer 12307986
+Node: Introduction308998
+Node: Basic Commands309513
+Node: Help Commands315959
+Node: Stack Basics320730
+Node: Numeric Entry323053
+Node: Algebraic Entry324588
+Node: Quick Calculator329937
+Node: Prefix Arguments333307
+Node: Undo335848
+Node: Error Messages338149
+Node: Multiple Calculators339480
+Node: Troubleshooting Commands340755
+Node: Autoloading Problems341218
+Node: Recursion Depth341989
+Node: Caches342884
+Node: Debugging Calc344169
+Node: Data Types346789
+Node: Integers348075
+Node: Fractions349254
+Node: Floats350153
+Node: Complex Numbers353991
+Node: Infinities355360
+Node: Vectors and Matrices359551
+Node: Strings361291
+Node: HMS Forms364044
+Node: Date Forms365626
+Node: Modulo Forms374164
+Node: Error Forms377537
+Node: Interval Forms381480
+Node: Incomplete Objects386141
+Node: Variables388217
+Node: Formulas391141
+Node: Stack and Trail397777
+Node: Stack Manipulation398238
+Node: Editing Stack Entries403885
+Node: Trail Commands406635
+Node: Keep Arguments410486
+Node: Mode Settings412693
+Node: General Mode Commands413239
+Node: Precision417237
+Node: Inverse and Hyperbolic420093
+Node: Calculation Modes421933
+Node: Angular Modes422504
+Node: Polar Mode423702
+Node: Fraction Mode424379
+Node: Infinite Mode425410
+Node: Symbolic Mode427292
+Node: Matrix Mode428588
+Node: Automatic Recomputation432330
+Node: Working Message433406
+Node: Simplification Modes434556
+Node: Declarations438156
+Node: Declaration Basics438643
+Node: Kinds of Declarations441435
+Node: Functions for Declarations449750
+Node: Display Modes454287
+Node: Radix Modes456082
+Node: Grouping Digits458879
+Node: Float Formats460630
+Node: Complex Formats463599
+Node: Fraction Formats464750
+Node: HMS Formats466633
+Node: Date Formats468082
+Node: ISO 8601469236
+Node: Date Formatting Codes472440
+Node: Free-Form Dates478159
+Node: Standard Date Formats481267
+Node: Truncating the Stack482644
+Node: Justification484142
+Node: Labels486930
+Node: Language Modes488204
+Node: Normal Language Modes490658
+Node: C FORTRAN Pascal494137
+Node: TeX and LaTeX Language Modes497892
+Node: Eqn Language Mode505694
+Node: Yacas Language Mode509629
+Node: Maxima Language Mode510978
+Node: Giac Language Mode512113
+Node: Mathematica Language Mode513281
+Node: Maple Language Mode514323
+Node: Compositions515758
+Node: Composition Basics517327
+Node: Horizontal Compositions522339
+Node: Vertical Compositions523871
+Node: Other Compositions526534
+Node: Information about Compositions528856
+Node: User-Defined Compositions530236
+Node: Syntax Tables535379
+Node: Syntax Table Basics536364
+Node: Precedence in Syntax Tables542679
+Node: Advanced Syntax Patterns543946
+Node: Conditional Syntax Rules548517
+Node: Modes Variable551676
+Node: Calc Mode Line555528
+Node: Arithmetic561026
+Node: Basic Arithmetic562194
+Node: Integer Truncation576456
+Node: Complex Number Functions580300
+Node: Conversions582353
+Node: Date Arithmetic589310
+Node: Date Conversions590363
+Node: Date Functions593917
+Node: Business Days600477
+Node: Time Zones607223
+Node: Financial Functions617278
+Node: Percentages618306
+Node: Future Value621188
+Node: Present Value624072
+Node: Related Financial Functions627805
+Node: Depreciation Functions630859
+Node: Definitions of Financial Functions633593
+Node: Binary Functions639104
+Node: Scientific Functions646144
+Node: Logarithmic Functions647846
+Node: Trigonometric and Hyperbolic Functions650064
+Node: Advanced Math Functions654040
+Node: Branch Cuts657666
+Node: Random Numbers664132
+Node: Random Number Generator669512
+Node: Combinatorial Functions674311
+Node: Probability Distribution Functions681508
+Node: Matrix Functions685314
+Node: Packing and Unpacking686350
+Node: Building Vectors695192
+Node: Extracting Elements700921
+Node: Manipulating Vectors705391
+Node: Vector and Matrix Arithmetic714380
+Node: Set Operations717940
+Node: Statistical Operations725375
+Node: Single-Variable Statistics726391
+Node: Paired-Sample Statistics734919
+Node: Reducing and Mapping736716
+Node: Specifying Operators737752
+Node: Mapping744281
+Node: Reducing749171
+Node: Nesting and Fixed Points752468
+Node: Generalized Products756163
+Node: Vector and Matrix Formats757850
+Node: Algebra762616
+Node: Selecting Subformulas763983
+Node: Making Selections764815
+Node: Changing Selections770938
+Node: Displaying Selections775000
+Node: Operating on Selections776080
+Node: Rearranging with Selections782220
+Node: Algebraic Manipulation793050
+Node: Simplifying Formulas801108
+Node: Basic Simplifications803260
+Node: Algebraic Simplifications816788
+Node: Unsafe Simplifications826525
+Node: Simplification of Units830250
+Node: Polynomials834119
+Node: Calculus844236
+Node: Differentiation844770
+Node: Integration847391
+Node: Customizing the Integrator851177
+Node: Numerical Integration857770
+Node: Taylor Series859794
+Node: Solving Equations860677
+Node: Multiple Solutions862131
+Node: Solving Systems of Equations867552
+Node: Decomposing Polynomials870727
+Node: Numerical Solutions876914
+Node: Root Finding877582
+Node: Minimization881208
+Node: Numerical Systems of Equations883883
+Node: Curve Fitting885259
+Node: Linear Fits886275
+Node: Polynomial and Multilinear Fits891695
+Node: Error Estimates for Fits896017
+Node: Standard Nonlinear Models900862
+Node: Curve Fitting Details908301
+Node: Interpolation922859
+Node: Summations925735
+Node: Logical Operations933256
+Node: Rewrite Rules945845
+Node: Entering Rewrite Rules947290
+Node: Basic Rewrite Rules950202
+Node: Conditional Rewrite Rules952485
+Node: Algebraic Properties of Rewrite Rules957138
+Node: Other Features of Rewrite Rules968430
+Node: Composing Patterns in Rewrite Rules984149
+Node: Nested Formulas with Rewrite Rules989190
+Node: Multi-Phase Rewrite Rules992952
+Node: Selections with Rewrite Rules998496
+Node: Matching Commands1002232
+Node: Automatic Rewrites1004067
+Node: Debugging Rewrites1012958
+Node: Examples of Rewrite Rules1013909
+Node: Units1018673
+Node: Basic Operations on Units1019254
+Node: The Units Table1029409
+Node: Predefined Units1032210
+Node: User-Defined Units1037308
+Node: Logarithmic Units1041218
+Node: Musical Notes1046896
+Node: Store and Recall1049549
+Node: Storing Variables1050070
+Node: Recalling Variables1058275
+Node: Operations on Variables1059213
+Node: Let Command1063238
+Node: Evaluates-To Operator1065054
+Node: Graphics1070784
+Node: Basic Graphics1072021
+Node: Three Dimensional Graphics1076152
+Node: Managing Curves1079348
+Node: Graphics Options1087079
+Node: Devices1093880
+Ref: Devices-Footnote-11102787
+Node: Kill and Yank1103087
+Node: Killing From Stack1103654
+Node: Yanking Into Stack1105886
+Node: Saving Into Registers1107683
+Node: Inserting From Registers1109209
+Node: Grabbing From Buffers1109795
+Node: Yanking Into Buffers1115524
+Node: X Cut and Paste1118618
+Node: Keypad Mode1120132
+Node: Keypad Main Menu1122251
+Node: Keypad Functions Menu1127018
+Node: Keypad Binary Menu1128303
+Node: Keypad Vectors Menu1129518
+Node: Keypad Modes Menu1132857
+Node: Embedded Mode1134952
+Node: Basic Embedded Mode1135505
+Node: More About Embedded Mode1142521
+Node: Assignments in Embedded Mode1149162
+Node: Mode Settings in Embedded Mode1158065
+Node: Customizing Embedded Mode1164255
+Node: Programming1171707
+Node: Creating User Keys1173641
+Node: Keyboard Macros1177039
+Node: Naming Keyboard Macros1179030
+Node: Conditionals in Macros1181581
+Node: Loops in Macros1185173
+Node: Local Values in Macros1189325
+Node: Queries in Macros1192363
+Node: Invocation Macros1193916
+Node: Algebraic Definitions1195530
+Node: Lisp Definitions1201633
+Node: Defining Functions1203231
+Node: Defining Simple Commands1212417
+Node: Defining Stack Commands1218279
+Node: Argument Qualifiers1222340
+Node: Example Definitions1224715
+Node: Bit Counting Example1225126
+Node: Sine Example1226166
+Node: Calling Calc from Your Programs1229786
+Node: Internals1244716
+Node: Data Type Formats1246523
+Node: Interactive Lisp Functions1253127
+Node: Stack Lisp Functions1256087
+Node: Predicates1265486
+Node: Computational Lisp Functions1275149
+Node: Vector Lisp Functions1288036
+Node: Symbolic Lisp Functions1293193
+Node: Formatting Lisp Functions1319613
+Node: Hooks1325792
+Node: Copying1332265
+Node: GNU Free Documentation License1370051
+Node: Customizing Calc1395407
+Node: Reporting Bugs1413506
+Node: Summary1414635
+Node: Key Index1465158
+Node: Command Index1547568
+Node: Function Index1608125
+Node: Concept Index1665585
+Node: Variable Index1699278
+Node: Lisp Function Index1710939
 
 End Tag Table
 

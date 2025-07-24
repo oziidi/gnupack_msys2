@@ -1,8 +1,8 @@
-This is ido.info, produced by makeinfo version 6.7 from ido.texi.
+This is ido.info, produced by makeinfo version 6.8 from ido.texi.
 
 This file documents the Ido package for GNU Emacs.
 
-   Copyright © 2013–2022 Free Software Foundation, Inc.
+   Copyright © 2013–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -27,7 +27,7 @@ Interactive Do
 
 This file documents the Ido package for GNU Emacs.
 
-   Copyright © 2013–2022 Free Software Foundation, Inc.
+   Copyright © 2013–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -375,12 +375,12 @@ or customize a certain variable:
 
      M-x customize-variable <RET> ido-xxxxx <RET>
 
-   To modify the keybindings, use the ‘ido-setup-hook’.  For example:
+   To modify the key bindings, use the ‘ido-setup-hook’.  For example:
 
      (add-hook 'ido-setup-hook 'ido-my-keys)
 
      (defun ido-my-keys ()
-      "Add my keybindings for Ido."
+      "Add my key bindings for Ido."
       (define-key ido-completion-map " " 'ido-next-match))
 
 * Menu:
@@ -1166,17 +1166,17 @@ Node: Regexp Matching12703
 Node: Highlighting13388
 Node: Hidden Buffers and Files13747
 Node: Customization14358
-Node: Changing List Order15177
-Node: Find File At Point16028
-Node: Ignoring16668
-Node: Misc Customization18168
-Node: Misc21235
-Node: All Matching22536
-Node: Replacement23457
-Node: Other Packages23883
-Node: GNU Free Documentation License24253
-Node: Function Index49603
-Node: Variable Index50566
+Node: Changing List Order15179
+Node: Find File At Point16030
+Node: Ignoring16670
+Node: Misc Customization18170
+Node: Misc21237
+Node: All Matching22538
+Node: Replacement23459
+Node: Other Packages23885
+Node: GNU Free Documentation License24255
+Node: Function Index49605
+Node: Variable Index50568
 
 End Tag Table
 

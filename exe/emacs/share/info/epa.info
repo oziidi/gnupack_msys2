@@ -1,8 +1,8 @@
-This is epa.info, produced by makeinfo version 6.7 from epa.texi.
+This is epa.info, produced by makeinfo version 6.8 from epa.texi.
 
 This file describes EasyPG Assistant 1.0.0.
 
-   Copyright © 2007–2022 Free Software Foundation, Inc.
+   Copyright © 2007–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -22,7 +22,7 @@ END-INFO-DIR-ENTRY
 
 File: epa.info,  Node: Top,  Next: Overview,  Up: (dir)
 
-EasyPG Assistant user’s manual
+EasyPG Assistant User’s Manual
 ******************************
 
 EasyPG Assistant is an Emacs user interface to GNU Privacy Guard (GnuPG,
@@ -34,7 +34,7 @@ interface called EasyPG Library.
 
    This file describes EasyPG Assistant 1.0.0.
 
-   Copyright © 2007–2022 Free Software Foundation, Inc.
+   Copyright © 2007–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -53,9 +53,11 @@ interface called EasyPG Library.
 * Quick start::
 * Commands::
 * GnuPG version compatibility::
+* GnuPG Pinentry::
 * Caching Passphrases::
 * Bug Reports::
 * GNU Free Documentation License::  The license for this documentation.
+* Concept Index::
 * Key Index::
 * Function Index::
 * Variable Index::
@@ -66,7 +68,8 @@ File: epa.info,  Node: Overview,  Next: Quick start,  Prev: Top,  Up: Top
 1 Overview
 **********
 
-EasyPG Assistant provides the following features.
+EasyPG Assistant is an Emacs frontend application to GnuPG (GNU Privacy
+Guard) that provides the following features:
 
    • Key management.
    • Cryptographic operations on regions.
@@ -78,10 +81,22 @@ EasyPG Assistant provides the following features.
 
 File: epa.info,  Node: Quick start,  Next: Commands,  Prev: Overview,  Up: Top
 
-2 Quick start
+2 Quick Start
 *************
 
-EasyPG Assistant commands are prefixed by ‘epa-’.  For example,
+You can use EasyPG Assistant without any Emacs or GnuPG configuration
+whatsoever, for example to encrypt and decrypt files automatically with
+symmetric encryption, see *note Encrypting/decrypting gpg files::.
+However, to use the full set of EasyPG Assistant’s functions you should
+have at least some minimum GnuPG configuration in place.
+
+   John Michael Ashley’s GNU Privacy Handbook, available online as part
+of the GnuPG user guides (https://gnupg.org/documentation/guides.html),
+provides an introduction to GnuPG use and configuration.  In contrast to
+that, the GnuPG manual (*note Top: (gnupg)Top.) is more of a reference
+manual.
+
+   EasyPG Assistant commands are prefixed by ‘epa-’.  For example,
 
    • To browse your keyring, type ‘M-x epa-list-keys’
 
@@ -117,7 +132,7 @@ This chapter introduces various commands for typical use cases.
 
 File: epa.info,  Node: Key management,  Next: Cryptographic operations on regions,  Up: Commands
 
-3.1 Key management
+3.1 Key Management
 ==================
 
 Probably the first step of using EasyPG Assistant is to browse your
@@ -189,7 +204,7 @@ take a file as input/output, and others take the current region.
 
 File: epa.info,  Node: Cryptographic operations on regions,  Next: Cryptographic operations on files,  Prev: Key management,  Up: Commands
 
-3.2 Cryptographic operations on regions
+3.2 Cryptographic Operations on Regions
 =======================================
 
  -- Command: epa-decrypt-region start end
@@ -230,7 +245,7 @@ File: epa.info,  Node: Cryptographic operations on regions,  Next: Cryptographic
 
 File: epa.info,  Node: Cryptographic operations on files,  Next: Dired integration,  Prev: Cryptographic operations on regions,  Up: Commands
 
-3.3 Cryptographic operations on files
+3.3 Cryptographic Operations on Files
 =====================================
 
  -- Command: epa-decrypt-file file &optional output
@@ -250,7 +265,7 @@ File: epa.info,  Node: Cryptographic operations on files,  Next: Dired integrati
 
 File: epa.info,  Node: Dired integration,  Next: Mail-mode integration,  Prev: Cryptographic operations on files,  Up: Commands
 
-3.4 Dired integration
+3.4 Dired Integration
 =====================
 
 EasyPG Assistant extends Dired Mode for GNU Emacs to allow users to
@@ -278,7 +293,7 @@ The following keys are assigned.
 
 File: epa.info,  Node: Mail-mode integration,  Next: Encrypting/decrypting gpg files,  Prev: Dired integration,  Up: Commands
 
-3.5 Mail-mode integration
+3.5 Mail-Mode Integration
 =========================
 
 EasyPG Assistant provides a minor mode ‘epa-mail-mode’ to help user
@@ -320,13 +335,43 @@ interface.  Try ‘M-x customize-variable epa-global-mail-mode’.
 
 File: epa.info,  Node: Encrypting/decrypting gpg files,  Next: Querying a key server,  Prev: Mail-mode integration,  Up: Commands
 
-3.6 Encrypting/decrypting gpg files
-===================================
+3.6 Encrypting and Decrypting gpg Files
+=======================================
 
 By default, every file whose name ends with ‘.gpg’ will be treated as
 encrypted.  That is, when you open such a file, the decrypted text is
 inserted in the buffer rather than encrypted one.  Similarly, when you
 save the buffer to a ‘foo.gpg’ file, encrypted data is written.
+
+   When you save a buffer to an encrypted file for the first time,
+EasyPG Assistant presents you a list of keys in a buffer ‘*Keys*’ where
+you can select recipients for encryption.  *Note Key management::, for a
+description of the format of that buffer.  You can streamline this
+recipient selection step by customizing variables ‘epa-file-encrypt-to’
+and ‘epa-file-select-keys’ described further below in this section.
+
+   If you do not select any recipient during this step, EasyPG Assistant
+uses symmetric encryption.  As a consequence, you have to enter the
+passphrase twice for every buffer save and every so often for file
+reads, since the GnuPG Agent caches your passphrase for file reads at
+least for some time, but not for buffer saves.  *Note Caching
+Passphrases::, for more information.
+
+   If you have created your own keypair(1), you can select that as
+recipient, and EasyPG Assistant will use public key encryption for that
+file.  Since GnuPG performs encryption with your public key, it does not
+prompt for a passphrase for the buffer save, but it will prompt for your
+passphrase for file reads every now and then, depending on the GnuPG
+Agent cache configuration.
+
+   To encrypt and decrypt files as described above EasyPG Assistant
+under certain circumstances uses intermediate temporary files that
+contain the plain-text contents of the files it processes.  EasyPG
+Assistant creates them below the directory returned by function
+‘temporary-file-directory’ (*note Generating Unique File Names:
+(elisp)Unique File Names.).  If you want to be sure not to leave any
+plain-text traces, use an encrypted file systems at least for that
+directory.
 
    The file name pattern for encrypted files can be controlled by
 ‘epa-file-name-regexp’.
@@ -359,8 +404,9 @@ dialog.
      Control whether or not to pop up the key selection dialog.
 
    For frequently visited files, it might be a good idea to tell Emacs
-which encryption method should be used through *Note (emacs)File
-Variables::.  Use the ‘epa-file-encrypt-to’ local variable for this.
+which encryption method should be used through file variables (*note
+Local Variables in Files: (emacs)File Variables.).  Use the
+‘epa-file-encrypt-to’ local variable for this.
 
    For example, if you want an Elisp file to be encrypted with a public
 key associated with an email address ‘ueno@unixuser.org’, add the
@@ -381,14 +427,27 @@ behavior are below.
      If non-‘nil’, cache passphrase for symmetric encryption.  The
      default value is ‘nil’.
 
+     For security reasons, this option is turned off by default and not
+     recommended to be used.  Instead, consider using the GnuPG Agent,
+     which in many cases can do the same job, and does it in a safer
+     way.  *Note Caching Passphrases::, for more information.
+
  -- Variable: epa-file-inhibit-auto-save
      If non-‘nil’, disable auto-saving when opening an encrypted file.
      The default value is ‘t’.
 
+   ---------- Footnotes ----------
+
+   (1) For encryption and decryption of files you do not intend to
+share, you do not have to use an email address as recipient during
+creation of the keypair.  You can also use some free-form string that
+gives information on the use of the keypair, like ‘backup’ or ‘account
+database’.
+
 
 File: epa.info,  Node: Querying a key server,  Prev: Encrypting/decrypting gpg files,  Up: Commands
 
-3.7 Querying a key server
+3.7 Querying a Key Server
 =========================
 
 The ‘epa-search-keys’ command can be used to query a GPG key server.
@@ -402,43 +461,81 @@ your key ring).
    The ‘epa-keyserver’ variable says which server to query.
 
 
-File: epa.info,  Node: GnuPG version compatibility,  Next: Caching Passphrases,  Prev: Commands,  Up: Top
+File: epa.info,  Node: GnuPG version compatibility,  Next: GnuPG Pinentry,  Prev: Commands,  Up: Top
 
-4 GnuPG version compatibility
+4 GnuPG Version Compatibility
 *****************************
 
-As of February 2016, there are three active branches of GnuPG: 2.1, 2.0,
-and 1.4.  All those branches should work flawlessly with Emacs with
-basic use-cases.  They have, however, some incompatible characteristics,
-which might be visible when used from Emacs.
+As of June 2023, there are three active branches of GnuPG: 2.4, 2.2, and
+1.4.  GnuPG versions 2.4.1 and later suffer from GnuPG bug T6481
+(https://dev.gnupg.org/T6481) and are hardly usable with Emacs.  There
+is a patch for that bug available at least for GnuPG version 2.4.1,
+which your operating system or distribution might provide already.
+GnuPG 1.4 is considered a legacy version.
+
+   Besides that, all of those branches mentioned above should work
+flawlessly with Emacs with basic use-cases.  They have, however, some
+incompatible characteristics, which might be visible when used from
+Emacs.
 
    • The key store format used by GnuPG 2.1 is incompatible with 1.4.
      That means, a key created with GnuPG 2.1 is not visible with 1.4.
 
    • GnuPG 2.1 uses a fixed address for the Unix domain socket used to
-     communicate with gpg-agent.  The ‘GPG_AGENT_INFO’ environment
+     communicate with ‘gpg-agent’.  The ‘GPG_AGENT_INFO’ environment
      variable, which is used by GnuPG 2.0 and 1.4, is ignored.  That
      means, if your system has both GnuPG 2.1 and 1.4, the gpg command
-     from GnuPG 1.4 is not able to use gpg-agent provided by 2.1 (at
+     from GnuPG 1.4 is not able to use ‘gpg-agent’ provided by 2.1 (at
      least out of box).
 
    • GnuPG 2.1 (2.1.5 or later) has a mechanism to direct the Pinentry
-     password prompt to the Emacs minibuffer(1), which would be useful
-     when you use Emacs remotely or from a text-only terminal.  That
-     feature is not available in other versions, and more specifically,
-     with 2.0 (as of 2.0.29), there is no way to avoid the graphical
-     prompt.
-
-   ---------- Footnotes ----------
-
-   (1) To enable this feature, add ‘allow-emacs-pinentry’ to
-‘~/.gnupg/gpg-agent.conf’ and let gpg-agent reload the configuration,
-with: ‘gpgconf --reload gpg-agent’
+     password prompt to the Emacs minibuffer.  *Note GnuPG Pinentry::.
 
 
-File: epa.info,  Node: Caching Passphrases,  Next: Bug Reports,  Prev: GnuPG version compatibility,  Up: Top
+File: epa.info,  Node: GnuPG Pinentry,  Next: Caching Passphrases,  Prev: GnuPG version compatibility,  Up: Top
 
-5 Caching Passphrases
+5 GnuPG Pinentry
+****************
+
+An important component of the GnuPG suite is the Pinentry, which allows
+for secure entry of passphrases requested by GnuPG. GnuPG delivers
+various different programs as Pinentry, ranging from bland TTY-only
+‘pinentry-tty’ to fancy graphical dialogs for various desktop
+environments, like ‘pinentry-gnome3’.  Your operating system usually
+determines which of these is used by default.
+
+   Note that the selection of a concrete Pinentry program determines
+only _how_ GnuPG queries for passphrases and not _how often_.  For the
+latter question see *note Caching Passphrases::.
+
+   With some configuration Emacs can also play the role of a Pinentry.
+The most natural choice, available with GnuPG 2.1.5 and later, is to use
+Emacs itself as Pinentry for requests that are triggered by Emacs.  For
+example, if you open a file whose name ends with ‘.gpg’ using automatic
+decryption, you most likely also want to enter the passphrase for that
+request in Emacs.
+
+   This so called “loopback Pinentry” has the added benefit that it
+works also when you use Emacs remotely or from a text-only terminal.  To
+enable it:
+
+  1. Ensure that option ‘allow-loopback-pinentry’ is configured for
+     ‘gpg-agent’, which should be the default.  *Note Option Summary:
+     (gnupg)Agent Options.
+
+  2. Customize variable ‘epg-pinentry-mode’ to ‘loopback’ in Emacs.
+
+   There are other options available to use Emacs as Pinentry, you might
+come across a Pinentry called ‘pinentry-emacs’ or ‘gpg-agent’ option
+‘allow-emacs-pinentry’.  However, these are considered insecure or
+semi-obsolete and might not be supported by your operating system or
+distribution.  For example, Debian GNU/Linux supports only the loopback
+Pinentry described above.
+
+
+File: epa.info,  Node: Caching Passphrases,  Next: Bug Reports,  Prev: GnuPG Pinentry,  Up: Top
+
+6 Caching Passphrases
 *********************
 
 Typing passphrases is a troublesome task if you frequently open and
@@ -446,28 +543,27 @@ close the same file.  GnuPG and EasyPG Assistant provide mechanisms to
 remember your passphrases for a limited time.  Using these, you only
 need to re-enter the passphrase occasionally.  However, the
 configuration is a bit confusing since it depends on your GnuPG
-installation*Note GnuPG version compatibility::, encryption method
-(symmetric or public key), and whether or not you want to use gpg-agent.
-Here are some questions:
+installation (*note GnuPG version compatibility::), encryption method
+(symmetric or public key), and whether or not you want to use GnuPG
+Agent.  As an additional constraint, use of the GnuPG Agent is mandatory
+for GnuPG 2.0 and later.  Here are some questions:
 
-  1. Do you use GnuPG version 2.1 or 2.0 instead of GnuPG version 1.4?
+  1. Do you use GnuPG version 2.0 or later instead of GnuPG version 1.4?
   2. Do you use symmetric encryption rather than public key encryption?
-  3. Do you want to use gpg-agent?
+  3. Do you want to use GnuPG Agent?
 
    Here are configurations depending on your answers:
 
 1     2     3     Configuration
-Yes   Yes   Yes   Set up gpg-agent.
-Yes   Yes   No    You can’t, without gpg-agent.
-Yes   No    Yes   Set up gpg-agent.
-Yes   No    No    You can’t, without gpg-agent.
+Yes   Yes   Must  Set up GnuPG Agent.
+Yes   No    Must  Set up GnuPG Agent.
 No    Yes   Yes   Set up elisp passphrase cache.
 No    Yes   No    Set up elisp passphrase cache.
-No    No    Yes   Set up gpg-agent.
-No    No    No    You can’t, without gpg-agent.
+No    No    Yes   Set up GnuPG Agent.
+No    No    No    You can’t, without GnuPG Agent.
 
-   To set up gpg-agent, follow the instruction in GnuPG manual.  *note
-Invoking GPG-AGENT: (gnupg)Invoking GPG-AGENT.
+   To set up GnuPG Agent, follow the instruction in *note
+(gnupg)Invoking GPG-AGENT::.
 
    To set up elisp passphrase cache, set
 ‘epa-file-cache-passphrase-for-symmetric-encryption’.  *Note
@@ -476,12 +572,13 @@ Encrypting/decrypting gpg files::.
 
 File: epa.info,  Node: Bug Reports,  Next: GNU Free Documentation License,  Prev: Caching Passphrases,  Up: Top
 
-6 Bug Reports
+7 Bug Reports
 *************
 
 Bugs and problems with EasyPG Assistant are actively worked on by the
 Emacs development team.  Feature requests and suggestions are also more
-than welcome.  Use ‘M-x report-emacs-bug’, *note Bugs: (emacs)Bugs.
+than welcome.  Use ‘M-x report-emacs-bug’, see *note Reporting Bugs:
+(emacs)Bugs.
 
    When submitting a bug report, please try to describe in excruciating
 detail the steps required to reproduce the problem.  Also try to collect
@@ -496,7 +593,7 @@ necessary information to fix the bug, such as:
 whitespace.
 
 
-File: epa.info,  Node: GNU Free Documentation License,  Next: Key Index,  Prev: Bug Reports,  Up: Top
+File: epa.info,  Node: GNU Free Documentation License,  Next: Concept Index,  Prev: Bug Reports,  Up: Top
 
 Appendix A GNU Free Documentation License
 *****************************************
@@ -978,7 +1075,97 @@ software license, such as the GNU General Public License, to permit
 their use in free software.
 
 
-File: epa.info,  Node: Key Index,  Next: Function Index,  Prev: GNU Free Documentation License,  Up: Top
+File: epa.info,  Node: Concept Index,  Next: Key Index,  Prev: GNU Free Documentation License,  Up: Top
+
+Concept Index
+*************
+
+ [index ]
+* Menu:
+
+* automatic file encryption and decryption: Encrypting/decrypting gpg files.
+                                                               (line  6)
+* browse key ring:                       Key management.       (line  6)
+* bug reports:                           Bug Reports.          (line  6)
+* caching passphrases:                   Caching Passphrases.  (line  6)
+* compatibility with gnupg:              GnuPG version compatibility.
+                                                               (line  6)
+* configuration of gnupg:                Quick start.          (line  6)
+* cryptographic operations on files:     Cryptographic operations on files.
+                                                               (line  6)
+* cryptographic operations on regions:   Cryptographic operations on regions.
+                                                               (line  6)
+* decrypt file:                          Cryptographic operations on files.
+                                                               (line  6)
+* decrypt region:                        Cryptographic operations on regions.
+                                                               (line  6)
+* decrypting gpg files:                  Encrypting/decrypting gpg files.
+                                                               (line  6)
+* delete keys:                           Key management.       (line 68)
+* directory operations:                  Dired integration.    (line  6)
+* dired integration:                     Dired integration.    (line  6)
+* documentation on gnupg:                Quick start.          (line  6)
+* easypg assistant:                      Top.                  (line  6)
+* encrypt file:                          Cryptographic operations on files.
+                                                               (line 17)
+* encrypt region:                        Cryptographic operations on regions.
+                                                               (line 35)
+* encrypting gpg files:                  Encrypting/decrypting gpg files.
+                                                               (line  6)
+* entering passphrases:                  Caching Passphrases.  (line  6)
+* features of easypg assistant:          Overview.             (line  6)
+* file operations, cryptographic:        Cryptographic operations on files.
+                                                               (line  6)
+* gnu privacy guard:                     Top.                  (line  6)
+* gnupg:                                 Top.                  (line  6)
+* gnupg documentation:                   Quick start.          (line  6)
+* gnupg pinentry:                        GnuPG Pinentry.       (line  6)
+* gnupg version compatibility:           GnuPG version compatibility.
+                                                               (line  6)
+* gpg files, encrypting and decrypting:  Encrypting/decrypting gpg files.
+                                                               (line  6)
+* import keys:                           Key management.       (line 54)
+* insert keys:                           Key management.       (line 49)
+* introduction to easypg assistant:      Quick start.          (line  6)
+* introduction to gnupg:                 Quick start.          (line  6)
+* key management:                        Key management.       (line  6)
+* key ring, browsing:                    Key management.       (line  6)
+* key server, querying:                  Querying a key server.
+                                                               (line  6)
+* loopback pinentry:                     GnuPG Pinentry.       (line 24)
+* mail-mode integration:                 Mail-mode integration.
+                                                               (line  6)
+* multiple file operations:              Dired integration.    (line  6)
+* passphrases, entering and caching:     Caching Passphrases.  (line  6)
+* pinentry provided by gnupg:            GnuPG Pinentry.       (line  6)
+* pinentry, emacs as:                    GnuPG Pinentry.       (line 17)
+* private key ring, browsing:            Key management.       (line 37)
+* public key encryption, passphrase entry for: Encrypting/decrypting gpg files.
+                                                               (line 25)
+* query key server:                      Querying a key server.
+                                                               (line  6)
+* region operations, cryptographic:      Cryptographic operations on regions.
+                                                               (line  6)
+* reporting bugs:                        Bug Reports.          (line  6)
+* sending signed/encrypted mails:        Mail-mode integration.
+                                                               (line  6)
+* sign file:                             Cryptographic operations on files.
+                                                               (line 13)
+* sign region:                           Cryptographic operations on regions.
+                                                               (line 30)
+* symmetric encryption, passphrase entry for: Encrypting/decrypting gpg files.
+                                                               (line 18)
+* temporary files created by easypg assistant: Encrypting/decrypting gpg files.
+                                                               (line 32)
+* verify file:                           Cryptographic operations on files.
+                                                               (line 10)
+* verify region:                         Cryptographic operations on regions.
+                                                               (line 17)
+* version compatibility with gnupg:      GnuPG version compatibility.
+                                                               (line  6)
+
+
+File: epa.info,  Node: Key Index,  Next: Function Index,  Prev: Concept Index,  Up: Top
 
 Key Index
 *********
@@ -1032,11 +1219,11 @@ Function Index
 * epa-encrypt-region:                    Cryptographic operations on regions.
                                                                (line 35)
 * epa-file-disable:                      Encrypting/decrypting gpg files.
-                                                               (line 20)
+                                                               (line 50)
 * epa-file-enable:                       Encrypting/decrypting gpg files.
-                                                               (line 23)
+                                                               (line 53)
 * epa-file-select-keys:                  Encrypting/decrypting gpg files.
-                                                               (line 31)
+                                                               (line 61)
 * epa-import-armor-in-region:            Key management.       (line 61)
 * epa-import-keys:                       Key management.       (line 54)
 * epa-import-keys-region:                Key management.       (line 57)
@@ -1071,41 +1258,45 @@ Variable Index
  [index ]
 * Menu:
 
+* allow-loopback-pinentry:               GnuPG Pinentry.      (line  28)
 * epa-file-cache-passphrase-for-symmetric-encryption: Encrypting/decrypting gpg files.
-                                                               (line 60)
+                                                              (line  91)
 * epa-file-encrypt-to:                   Encrypting/decrypting gpg files.
-                                                               (line 43)
+                                                              (line  71)
 * epa-file-inhibit-auto-save:            Encrypting/decrypting gpg files.
-                                                               (line 64)
+                                                              (line 100)
 * epa-file-name-regexp:                  Encrypting/decrypting gpg files.
-                                                               (line 14)
+                                                              (line  44)
 * epa-file-select-keys:                  Encrypting/decrypting gpg files.
-                                                               (line 38)
+                                                              (line  68)
 * epa-mail-aliases:                      Mail-mode integration.
-                                                               (line 31)
+                                                              (line  31)
+* epg-pinentry-mode:                     GnuPG Pinentry.      (line  32)
 
 
 
 Tag Table:
 Node: Top899
-Node: Overview2219
-Node: Quick start2591
-Node: Commands3240
-Node: Key management3646
-Node: Cryptographic operations on regions6371
-Node: Cryptographic operations on files8387
-Node: Dired integration9118
-Node: Mail-mode integration9729
-Node: Encrypting/decrypting gpg files11590
-Node: Querying a key server14206
-Node: GnuPG version compatibility14789
-Ref: GnuPG version compatibility-Footnote-116145
-Node: Caching Passphrases16324
-Node: Bug Reports17863
-Node: GNU Free Documentation License18796
-Node: Key Index44148
-Node: Function Index45687
-Node: Variable Index49126
+Node: Overview2256
+Node: Quick start2695
+Node: Commands3987
+Node: Key management4393
+Node: Cryptographic operations on regions7118
+Node: Cryptographic operations on files9134
+Node: Dired integration9865
+Node: Mail-mode integration10476
+Node: Encrypting/decrypting gpg files12337
+Ref: Encrypting/decrypting gpg files-Footnote-116988
+Node: Querying a key server17283
+Node: GnuPG version compatibility17866
+Node: GnuPG Pinentry19310
+Node: Caching Passphrases21222
+Node: Bug Reports22726
+Node: GNU Free Documentation License23673
+Node: Concept Index49029
+Node: Key Index55057
+Node: Function Index56579
+Node: Variable Index60018
 
 End Tag Table
 

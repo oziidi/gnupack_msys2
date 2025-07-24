@@ -1,6 +1,6 @@
-This is viper.info, produced by makeinfo version 6.7 from viper.texi.
+This is viper.info, produced by makeinfo version 6.8 from viper.texi.
 
-Copyright © 1995–1997, 2001–2022 Free Software Foundation, Inc.
+Copyright © 1995–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -61,7 +61,7 @@ may be visited as needed.
 the current address for Viper bug reports.  Please use the Ex command
 ‘:submitReport’ for this purpose.
 
-   Copyright © 1995–1997, 2001–2022 Free Software Foundation, Inc.
+   Copyright © 1995–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -1395,9 +1395,9 @@ of Vi variables, type ‘:se <SPC> <TAB>’.
      document writing).  Instead, the tab is inserted via the command
      ‘viper-insert-tab’, which is bound to ‘S-tab’ (shift + tab).
 
-     On some non-windowing terminals, Shift doesn’t modify the <TAB>
-     key, so ‘S-tab’ behaves as if it were <TAB>.  In such a case, you
-     will have to bind ‘viper-insert-tab’ to some other convenient key.
+     On some text terminals, Shift doesn’t modify the <TAB> key, so
+     ‘S-tab’ behaves as if it were <TAB>.  In such a case, you will have
+     to bind ‘viper-insert-tab’ to some other convenient key.
 
 ‘viper-shift-width 8’
 ‘:se sw=value (:se shiftwidth=value)’
@@ -1832,10 +1832,9 @@ likely to mis-indent the line.
 1).  Instead, in Viper, the key ‘S-tab’ (shift+ tab) is chosen to
 emulate Vi’s <TAB>.
 
-   We should note that on some non-windowing terminals, Shift doesn’t
-modify the <TAB> key, so ‘S-tab’ behaves as if it were <TAB>.  In such a
-case, you will have to bind ‘viper-insert-tab’ to some other convenient
-key.
+   We should note that on some text terminals, Shift doesn’t modify the
+<TAB> key, so ‘S-tab’ behaves as if it were <TAB>.  In such a case, you
+will have to bind ‘viper-insert-tab’ to some other convenient key.
 
    Some packages, notably Dired, Gnus, Info, etc., attach special
 meaning to common keys like <SPC>, ‘x’, ‘d’, ‘v’, and others.  This
@@ -2115,7 +2114,7 @@ substitute for the powerful _tag table_ facility of Emacs.  Viper’s
    The following two commands are normally bound to a mouse click and
 are part of Viper.  They work only if Emacs runs as an application under
 X Windows (or under some other window system for which a port of GNU
-Emacs 20 is available).  Clicking the mouse when Emacs is invoked in an
+Emacs is available).  Clicking the mouse when Emacs is invoked in an
 Xterm window (using ‘emacs -nw’) will do no good.
 
 ‘viper-mouse-search-key (meta shift 1)’
@@ -4381,7 +4380,7 @@ Function Index
 * !<cmd>:                                Shell Commands.      (line  46)
 * !<move><cmd>:                          Shell Commands.      (line  46)
 * add-hook:                              Packages that Change Keymaps.
-                                                              (line 106)
+                                                              (line 105)
 * Ex !! <args>:                          Shell Commands.      (line  46)
 * Ex !<cmd>:                             Shell Commands.      (line  46)
 * Ex <address>r !<cmd>:                  Shell Commands.      (line  46)
@@ -4513,7 +4512,7 @@ Function Index
 * Ex x,y w !<cmd>:                       Shell Commands.      (line  46)
 * Ex yank:                               Yanking.             (line  28)
 * remove-hook:                           Packages that Change Keymaps.
-                                                              (line 107)
+                                                              (line 106)
 * toggle-viper-mode:                     States in Viper.     (line   6)
 * toggle-viper-mode <1>:                 Viper Specials.      (line 183)
 * viper-add-local-keys:                  Key Bindings.        (line 187)
@@ -4523,16 +4522,16 @@ Function Index
 * viper-go-away:                         States in Viper.     (line   6)
 * viper-go-away <1>:                     Viper Specials.      (line 179)
 * viper-harness-minor-mode:              Packages that Change Keymaps.
-                                                              (line 107)
+                                                              (line 106)
 * viper-mode:                            Packages that Change Keymaps.
-                                                              (line 107)
+                                                              (line 106)
 * viper-modify-major-mode:               Key Bindings.        (line  84)
 * viper-mouse-click-insert-word:         Viper Specials.      (line 300)
 * viper-mouse-click-search-word:         Viper Specials.      (line 300)
 * viper-set-emacs-state-searchstyle-macros: Viper Specials.   (line  73)
 * viper-set-expert-level:                Viper Specials.      (line  82)
 * viper-set-hooks:                       Packages that Change Keymaps.
-                                                              (line 107)
+                                                              (line 106)
 * viper-set-parsing-style-toggling-macro: Move Commands.      (line 121)
 * viper-set-searchstyle-toggling-macros: Viper Specials.      (line  44)
 * viper-set-syntax-preference:           Movement and Markers.
@@ -4558,7 +4557,7 @@ Variable Index
 * viper-allow-multiline-replace-regions: Rudimentary Changes. (line 289)
 * viper-always:                          Rudimentary Changes. (line 289)
 * viper-always <1>:                      Packages that Change Keymaps.
-                                                              (line 107)
+                                                              (line 106)
 * viper-auto-indent:                     Rudimentary Changes. (line 289)
 * viper-buffer-search-char:              Rudimentary Changes. (line 289)
 * viper-buffer-search-char <1>:          Viper Specials.      (line  21)
@@ -4572,7 +4571,7 @@ Variable Index
 * viper-emacs-state-cursor-color:        Rudimentary Changes. (line 232)
 * viper-emacs-state-hook:                Rudimentary Changes. (line 288)
 * viper-emacs-state-mode-list:           Packages that Change Keymaps.
-                                                              (line  67)
+                                                              (line  66)
 * viper-ESC-moves-cursor-back:           Rudimentary Changes. (line 289)
 * viper-ex-style-editing:                Rudimentary Changes. (line 289)
 * viper-ex-style-motion:                 Rudimentary Changes. (line 289)
@@ -4581,7 +4580,7 @@ Variable Index
 * viper-insert-state-cursor-color:       Rudimentary Changes. (line 229)
 * viper-insert-state-hook:               Rudimentary Changes. (line 289)
 * viper-insert-state-mode-list:          Packages that Change Keymaps.
-                                                              (line  67)
+                                                              (line  66)
 * viper-insertion-ring-size:             Viper Specials.      (line 102)
 * viper-keep-point-on-repeat:            Rudimentary Changes. (line 289)
 * viper-keep-point-on-undo:              Rudimentary Changes. (line 289)
@@ -4618,15 +4617,15 @@ Variable Index
 * viper-vi-global-user-map:              Key Bindings.        (line 187)
 * viper-vi-state-hook:                   Rudimentary Changes. (line 289)
 * viper-vi-state-mode-list:              Packages that Change Keymaps.
-                                                              (line  67)
+                                                              (line  66)
 * viper-vi-style-in-minibuffer:          Rudimentary Changes. (line 289)
 * viper-want-ctl-h-help:                 Rudimentary Changes. (line 289)
 * viper-want-emacs-keys-in-insert:       Rudimentary Changes. (line 289)
 * viper-want-emacs-keys-in-insert <1>:   Packages that Change Keymaps.
-                                                              (line 107)
+                                                              (line 106)
 * viper-want-emacs-keys-in-vi:           Rudimentary Changes. (line 289)
 * viper-want-emacs-keys-in-vi <1>:       Packages that Change Keymaps.
-                                                              (line 107)
+                                                              (line 106)
 
 
 File: viper.info,  Node: Package Index,  Next: Concept Index,  Prev: Variable Index,  Up: Top
@@ -4889,61 +4888,61 @@ Concept Index
 
 
 Tag Table:
-Node: Top853
-Node: Overview3992
-Node: Emacs Preliminaries5612
-Node: Loading Viper11143
-Node: States in Viper13428
-Node: Emacs State18592
-Node: Vi State20080
-Node: Insert State27295
-Node: Replace State30295
-Node: The Minibuffer31980
-Node: Multiple Files in Viper33956
-Node: Unimplemented Features37570
-Node: Improvements over Vi38334
-Node: Basics39425
-Node: Undo and Backups42104
-Node: History43328
-Node: Macros and Registers44984
-Node: Completion46791
-Node: Improved Search47246
-Node: Abbreviation Facilities49717
-Node: Movement and Markers50736
-Node: New Commands53939
-Node: Useful Packages60389
-Node: Customization62522
-Node: Rudimentary Changes64409
-Node: Key Bindings79774
-Node: Packages that Change Keymaps89949
-Node: Viper Specials96010
-Node: Vi Macros114261
-Node: Commands128122
-Node: Groundwork129015
-Node: Text Handling135904
-Node: Move Commands136581
-Node: Marking140510
-Node: Appending Text141828
-Node: Editing in Insert State144242
-Node: Deleting Text144856
-Node: Changing Text146222
-Node: Search and Replace149396
-Node: Yanking152089
-Node: Undoing153043
-Node: Display153411
-Node: File and Buffer Handling154778
-Node: Mapping159570
-Node: Shell Commands161335
-Node: Options163280
-Node: Emacs Related Commands165658
-Node: Mouse-bound Commands167323
-Node: GNU Free Documentation License168231
-Node: Acknowledgments193588
-Node: Key Index196794
-Node: Function Index214506
-Node: Variable Index226328
-Node: Package Index232072
-Node: Concept Index232731
+Node: Top840
+Node: Overview3966
+Node: Emacs Preliminaries5586
+Node: Loading Viper11117
+Node: States in Viper13402
+Node: Emacs State18566
+Node: Vi State20054
+Node: Insert State27269
+Node: Replace State30269
+Node: The Minibuffer31954
+Node: Multiple Files in Viper33930
+Node: Unimplemented Features37544
+Node: Improvements over Vi38308
+Node: Basics39399
+Node: Undo and Backups42078
+Node: History43302
+Node: Macros and Registers44958
+Node: Completion46765
+Node: Improved Search47220
+Node: Abbreviation Facilities49691
+Node: Movement and Markers50710
+Node: New Commands53913
+Node: Useful Packages60363
+Node: Customization62496
+Node: Rudimentary Changes64383
+Node: Key Bindings79739
+Node: Packages that Change Keymaps89914
+Node: Viper Specials95966
+Node: Vi Macros114214
+Node: Commands128075
+Node: Groundwork128968
+Node: Text Handling135857
+Node: Move Commands136534
+Node: Marking140463
+Node: Appending Text141781
+Node: Editing in Insert State144195
+Node: Deleting Text144809
+Node: Changing Text146175
+Node: Search and Replace149349
+Node: Yanking152042
+Node: Undoing152996
+Node: Display153364
+Node: File and Buffer Handling154731
+Node: Mapping159523
+Node: Shell Commands161288
+Node: Options163233
+Node: Emacs Related Commands165611
+Node: Mouse-bound Commands167276
+Node: GNU Free Documentation License168184
+Node: Acknowledgments193541
+Node: Key Index196747
+Node: Function Index214459
+Node: Variable Index226281
+Node: Package Index232025
+Node: Concept Index232684
 
 End Tag Table
 

@@ -1,9 +1,9 @@
-This is message.info, produced by makeinfo version 6.7 from
+This is message.info, produced by makeinfo version 6.8 from
 message.texi.
 
 This file documents Message, the Emacs message composition mode.
 
-   Copyright © 1996–2022 Free Software Foundation, Inc.
+   Copyright © 1996–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -29,7 +29,7 @@ Message
 
 This file documents Message, the Emacs message composition mode.
 
-   Copyright © 1996–2022 Free Software Foundation, Inc.
+   Copyright © 1996–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -814,7 +814,7 @@ lock the door, while your private key corresponds to the opening
 combination for the safe.)
 
    Thus, you need to perform the following steps for e-mail encryption,
-typically outside Emacs.  See, for example, the The GNU Privacy Handbook
+typically outside Emacs.  See, for example, The GNU Privacy Handbook
 (https://www.gnupg.org/gph/en/manual.html) for details covering the
 standard OpenPGP with GnuPG.
   1. Install GnuPG.
@@ -938,11 +938,11 @@ File: message.info,  Node: Using S/MIME,  Next: Using OpenPGP,  Prev: Signing an
 S/MIME requires an external implementation, such as GNU Privacy Guard
 (https://www.gnupg.org/) or OpenSSL (https://www.openssl.org/).  The
 default Emacs interface to the S/MIME implementation is EasyPG (*note
-EasyPG Assistant User’s Manual: (epa)Top.), which has been included in
-Emacs since version 23 and which relies on the command line tool ‘gpgsm’
-provided by GnuPG.  That tool implements certificate management,
-including certificate revocation and expiry, while such tasks need to be
-performed manually, if OpenSSL is used.
+EasyPG Assistant User’s Manual: (epa)Top.), which is included in Emacs
+and relies on the command line tool ‘gpgsm’ provided by GnuPG.  That
+tool implements certificate management, including certificate revocation
+and expiry, while such tasks need to be performed manually, if OpenSSL
+is used.
 
    The choice between EasyPG and OpenSSL is controlled by the variable
 ‘mml-smime-use’, which needs to be set to the value ‘epg’ for EasyPG.
@@ -1030,8 +1030,7 @@ Use of OpenPGP requires an external software, such as GNU Privacy Guard
 (https://www.gnupg.org/).  Pre-OpenPGP implementations such as PGP 2.x
 and PGP 5.x are also supported.  The default Emacs interface to the PGP
 implementation is EasyPG (*note EasyPG Assistant User’s Manual:
-(epa)Top.), but PGG (*note PGG: (pgg)Top.) and Mailcrypt are also
-supported.  *Note PGP Compatibility::.
+(epa)Top.), but Mailcrypt is also supported.  *Note PGP Compatibility::.
 
    As stated earlier, messages encrypted with OpenPGP can be formatted
 according to two different standards, namely PGP or PGP/MIME.  The
@@ -1112,11 +1111,10 @@ your PGP implementation, so we refer to it.
    If you have imported your old PGP 2.x key into GnuPG, and want to
 send signed and encrypted messages to your fellow PGP 2.x users, you’ll
 discover that the receiver cannot understand what you send.  One
-solution is to use PGP 2.x instead (e.g., if you use ‘pgg’, set
-‘pgg-default-scheme’ to ‘pgp’).  You could also convince your fellow PGP
-2.x users to convert to GnuPG.  As a final workaround, you can make the
-sign and encryption work in two steps; separately sign, then encrypt a
-message.  If you would like to change this behavior you can customize
+solution is to use PGP 2.x instead.  You could also convince your fellow
+PGP 2.x users to convert to GnuPG.  As a final workaround, you can make
+the sign and encryption work in two steps; separately sign, then encrypt
+a message.  If you would like to change this behavior you can customize
 the ‘mml-signencrypt-style-alist’ variable.  For example:
 
      (setq mml-signencrypt-style-alist '(("smime" separate)
@@ -2091,6 +2089,20 @@ File: message.info,  Node: Sending Variables,  Next: Message Buffers,  Prev: Var
      When non-‘nil’, Gnus will ask for confirmation when sending a
      message.
 
+‘message-server-alist’
+     An alist describing the rules for generating the
+     ‘X-Message-SMTP-Method’ header to insert before sending out a new
+     message, if the message doesn’t yet have such a header.  Each
+     element of the alist should be of the form ‘(COND . METHOD)’.  If
+     COND is a string, it will be compared with the ‘From’ header, and
+     if they compare equal, the corresponding METHOD will be inserted as
+     a string into the message headers as the SMTP Method.  If COND is a
+     function, it will be called in the message buffer without any
+     arguments, and the corresponding METHOD will be inserted into the
+     message headers as the SMTP Method if the function returns a
+     non-‘nil’ value; if METHOD is nil, the value returned by the
+     function ‘cond’ is used instead.
+
 
 File: message.info,  Node: Message Buffers,  Next: Message Actions,  Prev: Sending Variables,  Up: Variables
 
@@ -2955,6 +2967,7 @@ File: message.info,  Node: Index,  Next: Key Index,  Prev: GNU Free Documentatio
 * message-sendmail-f-is-evil:            Mail Variables.      (line  73)
 * message-sent-hook:                     Various Message Variables.
                                                               (line  86)
+* message-server-alist:                  Sending Variables.   (line  34)
 * message-setup-hook:                    Various Message Variables.
                                                               (line  42)
 * message-signature:                     Insertion Variables. (line  90)
@@ -3017,12 +3030,12 @@ File: message.info,  Node: Index,  Next: Key Index,  Prev: GNU Free Documentatio
 * mml-secure-message-sign-smime:         Signing and encryption.
                                                               (line  11)
 * mml-secure-safe-bcc-list:              BCC Warning.         (line   8)
-* mml-signencrypt-style-alist:           PGP Compatibility.   (line  17)
+* mml-signencrypt-style-alist:           PGP Compatibility.   (line  16)
 * mml-unsecure-message:                  Signing and encryption.
                                                               (line  35)
 * multipart:                             MIME.                (line   6)
 * Newsgroups:                            News Headers.        (line  20)
-* non-ascii domain names:                IDNA.                (line   6)
+* non-ASCII domain names:                IDNA.                (line   6)
 * organization:                          News Headers.        (line  24)
 * path:                                  News Headers.        (line  62)
 * PGP:                                   Security.            (line   6)
@@ -3162,34 +3175,34 @@ Node: Insertion27330
 Node: MIME28751
 Node: IDNA30445
 Node: Security31814
-Node: Signing and encryption35627
-Node: Using S/MIME38509
-Node: Using OpenPGP43248
-Node: OpenPGP Header44051
-Node: Passphrase caching44904
-Node: PGP Compatibility46638
-Node: Encrypt-to-self48197
-Node: BCC Warning49063
-Node: Various Commands49731
-Node: Sending51617
-Node: Mail Aliases52063
-Node: Spelling53601
-Node: Variables54968
-Node: Message Headers55689
-Node: Mail Headers65226
-Node: Mail Variables66216
-Node: News Headers70273
-Node: News Variables74536
-Node: Insertion Variables74961
-Node: Various Message Variables80618
-Node: Sending Variables86384
-Node: Message Buffers87751
-Node: Message Actions89966
-Node: Appendices91489
-Node: Responses91708
-Node: GNU Free Documentation License93166
-Node: Index118499
-Node: Key Index142085
+Node: Signing and encryption35623
+Node: Using S/MIME38505
+Node: Using OpenPGP43215
+Node: OpenPGP Header43986
+Node: Passphrase caching44839
+Node: PGP Compatibility46573
+Node: Encrypt-to-self48060
+Node: BCC Warning48926
+Node: Various Commands49594
+Node: Sending51480
+Node: Mail Aliases51926
+Node: Spelling53464
+Node: Variables54831
+Node: Message Headers55552
+Node: Mail Headers65089
+Node: Mail Variables66079
+Node: News Headers70136
+Node: News Variables74399
+Node: Insertion Variables74824
+Node: Various Message Variables80481
+Node: Sending Variables86247
+Node: Message Buffers88452
+Node: Message Actions90667
+Node: Appendices92190
+Node: Responses92409
+Node: GNU Free Documentation License93867
+Node: Index119200
+Node: Key Index142859
 
 End Tag Table
 

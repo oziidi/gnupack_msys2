@@ -1,7 +1,7 @@
-This is efaq-w32.info, produced by makeinfo version 6.7 from
+This is efaq-w32.info, produced by makeinfo version 6.8 from
 efaq-w32.texi.
 
-Copyright © 2008, 2010–2022 Free Software Foundation, Inc.
+Copyright © 2008, 2010–2024 Free Software Foundation, Inc.
 
      This list of frequently asked questions about GNU Emacs on MS
      Windows with answers (“FAQ”) may be translated into other
@@ -30,7 +30,7 @@ GNU Emacs FAQ for MS Windows
 ****************************
 
 This is the FAQ for using GNU Emacs on MS Windows, as distributed with
-Emacs 28.2.
+Emacs 29.4.
 
    This FAQ is maintained by the developers and users of Emacs on MS
 Windows.  If you find any errors, or have any suggestions, please send
@@ -38,9 +38,9 @@ them to the help-emacs-windows
 (https://lists.gnu.org/mailman/listinfo/help-emacs-windows) mailing
 list.
 
-   At time of writing, the latest version of GNU Emacs is version 28.2.
+   At time of writing, the latest version of GNU Emacs is version 29.4.
 
-   Copyright © 2008, 2010–2022 Free Software Foundation, Inc.
+   Copyright © 2008, 2010–2024 Free Software Foundation, Inc.
 
      This list of frequently asked questions about GNU Emacs on MS
      Windows with answers (“FAQ”) may be translated into other
@@ -111,7 +111,7 @@ File: efaq-w32.info,  Node: Which versions of Windows,  Next: Other versions of 
 1.2 Which versions of Windows are supported?
 ============================================
 
-Emacs 28.2 is known to run on all versions of Windows 9X from Windows 98
+Emacs 29.4 is known to run on all versions of Windows 9X from Windows 98
 onward, and all versions of the NT family starting from NT 4.0; this
 includes all the modern versions from Windows XP and on.  The Windows
 port is built using the Win32 API and supports most features of the X
@@ -267,12 +267,12 @@ multiple sources, or use ‘bsdtar’.  *Note Other useful ports::.
 
    The command to unpack a source distribution from the command line is:
 
-     tar xzf emacs-28.2.tar.gz
+     tar xzf emacs-29.4.tar.gz
 
    If this does not work with the versions of tar and gzip that you
 have, you may need to try a two step process:
 
-     gzip -dc emacs-28.2.tar.gz | tar xf -
+     gzip -dc emacs-29.4.tar.gz | tar xf -
 
    You may see many messages from tar complaining about being unable to
 change the modification time on directories, and from gzip complaining
@@ -282,7 +282,7 @@ incomplete ports that are not fully aware of the limitations of Windows.
    And here’s an example of using ‘bsdtar’ (from the ‘libarchive’
 package) to unpack a ‘.tar.xz’ archive:
 
-     bsdtar -xf emacs-28.2.tar.xz
+     bsdtar -xf emacs-29.4.tar.xz
 
    Expect ‘bsdtar’ to unpack the whole distribution without any
 complaints.
@@ -414,7 +414,7 @@ File: efaq-w32.info,  Node: Using with Explorer,  Up: Associate files with Emacs
 ------------------------------------
 
 You can use Emacs as the editor for composing mail for ‘mailto:’ links,
-reading usenet for ‘news:’ links, and viewing source.  The following
+reading Usenet for ‘news:’ links, and viewing source.  The following
 registry entries control this:
 
      Mail
@@ -613,7 +613,7 @@ File: efaq-w32.info,  Node: CUA,  Prev: Highlight selection,  Up: Make Emacs lik
 3.10.2 Standard Windows key bindings
 ------------------------------------
 
-The keybindings of Emacs predate modern GUIs, and the keys that were
+The key bindings of Emacs predate modern GUIs, and the keys that were
 chosen by later GUIs for cut and copy were given important functions as
 extended keymaps in Emacs.  CUA mode attempts to let both bindings
 co-exist by defining C-x and C-c as ‘kill-region’ and
@@ -820,9 +820,9 @@ an indication of whether the font is outline (.TTF, .ATM) or raster
 (.FON) based when fonts are listed, which may let you differentiate
 between two fonts with the same name and different technologies.
 
-   Starting with Emacs 23, the preferred font name format will be moving
-to the simpler and more flexible fontconfig format.  XLFD names will
-continue to be supported for backward compatibility.
+   Starting with Emacs 23, the preferred font name format is the simpler
+and more flexible fontconfig format.  XLFD names will continue to be
+supported for backward compatibility.
 
      XLFD: -*-Courier New-normal-r-*-*-13-*-*-*-c-*-iso8859-1
      Fontconfig: Courier New-13
@@ -1036,10 +1036,11 @@ File: efaq-w32.info,  Node: Line ends by file system,  Prev: Automatic line ends
 5.5.2 CR/LF translation by file system
 --------------------------------------
 
-The variable ‘untranslated-filesystem-list’ defines whole directory
+The variable ‘w32-untranslated-filesystem-list’ defines whole directory
 trees that should not have CR/LF autodetection performed on them.  The
-list can be manipulated with the functions ‘add-untranslated-filesystem’
-and ‘remove-untranslated-filesystem’.  With auto-detection in recent
+list can be manipulated with the functions
+‘w32-add-untranslated-filesystem’ and
+‘w32-remove-untranslated-filesystem’.  With auto-detection in recent
 versions of Emacs, this is seldom useful for existing files, but can
 still be used to influence the choice of line ends for newly created
 files.
@@ -1537,7 +1538,7 @@ File: efaq-w32.info,  Node: TeX,  Next: Spell check,  Up: Text and Utility modes
 
 You will need an implementation of TeX for Windows.  A number of
 implementations are listed on the TeX Users Group
-(http://www.tug.org/interest.html#free) website.
+(https://www.tug.org/interest.html#free) website.
 
 
 File: efaq-w32.info,  Node: Spell check,  Next: Encryption,  Prev: TeX,  Up: Text and Utility modes
@@ -1678,7 +1679,8 @@ File: efaq-w32.info,  Node: DevStudio,  Next: MSVC command line,  Up: MSVC
 Christopher Payne wrote a Visual Studio add-in that makes Emacs the
 default text editor, this has now been taken over by Jeff Paquette.  See
 the following two URLs for details:
-   • <http://sourceforge.net/projects/visemacs/> for the latest version.
+   • <https://sourceforge.net/projects/visemacs/> for the latest
+     version.
    • <http://www.smathers.net/VisEmacs.htm> for notes on usage.
 
 
@@ -1809,8 +1811,8 @@ File: efaq-w32.info,  Node: Borland C++ Builder,  Next: Version control,  Prev: 
 ==================================
 
 Jonathan Arnold has written an EmacsEdit “expert”
-(http://www.buddydog.org/C++Builder/c++builder.html) for interfacing C++
-Builder and Emacs.
+(https://www.buddydog.org/C++Builder/c++builder.html) for interfacing
+C++ Builder and Emacs.
 
 
 File: efaq-w32.info,  Node: Version control,  Next: Perldb,  Prev: Borland C++ Builder,  Up: Developing with Emacs
@@ -1950,7 +1952,7 @@ File: efaq-w32.info,  Node: GnuWin32,  Next: GTK,  Prev: MinGW,  Up: Other usefu
 11.5 GnuWin32
 =============
 
-<http://gnuwin32.sourceforge.net/>
+<https://gnuwin32.sourceforge.net/>
 
    GnuWin32 provides precompiled native Windows ports of a wide
 selection of Free software and libraries.  Unfortunately, the ports are
@@ -2055,8 +2057,6 @@ Function and Variable Index
  [index ]
 * Menu:
 
-* add-untranslated-filesystem:           Line ends by file system.
-                                                                (line 6)
 * ange-ftp-ftp-program-name:             Using FTP.             (line 6)
 * auto-revert-mode:                      Reverting buffers.     (line 6)
 * comint-completion-addsuffix:           Bash.                  (line 6)
@@ -2094,8 +2094,6 @@ Function and Variable Index
 * man:                                   Read man pages.        (line 6)
 * message-send-mail-function:            Outgoing mail.         (line 6)
 * process-send-eof:                      Subprocess EOF.        (line 6)
-* remove-untranslated-filesystem:        Line ends by file system.
-                                                                (line 6)
 * rgrep:                                 Recursive grep.        (line 6)
 * rmail-primary-inbox-list:              Incoming mail with Rmail.
                                                                 (line 6)
@@ -2120,17 +2118,21 @@ Function and Variable Index
 * telnet:                                telnet.                (line 6)
 * tramp-default-method:                  Tramp ssh.             (line 6)
 * tramp-default-method-alist:            Tramp ssh.             (line 6)
-* untranslated-filesystem-list:          Line ends by file system.
-                                                                (line 6)
 * user-full-name:                        Outgoing mail.         (line 6)
 * user-mail-address:                     Outgoing mail.         (line 6)
+* w32-add-untranslated-filesystem:       Line ends by file system.
+                                                                (line 6)
 * w32-enable-synthesized-fonts:          Bold and italic.       (line 6)
 * w32-enable-unicode-output:             Third-party multibyte. (line 6)
 * w32-fixed-font-alist:                  Add fonts to menu.     (line 6)
 * w32-mouse-button-tolerance:            Mouse trouble.         (line 6)
 * w32-num-mouse-buttons:                 Mouse trouble.         (line 6)
 * w32-quote-process-args:                Bash.                  (line 6)
+* w32-remove-untranslated-filesystem:    Line ends by file system.
+                                                                (line 6)
 * w32-swap-mouse-buttons:                Mouse trouble.         (line 6)
+* w32-untranslated-filesystem-list:      Line ends by file system.
+                                                                (line 6)
 * w32-use-full-screen-buffer:            Console window size.   (line 6)
 * w32-use-w32-font-dialog:               Font menu.             (line 6)
 * woman:                                 Read man pages.        (line 6)
@@ -2210,7 +2212,7 @@ Concept Index
 * control key, swapping with caps-lock:  Swap CapsLock and Control.
                                                                (line  6)
 * copy with C-c:                         CUA.                  (line  6)
-* CUA keybindings:                       CUA.                  (line  6)
+* CUA key bindings:                      CUA.                  (line  6)
 * cut with C-x:                          CUA.                  (line  6)
 * cvs hanging when login needed:         Subprocess buffering. (line  6)
 * cvs, version control integration with Emacs: Version control.
@@ -2360,7 +2362,7 @@ Concept Index
 * MAILHOST:                              Incoming mail with Rmail.
                                                                (line  6)
 * mailing lists:                         Mailing lists.        (line  6)
-* mailto urls, associating with Emacs:   Using with Explorer.  (line  6)
+* mailto URLs, associating with Emacs:   Using with Explorer.  (line  6)
 * man pages:                             Read man pages.       (line  6)
 * manuals:                               More information.     (line  6)
 * marked region, highlighting:           Highlight selection.  (line  6)
@@ -2400,7 +2402,7 @@ Concept Index
 * multilingual display, fontsets:        Non-latin display.    (line  6)
 * multilingual display, third party programs on Windows 9x/ME: Third-party multibyte.
                                                                (line  6)
-* news urls, associating with Emacs:     Using with Explorer.  (line  6)
+* news URLs, associating with Emacs:     Using with Explorer.  (line  6)
 * nmake, as default compile command:     Default compile command.
                                                                (line  6)
 * nmake, Incorrect DOS version messages: Incorrect DOS version.
@@ -2486,7 +2488,7 @@ Concept Index
 * ssh, accessing remote hosts within Emacs: Tramp ssh.         (line  6)
 * ssh, password prompt not appearing when using with cvs: Subprocess buffering.
                                                                (line  6)
-* standard Windows keybindings:          CUA.                  (line  6)
+* standard Windows key bindings:         CUA.                  (line  6)
 * Start Menu, creating icons for Emacs:  Installing binaries.  (line  6)
 * Start Menu, removing Emacs from:       Uninstall.            (line  6)
 * sub-processes, quoting arguments to:   Quoting issues.       (line  6)
@@ -2605,88 +2607,88 @@ Node: Swap Caps 9822189
 Node: Make Emacs like a Windows app22490
 Node: Highlight selection23131
 Node: CUA24739
-Node: Window operations25485
-Node: Uninstall25988
-Node: Does not run26817
-Node: Virus28046
-Node: Anti-virus28817
-Node: Display Settings29463
-Node: Console window size29731
-Node: Mouse trouble30326
-Node: Cut and paste NUL31162
-Node: Garbled clipboard31644
-Node: Beep sound32036
-Node: Fonts and text translation32434
-Node: Font names32699
-Node: Bold and italic34886
-Node: Multilingual fonts35959
-Node: Language display36268
-Node: Non-latin display36952
-Node: International fonts38884
-Node: Third-party multibyte39518
-Node: Localized fonts40356
-Node: Font menu40731
-Node: Add fonts to menu41068
-Node: Line ends41763
-Node: Automatic line ends42352
-Node: Line ends by file system42995
-Node: Printing43613
-Node: Sub-processes44258
-Node: Quoting issues44688
-Node: Subprocess hang45054
-Node: Subprocess buffering46071
-Node: Perl script buffering48045
-Node: Subprocesses and floppy drive48406
-Node: Killing subprocesses48867
-Node: Subprocess EOF49656
-Node: Using shell50163
-Node: Bash50924
-Node: Cygwin paths51995
-Node: Dired ls52309
-Node: Shell echo52903
-Node: Shell completion forward slash54654
-Node: Incorrect DOS version55099
-Node: Shell commands do nothing56108
-Node: Network access56558
-Node: Mail56786
-Node: Outgoing mail57440
-Node: Incoming mail with Rmail58403
-Node: Incoming mail with Gnus58874
-Node: Incoming mail other59315
-Node: Attachments with Gnus59742
-Node: Using FTP60431
-Node: Tramp ssh61294
-Node: telnet62218
-Node: Text and Utility modes62692
-Node: TeX62934
-Node: Spell check63250
-Node: Encryption64394
-Node: Mouse wheel64670
-Node: Grep65402
-Node: Recursive grep66049
-Node: Developing with Emacs67500
-Node: MSVC68001
-Node: DevStudio68474
-Node: MSVC command line68964
-Node: VC++ environment69524
-Node: Default compile command70705
-Node: Reverting buffers71894
-Node: Edit MSVC72365
-Node: Borland C++ Builder73822
-Node: Version control74156
-Node: Perldb74783
-Node: Other useful ports75784
-Node: Cygwin76047
-Node: MinGW-w6477186
-Node: EZWinPorts77989
-Node: MinGW78483
-Node: GnuWin3279109
-Node: GTK80855
-Node: Read man pages81370
-Node: Further information81883
-Node: More information82083
-Node: Mailing lists82736
-Node: Indexes83272
+Node: Window operations25486
+Node: Uninstall25989
+Node: Does not run26818
+Node: Virus28047
+Node: Anti-virus28818
+Node: Display Settings29464
+Node: Console window size29732
+Node: Mouse trouble30327
+Node: Cut and paste NUL31163
+Node: Garbled clipboard31645
+Node: Beep sound32037
+Node: Fonts and text translation32435
+Node: Font names32700
+Node: Bold and italic34872
+Node: Multilingual fonts35945
+Node: Language display36254
+Node: Non-latin display36938
+Node: International fonts38870
+Node: Third-party multibyte39504
+Node: Localized fonts40342
+Node: Font menu40717
+Node: Add fonts to menu41054
+Node: Line ends41749
+Node: Automatic line ends42338
+Node: Line ends by file system42981
+Node: Printing43611
+Node: Sub-processes44256
+Node: Quoting issues44686
+Node: Subprocess hang45052
+Node: Subprocess buffering46069
+Node: Perl script buffering48043
+Node: Subprocesses and floppy drive48404
+Node: Killing subprocesses48865
+Node: Subprocess EOF49654
+Node: Using shell50161
+Node: Bash50922
+Node: Cygwin paths51993
+Node: Dired ls52307
+Node: Shell echo52901
+Node: Shell completion forward slash54652
+Node: Incorrect DOS version55097
+Node: Shell commands do nothing56106
+Node: Network access56556
+Node: Mail56784
+Node: Outgoing mail57438
+Node: Incoming mail with Rmail58401
+Node: Incoming mail with Gnus58872
+Node: Incoming mail other59313
+Node: Attachments with Gnus59740
+Node: Using FTP60429
+Node: Tramp ssh61292
+Node: telnet62216
+Node: Text and Utility modes62690
+Node: TeX62932
+Node: Spell check63249
+Node: Encryption64393
+Node: Mouse wheel64669
+Node: Grep65401
+Node: Recursive grep66048
+Node: Developing with Emacs67499
+Node: MSVC68000
+Node: DevStudio68473
+Node: MSVC command line68969
+Node: VC++ environment69529
+Node: Default compile command70710
+Node: Reverting buffers71899
+Node: Edit MSVC72370
+Node: Borland C++ Builder73827
+Node: Version control74162
+Node: Perldb74789
+Node: Other useful ports75790
+Node: Cygwin76053
+Node: MinGW-w6477192
+Node: EZWinPorts77995
+Node: MinGW78489
+Node: GnuWin3279115
+Node: GTK80862
+Node: Read man pages81377
+Node: Further information81890
+Node: More information82090
+Node: Mailing lists82743
+Node: Indexes83279
 
 End Tag Table
 

@@ -1,9 +1,9 @@
-This is sc.info, produced by makeinfo version 6.7 from sc.texi.
+This is sc.info, produced by makeinfo version 6.8 from sc.texi.
 
 This document describes Supercite, an Emacs package for citing and
 attributing replies to mail and news messages.
 
-   Copyright © 1993, 2001–2022 Free Software Foundation, Inc.
+   Copyright © 1993, 2001–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -30,7 +30,7 @@ Supercite
 This document describes Supercite, an Emacs package for citing and
 attributing replies to mail and news messages.
 
-   Copyright © 1993, 2001–2022 Free Software Foundation, Inc.
+   Copyright © 1993, 2001–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,

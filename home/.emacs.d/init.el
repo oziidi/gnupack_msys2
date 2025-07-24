@@ -840,7 +840,7 @@
  #'(lambda()
     (c-set-style "K&R")
     (setq tab-width 8)
-    (setq indent-tabs-mode t)
+    (setq indent-tabs-mode nil)
     (setq c-basic-offset 8)
     (setq comment-start "//")
     (setq comment-end "")
@@ -1283,7 +1283,10 @@
 ;(setq echo-keystrokes 0.1)
 
 ;; y instead of yes
-(defalias 'yes-or-no-p 'y-or-n-p)
+(if (version< emacs-version "29.0")
+    (defalias 'yes-or-no-p 'y-or-n-p)
+  (setopt use-short-answers t)
+)
 
 ;; key bind for "goto-line"
 (global-set-key "\M-g" 'goto-line)

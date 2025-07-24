@@ -1,6 +1,6 @@
-This is dbus.info, produced by makeinfo version 6.7 from dbus.texi.
+This is dbus.info, produced by makeinfo version 6.8 from dbus.texi.
 
-Copyright © 2007–2022 Free Software Foundation, Inc.
+Copyright © 2007–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -28,7 +28,7 @@ message bus system, a simple way for applications to talk to one
 another.  An overview of D-Bus can be found at
 <https://dbus.freedesktop.org/>.
 
-   Copyright © 2007–2022 Free Software Foundation, Inc.
+   Copyright © 2007–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -699,13 +699,7 @@ the interface for a given language binding.
           (dbus-get-all-managed-objects
            :session "org.gnome.SettingsDaemon" "/")
 
-          ⇒ (("/org/gnome/SettingsDaemon/MediaKeys"
-               ("org.gnome.SettingsDaemon.MediaKeys")
-               ("org.freedesktop.DBus.Peer")
-               ("org.freedesktop.DBus.Introspectable")
-               ("org.freedesktop.DBus.Properties")
-               ("org.freedesktop.DBus.ObjectManager"))
-              ("/org/gnome/SettingsDaemon/Power"
+          ⇒ (("/org/gnome/SettingsDaemon/Power"
                ("org.gnome.SettingsDaemon.Power.Keyboard")
                ("org.gnome.SettingsDaemon.Power.Screen")
                ("org.gnome.SettingsDaemon.Power"
@@ -1260,6 +1254,9 @@ the following functions:
      ‘:not-owner’
           We are not an owner of the name SERVICE.
 
+     When SERVICE is not a known name but a unique name, the function
+     returns nil.
+
    When a name has been chosen, Emacs can offer its own methods, which
 can be called by other applications.  These methods could be an
 implementation of an interface of a well known service, like
@@ -1656,11 +1653,25 @@ first.
      bus.  For the system and session buses, this function is called
      when loading ‘dbus.el’, there is no need to call it again.
 
-     The function returns the number of connections this Emacs session
-     has established to the BUS under the same unique name (*note
-     dbus-get-unique-name::).  It depends on the libraries Emacs is
-     linked with, and on the environment Emacs is running.  For example,
-     if Emacs is linked with the GTK+ toolkit, and it runs in a
+     If Emacs was invoked when there was no D-Bus session bus available
+     yet, you can set the environment variable
+     ‘DBUS_SESSION_BUS_ADDRESS’ once the session bus daemon is running
+     and offering the address.  Calling ‘dbus-init-bus’ initializes the
+     connection to the session bus.
+
+          (setenv "DBUS_SESSION_BUS_ADDRESS" "unix:path=/run/user/1000/bus")
+
+          ⇒ "unix:path=/run/user/1000/bus"
+
+          (dbus-init-bus :session)
+
+          ⇒ 2
+
+     ‘dbus-init-bus’ returns the number of connections this Emacs
+     session has established to the BUS under the same unique name
+     (*note dbus-get-unique-name::).  It depends on the libraries Emacs
+     is linked with, and on the environment Emacs is running.  For
+     example, if Emacs is linked with the GTK+ toolkit, and it runs in a
      GTK+-aware environment like GNOME, another connection might already
      be established.
 
@@ -1961,14 +1972,14 @@ Index
 * dbus-get-unique-name:                  Bus names.           (line  83)
 * dbus-ignore-errors:                    Errors and Events.   (line  23)
 * dbus-init-bus:                         Alternative Buses.   (line  14)
-* dbus-interface-emacs:                  Register Objects.    (line  82)
+* dbus-interface-emacs:                  Register Objects.    (line  85)
 * dbus-introspect:                       Introspection.       (line  95)
 * dbus-introspect-get-all-nodes:         Nodes and Interfaces.
                                                               (line  23)
 * dbus-introspect-get-annotation:        Properties and Annotations.
-                                                              (line 169)
+                                                              (line 163)
 * dbus-introspect-get-annotation-names:  Properties and Annotations.
-                                                              (line 144)
+                                                              (line 138)
 * dbus-introspect-get-argument:          Arguments and Signatures.
                                                               (line  24)
 * dbus-introspect-get-argument-names:    Arguments and Signatures.
@@ -1997,22 +2008,22 @@ Index
 * dbus-list-queued-owners:               Bus names.           (line  43)
 * dbus-monitor:                          Monitoring Messages. (line  44)
 * dbus-monitor-handler:                  Monitoring Messages. (line  14)
-* dbus-path-emacs:                       Register Objects.    (line  79)
+* dbus-path-emacs:                       Register Objects.    (line  82)
 * dbus-ping:                             Bus names.           (line  61)
-* dbus-register-method:                  Register Objects.    (line  85)
+* dbus-register-method:                  Register Objects.    (line  88)
 * dbus-register-monitor:                 Monitoring Messages. (line   6)
-* dbus-register-property:                Register Objects.    (line 201)
+* dbus-register-property:                Register Objects.    (line 204)
 * dbus-register-service:                 Register Objects.    (line  16)
 * dbus-register-signal:                  Signals.             (line  33)
 * dbus-runtime-version:                  Version.             (line  14)
 * dbus-send-signal:                      Signals.             (line   9)
-* dbus-service-emacs:                    Register Objects.    (line  76)
+* dbus-service-emacs:                    Register Objects.    (line  79)
 * dbus-set-property:                     Properties and Annotations.
                                                               (line  68)
-* dbus-setenv:                           Alternative Buses.   (line  74)
+* dbus-setenv:                           Alternative Buses.   (line  88)
 * dbus-string-to-byte-array:             Type Conversion.     (line 107)
 * dbus-unescape-from-identifier:         Type Conversion.     (line 177)
-* dbus-unregister-object:                Register Objects.    (line 301)
+* dbus-unregister-object:                Register Objects.    (line 304)
 * dbus-unregister-service:               Register Objects.    (line  47)
 * debugging:                             Errors and Events.   (line   6)
 * errors:                                Errors and Events.   (line   6)
@@ -2528,23 +2539,23 @@ Ref: Introspection-Footnote-218472
 Node: Nodes and Interfaces18657
 Node: Methods and Signal22927
 Node: Properties and Annotations25932
-Ref: Properties and Annotations-Footnote-134400
-Ref: Properties and Annotations-Footnote-234502
-Ref: Properties and Annotations-Footnote-334607
-Node: Arguments and Signatures34699
-Node: Type Conversion36982
-Node: Synchronous Methods44800
-Ref: dbus-call-method45427
-Node: Asynchronous Methods49032
-Node: Register Objects50895
-Node: Signals64075
-Ref: Signals-Footnote-169138
-Ref: Signals-Footnote-269283
-Node: Alternative Buses69526
-Node: Errors and Events73689
-Node: Monitoring Messages79408
-Node: Index81423
-Node: GNU Free Documentation License88748
+Ref: Properties and Annotations-Footnote-134087
+Ref: Properties and Annotations-Footnote-234189
+Ref: Properties and Annotations-Footnote-334294
+Node: Arguments and Signatures34386
+Node: Type Conversion36669
+Node: Synchronous Methods44487
+Ref: dbus-call-method45114
+Node: Asynchronous Methods48719
+Node: Register Objects50582
+Node: Signals63851
+Ref: Signals-Footnote-168914
+Ref: Signals-Footnote-269059
+Node: Alternative Buses69302
+Node: Errors and Events73956
+Node: Monitoring Messages79675
+Node: Index81690
+Node: GNU Free Documentation License89015
 
 End Tag Table
 

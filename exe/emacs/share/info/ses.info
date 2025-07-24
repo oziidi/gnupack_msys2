@@ -1,8 +1,8 @@
-This is ses.info, produced by makeinfo version 6.7 from ses.texi.
+This is ses.info, produced by makeinfo version 6.8 from ses.texi.
 
 This file documents SES: the Simple Emacs Spreadsheet.
 
-   Copyright © 2002–2022 Free Software Foundation, Inc.
+   Copyright © 2002–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -33,7 +33,7 @@ SES: Simple Emacs Spreadsheet
 
    This file documents SES: the Simple Emacs Spreadsheet.
 
-   Copyright © 2002–2022 Free Software Foundation, Inc.
+   Copyright © 2002–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -172,7 +172,13 @@ of the 7th row.  Super wide spreadsheets get AAA1, etc.  You move around
 with the regular Emacs movement commands.
 
 ‘j’
-     Moves point to cell, specified by identifier (‘ses-jump’).
+     Moves point to cell, specified by identifier (‘ses-jump’).  Unless
+     the cell is a renamed cell, the identifier is case-insensitive.  A
+     prefix argument n move to cell with coordinates (n\div R, n \% C)
+     for a spreadsheet of R rows and C columns, and A1 being of
+     coordinates (0,0).  The way the identifier or the command prefix
+     argument are interpreted can be customized through variables
+     ‘ses-jump-cell-name-function’ and ‘ses-jump-prefix-function’.
 
    Point is always at the left edge of a cell, or at the empty endline.
 When mark is inactive, the current cell is underlined.  When mark is
@@ -606,6 +612,27 @@ can be customized.  Look in group “ses”.
    After entering a cell value, point normally moves right to the next
 cell.  You can customize ‘ses-after-entry-functions’ to move left or up
 or down.  For diagonal movement, select two functions from the list.
+
+   ‘ses-jump-cell-name-function’ is a customizable variable by default
+set to the ‘upcase’ function.  This function is called when you pass a
+cell name to the ‘ses-jump’ command (‘j’), it changes the entered cell
+name to that where to jump.  The default setting ‘upcase’ allows you to
+enter the cell name in low case.  Another use of
+‘ses-jump-cell-name-function’ could be some internationalization to
+convert non latin characters into latin equivalents to name the cell.
+Instead of a cell name, the function may return cell coordinates in the
+form of a cons, for instance ‘(0 . 0)’ for cell ‘A1’, ‘(1 . 0)’ for cell
+‘A2’, etc.
+
+   ‘ses-jump-prefix-function’ is a customizable variable by default set
+to the ‘ses-jump-prefix’ function.  This function is called when you
+give a prefix argument to the ‘ses-jump’ command (‘j’).  It returns a
+cell name or cell coordinates corresponding to the prefix argument.
+Cell coordinates are in the form of a cons, for instance ‘(1 . 0)’ for
+cell ‘A2’.  The default setting ‘ses-jump-prefix’ will number cells left
+to right and then top down, so assuming a 4x3 spreadsheet prefix
+argument 0 jumps to cell A1, prefix argument 2 jumps to C1, prefix
+argument 3 jumps to A2, etc.
 
    ‘ses-mode-hook’ is a normal mode hook (list of functions to execute
 when starting SES mode for a buffer).
@@ -1145,7 +1172,6 @@ Index
 * dimensions:                            Resizing.             (line  6)
 * editing cells:                         Formulas.             (line  6)
 * enable-local-eval:                     Customizing SES.      (line  6)
-* enable-local-eval <1>:                 Customizing SES.      (line  6)
 * export, and import:                    Import and export.    (line  6)
 * features:                              Sales Pitch.          (line  6)
 * formatting cells:                      Printer functions.    (line  6)
@@ -1173,7 +1199,7 @@ Index
 * resizing spreadsheets:                 Resizing.             (line  6)
 * row, adding or removing:               Resizing.             (line  6)
 * run-with-idle-timer:                   Deferred updates.     (line  6)
-* safe-functions:                        Customizing SES.      (line  6)
+* safe-functions:                        Customizing SES.      (line 38)
 * ses+:                                  Standard formula functions.
                                                                (line  6)
 * ses-append-row-jump-first-column:      Resizing.             (line  6)
@@ -1208,11 +1234,13 @@ Index
 * ses-insert-ses-range:                  Ranges in formulas.   (line  6)
 * ses-insert-ses-range-click:            Ranges in formulas.   (line  6)
 * ses-jump:                              The Basics.           (line  6)
+* ses-jump-cell-name-function:           Customizing SES.      (line 14)
+* ses-jump-prefix-function:              Customizing SES.      (line 25)
 * ses-kill-override:                     Copy/cut/paste.       (line  6)
 * ses-mark-column:                       The Basics.           (line  6)
 * ses-mark-row:                          The Basics.           (line  6)
 * ses-mark-whole-buffer:                 The Basics.           (line  6)
-* ses-mode-hook:                         Customizing SES.      (line  6)
+* ses-mode-hook:                         Customizing SES.      (line 35)
 * ses-prin1:                             Standard printer functions.
                                                                (line 26)
 * ses-prin1 <1>:                         More on cell printing.
@@ -1774,35 +1802,35 @@ Node: Top890
 Node: Sales Pitch2432
 Node: Quick Tutorial3272
 Node: The Basics6119
-Node: Formulas7566
-Node: Resizing9219
-Node: Printer functions10441
-Node: Various kinds of printer functions10885
-Node: Configuring what printer function applies12195
-Node: Standard printer functions13474
-Node: Local printer functions14375
-Node: Writing a lambda printer function15921
-Node: Clearing cells18646
-Node: Copy/cut/paste19001
-Node: Customizing SES21333
-Node: Advanced Features22746
-Node: The print area24154
-Node: Ranges in formulas24841
-Node: Sorting by column28295
-Node: Standard formula functions29246
-Node: More on cell printing30204
-Node: Import and export32280
-Node: Virus protection32905
-Node: Spreadsheets with details and summary34330
-Node: For Gurus35543
-Node: Deferred updates35805
-Node: Nonrelocatable references37347
-Node: The data area38876
-Node: Buffer-local variables in spreadsheets40195
-Node: Uses of defadvice in SES41673
-Node: Index42521
-Node: Acknowledgments53735
-Node: GNU Free Documentation License54312
+Node: Formulas7992
+Node: Resizing9645
+Node: Printer functions10867
+Node: Various kinds of printer functions11311
+Node: Configuring what printer function applies12621
+Node: Standard printer functions13900
+Node: Local printer functions14801
+Node: Writing a lambda printer function16347
+Node: Clearing cells19072
+Node: Copy/cut/paste19427
+Node: Customizing SES21759
+Node: Advanced Features24454
+Node: The print area25862
+Node: Ranges in formulas26549
+Node: Sorting by column30003
+Node: Standard formula functions30954
+Node: More on cell printing31912
+Node: Import and export33988
+Node: Virus protection34613
+Node: Spreadsheets with details and summary36038
+Node: For Gurus37251
+Node: Deferred updates37513
+Node: Nonrelocatable references39055
+Node: The data area40584
+Node: Buffer-local variables in spreadsheets41903
+Node: Uses of defadvice in SES43381
+Node: Index44229
+Node: Acknowledgments55516
+Node: GNU Free Documentation License56093
 
 End Tag Table
 

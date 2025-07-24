@@ -1,10 +1,10 @@
-This is htmlfontify.info, produced by makeinfo version 6.7 from
+This is htmlfontify.info, produced by makeinfo version 6.8 from
 htmlfontify.texi.
 
 This manual documents Htmlfontify, a source code -> crosslinked +
 formatted + syntax colorized html transformer.
 
-   Copyright © 2002–2022 Free Software Foundation, Inc.
+   Copyright © 2002–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -30,7 +30,7 @@ Htmlfontify
 This manual documents Htmlfontify, a source code -> crosslinked +
 formatted + syntax colorized html transformer.
 
-   Copyright © 2002–2022 Free Software Foundation, Inc.
+   Copyright © 2002–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -484,11 +484,11 @@ provides the following non-interactive ones:
 
           (hfy-flatten-style STYLE)
 
-     Take STYLE (see *note hfy-face-to-style-i::, *note
-     hfy-face-to-style::) and merge any multiple attributes
-     appropriately.  Currently only font-size is merged down to a single
-     occurrence—others may need special handling, but I haven’t
-     encountered them yet.  Returns a *note hfy-style-assoc::.
+     Take STYLE (*note hfy-face-to-style-i::, *note hfy-face-to-style::)
+     and merge any multiple attributes appropriately.  Currently only
+     font-size is merged down to a single occurrence—others may need
+     special handling, but I haven’t encountered them yet.  Returns a
+     *note hfy-style-assoc::.
 
 ‘hfy-size-to-int’
 
@@ -633,8 +633,8 @@ provides the following non-interactive ones:
           (hfy-face-at P)
 
      Find face in effect at point P.  If overlays are to be considered
-     (see *note hfy-optimizations::) then this may return a ‘defface’
-     style list of face properties instead of a face symbol.
+     (*note hfy-optimizations::) then this may return a ‘defface’ style
+     list of face properties instead of a face symbol.
 
 ‘hfy-bgcol’
 
@@ -1039,10 +1039,9 @@ Htmlfontify provides the following variable and customization entries:
      index would otherwise be large and take a long time to render or be
      difficult to navigate.
 
-‘hfy-find-cmd’
+‘hfy-exclude-file-rules’
 
-     The “find” command used to harvest a list of files to attempt to
-     fontify.
+     Regular expressions to exclude files which shouldn’t be fontified.
 
 ‘hfy-extn’
 
@@ -1194,12 +1193,6 @@ Htmlfontify has a couple of external requirements:
      accordingly, but you should be able to override this.
 
      See: *note Customization::
-
-   • A copy of find (e.g., GNU find) that provides the ‘-path’
-     predicate.
-
-     You may be able to work around this with a suitable clever shell
-     command and the customization entry: *note hfy-find-cmd::
 
    • A copy of sed (e.g., GNU sed).
 
@@ -1792,29 +1785,29 @@ VARIABLES & CUSTOMIZATION
  [index ]
 * Menu:
 
-*      hfy-default-face-def:             Customization.       (line  90)
+*      hfy-default-face-def:             Customization.       (line  89)
 *      hfy-display-class:                Customization.       (line  28)
-*      hfy-etag-regex:                   Customization.       (line 199)
-*      hfy-etags-bin:                    Customization.       (line 179)
-*      hfy-etags-cmd:                    Customization.       (line 190)
-*      hfy-etags-cmd-alist:              Customization.       (line 173)
-*      hfy-extn:                         Customization.       (line  86)
-*      hfy-find-cmd:                     Customization.       (line  81)
-*      hfy-html-quote-map:               Customization.       (line 218)
+*      hfy-etag-regex:                   Customization.       (line 198)
+*      hfy-etags-bin:                    Customization.       (line 178)
+*      hfy-etags-cmd:                    Customization.       (line 189)
+*      hfy-etags-cmd-alist:              Customization.       (line 172)
+*      hfy-exclude-file-rules:           Customization.       (line  81)
+*      hfy-extn:                         Customization.       (line  85)
+*      hfy-html-quote-map:               Customization.       (line 217)
 *      hfy-html-quote-regex:             Customization.       (line  17)
-*      hfy-index-file:                   Customization.       (line 208)
-*      hfy-init-kludge-hook:             Customization.       (line 101)
-*      hfy-instance-file:                Customization.       (line 213)
-*      hfy-istext-command:               Customization.       (line 166)
-*      hfy-link-extn:                    Customization.       (line 159)
+*      hfy-index-file:                   Customization.       (line 207)
+*      hfy-init-kludge-hook:             Customization.       (line 100)
+*      hfy-instance-file:                Customization.       (line 212)
+*      hfy-istext-command:               Customization.       (line 165)
+*      hfy-link-extn:                    Customization.       (line 158)
 *      hfy-link-style-fun:               Customization.       (line   9)
-*      hfy-optimizations:                Customization.       (line 114)
+*      hfy-optimizations:                Customization.       (line 113)
 *      hfy-page-footer:                  Customization.       (line  23)
 *      hfy-page-header:                  Customization.       (line  59)
-*      hfy-shell-file-name:              Customization.       (line 107)
+*      hfy-shell-file-name:              Customization.       (line 106)
 *      hfy-split-index:                  Customization.       (line  74)
 *      hfy-src-doc-link-style:           Customization.       (line  69)
-*      hfy-src-doc-link-unstyle:         Customization.       (line 154)
+*      hfy-src-doc-link-unstyle:         Customization.       (line 153)
 *      hfy-tags-cache:                   Variables.           (line   9)
 *      hfy-tags-rmap:                    Variables.           (line  24)
 *      hfy-tags-sortl:                   Variables.           (line  38)
@@ -1864,73 +1857,72 @@ Ref: hfy-lookup14373
 Ref: hfy-fontify-buffer14550
 Ref: hfy-color14678
 Ref: hfy-flatten-style14802
-Ref: hfy-size-to-int15184
-Ref: hfy-sprintf-stylesheet15400
-Ref: hfy-relstub15659
-Ref: hfy-compile-face-map15856
-Ref: hfy-prepare-index15998
-Ref: hfy-prepare-tag-map16205
-Ref: hfy-subtract-maps16538
-Ref: hfy-face-to-style-i16739
-Ref: hfy-face-to-css17275
-Ref: hfy-html-quote17501
-Ref: hfy-link-style17659
-Ref: hfy-p-to-face17847
-Ref: hfy-box-to-border-assoc18016
-Ref: hfy-face-attr-for-class18142
-Ref: hfy-face-at19079
-Ref: hfy-bgcol19331
-Ref: hfy-kludge-cperl-mode19448
-Ref: hfy-href19627
-Ref: hfy-shell20046
-Ref: hfy-load-tags-cache20260
-Ref: hfy-parse-tags-buffer20434
-Ref: hfy-interq20645
-Ref: hfy-text-p20759
-Ref: hfy-opt20895
-Ref: hfy-dirname21004
-Ref: hfy-html-dekludge-buffer21311
-Ref: hfy-copy-and-fontify-file21550
-Ref: hfy-decor21867
-Ref: hfy-slant22001
-Ref: hfy-tags-for-file22228
-Ref: hfy-width22431
-Node: Variables22546
-Ref: hfy-tags-cache22766
-Ref: hfy-tags-rmap23142
-Ref: hfy-tags-sortl23507
-Node: Data Structures23713
-Ref: hfy-style-assoc23963
-Ref: hfy-sheet-assoc25139
-Ref: hfy-facemap-assoc25481
-Node: Examples26757
-Node: Customization29024
-Ref: hfy-link-style-fun29258
-Ref: hfy-html-quote-regex29622
-Ref: hfy-page-footer29836
-Ref: hfy-display-class29975
-Ref: hfy-page-header31054
-Ref: hfy-src-doc-link-style31454
-Ref: hfy-split-index31562
-Ref: hfy-find-cmd31816
-Ref: hfy-extn31921
-Ref: hfy-default-face-def31993
-Ref: hfy-init-kludge-hook32404
-Ref: hfy-shell-file-name32629
-Ref: hfy-optimizations32908
-Ref: hfy-src-doc-link-unstyle34424
-Ref: hfy-link-extn34534
-Ref: hfy-istext-command34814
-Ref: hfy-etags-cmd-alist35086
-Ref: hfy-etags-bin35270
-Ref: hfy-etags-cmd35601
-Ref: hfy-etag-regex35942
-Ref: hfy-index-file36155
-Ref: hfy-instance-file36279
-Ref: hfy-html-quote-map36414
-Node: Requirements36500
-Node: GNU Free Documentation License37233
-Node: Index62590
+Ref: hfy-size-to-int15180
+Ref: hfy-sprintf-stylesheet15396
+Ref: hfy-relstub15655
+Ref: hfy-compile-face-map15852
+Ref: hfy-prepare-index15994
+Ref: hfy-prepare-tag-map16201
+Ref: hfy-subtract-maps16534
+Ref: hfy-face-to-style-i16735
+Ref: hfy-face-to-css17271
+Ref: hfy-html-quote17497
+Ref: hfy-link-style17655
+Ref: hfy-p-to-face17843
+Ref: hfy-box-to-border-assoc18012
+Ref: hfy-face-attr-for-class18138
+Ref: hfy-face-at19075
+Ref: hfy-bgcol19323
+Ref: hfy-kludge-cperl-mode19440
+Ref: hfy-href19619
+Ref: hfy-shell20038
+Ref: hfy-load-tags-cache20252
+Ref: hfy-parse-tags-buffer20426
+Ref: hfy-interq20637
+Ref: hfy-text-p20751
+Ref: hfy-opt20887
+Ref: hfy-dirname20996
+Ref: hfy-html-dekludge-buffer21303
+Ref: hfy-copy-and-fontify-file21542
+Ref: hfy-decor21859
+Ref: hfy-slant21993
+Ref: hfy-tags-for-file22220
+Ref: hfy-width22423
+Node: Variables22538
+Ref: hfy-tags-cache22758
+Ref: hfy-tags-rmap23134
+Ref: hfy-tags-sortl23499
+Node: Data Structures23705
+Ref: hfy-style-assoc23955
+Ref: hfy-sheet-assoc25131
+Ref: hfy-facemap-assoc25473
+Node: Examples26749
+Node: Customization29016
+Ref: hfy-link-style-fun29250
+Ref: hfy-html-quote-regex29614
+Ref: hfy-page-footer29828
+Ref: hfy-display-class29967
+Ref: hfy-page-header31046
+Ref: hfy-src-doc-link-style31446
+Ref: hfy-split-index31554
+Ref: hfy-extn31909
+Ref: hfy-default-face-def31981
+Ref: hfy-init-kludge-hook32392
+Ref: hfy-shell-file-name32617
+Ref: hfy-optimizations32896
+Ref: hfy-src-doc-link-unstyle34412
+Ref: hfy-link-extn34522
+Ref: hfy-istext-command34802
+Ref: hfy-etags-cmd-alist35074
+Ref: hfy-etags-bin35258
+Ref: hfy-etags-cmd35589
+Ref: hfy-etag-regex35930
+Ref: hfy-index-file36143
+Ref: hfy-instance-file36267
+Ref: hfy-html-quote-map36402
+Node: Requirements36488
+Node: GNU Free Documentation License37001
+Node: Index62358
 
 End Tag Table
 

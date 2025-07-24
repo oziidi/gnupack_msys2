@@ -1,8 +1,8 @@
-This is ede.info, produced by makeinfo version 6.7 from ede.texi.
+This is ede.info, produced by makeinfo version 6.8 from ede.texi.
 
 This file describes EDE, the Emacs Development Environment.
 
-   Copyright © 1998–2001, 2004–2005, 2008–2022 Free Software Foundation,
+   Copyright © 1998–2001, 2004–2005, 2008–2024 Free Software Foundation,
 Inc.
 
      Permission is granted to copy, distribute and/or modify this
@@ -36,7 +36,7 @@ GNU ways of doing things.
 
    This file describes EDE, the Emacs Development Environment.
 
-   Copyright © 1998–2001, 2004–2005, 2008–2022 Free Software Foundation,
+   Copyright © 1998–2001, 2004–2005, 2008–2024 Free Software Foundation,
 Inc.
 
      Permission is granted to copy, distribute and/or modify this
@@ -69,7 +69,7 @@ File: ede.info,  Node: EDE Project Concepts,  Next: EDE Mode,  Prev: Top,  Up: T
 **********************
 
 EDE is a generic interface for managing projects.  It specifies a single
-set of menus and keybindings, while supporting multiple ways to express
+set of menus and key bindings, while supporting multiple ways to express
 a project via a build system.
 
    In the subsequent chapters, we will describe the different project
@@ -109,7 +109,7 @@ the command ‘global-ede-mode’, or by putting this in your init file:
 
    Activating EDE adds a menu named ‘Development’ to the menu bar.  This
 menu provides several menu items for high-level EDE commands.  These
-menu items, and their corresponding keybindings, are independent of the
+menu items, and their corresponding key bindings, are independent of the
 type of project you are actually working on.
 
 
@@ -223,9 +223,9 @@ You can create targets either from a buffer, or from a ‘dired’ directory
 buffer.
 
    Note: If for some reason a directory list buffer, or file does not
-have the ‘Project’ menu item, or if EDE keybindings don’t work, just use
-‘M-x revert-buffer <RET>’ to force a refresh.  Sometimes creating a new
-project doesn’t restart buffers correctly.
+have the ‘Project’ menu item, or if EDE key bindings don’t work, just
+use ‘M-x revert-buffer <RET>’ to force a refresh.  Sometimes creating a
+new project doesn’t restart buffers correctly.
 
    Lets start with the header file.  In ‘include/myproj.hh’, you could
 use the menu, but we will now start using the EDE command prefix which
@@ -905,7 +905,7 @@ The example for Makefiles looks like this:
        ((buildfile :initform "Makefile"))
        "Generic Project for makefiles.")
 
-     (defmethod ede-generic-setup-configuration ((proj ede-generic-makefile-project) config)
+     (cl-defmethod ede-generic-setup-configuration ((proj ede-generic-makefile-project) config)
        "Set up a configuration for Make."
        (oset config build-command "make -k")
        (oset config debug-command "gdb "))
@@ -979,7 +979,7 @@ superclasses.  In this way, specific behaviors such as how a project is
 saved, or how a target is compiled can be customized by a project author
 in detail.  EDE communicates to these project objects via an API using
 methods.  The commands you use in EDE mode are high-level functional
-wrappers over these methods.  *Note (eieio)Top::.  For details on using
+wrappers over these methods.  *Note (eieio)Top:: for details on using
 EIEIO to extending classes, and writing methods.
 
    If you intend to extend EDE, it is most likely that a new target type
@@ -1007,7 +1007,7 @@ methods.  See the ‘ede-skel.el’ file for examples of these.  The files
 
 * Development Overview::
 * Detecting a Project::
-* User interface methods::      Methods associated with keybindings
+* User interface methods::      Methods associated with key bindings
 * Base project methods::        The most basic methods on EDE objects.
 * Sourcecode objects::          Defining new sourcecode classes.
 * Compiler and Linker objects::  Defining new compilers and linkers.
@@ -1440,17 +1440,18 @@ File: ede.info,  Node: ede-project,  Next: ede-cpp-root-project,  Prev: ede-proj
 Inheritance Tree:
      ‘eieio-speedbar’
           ‘eieio-speedbar-directory-button’
-               ‘*Note ede-project-placeholder::.’
+               ‘ede-project-placeholder’
+                    *Note ede-project-placeholder::.
                     ‘ede-project’
                          Children:
                               *Note ede-cpp-root-project::,
                               ede-emacs-project, ede-linux-project,
-                              ede-maven-project,
-                              *Note ede-simple-project::,
-                              *Note ede-simple-base-project::,
-                              *Note ede-proj-project::,
-                              *Note project-am-makefile::,
-                              *Note ede-step-project::.
+                              ede-maven-project, *Note
+                              ede-simple-project::, *Note
+                              ede-simple-base-project::, *Note
+                              ede-proj-project::, *Note
+                              project-am-makefile::, *Note
+                              ede-step-project::.
 
 Slots:
 
@@ -1476,15 +1477,15 @@ Slots:
      ’
 
           A directory where web pages can be found by Emacs.  For remote
-          locations use a path compatible with ange-ftp or EFS.  You can
-          also use TRAMP for use with rcp & scp.
+          locations use a path compatible with ange-ftp.  You can also
+          use TRAMP for use with rcp & scp.
 
      ‘:web-site-file
      ’
 
           A file which contains the website for this project.  This file
           can be relative to slot ‘web-site-directory’.  This can be a
-          local file, use ange-ftp, EFS, or TRAMP.
+          local file, use ange-ftp or TRAMP.
 
      ‘:ftp-site’
           Type: ‘string’
@@ -1686,8 +1687,10 @@ File: ede.info,  Node: ede-cpp-root-project,  Next: ede-simple-project,  Prev: e
 Inheritance Tree:
      ‘eieio-speedbar’
           ‘eieio-speedbar-directory-button’
-               ‘*Note ede-project-placeholder::.’
-                    ‘*Note ede-project::.’
+               ‘ede-project-placeholder’
+                    *Note ede-project-placeholder::.
+                    ‘ede-project’
+                         *Note ede-project::.
                          ‘ede-cpp-root-project’
                               No children
 
@@ -1773,7 +1776,7 @@ Slots:
      Get the pre-processor map for project THIS.
 
  -- Method: ede-cpp-root-header-file-p :AFTER proj name
-     Non ‘nil’ if in PROJ the filename NAME is a header.
+     Non-‘nil’ if in PROJ the filename NAME is a header.
 
  -- Method: ede-system-include-path :AFTER this
      Get the system include path used by project THIS.
@@ -1791,8 +1794,10 @@ File: ede.info,  Node: ede-simple-project,  Next: ede-simple-base-project,  Prev
 Inheritance Tree:
      ‘eieio-speedbar’
           ‘eieio-speedbar-directory-button’
-               ‘*Note ede-project-placeholder::.’
-                    ‘*Note ede-project::.’
+               ‘ede-project-placeholder’
+                    *Note ede-project-placeholder::.
+                    ‘ede-project’
+                         *Note ede-project::.
                          ‘ede-simple-project’
                               No children
 
@@ -1811,8 +1816,10 @@ File: ede.info,  Node: ede-simple-base-project,  Next: ede-proj-project,  Prev: 
 Inheritance Tree:
      ‘eieio-speedbar’
           ‘eieio-speedbar-directory-button’
-               ‘*Note ede-project-placeholder::.’
-                    ‘*Note ede-project::.’
+               ‘ede-project-placeholder’
+                    *Note ede-project-placeholder::.
+                    ‘ede-project’
+                         *Note ede-project::.
                          ‘ede-simple-base-project’
                               No children
 
@@ -1828,8 +1835,10 @@ File: ede.info,  Node: ede-proj-project,  Next: project-am-makefile,  Prev: ede-
 Inheritance Tree:
      ‘eieio-speedbar’
           ‘eieio-speedbar-directory-button’
-               ‘*Note ede-project-placeholder::.’
-                    ‘*Note ede-project::.’
+               ‘ede-project-placeholder’
+                    *Note ede-project-placeholder::.
+                    ‘ede-project’
+                         *Note ede-project::.
                          ‘ede-proj-project’
                               No children
 
@@ -1989,8 +1998,10 @@ File: ede.info,  Node: project-am-makefile,  Next: ede-step-project,  Prev: ede-
 Inheritance Tree:
      ‘eieio-speedbar’
           ‘eieio-speedbar-directory-button’
-               ‘*Note ede-project-placeholder::.’
-                    ‘*Note ede-project::.’
+               ‘ede-project-placeholder’
+                    *Note ede-project-placeholder::.
+                    ‘ede-project’
+                         *Note ede-project::.
                          ‘project-am-makefile’
                               No children
 
@@ -2019,8 +2030,10 @@ File: ede.info,  Node: ede-step-project,  Prev: project-am-makefile,  Up: Projec
 Inheritance Tree:
      ‘eieio-speedbar’
           ‘eieio-speedbar-directory-button’
-               ‘*Note ede-project-placeholder::.’
-                    ‘*Note ede-project::.’
+               ‘ede-project-placeholder’
+                    *Note ede-project-placeholder::.
+                    ‘ede-project’
+                         *Note ede-project::.
                          ‘ede-step-project’
                               No children
 
@@ -2159,9 +2172,8 @@ Inheritance Tree:
                          ede-emacs-target-el, ede-emacs-target-misc,
                          ede-linux-target-c, ede-linux-target-misc,
                          ede-maven-target-java, ede-maven-target-c,
-                         ede-maven-target-misc, ede-simple-target,
-                         *Note ede-proj-target::,
-                         *Note project-am-target::.
+                         ede-maven-target-misc, ede-simple-target, *Note
+                         ede-proj-target::, *Note project-am-target::.
 
 Slots:
 
@@ -2291,7 +2303,7 @@ Slots:
      Call this when a user finishes customizing TARGET.
 
  -- Method: project-edit-file-target :AFTER ot
-     Edit the target OT associated w/ this file.
+     Edit the target OT associated with this file.
 
  -- Method: ede-documentation :AFTER this
      Return a list of files that provides documentation.  Documentation
@@ -2324,12 +2336,13 @@ File: ede.info,  Node: ede-proj-target,  Next: ede-proj-target-makefile,  Prev: 
 Inheritance Tree:
      ‘eieio-speedbar’
           ‘eieio-speedbar-directory-button’
-               ‘*Note ede-target::.’
+               ‘ede-target’
+                    *Note ede-target::.
                     ‘ede-proj-target’
                          Children:
                               *Note ede-proj-target-makefile::,
-                              ede-proj-target-aux,
-                              *Note ede-proj-target-scheme::.
+                              ede-proj-target-aux, *Note
+                              ede-proj-target-scheme::.
 
 Slots:
 
@@ -2482,15 +2495,20 @@ File: ede.info,  Node: ede-proj-target-makefile,  Next: semantic-ede-proj-target
 Inheritance Tree:
      ‘eieio-speedbar’
           ‘eieio-speedbar-directory-button’
-               ‘*Note ede-target::.’
-                    ‘*Note ede-proj-target::.’
+               ‘ede-target’
+                    *Note ede-target::.
+                    ‘ede-proj-target’
+                         *Note ede-proj-target::.
                          ‘ede-proj-target-makefile’
                               Children:
-                                   *Note semantic-ede-proj-target-grammar::,
-                                   *Note ede-proj-target-makefile-objectcode::,
-                                   *Note ede-proj-target-elisp::,
-                                   *Note ede-proj-target-makefile-miscelaneous::,
-                                   *Note ede-proj-target-makefile-info::.
+                                   *Note
+                                   semantic-ede-proj-target-grammar::,
+                                   *Note
+                                   ede-proj-target-makefile-objectcode::,
+                                   *Note ede-proj-target-elisp::, *Note
+                                   ede-proj-target-makefile-miscelaneous::,
+                                   *Note
+                                   ede-proj-target-makefile-info::.
 
 Slots:
 
@@ -2504,7 +2522,7 @@ Slots:
           Type: ‘boolean’
           Default Value: ‘t’
 
-          Non ‘nil’ means the rule created is part of the all target.
+          Non-‘nil’ means the rule created is part of the all target.
           Setting this to ‘nil’ creates the rule to build this item, but
           does not include it in the ‘all:’ rule.
 
@@ -2565,9 +2583,12 @@ File: ede.info,  Node: semantic-ede-proj-target-grammar,  Next: ede-proj-target-
 Inheritance Tree:
      ‘eieio-speedbar’
           ‘eieio-speedbar-directory-button’
-               ‘*Note ede-target::.’
-                    ‘*Note ede-proj-target::.’
-                         ‘*Note ede-proj-target-makefile::.’
+               ‘ede-target’
+                    *Note ede-target::.
+                    ‘ede-proj-target’
+                         *Note ede-proj-target::.
+                         ‘ede-proj-target-makefile’
+                              *Note ede-proj-target-makefile::.
                               ‘semantic-ede-proj-target-grammar’
                                    No children
 
@@ -2602,13 +2623,18 @@ File: ede.info,  Node: ede-proj-target-makefile-objectcode,  Next: ede-proj-targ
 Inheritance Tree:
      ‘eieio-speedbar’
           ‘eieio-speedbar-directory-button’
-               ‘*Note ede-target::.’
-                    ‘*Note ede-proj-target::.’
-                         ‘*Note ede-proj-target-makefile::.’
+               ‘ede-target’
+                    *Note ede-target::.
+                    ‘ede-proj-target’
+                         *Note ede-proj-target::.
+                         ‘ede-proj-target-makefile’
+                              *Note ede-proj-target-makefile::.
                               ‘ede-proj-target-makefile-objectcode’
                                    Children:
-                                        *Note ede-proj-target-makefile-archive::,
-                                        *Note ede-proj-target-makefile-program::.
+                                        *Note
+                                        ede-proj-target-makefile-archive::,
+                                        *Note
+                                        ede-proj-target-makefile-program::.
 
 Slots:
 
@@ -2646,10 +2672,15 @@ File: ede.info,  Node: ede-proj-target-makefile-archive,  Next: ede-proj-target-
 Inheritance Tree:
      ‘eieio-speedbar’
           ‘eieio-speedbar-directory-button’
-               ‘*Note ede-target::.’
-                    ‘*Note ede-proj-target::.’
-                         ‘*Note ede-proj-target-makefile::.’
-                              ‘*Note ede-proj-target-makefile-objectcode::.’
+               ‘ede-target’
+                    *Note ede-target::.
+                    ‘ede-proj-target’
+                         *Note ede-proj-target::.
+                         ‘ede-proj-target-makefile’
+                              *Note ede-proj-target-makefile::.
+                              ‘ede-proj-target-makefile-objectcode’
+                                   *Note
+                                   ede-proj-target-makefile-objectcode::.
                                    ‘ede-proj-target-makefile-archive’
                                         No children
 
@@ -2673,13 +2704,19 @@ File: ede.info,  Node: ede-proj-target-makefile-program,  Next: ede-proj-target-
 Inheritance Tree:
      ‘eieio-speedbar’
           ‘eieio-speedbar-directory-button’
-               ‘*Note ede-target::.’
-                    ‘*Note ede-proj-target::.’
-                         ‘*Note ede-proj-target-makefile::.’
-                              ‘*Note ede-proj-target-makefile-objectcode::.’
+               ‘ede-target’
+                    *Note ede-target::.
+                    ‘ede-proj-target’
+                         *Note ede-proj-target::.
+                         ‘ede-proj-target-makefile’
+                              *Note ede-proj-target-makefile::.
+                              ‘ede-proj-target-makefile-objectcode’
+                                   *Note
+                                   ede-proj-target-makefile-objectcode::.
                                    ‘ede-proj-target-makefile-program’
                                         Children:
-                                             *Note ede-proj-target-makefile-shared-object::.
+                                             *Note
+                                             ede-proj-target-makefile-shared-object::.
 
 Slots:
 
@@ -2727,11 +2764,18 @@ File: ede.info,  Node: ede-proj-target-makefile-shared-object,  Next: ede-proj-t
 Inheritance Tree:
      ‘eieio-speedbar’
           ‘eieio-speedbar-directory-button’
-               ‘*Note ede-target::.’
-                    ‘*Note ede-proj-target::.’
-                         ‘*Note ede-proj-target-makefile::.’
-                              ‘*Note ede-proj-target-makefile-objectcode::.’
-                                   ‘*Note ede-proj-target-makefile-program::.’
+               ‘ede-target’
+                    *Note ede-target::.
+                    ‘ede-proj-target’
+                         *Note ede-proj-target::.
+                         ‘ede-proj-target-makefile’
+                              *Note ede-proj-target-makefile::.
+                              ‘ede-proj-target-makefile-objectcode’
+                                   *Note
+                                   ede-proj-target-makefile-objectcode::.
+                                   ‘ede-proj-target-makefile-program’
+                                        *Note
+                                        ede-proj-target-makefile-program::.
                                         ‘ede-proj-target-makefile-shared-object’
                                              No children
 
@@ -2766,12 +2810,16 @@ File: ede.info,  Node: ede-proj-target-elisp,  Next: ede-proj-target-elisp-autol
 Inheritance Tree:
      ‘eieio-speedbar’
           ‘eieio-speedbar-directory-button’
-               ‘*Note ede-target::.’
-                    ‘*Note ede-proj-target::.’
-                         ‘*Note ede-proj-target-makefile::.’
+               ‘ede-target’
+                    *Note ede-target::.
+                    ‘ede-proj-target’
+                         *Note ede-proj-target::.
+                         ‘ede-proj-target-makefile’
+                              *Note ede-proj-target-makefile::.
                               ‘ede-proj-target-elisp’
                                    Children:
-                                        *Note ede-proj-target-elisp-autoloads::.
+                                        *Note
+                                        ede-proj-target-elisp-autoloads::.
 
 Slots:
 
@@ -2818,10 +2866,14 @@ File: ede.info,  Node: ede-proj-target-elisp-autoloads,  Next: ede-proj-target-m
 Inheritance Tree:
      ‘eieio-speedbar’
           ‘eieio-speedbar-directory-button’
-               ‘*Note ede-target::.’
-                    ‘*Note ede-proj-target::.’
-                         ‘*Note ede-proj-target-makefile::.’
-                              ‘*Note ede-proj-target-elisp::.’
+               ‘ede-target’
+                    *Note ede-target::.
+                    ‘ede-proj-target’
+                         *Note ede-proj-target::.
+                         ‘ede-proj-target-makefile’
+                              *Note ede-proj-target-makefile::.
+                              ‘ede-proj-target-elisp’
+                                   *Note ede-proj-target-elisp::.
                                    ‘ede-proj-target-elisp-autoloads’
                                         No children
 
@@ -2906,9 +2958,12 @@ File: ede.info,  Node: ede-proj-target-makefile-miscelaneous,  Next: ede-proj-ta
 Inheritance Tree:
      ‘eieio-speedbar’
           ‘eieio-speedbar-directory-button’
-               ‘*Note ede-target::.’
-                    ‘*Note ede-proj-target::.’
-                         ‘*Note ede-proj-target-makefile::.’
+               ‘ede-target’
+                    *Note ede-target::.
+                    ‘ede-proj-target’
+                         *Note ede-proj-target::.
+                         ‘ede-proj-target-makefile’
+                              *Note ede-proj-target-makefile::.
                               ‘ede-proj-target-makefile-miscelaneous’
                                    No children
 
@@ -2942,9 +2997,12 @@ File: ede.info,  Node: ede-proj-target-makefile-info,  Next: ede-proj-target-sch
 Inheritance Tree:
      ‘eieio-speedbar’
           ‘eieio-speedbar-directory-button’
-               ‘*Note ede-target::.’
-                    ‘*Note ede-proj-target::.’
-                         ‘*Note ede-proj-target-makefile::.’
+               ‘ede-target’
+                    *Note ede-target::.
+                    ‘ede-proj-target’
+                         *Note ede-proj-target::.
+                         ‘ede-proj-target-makefile’
+                              *Note ede-proj-target-makefile::.
                               ‘ede-proj-target-makefile-info’
                                    No children
 
@@ -3005,8 +3063,10 @@ File: ede.info,  Node: ede-proj-target-scheme,  Next: project-am-target,  Prev: 
 Inheritance Tree:
      ‘eieio-speedbar’
           ‘eieio-speedbar-directory-button’
-               ‘*Note ede-target::.’
-                    ‘*Note ede-proj-target::.’
+               ‘ede-target’
+                    *Note ede-target::.
+                    ‘ede-proj-target’
+                         *Note ede-proj-target::.
                          ‘ede-proj-target-scheme’
                               No children
 
@@ -3033,14 +3093,15 @@ File: ede.info,  Node: project-am-target,  Next: project-am-objectcode,  Prev: e
 Inheritance Tree:
      ‘eieio-speedbar’
           ‘eieio-speedbar-directory-button’
-               ‘*Note ede-target::.’
+               ‘ede-target’
+                    *Note ede-target::.
                     ‘project-am-target’
                          Children:
                               *Note project-am-objectcode::,
-                              project-am-header,
-                              *Note project-am-lisp::,
-                              *Note project-am-texinfo::,
-                              *Note project-am-man::.
+                              project-am-header, *Note
+                              project-am-lisp::, *Note
+                              project-am-texinfo::, *Note
+                              project-am-man::.
 
 8.8.14.1 Specialized Methods
 ............................
@@ -3052,7 +3113,7 @@ Inheritance Tree:
      Run the current project in the debugger.
 
  -- Method: project-edit-file-target :AFTER obj
-     Edit the target associated w/ this file.
+     Edit the target associated with this file.
 
 
 File: ede.info,  Node: project-am-objectcode,  Next: project-am-program,  Prev: project-am-target,  Up: Targets
@@ -3063,8 +3124,10 @@ File: ede.info,  Node: project-am-objectcode,  Next: project-am-program,  Prev: 
 Inheritance Tree:
      ‘eieio-speedbar’
           ‘eieio-speedbar-directory-button’
-               ‘*Note ede-target::.’
-                    ‘*Note project-am-target::.’
+               ‘ede-target’
+                    *Note ede-target::.
+                    ‘project-am-target’
+                         *Note project-am-target::.
                          ‘project-am-objectcode’
                               Children:
                                    *Note project-am-program::,
@@ -3094,9 +3157,12 @@ File: ede.info,  Node: project-am-program,  Next: project-am-header-noinst,  Pre
 Inheritance Tree:
      ‘eieio-speedbar’
           ‘eieio-speedbar-directory-button’
-               ‘*Note ede-target::.’
-                    ‘*Note project-am-target::.’
-                         ‘*Note project-am-objectcode::.’
+               ‘ede-target’
+                    *Note ede-target::.
+                    ‘project-am-target’
+                         *Note project-am-target::.
+                         ‘project-am-objectcode’
+                              *Note project-am-objectcode::.
                               ‘project-am-program’
                                    No children
 
@@ -3117,8 +3183,10 @@ File: ede.info,  Node: project-am-header-noinst,  Next: project-am-header-inst, 
 Inheritance Tree:
      ‘eieio-speedbar’
           ‘eieio-speedbar-directory-button’
-               ‘*Note ede-target::.’
-                    ‘*Note project-am-target::.’
+               ‘ede-target’
+                    *Note ede-target::.
+                    ‘project-am-target’
+                         *Note project-am-target::.
                          ‘project-am-header.’
                               ‘project-am-header-noinst’
                                    No children
@@ -3138,8 +3206,10 @@ File: ede.info,  Node: project-am-header-inst,  Next: project-am-lisp,  Prev: pr
 Inheritance Tree:
      ‘eieio-speedbar’
           ‘eieio-speedbar-directory-button’
-               ‘*Note ede-target::.’
-                    ‘*Note project-am-target::.’
+               ‘ede-target’
+                    *Note ede-target::.
+                    ‘project-am-target’
+                         *Note project-am-target::.
                          ‘project-am-header.’
                               ‘project-am-header-inst’
                                    No children
@@ -3159,8 +3229,10 @@ File: ede.info,  Node: project-am-lisp,  Next: project-am-texinfo,  Prev: projec
 Inheritance Tree:
      ‘eieio-speedbar’
           ‘eieio-speedbar-directory-button’
-               ‘*Note ede-target::.’
-                    ‘*Note project-am-target::.’
+               ‘ede-target’
+                    *Note ede-target::.
+                    ‘project-am-target’
+                         *Note project-am-target::.
                          ‘project-am-lisp’
                               No children
 
@@ -3179,8 +3251,10 @@ File: ede.info,  Node: project-am-texinfo,  Next: project-am-man,  Prev: project
 Inheritance Tree:
      ‘eieio-speedbar’
           ‘eieio-speedbar-directory-button’
-               ‘*Note ede-target::.’
-                    ‘*Note project-am-target::.’
+               ‘ede-target’
+                    *Note ede-target::.
+                    ‘project-am-target’
+                         *Note project-am-target::.
                          ‘project-am-texinfo’
                               No children
 
@@ -3215,8 +3289,10 @@ File: ede.info,  Node: project-am-man,  Prev: project-am-texinfo,  Up: Targets
 Inheritance Tree:
      ‘eieio-speedbar’
           ‘eieio-speedbar-directory-button’
-               ‘*Note ede-target::.’
-                    ‘*Note project-am-target::.’
+               ‘ede-target’
+                    *Note ede-target::.
+                    ‘project-am-target’
+                         *Note project-am-target::.
                          ‘project-am-man’
                               No children
 
@@ -3283,10 +3359,10 @@ Slots:
           Type: ‘boolean’
           Default Value: ‘nil’
 
-          Non ‘nil’ if this sourcecode type uses subdirectores.  If
+          Non-‘nil’ if this sourcecode type uses subdirectores.  If
           sourcecode always lives near the target creating it, this
-          should be nil.  If sourcecode can, or typically lives in a
-          subdirectory of the owning target, set this to t.
+          should be ‘nil’.  If sourcecode can, or typically lives in a
+          subdirectory of the owning target, set this to ‘t’.
 
      ‘:garbagepattern’
           Type: ‘list’
@@ -3444,7 +3520,8 @@ File: ede.info,  Node: ede-compiler,  Next: ede-object-compiler,  Prev: ede-comp
 
 Inheritance Tree:
      ‘eieio-instance-inheritor’
-          ‘*Note ede-compilation-program::.’
+          ‘ede-compilation-program’
+               *Note ede-compilation-program::.
                ‘ede-compiler’
                     Children:
                          *Note ede-object-compiler::,
@@ -3538,8 +3615,10 @@ File: ede.info,  Node: ede-object-compiler,  Next: ede-linker,  Prev: ede-compil
 
 Inheritance Tree:
      ‘eieio-instance-inheritor’
-          ‘*Note ede-compilation-program::.’
-               ‘*Note ede-compiler::.’
+          ‘ede-compilation-program’
+               *Note ede-compilation-program::.
+               ‘ede-compiler’
+                    *Note ede-compiler::.
                     ‘ede-object-compiler’
                          No children
 
@@ -3569,7 +3648,8 @@ File: ede.info,  Node: ede-linker,  Prev: ede-object-compiler,  Up: Compilers
 
 Inheritance Tree:
      ‘eieio-instance-inheritor’
-          ‘*Note ede-compilation-program::.’
+          ‘ede-compilation-program’
+               *Note ede-compilation-program::.
                ‘ede-linker’
                     No children
 
@@ -4099,74 +4179,74 @@ their use in free software.
 Tag Table:
 Node: Top930
 Node: EDE Project Concepts2749
-Node: EDE Mode4139
-Node: Quick Start4764
-Node: Creating a project12435
-Node: Modifying your project14531
-Node: Add/Remove target15089
-Node: Add/Remove files15765
-Node: Customize Features16714
-Node: Project Local Variables17716
-Node: EDE Project Features19249
-Node: Changing Compilers and Flags19956
-Node: Configurations20891
-Node: Building and Debugging21808
-Node: Miscellaneous commands22428
-Ref: ede-locate-setup-options23278
-Node: Make and Automake projects24067
-Node: Automake direct projects24743
-Node: Simple projects25347
-Node: ede-cpp-root26231
-Node: ede-emacs31657
-Node: ede-linux32031
-Node: ede-generic-project32765
-Node: Custom Locate34820
-Node: Extending EDE36434
-Node: Development Overview39172
-Node: Detecting a Project43490
-Node: User interface methods46663
-Node: Base project methods47924
-Node: Sourcecode objects49337
-Node: Compiler and Linker objects51094
-Node: Project53389
-Node: ede-project-placeholder53716
-Node: ede-project55757
-Node: ede-cpp-root-project64887
-Node: ede-simple-project68986
-Node: ede-simple-base-project69588
-Node: ede-proj-project70149
-Node: project-am-makefile75950
-Node: ede-step-project77051
-Node: Targets80549
-Node: ede-target81285
-Node: ede-proj-target87448
-Node: ede-proj-target-makefile93529
-Node: semantic-ede-proj-target-grammar96725
-Node: ede-proj-target-makefile-objectcode98144
-Node: ede-proj-target-makefile-archive99742
-Node: ede-proj-target-makefile-program100890
-Node: ede-proj-target-makefile-shared-object102838
-Node: ede-proj-target-elisp104571
-Node: ede-proj-target-elisp-autoloads106530
-Node: ede-proj-target-makefile-miscelaneous109990
-Node: ede-proj-target-makefile-info111232
-Node: ede-proj-target-scheme113703
-Node: project-am-target114501
-Node: project-am-objectcode115518
-Node: project-am-program116565
-Node: project-am-header-noinst117190
-Node: project-am-header-inst117885
-Node: project-am-lisp118571
-Node: project-am-texinfo119170
-Node: project-am-man120216
-Node: Sourcecode120785
-Node: ede-sourcecode121014
-Node: Compilers123760
-Node: ede-compilation-program124173
-Node: ede-compiler127466
-Node: ede-object-compiler130711
-Node: ede-linker131506
-Node: GNU Free Documentation License133036
+Node: EDE Mode4140
+Node: Quick Start4766
+Node: Creating a project12438
+Node: Modifying your project14534
+Node: Add/Remove target15092
+Node: Add/Remove files15768
+Node: Customize Features16717
+Node: Project Local Variables17719
+Node: EDE Project Features19252
+Node: Changing Compilers and Flags19959
+Node: Configurations20894
+Node: Building and Debugging21811
+Node: Miscellaneous commands22431
+Ref: ede-locate-setup-options23281
+Node: Make and Automake projects24070
+Node: Automake direct projects24746
+Node: Simple projects25350
+Node: ede-cpp-root26234
+Node: ede-emacs31660
+Node: ede-linux32034
+Node: ede-generic-project32768
+Node: Custom Locate34826
+Node: Extending EDE36440
+Node: Development Overview39177
+Node: Detecting a Project43495
+Node: User interface methods46668
+Node: Base project methods47929
+Node: Sourcecode objects49342
+Node: Compiler and Linker objects51099
+Node: Project53394
+Node: ede-project-placeholder53721
+Node: ede-project55762
+Node: ede-cpp-root-project64923
+Node: ede-simple-project69103
+Node: ede-simple-base-project69786
+Node: ede-proj-project70428
+Node: project-am-makefile76310
+Node: ede-step-project77492
+Node: Targets81071
+Node: ede-target81807
+Node: ede-proj-target87947
+Node: ede-proj-target-makefile94059
+Node: semantic-ede-proj-target-grammar97432
+Node: ede-proj-target-makefile-objectcode98978
+Node: ede-proj-target-makefile-archive100783
+Node: ede-proj-target-makefile-program102164
+Node: ede-proj-target-makefile-shared-object104390
+Node: ede-proj-target-elisp106469
+Node: ede-proj-target-elisp-autoloads108595
+Node: ede-proj-target-makefile-miscelaneous112239
+Node: ede-proj-target-makefile-info113608
+Node: ede-proj-target-scheme116206
+Node: project-am-target117076
+Node: project-am-objectcode118126
+Node: project-am-program119247
+Node: project-am-header-noinst119998
+Node: project-am-header-inst120767
+Node: project-am-lisp121527
+Node: project-am-texinfo122200
+Node: project-am-man123320
+Node: Sourcecode123963
+Node: ede-sourcecode124192
+Node: Compilers126950
+Node: ede-compilation-program127363
+Node: ede-compiler130656
+Node: ede-object-compiler133940
+Node: ede-linker134807
+Node: GNU Free Documentation License136376
 
 End Tag Table
 

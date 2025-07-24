@@ -78,13 +78,15 @@ Emacs misc features
 * Ebrowse: (ebrowse).           A C++ class browser for Emacs.
 * Ediff: (ediff).               A visual interface for comparing and merging 
                                   programs.
+* Eglot: (eglot).               Language Server Protocol client for Emacs.
 * Eshell: (eshell).             A command shell implemented in Emacs Lisp.
 * Flymake: (flymake).           A universal on-the-fly syntax checker.
 * Forms: (forms).               Emacs package for editing data bases by 
                                   filling in forms.
 * Htmlfontify: (htmlfontify).   Convert source code to html.
 * Ido: (ido).                   Interactively do things with buffers and files.
-* Modus Themes: (modus-themes). Highly accessible themes (WCAG AAA).
+* Modus Themes: (modus-themes). Elegant, highly legible and customizable 
+                                  themes.
 * PCL-CVS: (pcl-cvs).           Emacs front-end to CVS.
 * RefTeX: (reftex).             Emacs support for LaTeX cross-references and 
                                   citations.
@@ -99,6 +101,8 @@ Emacs misc features
 * VIPER: (viper).               A VI-emulation mode for Emacs.
 * Wisent: (wisent).             Semantic Wisent parser development.
 * WoMan: (woman).               Browse UN*X Manual Pages "W.O. (without) Man".
+* use-package: (use-package).   Declarative package configuration for Emacs.
+* vtable: (vtable).             Variable Pitch Tables.
 
 Emacs lisp libraries
 * Auth-source: (auth).          The Emacs auth-source library.

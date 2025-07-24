@@ -1,9 +1,9 @@
-This is vhdl-mode.info, produced by makeinfo version 6.7 from
+This is vhdl-mode.info, produced by makeinfo version 6.8 from
 vhdl-mode.texi.
 
 This file documents VHDL Mode, an Emacs mode for editing VHDL code.
 
-   Copyright © 1995–2008, 2010, 2012, 2015–2022 Free Software
+   Copyright © 1995–2008, 2010, 2012, 2015–2024 Free Software
 Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
@@ -29,7 +29,7 @@ VHDL Mode, an Emacs mode for editing VHDL code
 
 This file documents VHDL Mode, an Emacs mode for editing VHDL code.
 
-   Copyright © 1995–2008, 2010, 2012, 2015–2022 Free Software
+   Copyright © 1995–2008, 2010, 2012, 2015–2024 Free Software
 Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
@@ -205,7 +205,7 @@ File: vhdl-mode.info,  Node: Indentation Calculation,  Prev: Syntactic Analysis,
 ===========================
 
 Indentation for the current line is calculated using the syntactic
-component list derived in step 1 above (see *note Syntactic Analysis::).
+component list derived in step 1 above (*note Syntactic Analysis::).
 Each component contributes to the final total indentation of the line in
 two ways.
 
@@ -542,7 +542,7 @@ File: vhdl-mode.info,  Node: Custom Indentation Functions,  Next: Other Special 
 
 One of the most common ways to customize VHDL Mode is by writing “custom
 indentation functions” and associating them with specific syntactic
-symbols (see *note Syntactic Symbols::).  VHDL Mode itself uses custom
+symbols (*note Syntactic Symbols::).  VHDL Mode itself uses custom
 indentation functions to provide more sophisticated indentation, for
 example when lining up selected signal assignments:
 
@@ -597,8 +597,8 @@ implements this:
            )))
 
 Custom indent functions take a single argument, which is a syntactic
-component cons cell (see *note Syntactic Analysis::).  The function
-returns an integer offset value that will be added to the running total
+component cons cell (*note Syntactic Analysis::).  The function returns
+an integer offset value that will be added to the running total
 indentation for the line.  Note that what actually gets returned is the
 difference between the column that the signal assignment operator is on,
 and the column of the buffer relative position passed in the function’s
@@ -723,7 +723,7 @@ you may also join the ‘vhdl-mode-victims’ mailing list.  Send email to
 the maintainer <reto@gnu.org> to join either of these lists.
 
    The official Emacs VHDL Mode Home Page can be found at
-<http://www.iis.ee.ethz.ch/~zimmi/emacs/vhdl-mode.html>.
+<https://www.iis.ee.ethz.ch/~zimmi/emacs/vhdl-mode.html>.
 
 
 File: vhdl-mode.info,  Node: Sample Init File,  Next: Limitations and Known Bugs,  Prev: Getting the latest VHDL Mode release,  Up: Top
@@ -760,7 +760,7 @@ customize indentation, here you go:
        (setq tab-width 8
              ;; this will make sure spaces are used instead of tabs
              indent-tabs-mode nil)
-       ;; keybindings for VHDL are put in vhdl-mode-map
+       ;; key bindings for VHDL are put in vhdl-mode-map
        (define-key vhdl-mode-map "\C-m" 'newline-and-indent)
        )
 
@@ -1489,27 +1489,27 @@ Node: New Indentation Engine3888
 Node: Syntactic Analysis4795
 Ref: Syntactic Analysis-Footnote-17349
 Node: Indentation Calculation7441
-Node: Customizing Indentation9797
-Node: Interactive Customization12019
-Node: Permanent Customization14411
-Node: Styles15741
-Node: Built-in Styles16737
-Node: Adding Styles17935
-Node: File Styles19000
-Node: Advanced Customizations20150
-Node: Custom Indentation Functions21043
-Node: Other Special Indentations24884
-Node: Syntactic Symbols25566
-Node: Frequently Asked Questions26609
-Node: Getting the latest VHDL Mode release28345
-Node: Sample Init File29035
-Node: Limitations and Known Bugs30726
-Node: Mailing Lists and Submitting Bug Reports30991
-Node: GNU Free Documentation License32143
-Node: Concept Index57534
-Node: Command Index62458
-Node: Key Index64868
-Node: Variable Index66369
+Node: Customizing Indentation9793
+Node: Interactive Customization12015
+Node: Permanent Customization14407
+Node: Styles15737
+Node: Built-in Styles16733
+Node: Adding Styles17931
+Node: File Styles18996
+Node: Advanced Customizations20146
+Node: Custom Indentation Functions21039
+Node: Other Special Indentations24872
+Node: Syntactic Symbols25554
+Node: Frequently Asked Questions26597
+Node: Getting the latest VHDL Mode release28333
+Node: Sample Init File29024
+Node: Limitations and Known Bugs30716
+Node: Mailing Lists and Submitting Bug Reports30981
+Node: GNU Free Documentation License32133
+Node: Concept Index57524
+Node: Command Index62448
+Node: Key Index64858
+Node: Variable Index66359
 
 End Tag Table
 

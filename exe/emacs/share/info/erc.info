@@ -1,8 +1,8 @@
-This is erc.info, produced by makeinfo version 6.7 from erc.texi.
+This is erc.info, produced by makeinfo version 6.8 from erc.texi.
 
-This manual is for ERC as distributed with Emacs 28.2.
+This manual is for ERC 5.5.0.29.1 as distributed with Emacs 29.4.
 
-   Copyright © 2005–2022 Free Software Foundation, Inc.
+   Copyright © 2005–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -28,9 +28,9 @@ File: erc.info,  Node: Top,  Next: Introduction,  Up: (dir)
 ERC
 ***
 
-This manual is for ERC as distributed with Emacs 28.2.
+This manual is for ERC 5.5.0.29.1 as distributed with Emacs 29.4.
 
-   Copyright © 2005–2022 Free Software Foundation, Inc.
+   Copyright © 2005–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -68,7 +68,9 @@ Getting Started
 Advanced Usage
 
 * Connecting::                  Ways of connecting to an IRC server.
+* SASL::                        Authenticating via SASL.
 * Sample Configuration::        An example configuration file.
+* Integrations::                Integrations available for ERC.
 * Options::                     Options that are available for ERC.
 
 
@@ -78,10 +80,32 @@ File: erc.info,  Node: Introduction,  Next: Getting Started,  Prev: Top,  Up: To
 1 Introduction
 **************
 
-ERC is a powerful, modular, and extensible IRC client for Emacs.  It is
-distributed with Emacs since version 22.1.
+ERC is a powerful, modular, and extensible IRC client for Emacs.  It has
+been included in Emacs since 2006 (*note History::) and is also
+available on GNU ELPA.
 
-   It comes with the following capabilities enabled by default.
+   IRC is short for Internet Relay Chat.  When using IRC, you can
+communicate with other users on the same IRC network.  There are many
+different networks—if you search for “IRC networks” in your favorite
+search engine, you will find up-to-date lists of IRC networks catering
+to various interests and topics.
+
+   To use IRC, you need an IRC client such as ERC. Using the client, you
+connect to an IRC server.  Once you’ve done that, you will have access
+to all available channels on that server’s network.  A channel is
+basically a chat room, and what you type in a channel will be shown to
+all other users in that channel.  You can be in several channels at the
+same time—ERC will show each channel in its own buffer.
+
+   IRC channel names always begin with a ‘#’ character.  For example,
+the Emacs channel on Libera.Chat is ‘#emacs’, and the ERC channel is
+‘#erc’.  Do not confuse them with the hashtags used on many social media
+platforms.
+
+   You can also send private messages to other IRC users on the same
+network, even if they are not in the same channels as you.
+
+   ERC comes with the following capabilities enabled by default.
 
    • Flood control
    • Timestamps
@@ -103,7 +127,11 @@ File: erc.info,  Node: Getting Started,  Next: Keystroke Summary,  Prev: Introdu
 *****************
 
 The command ‘M-x erc’ will start ERC and prompt for the server to
-connect to.
+connect to.  If you’re unsure of which server or network to connect to,
+we suggest starting with “irc.libera.chat”.  There you will find the
+‘#emacs’ channels where you can chat with other Emacs users, and if
+you’re having trouble with ERC, you can join the ‘#erc’ channel and ask
+for help there.
 
    If you want to place ERC settings in their own file, you can place
 them in ‘~/.emacs.d/.ercrc.el’, creating it if necessary.
@@ -345,8 +373,15 @@ One way to add functionality to ERC is to customize which of its many
 modules are loaded.
 
    There is a spiffy customize interface, which may be reached by typing
-‘M-x customize-option <RET> erc-modules <RET>’.  Alternatively, set
-‘erc-modules’ manually and then call ‘erc-update-modules’.
+‘M-x customize-option <RET> erc-modules <RET>’.  When removing a module
+outside of the Custom ecosystem, you may wish to ensure it’s disabled by
+invoking its associated minor-mode toggle with a nonpositive prefix
+argument, for example, ‘C-u - M-x erc-spelling-mode <RET>’.
+Additionally, if you plan on loading third-party modules that perform
+atypical setup on activation, you may need to arrange for calling
+‘erc-update-modules’ in your init file.  Examples of such setup might
+include registering an ‘erc-before-connect’ hook, advising ‘erc-open’,
+and modifying ‘erc-modules’ itself.
 
    The following is a list of available modules.
 
@@ -412,6 +447,9 @@ modules are loaded.
 ‘ring’
      Enable an input history
 
+‘sasl’
+     Enable SASL authentication
+
 ‘scrolltobottom’
      Scroll to the bottom of the buffer
 
@@ -439,6 +477,58 @@ modules are loaded.
 ‘unmorse’
      Translate morse code in messages
 
+Required Modules
+----------------
+
+Note that some modules are essential to core IRC operations and thus not
+listed above.  You can nevertheless still remove these, but doing so
+demands special precautions to avoid degrading the user experience.  At
+present, the only such module is ‘networks’, whose library ERC always
+loads anyway.
+
+Local Modules
+-------------
+
+All modules operate as minor modes under the hood, and some newer ones
+may be defined as buffer-local.  These so-called “local modules” are a
+work in progress and their behavior and interface are subject to change.
+As of ERC 5.5, the only practical differences are as follows:
+
+  1. “Control variables,” like ‘erc-sasl-mode’, retain their values
+     across IRC sessions and override ‘erc-module’ membership when
+     influencing module activation.
+  2. Removing a local module from ‘erc-modules’ via Customize not only
+     disables its mode but also kills its control variable in all ERC
+     buffers.
+  3. “Mode toggles,” like ‘erc-sasl-mode’ and the complementary
+     ‘erc-sasl-enable’/‘erc-sasl-disable’ pairing, behave differently
+     than their global counterparts.
+
+   In target buffers, a local module’s activation state survives
+“reassociation” by default, but modules themselves always have the final
+say.  For example, a module may reset all instances of itself in its
+network context upon reconnecting.  Moreover, the value of a mode
+variable may be meaningless in buffers that its module has no interest
+in.  For example, the value of ‘erc-sasl-mode’ doesn’t matter in target
+buffers and may even remain non-‘nil’ after SASL has been disabled for
+the current connection (and vice versa).
+
+   When it comes to server buffers, a module’s activation state only
+persists for sessions revived via the automatic reconnection mechanism
+or a manual ‘/reconnect’ issued at the prompt.  In other words, this
+doesn’t apply to sessions revived by an entry-point command, such as
+‘erc-tls’, because such commands always ensure a clean slate by looking
+only to ‘erc-modules’.  Although a session revived in this manner may
+indeed harvest other information from a previous server buffer, it
+simply doesn’t care which modules might have been active during that
+connection.
+
+   Lastly, a local mode’s toggle command, like ‘erc-sasl-mode’, only
+affects the current buffer, but its “non-mode” cousins, like
+‘erc-sasl-enable’ and ‘erc-sasl-disable’, operate on all buffers
+belonging to their connection (when called interactively).  And unlike
+global toggles, none of these ever mutates ‘erc-modules’.
+
 
 File: erc.info,  Node: Advanced Usage,  Next: Getting Help and Reporting Bugs,  Prev: Modules,  Up: Top
 
@@ -448,11 +538,21 @@ File: erc.info,  Node: Advanced Usage,  Next: Getting Help and Reporting Bugs,  
 * Menu:
 
 * Connecting::                  Ways of connecting to an IRC server.
+* SASL::                        Authenticating via SASL.
 * Sample Configuration::        An example configuration file.
+* Integrations::                Integrations available for ERC.
 * Options::                     Options that are available for ERC.
 
+— Detailed Node Listing —
+
+Integrations
+
+* URL::                         Opening IRC URLs in ERC.
+* auth-source::                 Retrieving auth-source entries with ERC.
+
+
 
-File: erc.info,  Node: Connecting,  Next: Sample Configuration,  Up: Advanced Usage
+File: erc.info,  Node: Connecting,  Next: SASL,  Up: Advanced Usage
 
 5.1 Connecting to an IRC Server
 ===============================
@@ -468,18 +568,21 @@ you figure out its parameters.
         • SERVER
         • PORT
         • NICK
+        • USER
         • PASSWORD
         • FULL-NAME
+        • ID
 
-     That is, if called with the following arguments, SERVER and
-     FULL-NAME will be set to those values, whereas ‘erc-compute-port’
-     and ‘erc-compute-nick’ will be invoked for the values of the other
-     parameters.
+     For example, calling the command like so
 
           (erc :server "irc.libera.chat" :full-name "J. Random Hacker")
 
-   To connect securely over an encrypted TLS connection, use ‘M-x
-erc-tls’.
+     sets SERVER and FULL-NAME directly while leaving the rest up to
+     functions like ‘erc-compute-port’.  Note that some arguments can’t
+     be specified interactively.  ID, in particular, is rarely needed
+     (*note Network Identifier::).
+
+To connect securely over an encrypted TLS connection, use ‘M-x erc-tls’.
 
  -- Function: erc-tls
      Select connection parameters and run ERC over TLS.
@@ -488,16 +591,19 @@ erc-tls’.
         • SERVER
         • PORT
         • NICK
+        • USER
         • PASSWORD
         • FULL-NAME
+        • ID
         • CLIENT-CERTIFICATE
 
-     That is, if called with the following arguments, SERVER and
-     FULL-NAME will be set to those values, whereas ‘erc-compute-port’
-     and ‘erc-compute-nick’ will be invoked for the values of the other
-     parameters, and ‘client-certificate’ will be ‘nil’.
+     That is, if called in the following manner
 
           (erc-tls :server "irc.libera.chat" :full-name "J. Random Hacker")
+
+     the command will set SERVER and FULL-NAME accordingly, while
+     helpers, like ‘erc-compute-nick’, will determine other parameters,
+     and some, like ‘client-certificate’, will just be ‘nil’.
 
      To use a certificate with ‘erc-tls’, specify the optional
      CLIENT-CERTIFICATE keyword argument, whose value should be as
@@ -532,7 +638,8 @@ erc-tls’.
           machine irc.libera.chat key /home/bandali/my-cert.key cert /home/bandali/my-cert.crt
 
      *Note (auth)Help for users::, for more on the ‘.authinfo’/‘.netrc’
-     backend of ‘auth-source’.
+     backend of ‘auth-source’.  For other uses of auth-source throughout
+     ERC, *note ERC’s auth-source integration: auth-source.
 
 Server
 ------
@@ -607,24 +714,50 @@ Nick
 
      You can manually set another nickname with the /NICK command.
 
+User
+----
+
+ -- Function: erc-compute-user &optional user
+     Determine a suitable value to send as the first argument of the
+     opening ‘USER’ IRC command by consulting the following sources:
+
+        • USER, the argument passed to this function
+        • The option ‘erc-email-userid’, assuming ‘erc-anonymous-login’
+          is non-‘nil’
+        • The result of calling the function ‘user-login-name’
+
+ -- User Option: erc-email-userid
+     A permanent username value to send for all connections.  It should
+     be a string abiding by the rules of the network.
+
 Password
 --------
 
+This parameter was traditionally meant to specify a “server password” to
+be sent along with the IRC ‘PASS’ command.  However, such passwords
+aren’t widely used.  Instead, networks typically expect them, when
+present, to convey other authentication information.  In the case of
+account-services (a.k.a., “NickServ”) credentials, this typically
+involves a special syntax, such as ‘myuser:mypass’.  IRC bouncers often
+do something similar but include a pre-configured network-ID component,
+for example, ‘bncuser/mynet:bncpass’.
+
+   In general, if you have _not_ been asked by your network or bouncer
+to specify a repurposed server password, you should instead consider
+setting up ‘services’ or, preferably, ‘sasl’, both ERC modules (*note
+Modules::).  In addition to performing network-account authentication,
+these obviate the need for this parameter completely, although both can
+optionally borrow it for their own purposes.  (*Note SASL in ERC: SASL.)
+
  -- User Option: erc-prompt-for-password
-     If non-‘nil’ (the default), ‘M-x erc’ prompts for a password.
+     If non-‘nil’ (the default), ‘M-x erc’ and ‘M-x erc-tls’ prompt for
+     a server password.  This only affects interactive invocations of
+     ‘erc’ and ‘erc-tls’.
 
-   If you prefer, you can set this option to ‘nil’ and use the
-‘auth-source’ mechanism to store your password.  For instance, if you
-use ‘~/.authinfo’ as your auth-source backend, then put something like
-the following in that file:
-
-     machine irc.example.net login "#fsf" password sEcReT
-
-ERC also consults ‘auth-source’ to find any channel keys required for
-the channels that you wish to autojoin, as specified by the variable
-‘erc-autojoin-channels-alist’.
-
-   For more details, *note auth-source: (auth)Top.
+If you prefer, you can set this option to ‘nil’ and use the auth-source
+facility to retrieve a server password, although hitting ‘RET’ at the
+prompt may achieve the same effect.  *Note ERC’s auth-source
+integration: auth-source, for more.
 
 Full name
 ---------
@@ -645,10 +778,223 @@ Full name
 
      This can be either a string or a function to call.
 
-
-File: erc.info,  Node: Sample Configuration,  Next: Options,  Prev: Connecting,  Up: Advanced Usage
+ID
+--
 
-5.2 Sample Configuration
+ERC uses an abstract designation, called “network context identifier”,
+for referring to a connection internally.  While normally derived from a
+combination of logical and physical connection parameters, an ID can
+also be explicitly provided via an entry-point command (like ‘erc-tls’).
+Use this in rare situations where ERC would otherwise have trouble
+discerning between connections.
+
+   One such situation might arise when using multiple connections to the
+same network with the same nick but different (nonstandard) ‘device’
+identifiers, which some bouncers may support.  Another might be when
+mimicking the experience offered by popular standalone clients, which
+normally offer “named” persistent configurations with server buffers
+reflecting those names.  Yet another use case might involve third-party
+code needing to identify a connection unequivocally, but in a
+human-friendly way suitable for UI components.
+
+   When providing an ID as an entry-point argument, strings and symbols
+make the most sense, but any reasonably printable object is acceptable.
+
+
+File: erc.info,  Node: SASL,  Next: Sample Configuration,  Prev: Connecting,  Up: Advanced Usage
+
+5.2 Authenticating via SASL
+===========================
+
+Regardless of the mechanism or the network, you’ll likely have to be
+registered before first use.  Please refer to the network’s own
+instructions for details.  If you’re new to IRC and using a bouncer,
+know that you probably won’t be needing SASL for the client-to-bouncer
+connection.  To get started, just add ‘sasl’ to ‘erc-modules’ like any
+other module.  But before that, please explore all custom options
+pertaining to your chosen mechanism.
+
+ -- User Option: erc-sasl-mechanism
+     The name of an SASL subprotocol type as a _lowercase_ symbol.  The
+     value can be one of the following:
+
+     ‘plain’ and ‘scram’ (“password-based”)
+          Here, “password” refers to your account password, which is
+          usually your ‘NickServ’ password.  To make this work,
+          customize ‘erc-sasl-user’ and ‘erc-sasl-password’ or specify
+          the ‘:user’ and ‘:password’ keyword arguments when invoking
+          ‘erc-tls’.  Note that ‘:user’ cannot be given interactively.
+
+     ‘external’ (via Client TLS Certificate)
+          This works in conjunction with the ‘:client-certificate’
+          keyword offered by ‘erc-tls’.  Just ensure you’ve registered
+          your fingerprint with the network beforehand.  The fingerprint
+          is usually a SHA1 or SHA256 digest in either "normalized" or
+          "openssl" forms.  The first is lowercase without delims
+          (‘deadbeef’) and the second uppercase with colon seps
+          (‘DE:AD:BE:EF’).  These days, there’s usually a ‘CERT ADD’
+          command offered by NickServ that can register you
+          automatically if you issue it while connected with a client
+          cert.  *Note client-certificate::.
+
+          Additional considerations:
+            1. Most IRCds will allow you to authenticate with a client
+               cert but without the hassle of SASL (meaning you may not
+               need this module).
+            2. Technically, EXTERNAL merely indicates that an
+               out-of-band mode of authentication is in effect (being
+               deferred to), so depending on the specific application or
+               service, there’s a remote chance your server has
+               something else in mind.
+
+     ‘ecdsa-nist256p-challenge’
+          This mechanism is quite complicated and currently requires the
+          external ‘openssl’ executable, so please use something else if
+          at all possible.  Ignoring that, specify your key file (e.g.,
+          ‘~/pki/mykey.pem’) as the value of ‘erc-sasl-password’, and
+          then configure your network settings.  On servers running
+          Atheme services, you can add your public key with ‘NickServ’
+          like so:
+
+               ERC> /msg NickServ set property \
+                    pubkey AgGZmlYTUjJlea/BVz7yrjJ6gysiAPaQxzeUzTH4hd5j
+
+          (You may be able to omit the ‘property’ subcommand.)
+
+ -- User Option: erc-sasl-user
+     This should be your network account username, typically the same
+     one registered with nickname services.  Specify this when your
+     NickServ login differs from the ‘:user’ you’re connecting with.
+     *Note username parameter::.
+
+ -- User Option: erc-sasl-password
+     As noted elsewhere, the entry-point ‘:password’ param was
+     originally intended for traditional “server passwords,” but these
+     aren’t really used any more (*note password parameter::).  As such,
+     this option defaults to borrowing that parameter for its own uses,
+     thus allowing you to call ‘erc-tls’ with ‘:password’ set to your
+     NickServ password.
+
+     You can also set this to a nonemtpy string, and ERC will send that
+     when needed, no questions asked.  Or, if you’d rather use
+     auth-source, set ‘erc-sasl-auth-source-function’ to a function, and
+     ERC will perform an auth-source query instead.  In all cases, ERC
+     will prompt you for input as a last resort.
+
+     Lastly, if your mechanism is ‘ecdsa-nist256p-challenge’, this
+     option should instead hold the file name of your key.
+
+ -- User Option: erc-sasl-auth-source-function
+     This is nearly identical to the other ERC ‘auth-source’ function
+     options (*note auth-source functions::) except that the default
+     value here is ‘nil’, meaning you have to set it to something like
+     ‘erc-auth-source-search’ for queries to be performed.  For
+     convenience, this module provides the following as a possible
+     value:
+
+      -- Function: erc-sasl-auth-source-password-as-host &rest plist
+          Setting ‘erc-sasl-auth-source-function’ to this function tells
+          ERC to use ‘erc-sasl-password’ for the ‘:host’ field when
+          querying auth-source, even if its value is the default
+          ‘:password’, in which case ERC knows to “resolve” it to
+          ‘erc-session-password’ and use that as long as it’s non-‘nil’.
+          Otherwise, ERC just defers to ‘erc-auth-source-search’ to
+          determine the ‘:host’, along with everything else.
+
+     As long as this option specifies a function, ERC will pass it the
+     “resolved” value of ‘erc-sasl-user’ for the auth-source ‘:user’
+     param.
+
+ -- User Option: erc-sasl-authzid
+     In the rarest of circumstances, a network may want you to specify a
+     specific role or assume an alternate identity.  In most cases, this
+     happens because the server is buggy or misconfigured.  If you
+     suspect such a thing, please contact your network operator.
+     Otherwise, just leave this set to ‘nil’.
+
+Examples
+--------
+
+   • Defaults
+
+          (erc-tls :server "irc.libera.chat" :port 6697
+                   :nick "aph"
+                   :user "APHacker"
+                   :password "changeme")
+
+     Here, after adding ‘sasl’ to ‘erc-modules’ via the Customize
+     interface, you authenticate to Libera.Chat using the ‘PLAIN’
+     mechanism and your NickServ credentials, ‘APHacker’ and ‘changeme’.
+
+   • External
+
+          (setopt erc-sasl-mechanism 'external)
+
+          (erc-tls :server "irc.libera.chat" :port 6697 :nick "aph"
+                   :client-certificate
+                   '("/home/aph/my.key" "/home/aph/my.crt"))
+
+     You decide to switch things up and try out the ‘EXTERNAL’
+     mechanism.  You follow your network’s instructions for telling
+     NickServ about your client-certificate’s fingerprint, and you
+     authenticate successfully.
+
+   • Multiple networks
+
+          # ~/.authinfo.gpg
+
+          machine irc.libera.chat key /home/aph/my.key cert /home/aph/my.crt
+          machine Example.Net login alyssa password sEcReT
+          machine Example.Net login aph-bot password sesame
+
+          ;; init.el
+
+          (defun my-erc-up (network)
+            (interactive "Snetwork: ")
+
+            (pcase network
+              ('libera
+               (let ((erc-sasl-mechanism 'external))
+                 (erc-tls :server "irc.libera.chat" :port 6697
+                          :client-certificate t)))
+              ('example
+               (let ((erc-sasl-auth-source-function
+                      #'erc-sasl-auth-source-password-as-host))
+                 (erc-tls :server "irc.example.net" :port 6697
+                          :user "alyssa"
+                          :password "Example.Net")))))
+
+     You’ve started storing your credentials with auth-source and have
+     decided to try SASL on another network as well.  But there’s a
+     catch: this network doesn’t support ‘EXTERNAL’.  You use
+     ‘let’-binding to get around this and successfully authenticate to
+     both networks.
+
+Troubleshooting
+---------------
+
+First and foremost, please know that ERC’s SASL offering is currently
+limited by a lack of support for proper IRCv3 capability negotiation.
+In most cases, this shouldn’t affect your ability to authenticate.
+
+   If you’re struggling, remember that your SASL password is almost
+always your NickServ password.  When in doubt, try restoring all SASL
+options to their defaults and calling ‘erc-tls’ with ‘:user’ set to your
+NickServ account name and ‘:password’ to your NickServ password.  If
+you’re still having trouble, please contact us (*note Getting Help and
+Reporting Bugs::).
+
+   As you try out different settings, keep in mind that it’s best to
+create a fresh session for every change, for example, by calling
+‘erc-tls’ from scratch.  More experienced users may be able to get away
+with cycling ‘erc-sasl-mode’ and issuing a ‘/reconnect’, but that’s
+generally not recommended.  Whatever the case, you’ll probably want to
+temporarily disable ‘erc-server-auto-reconnect’ while experimenting.
+
+
+File: erc.info,  Node: Sample Configuration,  Next: Integrations,  Prev: SASL,  Up: Advanced Usage
+
+5.3 Sample Configuration
 ========================
 
 Here is an example of configuration settings for ERC.  This can go into
@@ -707,12 +1053,6 @@ command can optionally go into ‘~/.emacs.d/.ercrc.el’.
      (setq erc-autojoin-channels-alist
            '(("Libera.Chat" "#emacs" "#erc")))
 
-     ;; Rename server buffers to reflect the current network name instead
-     ;; of SERVER:PORT (e.g., "Libera.Chat" instead of
-     ;; "irc.libera.chat:6667").  This is useful when using a bouncer like
-     ;; ZNC where you have multiple connections to the same server.
-     (setq erc-rename-buffers t)
-
      ;; Interpret mIRC-style color commands in IRC chats
      (setq erc-interpret-mirc-color t)
 
@@ -726,9 +1066,180 @@ command can optionally go into ‘~/.emacs.d/.ercrc.el’.
      ;; (setq erc-kill-server-buffer-on-quit t)
 
 
-File: erc.info,  Node: Options,  Prev: Sample Configuration,  Up: Advanced Usage
+File: erc.info,  Node: Integrations,  Next: Options,  Prev: Sample Configuration,  Up: Advanced Usage
 
-5.3 Options
+5.4 Integrations
+================
+
+* Menu:
+
+* auth-source::                 Retrieving auth-source entries with ERC.
+
+5.4.1 URL
+---------
+
+For anything to work, you’ll want to set ‘url-irc-function’ to
+‘url-irc-erc’.  As a rule of thumb, libraries relying directly on
+‘url-retrieve’ should be fine out the box from Emacs 29.1 onward.  On
+older versions of Emacs, you may need to ‘(require 'erc)’ beforehand.
+*Note (url)Retrieving URLs::.
+
+   For other apps and libraries, such as those relying on the
+higher-level ‘browse-url’, you’ll oftentimes be asked to specify a
+pattern, sometimes paired with a function that accepts a string URL as a
+first argument.  For example, with EWW, you may need to tack something
+like ‘"\\|\\`irc6?s?:"’ onto the end of ‘eww-use-browse-url’.  But with
+‘gnus-button-alist’, you’ll need a function as well:
+
+       '("\\birc6?s?://[][a-z0-9.,@_:+%?&/#-]+" 0 t browse-url-irc 0)
+
+Users on Emacs 28 and below may need to use ‘browse-url’ instead.
+
+
+File: erc.info,  Node: auth-source,  Up: Integrations
+
+5.4.2 auth-source
+-----------------
+
+You can configure ERC to use the built-in auth-source library for
+looking up passwords.  *Note auth-source: (auth)Top, for general info on
+setting up various backends, but keep in mind that some of these may not
+be compatible.  Those currently supported are netrc, plstore, json,
+secrets, and pass.  To get started with the default backend, netrc, put
+a line like the following in your ‘~/.authinfo.gpg’ (or any file named
+in the option ‘auth-sources’):
+
+     machine irc.example.net login mynick password sEcReT
+
+Server Passwords
+................
+
+When retrieving passwords to accompany the IRC ‘PASS’ command (*note
+password parameter::), ERC asks auth-source to match the SERVER
+parameter of ‘erc-tls’ against each entry’s ‘host’ field
+(‘machine irc.example.net’ in the above example).  Unfortunately,
+specifying a network, like ‘Libera.Chat’, or a specific network server,
+like ‘platinum.libera.chat’, won’t normally work for looking up a server
+password because that information isn’t available during opening
+introductions.  (Actually, ERC _can_ find entries with arbitrary ‘host’
+values for any context, including server passwords, but that requires
+customizing the more advanced options below.)
+
+   If ERC can’t find a suitable server password, it will just skip the
+IRC ‘PASS’ command altogether, something users may want when using
+CertFP or engaging NickServ via ERC’s ‘services’ module.  If that
+appeals to you, consider customizing the option
+‘erc-auth-source-server-function’ to ‘nil’ to skip server-password
+lookup for all servers.  Note that some networks and IRCds may accept
+account-services authentication via server password.  Also, some ERC
+modules may commandeer the ‘erc-tls’ PASSWORD parameter for their own
+ends, which likely don’t involve a server password.
+
+The ‘services’ module
+.....................
+
+You can use auth-source to authenticate to account services the
+traditional way through a bot called ‘NickServ’.  To do so, add
+‘services’ to ‘erc-modules’ and set the option
+‘erc-use-auth-source-for-nickserv-password’ to ‘t’.  After that, expect
+the ‘user’ parameter in relevant auth-source queries to be your current
+nickname.
+
+   Most of the time, a query’s precise contextual details (such as
+whether a nick was granted or forcibly assigned) shouldn’t affect how
+you define entries in your backend.  However, if something isn’t quite
+working, you may want to investigate the interplay between the option
+‘erc-nickserv-identify-mode’ and account services.  In particular, if
+you find yourself facing nicks suffixed with an ‘erc-nick-uniquifier’
+(the infamous ‘`’), check that the network’s entry in
+‘erc-nickserv-alist’ is up to date, and do let us know if something’s
+off (*note Getting Help and Reporting Bugs::).  Of course, if you’ve had
+your fill of fiddling with this module, consider switching to SASL for
+what’s likely a more consistent auth-source experience.  (*Note SASL::.)
+
+Default query behavior
+......................
+
+When preparing entries for your backend, it may help to get a feel for
+how ERC and its modules conduct searches, especially when exploring a
+new context, such as channel keys.  (Hint: in such situations, try
+temporarily setting the variable ‘auth-source-debug’ to ‘t’ and checking
+‘*Messages*’ periodically for insights into how auth-source is
+operating.)  Overall, though, ERC tries to be consistent in performing
+queries across various authentication contexts.  Here’s what to expect
+with respect to the ‘host’ field, which, by default, most heavily
+influences the fate of a query:
+
+  1. entries featuring custom identifiers and networks are matched first
+     (*note Network Identifier::)
+  2. followed by network-specific servers
+  3. and, finally, dialed endpoints (typically the SERVER argument
+     passed to ‘erc-tls’)
+
+The following netrc-style entries appear in order of precedence:
+
+     machine Libera/cellphone login MyNick password sEcReT
+     machine Libera.Chat login MyNick password sEcReT
+     machine zirconium.libera.chat login MyNick password sEcReT
+     machine irc.libera.chat login MyNick password sEcReT
+
+Remember that field labels vary per backend, so ‘machine’ (in netrc’s
+case) maps to auth-source’s generalized notion of a host, hence the
+‘:host’ keyword parameter to ‘auth-source-search’.  Also, be sure to
+mind the syntax of your chosen backend medium.  For example, always
+quote channel names in a netrc file.
+
+   Lastly, if this all seems overly nuanced or just plain doesn’t appeal
+to you, please see options ‘erc-auth-source-services-function’ and
+friends, described just below.
+
+Custom query functions
+......................
+
+These let you query auth-source your way.  Most users can simply ignore
+the passed-in arguments and get by with something like the following:
+
+     (defun my-fancy-auth-source-func (&rest _)
+       (let* ((host (read-string "host: " nil nil "default"))
+              (pass (auth-source-pick-first-password :host host)))
+         (if (and pass (string-search "libera" host))
+             (concat "MyNick:" pass)
+           pass)))
+
+ -- User Option: erc-auth-source-server-function
+ -- User Option: erc-auth-source-services-function
+ -- User Option: erc-auth-source-join-function
+
+     ERC calls these functions with keyword arguments recognized by
+     ‘auth-source-search’, namely, those deemed most relevant to the
+     current context, if any.  For example, when identifying to
+     services, ‘:user’ contains your current nickname.  Generalized
+     parameter names, like ‘:user’ and ‘:host’, are always preferred
+     over backend specific ones, like ‘:login’ or ‘:machine’.  In
+     return, ERC expects a string if the search succeeds or ‘nil’ if it
+     fails.
+
+     The default value for all three options is the function
+     ‘erc-auth-source-search’.  It tries to merge relevant contextual
+     parameters with those provided or discovered from the logical
+     connection or the underlying transport.
+
+     For using auth-source along with SASL, *note SASL auth-source
+     function::.
+
+Channel keys
+............
+
+ERC also consults ‘auth-source’ to find “keys” that may be required by
+certain channels you join.  When modifying a traditional ‘auth-source’
+entry for this purpose, put the channel name in the ‘user’ field (for
+example, ‘login "#fsf"’, in netrc’s case).  The actual key goes in the
+‘password’ (or ‘secret’) field.
+
+
+File: erc.info,  Node: Options,  Prev: Integrations,  Up: Advanced Usage
+
+5.5 Options
 ===========
 
 This section is extremely incomplete.  For now, the easiest way to check
@@ -759,12 +1270,6 @@ out all the available options for ERC is to do ‘M-x customize-group
      The function ‘erc-lurker-p’ determines whether a given nickname is
      considered a lurker.
 
- -- User Option: erc-rename-buffers
-     If non, ‘nil’, this will rename server buffers to reflect the
-     current network name instead of IP:PORT
-
-          (setq erc-rename-buffers t)
-
 
 File: erc.info,  Node: Getting Help and Reporting Bugs,  Next: History,  Prev: Advanced Usage,  Up: Top
 
@@ -775,16 +1280,41 @@ After you have read this guide, if you still have questions about ERC,
 or if you have bugs to report, there are several places you can go.
 
    • <https://www.emacswiki.org/emacs/ERC> is the emacswiki.org page for
-     ERC.  Anyone may add tips, hints, etc. to it.
+     ERC.  Anyone may add tips, hints, etc. to it.  If you do so, please
+     help keep it up to date.
 
    • You can ask questions about using ERC on the Emacs mailing list,
      <https://lists.gnu.org/mailman/listinfo/help-gnu-emacs>.
 
    • You can visit the IRC Libera.Chat channel ‘#emacs’.  Many of the
      contributors are frequently around and willing to answer your
-     questions.
+     questions.  You can also try the relatively quiet ‘#erc’, on the
+     same network, for more involved questions.
 
-   • To report a bug in ERC, use ‘M-x report-emacs-bug’.
+   • You can check GNU ELPA between Emacs releases to see if a newer
+     version is available that might contain a fix for your issue:
+     <https://elpa.gnu.org/packages/erc.html>.
+
+     To upgrade, run ‘M-x list-packages <RET>’.  In the ‘*Packages*’
+     (‘package-menu-mode’) buffer, click the ‘erc’ package link for the
+     desired version.  If unsure, or if the version column is too narrow
+     to tell, try the bottom-most candidate.  In the resulting
+     ‘help-mode’ buffer, confirm the version and click ‘Install’.  Make
+     sure to restart Emacs before reconnecting to IRC, and don’t forget
+     that you can roll back to the previous version by running ‘M-x
+     package-delete <RET>’.  *Note (emacs)Packages:: for more
+     information.
+
+     In the rare instance you need an emergency fix or have volunteered
+     to test an edge feature between ERC releases, you can try adding
+     ‘("devel" . "https://elpa.gnu.org/devel/")’ to ‘package-archives’
+     prior to performing the steps above.  For this, you’ll want to
+     instead select a “snapshot” version from the menu.  Please be aware
+     that when going this route, the latest changes may not yet be
+     available and you run the risk of incurring other bugs and
+     encountering unstable features.
+
+   • To report a bug in ERC, use ‘M-x erc-bug’.
 
 
 File: erc.info,  Node: History,  Next: GNU Free Documentation License,  Prev: Getting Help and Reporting Bugs,  Up: Top
@@ -1347,76 +1877,101 @@ Index
 * Menu:
 
 * advanced topics:                       Advanced Usage.      (line   6)
+* auth-source:                           auth-source.         (line   6)
 * bugs, reporting:                       Getting Help and Reporting Bugs.
                                                               (line   6)
 * configuration, sample:                 Sample Configuration.
                                                               (line   6)
 * connecting:                            Connecting.          (line   6)
 * erc:                                   Connecting.          (line  10)
-* erc-compute-full-name:                 Connecting.          (line 178)
-* erc-compute-nick:                      Connecting.          (line 121)
-* erc-compute-port:                      Connecting.          (line 103)
-* erc-compute-server:                    Connecting.          (line  86)
-* erc-tls:                               Connecting.          (line  30)
+* erc-auth-source-search:                auth-source.         (line 124)
+* erc-compute-full-name:                 Connecting.          (line 211)
+* erc-compute-nick:                      Connecting.          (line 128)
+* erc-compute-port:                      Connecting.          (line 110)
+* erc-compute-server:                    Connecting.          (line  93)
+* erc-compute-user:                      Connecting.          (line 166)
+* erc-sasl-auth-source-password-as-host: SASL.                (line  92)
+* erc-tls:                               Connecting.          (line  33)
 * help, getting:                         Getting Help and Reporting Bugs.
                                                               (line   6)
 * history ring:                          Special Features.    (line  39)
 * history, of ERC:                       History.             (line   6)
+* integrations:                          Integrations.        (line   6)
 * keystrokes:                            Keystroke Summary.   (line   6)
+* local modules:                         Modules.             (line 126)
 * modules:                               Modules.             (line   6)
-* modules, autoaway:                     Modules.             (line  15)
-* modules, autojoin:                     Modules.             (line  18)
-* modules, bbdb:                         Modules.             (line  21)
-* modules, button:                       Modules.             (line  24)
-* modules, capab-identify:               Modules.             (line  27)
-* modules, completion:                   Modules.             (line  31)
-* modules, fill:                         Modules.             (line  34)
-* modules, identd:                       Modules.             (line  37)
-* modules, irccontrols:                  Modules.             (line  40)
-* modules, log:                          Modules.             (line  43)
-* modules, match:                        Modules.             (line  46)
-* modules, menu:                         Modules.             (line  49)
-* modules, netsplit:                     Modules.             (line  52)
-* modules, noncommands:                  Modules.             (line  55)
-* modules, notifications:                Modules.             (line  61)
-* modules, notify:                       Modules.             (line  58)
-* modules, page:                         Modules.             (line  65)
-* modules, pcomplete:                    Modules.             (line  31)
-* modules, readonly:                     Modules.             (line  68)
-* modules, replace:                      Modules.             (line  71)
-* modules, ring:                         Modules.             (line  74)
-* modules, scrolltobottom:               Modules.             (line  77)
-* modules, services:                     Modules.             (line  80)
-* modules, smiley:                       Modules.             (line  83)
-* modules, sound:                        Modules.             (line  86)
-* modules, spelling:                     Modules.             (line  89)
-* modules, stamp:                        Modules.             (line  92)
-* modules, track:                        Modules.             (line  95)
-* modules, truncate:                     Modules.             (line  98)
-* modules, unmorse:                      Modules.             (line 101)
+* modules, autoaway:                     Modules.             (line  22)
+* modules, autojoin:                     Modules.             (line  25)
+* modules, bbdb:                         Modules.             (line  28)
+* modules, button:                       Modules.             (line  31)
+* modules, capab-identify:               Modules.             (line  34)
+* modules, completion:                   Modules.             (line  38)
+* modules, fill:                         Modules.             (line  41)
+* modules, identd:                       Modules.             (line  44)
+* modules, irccontrols:                  Modules.             (line  47)
+* modules, log:                          Modules.             (line  50)
+* modules, match:                        Modules.             (line  53)
+* modules, menu:                         Modules.             (line  56)
+* modules, netsplit:                     Modules.             (line  59)
+* modules, noncommands:                  Modules.             (line  62)
+* modules, notifications:                Modules.             (line  68)
+* modules, notify:                       Modules.             (line  65)
+* modules, page:                         Modules.             (line  72)
+* modules, pcomplete:                    Modules.             (line  38)
+* modules, readonly:                     Modules.             (line  75)
+* modules, replace:                      Modules.             (line  78)
+* modules, ring:                         Modules.             (line  81)
+* modules, sasl:                         Modules.             (line  84)
+* modules, scrolltobottom:               Modules.             (line  87)
+* modules, services:                     Modules.             (line  90)
+* modules, smiley:                       Modules.             (line  93)
+* modules, sound:                        Modules.             (line  96)
+* modules, spelling:                     Modules.             (line  99)
+* modules, stamp:                        Modules.             (line 102)
+* modules, track:                        Modules.             (line 105)
+* modules, truncate:                     Modules.             (line 108)
+* modules, unmorse:                      Modules.             (line 111)
 * options:                               Options.             (line   6)
-* password:                              Connecting.          (line 159)
+* password, server:                      Connecting.          (line 179)
 * query buffers:                         Special Features.    (line  13)
+* required modules:                      Modules.             (line 117)
+* SASL:                                  SASL.                (line   6)
 * settings:                              Getting Started.     (line   6)
+* URL:                                   Integrations.        (line  13)
+* username parameter:                    Connecting.          (line 166)
 
 
 
 Tag Table:
-Node: Top1031
-Node: Introduction2843
-Node: Getting Started3581
-Node: Sample Session4382
-Node: Special Features7479
-Node: Keystroke Summary9709
-Node: Modules12364
-Node: Advanced Usage14545
-Node: Connecting14897
-Node: Sample Configuration21566
-Node: Options25059
-Node: Getting Help and Reporting Bugs26382
-Node: History27184
-Node: GNU Free Documentation License29347
-Node: Concept Index54699
+Node: Top1042
+Node: Introduction2986
+Node: Getting Started4867
+Node: Sample Session5969
+Node: Special Features9066
+Node: Keystroke Summary11296
+Node: Modules13951
+Ref: Required Modules16649
+Ref: Local Modules16987
+Node: Advanced Usage19307
+Node: Connecting19957
+Ref: client-certificate21629
+Ref: username parameter25589
+Ref: password parameter26184
+Ref: server password26184
+Ref: Network Identifier28227
+Node: SASL29313
+Ref: SASL auth-source function33632
+Node: Sample Configuration38300
+Node: Integrations41486
+Ref: URL41709
+Node: auth-source42609
+Ref: auth-source functions47933
+Node: Options49304
+Node: Getting Help and Reporting Bugs50427
+Ref: Upgrading51330
+Node: History52701
+Node: GNU Free Documentation License54864
+Node: Concept Index80216
 
 End Tag Table
 

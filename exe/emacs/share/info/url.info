@@ -1,8 +1,8 @@
-This is url.info, produced by makeinfo version 6.7 from url.texi.
+This is url.info, produced by makeinfo version 6.8 from url.texi.
 
 This is the manual for the ‘url’ Emacs Lisp library.
 
-   Copyright © 1993–1999, 2002, 2004–2022 Free Software Foundation, Inc.
+   Copyright © 1993–1999, 2002, 2004–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -27,7 +27,7 @@ URL
 
 This is the manual for the ‘url’ Emacs Lisp library.
 
-   Copyright © 1993–1999, 2002, 2004–2022 Free Software Foundation, Inc.
+   Copyright © 1993–1999, 2002, 2004–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -223,7 +223,7 @@ and ‘url-unhex-string’:
      argument is ‘nil’, the allowed characters are those specified as
      “unreserved characters” by RFC 3986 (see the variable
      ‘url-unreserved-chars’).  Otherwise, ALLOWED-CHARS should be either
-     a list of allowed chars, or a vector whose Nth element is non-nil
+     a list of allowed chars, or a vector whose Nth element is non-‘nil’
      if character N is allowed.
 
  -- Function: url-unhex-string string &optional allow-newlines
@@ -332,7 +332,7 @@ for specific schemes.
 * info::                        Emacs "Info" pages.
 * mailto::                      Sending email.
 * news/nntp/snews::             Usenet news.
-* rlogin/telnet/tn3270::        Remote host connectivity.
+* telnet/tn3270::               Remote host connectivity.
 * irc::                         Internet Relay Chat.
 * data::                        Embedded data URLs.
 * nfs::                         Networked File System.
@@ -555,7 +555,7 @@ URL, Emacs automatically inserts an ‘X-Url-From’ header field into the
 mail buffer, specifying that URL.
 
 
-File: url.info,  Node: news/nntp/snews,  Next: rlogin/telnet/tn3270,  Prev: mailto,  Up: Supported URL Types
+File: url.info,  Node: news/nntp/snews,  Next: telnet/tn3270,  Prev: mailto,  Up: Supported URL Types
 
 4.5 ‘news’, ‘nntp’ and ‘snews’
 ==============================
@@ -594,10 +594,10 @@ except that it is tunneled through SSL and has default port 563.
      variable is unset.
 
 
-File: url.info,  Node: rlogin/telnet/tn3270,  Next: irc,  Prev: news/nntp/snews,  Up: Supported URL Types
+File: url.info,  Node: telnet/tn3270,  Next: irc,  Prev: news/nntp/snews,  Up: Supported URL Types
 
-4.6 rlogin, telnet and tn3270
-=============================
+4.6 telnet and tn3270
+=====================
 
 These URL schemes are defined in RFC 1738, and are used for logging in
 via a terminal emulator.  They have the form
@@ -607,13 +607,13 @@ via a terminal emulator.  They have the form
 but the PASSWORD component is ignored.  By default, the ‘telnet’ scheme
 is handled via Tramp (*note Tramp::).
 
-   To handle rlogin, telnet and tn3270 URLs, a ‘rlogin’, ‘telnet’ or
-‘tn3270’ (the program names and arguments are hardcoded) session is run
-in a ‘terminal-emulator’ buffer.  Well-known ports are used if the URL
-does not specify a port.
+   To handle telnet and tn3270 URLs, a ‘telnet’ or ‘tn3270’ (the program
+names and arguments are hardcoded) session is run in a
+‘terminal-emulator’ buffer.  Well-known ports are used if the URL does
+not specify a port.
 
 
-File: url.info,  Node: irc,  Next: data,  Prev: rlogin/telnet/tn3270,  Up: Supported URL Types
+File: url.info,  Node: irc,  Next: data,  Prev: telnet/tn3270,  Up: Supported URL Types
 
 4.7 irc
 =======
@@ -877,11 +877,6 @@ connections is ‘url-open-stream’.
           gateway host, and then run telnet from that host to connect to
           outside machines.
 
-     ‘rlogin’
-          This method is identical to ‘telnet’, but uses ‘rlogin’ to log
-          into the remote machine without having to send the username
-          and password over the wire every time.
-
      ‘socks’
           Use if the firewall has a SOCKS gateway running on it.  The
           SOCKS v5 protocol is defined in RFC 1928.
@@ -909,15 +904,6 @@ connections is ‘url-open-stream’.
      The username to log in with.
  -- User Option: url-gateway-telnet-password
      The password to send when logging in.
- -- User Option: url-gateway-prompt-pattern
-     This is a regular expression that matches the shell prompt.
-
- -- User Option: url-gateway-rlogin-host
-     Host to ‘rlogin’ to before telnetting out.
- -- User Option: url-gateway-rlogin-parameters
-     Parameters to pass to ‘rsh’.
- -- User Option: url-gateway-rlogin-user-name
-     User name to use when logging in to the gateway.
  -- User Option: url-gateway-prompt-pattern
      This is a regular expression that matches the shell prompt.
 
@@ -1067,8 +1053,6 @@ library.
 
      ‘telnet’
           Run telnet in a subprocess to connect;
-     ‘rlogin’
-          Rlogin to another machine to connect;
      ‘socks’
           Connect through a socks server;
      ‘ssl’
@@ -1581,7 +1565,7 @@ Command and Function Index
 
 * Info-goto-node:                        info.                 (line  6)
 * man:                                   man.                  (line  6)
-* terminal-emulator:                     rlogin/telnet/tn3270. (line  6)
+* terminal-emulator:                     telnet/tn3270.        (line  6)
 * url-attributes:                        Parsed URIs.          (line 49)
 * url-cache-create-filename-human-readable: Disk Caching.      (line 35)
 * url-cache-create-filename-using-md5:   Disk Caching.         (line 29)
@@ -1632,11 +1616,11 @@ Variable Index
 * mail-user-agent:                       mailto.               (line 23)
 * NNTPSERVER:                            news/nntp/snews.      (line 32)
 * NO_PROXY:                              Proxies.              (line 18)
-* socks-nslookup-program:                Gateways in general.  (line 91)
-* socks-password:                        Gateways in general.  (line 81)
-* socks-server:                          Gateways in general.  (line 77)
-* socks-timeout:                         Gateways in general.  (line 88)
-* socks-username:                        Gateways in general.  (line 85)
+* socks-nslookup-program:                Gateways in general.  (line 77)
+* socks-password:                        Gateways in general.  (line 67)
+* socks-server:                          Gateways in general.  (line 63)
+* socks-timeout:                         Gateways in general.  (line 74)
+* socks-username:                        Gateways in general.  (line 71)
 * url-automatic-caching:                 Disk Caching.         (line 13)
 * url-bad-port-list:                     Customization.        (line 43)
 * url-cache-creation-function:           Disk Caching.         (line 21)
@@ -1654,17 +1638,13 @@ Variable Index
 * url-gateway-local-host-regexp:         Gateways in general.  (line 18)
 * url-gateway-method:                    Gateways in general.  (line 23)
 * url-gateway-method <1>:                Customization.        (line 51)
-* url-gateway-prompt-pattern:            Gateways in general.  (line 65)
-* url-gateway-prompt-pattern <1>:        Gateways in general.  (line 74)
-* url-gateway-rlogin-host:               Gateways in general.  (line 68)
-* url-gateway-rlogin-parameters:         Gateways in general.  (line 70)
-* url-gateway-rlogin-user-name:          Gateways in general.  (line 72)
-* url-gateway-telnet-host:               Gateways in general.  (line 49)
-* url-gateway-telnet-login-prompt:       Gateways in general.  (line 58)
-* url-gateway-telnet-parameters:         Gateways in general.  (line 52)
-* url-gateway-telnet-password:           Gateways in general.  (line 63)
-* url-gateway-telnet-password-prompt:    Gateways in general.  (line 55)
-* url-gateway-telnet-user-name:          Gateways in general.  (line 61)
+* url-gateway-prompt-pattern:            Gateways in general.  (line 60)
+* url-gateway-telnet-host:               Gateways in general.  (line 44)
+* url-gateway-telnet-login-prompt:       Gateways in general.  (line 53)
+* url-gateway-telnet-parameters:         Gateways in general.  (line 47)
+* url-gateway-telnet-password:           Gateways in general.  (line 58)
+* url-gateway-telnet-password-prompt:    Gateways in general.  (line 50)
+* url-gateway-telnet-user-name:          Gateways in general.  (line 56)
 * url-gateway-unplugged:                 Suppressing network connections.
                                                                (line 13)
 * url-history-file:                      History.              (line 24)
@@ -1693,7 +1673,7 @@ Variable Index
 * url-tramp-protocols:                   Tramp.                (line  6)
 * url-uncompressor-alist:                Customization.        (line 40)
 * url-unreserved-chars:                  URI Encoding.         (line 39)
-* url-user-agent:                        Customization.        (line 66)
+* url-user-agent:                        Customization.        (line 64)
 
 
 File: url.info,  Node: Concept Index,  Prev: Variable Index,  Up: Top
@@ -1748,7 +1728,7 @@ Concept Index
 * news:                                  news/nntp/snews.      (line  6)
 * NFS:                                   nfs.                  (line  6)
 * NNTP:                                  news/nntp/snews.      (line  6)
-* nslookup:                              Gateways in general.  (line 92)
+* nslookup:                              Gateways in general.  (line 78)
 * opening a stream:                      Gateways in general.  (line 14)
 * P3P:                                   HTTP URL Options.     (line 29)
 * parsed URI:                            URI Parsing.          (line 26)
@@ -1758,21 +1738,19 @@ Concept Index
 * proxies:                               Proxies.              (line  6)
 * proxy servers:                         Proxies.              (line  6)
 * rcirc:                                 irc.                  (line  6)
-* rlogin:                                rlogin/telnet/tn3270. (line  6)
-* rlogin <1>:                            Gateways in general.  (line 34)
 * rsync:                                 Tramp.                (line 21)
 * scp:                                   Tramp.                (line 18)
 * snews:                                 news/nntp/snews.      (line  6)
-* SOCKS:                                 Gateways in general.  (line 39)
+* SOCKS:                                 Gateways in general.  (line 34)
 * ssh:                                   Tramp.                (line 15)
 * stream, opening:                       Gateways in general.  (line 14)
 * suppressing network connections:       Suppressing network connections.
                                                                (line  6)
-* telnet:                                rlogin/telnet/tn3270. (line  6)
+* telnet:                                telnet/tn3270.        (line  6)
 * telnet <1>:                            Gateways in general.  (line 29)
-* terminal emulation:                    rlogin/telnet/tn3270. (line  6)
+* terminal emulation:                    telnet/tn3270.        (line  6)
 * Texinfo:                               info.                 (line  6)
-* tn3270:                                rlogin/telnet/tn3270. (line  6)
+* tn3270:                                telnet/tn3270.        (line  6)
 * uniform resource identifier:           Introduction.         (line  6)
 * uniform resource locator:              Introduction.         (line  6)
 * Unix man pages:                        man.                  (line  6)
@@ -1791,36 +1769,36 @@ Node: Introduction2297
 Node: URI Parsing3586
 Node: Parsed URIs4948
 Node: URI Encoding7083
-Node: Retrieving URLs9526
-Node: Supported URL Types13343
-Node: http/https14264
-Node: Cookies15386
-Node: HTTP language/coding16793
-Node: HTTP URL Options18453
-Node: Dealing with HTTP documents19421
-Node: file/ftp19792
-Node: info20667
-Node: mailto21003
-Node: news/nntp/snews22386
-Node: rlogin/telnet/tn327024012
-Node: irc24707
-Node: data25653
-Node: nfs26162
-Node: ldap26970
-Node: man27113
-Node: Tramp27383
-Node: General Facilities28081
-Node: Disk Caching28304
-Node: Proxies30864
-Node: Gateways in general32979
-Ref: Gateways in general-Footnote-137097
-Node: Suppressing network connections37172
-Node: History37840
-Node: Customization39735
-Node: GNU Free Documentation License43260
-Node: Function Index68619
-Node: Variable Index71656
-Node: Concept Index76624
+Node: Retrieving URLs9532
+Node: Supported URL Types13349
+Node: http/https14270
+Node: Cookies15392
+Node: HTTP language/coding16799
+Node: HTTP URL Options18459
+Node: Dealing with HTTP documents19427
+Node: file/ftp19798
+Node: info20673
+Node: mailto21009
+Node: news/nntp/snews22392
+Node: telnet/tn327024011
+Node: irc24661
+Node: data25600
+Node: nfs26109
+Node: ldap26917
+Node: man27060
+Node: Tramp27330
+Node: General Facilities28028
+Node: Disk Caching28251
+Node: Proxies30811
+Node: Gateways in general32926
+Ref: Gateways in general-Footnote-136437
+Node: Suppressing network connections36512
+Node: History37180
+Node: Customization39075
+Node: GNU Free Documentation License42534
+Node: Function Index67893
+Node: Variable Index70930
+Node: Concept Index75606
 
 End Tag Table
 
