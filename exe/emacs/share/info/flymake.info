@@ -1,9 +1,9 @@
-This is flymake.info, produced by makeinfo version 6.7 from
+This is flymake.info, produced by makeinfo version 6.8 from
 flymake.texi.
 
 This manual is for GNU Flymake (version 1.2.2, November 2021).
 
-   Copyright © 2004–2022 Free Software Foundation, Inc.
+   Copyright © 2004–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -34,8 +34,10 @@ overall status including totals for different types of diagnostics.
 
    To learn about using Flymake, *note Using Flymake::.
 
-   Flymake is designed to be easily extended to support new backends via
-an Elisp interface.  *Note Extending Flymake::.
+   When the Emacs LSP support mode Eglot is enabled, Flymake will use
+that as an additional back-end.  *Note (eglot)Eglot Features:: Flymake
+is also designed to be easily extended to support new backends via an
+Elisp interface.  *Note Extending Flymake::.
 
    Historically, Flymake used to accept diagnostics from a single
 backend.  Although obsolete, it is still functional.  To learn how to
@@ -43,7 +45,7 @@ use and customize it, *note The legacy Proc backend::.
 
    This manual is for GNU Flymake (version 1.2.2, November 2021).
 
-   Copyright © 2004–2022 Free Software Foundation, Inc.
+   Copyright © 2004–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -79,6 +81,10 @@ already setup this hook for you, by adding “backend functions” to
 ‘flymake-diagnostic-functions’.  If you know Elisp you may also write
 your own Flymake backend functions.  *Note Backend functions::.
 
+   When the Emacs LSP support mode Eglot is enabled, Flymake will use
+that as an additional back-end automatically.  *Note (eglot)Eglot
+Features::
+
 * Menu:
 
 * Starting Flymake::
@@ -100,9 +106,10 @@ its presence via an indicator (*note Mode line status::).
    Syntax checks happen “on-the-fly”.  Each check is started whenever:
 
    • ‘flymake-mode’ is started, unless ‘flymake-start-on-flymake-mode’
-     is nil;
+     is ‘nil’;
 
-   • the buffer is saved, unless ‘flymake-start-on-save-buffer’ is nil;
+   • the buffer is saved, unless ‘flymake-start-on-save-buffer’ is
+     ‘nil’;
 
    • some changes were made to the buffer more than ‘0.5’ seconds ago
      (the delay is configurable in ‘flymake-no-changes-timeout’).
@@ -232,6 +239,9 @@ File: flymake.info,  Node: Customizable variables,  Prev: Troubleshooting,  Up: 
 This section summarizes customization variables used for the
 configuration of the Flymake user interface.
 
+‘flymake-mode-line-lighter’
+     The name of the mode.  Defaults to ‘Flymake’.
+
 ‘flymake-mode-line-format’
      Format to use for the Flymake mode line indicator.
 
@@ -276,7 +286,7 @@ configuration of the Flymake user interface.
      Which fringe (if any) should show the warning/error bitmaps.
 
 ‘flymake-wrap-around’
-     If non-nil, moving to errors with ‘flymake-goto-next-error’ and
+     If non-‘nil’, moving to errors with ‘flymake-goto-next-error’ and
      ‘flymake-goto-prev-error’ wraps around buffer boundaries.
 
 
@@ -529,7 +539,7 @@ calling the function ‘flymake-make-diagnostic’.
      Flymake error types::), and TEXT is a description of the problem
      detected in this region.  Most commonly LOCUS is the buffer object
      designating for the current buffer being syntax-checked.  However,
-     it may be a string nameing a file relative to the current working
+     it may be a string naming a file relative to the current working
      directory.  *Note Foreign and list-only diagnostics::, for when
      this may be useful.  Depending on the type of LOCUS, BEG and END
      are both either buffer positions or conses (LINE .  COL) which
@@ -633,6 +643,7 @@ a common technique for performing parallel processing in Emacs.
 Binding::) to be active.
 
      ;;; ruby-flymake.el --- A ruby Flymake backend  -*- lexical-binding: t; -*-
+     (require 'cl-lib)
      (defvar-local ruby--flymake-proc nil)
 
      (defun ruby-flymake (report-fn &rest _args)
@@ -695,6 +706,7 @@ Binding::) to be active.
                             for type = (if (string-match "^warning" msg)
                                            :warning
                                          :error)
+                            when (and beg end)
                             collect (flymake-make-diagnostic source
                                                              beg
                                                              end
@@ -738,10 +750,10 @@ File: flymake.info,  Node: The legacy Proc backend,  Next: GNU Free Documentatio
 * Parsing the output::
 * Interaction with other modes::
 
-The backend ‘flymake-proc-legacy-backend’ was originally designed to be
+The backend ‘flymake-proc-legacy-flymake’ was originally designed to be
 extended for supporting new syntax check tools and error message
 patterns.  It is also controlled by its own set of customization
-variables
+variables.
 
 
 File: flymake.info,  Node: Proc customization variables,  Next: Adding support for a new syntax check tool,  Up: The legacy Proc backend
@@ -772,13 +784,17 @@ File: flymake.info,  Node: Proc customization variables,  Next: Adding support f
      line-idx col-idx err-text-idx)’.  *Note Parsing the output::.
 
 ‘flymake-proc-diagnostic-type-pred’
-     A function to classify a diagnostic text as particular type of
-     error.  Should be a function taking an error text and returning a
-     diagnostic symbol (*note Flymake error types::).  If non-nil is
-     returned but there is no such symbol in that table, a warning is
-     assumed.  If nil is returned, an error is assumed.  Can also be a
-     regular expression that should match only warnings.  This variable
-     replaces the old ‘flymake-warning-re’ and
+     A function to classify a diagnostic text as a particular type of
+     error.  The value of this variable should be a function taking an
+     error text and returning a diagnostic symbol (*note Flymake error
+     types::).  If it returns a non-‘nil’ value but there is no such
+     symbol in that table, the text is interpreted as a warning.  If the
+     function returns ‘nil’, the text is assumed to be an error.
+
+     The value of this variable can alternatively be a regular
+     expression that should match only warnings.
+
+     This variable replaces the old ‘flymake-warning-re’ and
      ‘flymake-warning-predicate’.
 
 ‘flymake-proc-compilation-prevents-syntax-check’
@@ -935,7 +951,7 @@ File: flymake.info,  Node: Implementation overview,  Next: Making a temporary co
 3.3 Implementation overview
 ===========================
 
-‘flymake-proc-legacy-backend’ saves a copy of the buffer in a temporary
+‘flymake-proc-legacy-flymake’ saves a copy of the buffer in a temporary
 file in the buffer’s directory (or in the system temporary directory,
 for Java files), creates a syntax check command and launches a process
 with this command.  The output is parsed using a list of error message
@@ -1021,8 +1037,8 @@ appropriate include directives.  No more than
 
    For ‘file.h’, the include directives to look for are ‘#include
 "file.h"’, ‘#include "../file.h"’, etc.  Each include is checked against
-a list of include directories (see *note Getting the include
-directories::) to be sure it points to the correct ‘file.h’.
+a list of include directories (*note Getting the include directories::)
+to be sure it points to the correct ‘file.h’.
 
    First matching master file found stops the search.  The master file
 is then patched and saved to disk.  In case no master file is found,
@@ -1684,12 +1700,12 @@ Index
 * flymake-diagnostics <1>:               Flymake error types.  (line 78)
 * flymake-disabled-backends:             Troubleshooting.      (line 13)
 * flymake-error:                         Customizable variables.
-                                                               (line 29)
+                                                               (line 32)
 * flymake-error <1>:                     Flymake error types.  (line 56)
 * flymake-error-bitmap:                  Customizable variables.
-                                                               (line 41)
+                                                               (line 44)
 * flymake-fringe-indicator-position:     Customizable variables.
-                                                               (line 49)
+                                                               (line 52)
 * flymake-list-only-diagnostics:         Foreign and list-only diagnostics.
                                                                (line 27)
 * flymake-log:                           Flymake utility functions.
@@ -1697,20 +1713,22 @@ Index
 * flymake-make-diagnostic:               Flymake utility functions.
                                                                (line  9)
 * flymake-mode-line-counter-format:      Customizable variables.
-                                                               (line 12)
+                                                               (line 15)
 * flymake-mode-line-format:              Customizable variables.
+                                                               (line 12)
+* flymake-mode-line-lighter:             Customizable variables.
                                                                (line  9)
 * flymake-no-changes-timeout:            Customizable variables.
-                                                               (line 16)
+                                                               (line 19)
 * flymake-note:                          Customizable variables.
-                                                               (line 37)
+                                                               (line 40)
 * flymake-note <1>:                      Flymake error types.  (line 56)
 * flymake-proc-allowed-file-name-masks:  Proc customization variables.
                                                                (line  6)
 * flymake-proc-check-file-limit:         Proc customization variables.
                                                                (line 20)
 * flymake-proc-compilation-prevents-syntax-check: Proc customization variables.
-                                                               (line 38)
+                                                               (line 42)
 * flymake-proc-compile:                  Interaction with other modes.
                                                                (line 17)
 * flymake-proc-diagnostic-type-pred:     Proc customization variables.
@@ -1721,7 +1739,7 @@ Index
                                                                (line 20)
 * flymake-proc-get-project-include-dirs-function: Proc customization variables.
                                                                (line 15)
-* flymake-proc-legacy-backend:           The legacy Proc backend.
+* flymake-proc-legacy-flymake:           The legacy Proc backend.
                                                                (line 19)
 * flymake-proc-master-file-count-limit:  Proc customization variables.
                                                                (line 19)
@@ -1730,17 +1748,17 @@ Index
 * flymake-reporting-backends:            Troubleshooting.      (line 13)
 * flymake-running-backends:              Troubleshooting.      (line 13)
 * flymake-start-on-flymake-mode:         Customizable variables.
-                                                               (line 21)
+                                                               (line 24)
 * flymake-start-on-save-buffer:          Customizable variables.
-                                                               (line 25)
+                                                               (line 28)
 * flymake-type-name:                     Flymake error types.  (line 49)
 * flymake-warning:                       Customizable variables.
-                                                               (line 33)
+                                                               (line 36)
 * flymake-warning <1>:                   Flymake error types.  (line 56)
 * flymake-warning-bitmap:                Customizable variables.
-                                                               (line 45)
+                                                               (line 48)
 * flymake-wrap-around:                   Customizable variables.
-                                                               (line 52)
+                                                               (line 55)
 * foreign diagnostics:                   Foreign and list-only diagnostics.
                                                                (line 14)
 * include directories (C/C++ specific):  Getting the include directories.
@@ -1795,33 +1813,33 @@ Index
 
 Tag Table:
 Node: Top919
-Node: Using Flymake2552
-Node: Starting Flymake3278
-Node: Finding diagnostics4250
-Node: Mode line status5902
-Node: Troubleshooting7811
-Node: Customizable variables9567
-Node: Extending Flymake11394
-Node: Flymake error types11924
-Node: Backend functions16843
-Node: Flymake utility functions21601
-Node: Foreign and list-only diagnostics24391
-Node: An annotated example backend26858
-Node: The legacy Proc backend31697
-Node: Proc customization variables32434
-Node: Adding support for a new syntax check tool34323
-Node: Example---Configuring a tool called directly36717
-Node: Example---Configuring a tool called via make38445
-Node: Implementation overview40186
-Node: Making a temporary copy42112
-Node: Locating a master file43440
-Node: Getting the include directories44931
-Node: Locating the buildfile46023
-Node: Starting the syntax check process47379
-Node: Parsing the output47989
-Node: Interaction with other modes49482
-Node: GNU Free Documentation License50424
-Node: Index75788
+Node: Using Flymake2687
+Node: Starting Flymake3561
+Node: Finding diagnostics4550
+Node: Mode line status6202
+Node: Troubleshooting8111
+Node: Customizable variables9867
+Node: Extending Flymake11788
+Node: Flymake error types12318
+Node: Backend functions17237
+Node: Flymake utility functions21995
+Node: Foreign and list-only diagnostics24784
+Node: An annotated example backend27251
+Node: The legacy Proc backend32160
+Node: Proc customization variables32898
+Node: Adding support for a new syntax check tool34921
+Node: Example---Configuring a tool called directly37315
+Node: Example---Configuring a tool called via make39043
+Node: Implementation overview40784
+Node: Making a temporary copy42710
+Node: Locating a master file44038
+Node: Getting the include directories45525
+Node: Locating the buildfile46617
+Node: Starting the syntax check process47973
+Node: Parsing the output48583
+Node: Interaction with other modes50076
+Node: GNU Free Documentation License51018
+Node: Index76382
 
 End Tag Table
 

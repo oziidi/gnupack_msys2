@@ -1,6 +1,6 @@
-This is rcirc.info, produced by makeinfo version 6.7 from rcirc.texi.
+This is rcirc.info, produced by makeinfo version 6.8 from rcirc.texi.
 
-Copyright © 2006–2022 Free Software Foundation, Inc.
+Copyright © 2006–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -30,7 +30,7 @@ communicate with each other in real-time.  Communication occurs both in
 topic channels which are collections of many users, or privately, with
 just one other user.
 
-   Copyright © 2006–2022 Free Software Foundation, Inc.
+   Copyright © 2006–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -133,7 +133,9 @@ followed by a colon, like this:
 
      deego: fsbot rules!
 
-   Since this is so common, you can use <TAB> to do nick completion.
+   Since this is so common, you can use <TAB> to do nick completion.  By
+default rcirc will use the default completion system, but you can enable
+‘rcirc-cycle-completion-flag’ to cycle nicks in place.
 
 
 File: rcirc.info,  Node: Getting started with rcirc,  Prev: Internet Relay Chat,  Up: Basics
@@ -210,7 +212,7 @@ your init file:
    Use ‘C-c C-<SPC>’ to switch to these buffers.
 
    If the user wishes to ignore events in the server buffer, set
-‘rcirc-track-ignore-server-buffer-flag’ to a non-nil value.
+‘rcirc-track-ignore-server-buffer-flag’ to a non-‘nil’ value.
 
 
 File: rcirc.info,  Node: Reference,  Next: Fighting Information Overload,  Prev: Basics,  Up: Top
@@ -389,7 +391,7 @@ liking.
      This variable is used for the default nick.  It defaults to the
      login name returned by ‘user-login-name’.
 
-          (setq rcirc-default-nick "kensanata")
+          (setopt rcirc-default-nick "kensanata")
 
 ‘rcirc-default-port’
      This variable contains the default port to connect to.  It is 6667
@@ -405,7 +407,7 @@ liking.
      to the name returned by ‘user-full-name’.  If you want to hide your
      full name, you might want to set it to some pseudonym.
 
-          (setq rcirc-default-full-name "Curious Minds Want To Know")
+          (setopt rcirc-default-full-name "Curious Minds Want To Know")
 
 ‘rcirc-authinfo’
      This variable is an alist used to automatically identify yourself
@@ -416,10 +418,10 @@ liking.
 
      Here is an example to illustrate how you would set it:
 
-          (setq rcirc-authinfo
-                '(("Libera.Chat" nickserv "bob" "p455w0rd")
-                  ("Libera.Chat" chanserv "bob" "#bobland" "passwd99")
-                  ("bitlbee" bitlbee "robert" "sekrit")))
+          (setopt rcirc-authinfo
+                  '(("Libera.Chat" nickserv "bob" "p455w0rd")
+                    ("Libera.Chat" chanserv "bob" "#bobland" "passwd99")
+                    ("bitlbee" bitlbee "robert" "sekrit")))
 
      And here are the valid method symbols and the arguments they
      require:
@@ -451,11 +453,6 @@ liking.
           arguments are the nickname you want to use this for, and the
           password to use.
 
-     ‘sasl’
-          Use this symbol if you want to use SASL authentication.  The
-          necessary arguments are the nickname you want to use this for,
-          and the password to use.
-
           Bitlbee acts like an IRC server, but in fact it is a gateway
           to a lot of other instant messaging services.  You can either
           install Bitlbee locally or use a public Bitlbee server.
@@ -468,6 +465,17 @@ liking.
           log you in.  All ‘rcirc’ needs to know, is the login to your
           Bitlbee account.  Don’t confuse the Bitlbee account with all
           the other accounts.
+
+     ‘sasl’
+          Use this symbol if you want to use SASL authentication.  The
+          necessary arguments are the nickname you want to use this for,
+          and the password to use.
+
+     ‘certfp’
+          Use this symbol if you want to use CertFP authentication.  The
+          necessary arguments are the path to the key and to the client
+          certificate associated with the account.  The CertFP
+          authentication requires a TLS connection.
 
 
 File: rcirc.info,  Node: Fighting Information Overload,  Next: Hacking and Tweaking,  Prev: Reference,  Up: Top
@@ -506,7 +514,7 @@ window is showing them), the mode line will now show you the abbreviated
 channel or nick name.  Use ‘C-c C-<SPC>’ to switch to these buffers.
 
    By default the channel names are abbreviated, set
-‘rcirc-track-abbrevate-flag’ to a non-nil value.  This might be
+‘rcirc-track-abbrevate-flag’ to a non-‘nil’ value.  This might be
 interesting if the IRC activities are not tracked in the mode line, but
 somewhere else.
 
@@ -596,7 +604,7 @@ notices using ‘C-c C-o’.
 ‘rcirc-omit-responses’ variable.  Here’s an example of how to omit away
 messages:
 
-     (setq rcirc-omit-responses '("JOIN" "PART" "QUIT" "NICK" "AWAY"))
+     (setopt rcirc-omit-responses '("JOIN" "PART" "QUIT" "NICK" "AWAY"))
 
    Notice that these messages will not be omitted if the nick in
 question has recently been active.  After all, you don’t want to
@@ -611,7 +619,7 @@ requests them.  For example, if you don’t want to display ‘TOPIC’ and
 ‘NAMES’ messages, after reconnecting, you can configure
 ‘rcirc-omit-unless-requested’ to hide:
 
-     (setq rcirc-omit-unless-requested '("TOPIC" "NAMES"))
+     (setopt rcirc-omit-unless-requested '("TOPIC" "NAMES"))
 
    Now NAMES will only be displayed, after it has been requested via the
 ‘rcirc-cmd-name’ command.
@@ -632,6 +640,7 @@ Here are some examples of stuff you can do to configure ‘rcirc’.
 * Changing the time stamp format::
 * Defining a new command::
 * Using rcirc with bouncers::
+* Dealing with Bridge Bots::
 
 
 File: rcirc.info,  Node: Skipping /away messages using handlers,  Next: Using fly spell mode,  Up: Hacking and Tweaking
@@ -691,7 +700,11 @@ File: rcirc.info,  Node: Changing the time stamp format,  Next: Defining a new c
 ‘rcirc-time-format’ is the format used for the time stamp.  Here’s how
 to include the date in the time stamp:
 
-     (setq rcirc-time-format "%Y-%m-%d %H:%M ")
+     (setopt rcirc-time-format "%Y-%m-%d %H:%M ")
+
+   If you don’t wish to use verbose time formatting all the time, you
+can use the ‘rcirc-when’ command to display a complete timestamp for the
+message at point.
 
 
 File: rcirc.info,  Node: Defining a new command,  Next: Using rcirc with bouncers,  Prev: Changing the time stamp format,  Up: Hacking and Tweaking
@@ -714,7 +727,7 @@ loaded because ‘rcirc-define-command’ is not yet available, and without
          (rcirc-send-message process target "I use " rcirc-id-string)))
 
 
-File: rcirc.info,  Node: Using rcirc with bouncers,  Prev: Defining a new command,  Up: Hacking and Tweaking
+File: rcirc.info,  Node: Using rcirc with bouncers,  Next: Dealing with Bridge Bots,  Prev: Defining a new command,  Up: Hacking and Tweaking
 
 4.6 Using rcirc with bouncers
 =============================
@@ -735,8 +748,41 @@ configuration to fix the above example might be:
              (substring str 0 (match-beginning 0))
            str)))
 
-     (setq rcirc-nick-filter #'my/rcirc-remove-suffix
-           rcirc-channel-filter #'local/rcirc-soju-suffix)
+     (setopt rcirc-nick-filter #'my/rcirc-remove-suffix
+             rcirc-channel-filter #'local/rcirc-soju-suffix)
+
+
+File: rcirc.info,  Node: Dealing with Bridge Bots,  Prev: Using rcirc with bouncers,  Up: Hacking and Tweaking
+
+4.7 Dealing with Bridge Bots
+============================
+
+It is increasingly common for IRC channels to be “bridged” onto other
+networks such as XMPP, Matrix, etc.  Sometimes the software does a good
+job at mapping each non-IRC user into an IRC user, but more often than
+not it doesn’t.  In that case you might receive a message like:
+
+     09:47 <bridge> <john> I am not on IRC
+
+   where ‘bridge’ is a bot responsible for sending messages back and
+forth between networks, and ‘john’ is the user name of someone on a
+different network.  Note that the bot indicates this within the message
+(<john> I am not on IRC) that appears in your chat buffer.
+
+   If this annoys you, the user option ‘rcirc-bridge-bot-alist’ may be
+of use.  It consists of descriptions of what users are these kinds of
+“bridge bots” and how they format their messages.  To handle the above
+example, we might set the user option to:
+
+     (setopt rcirc-bridge-bot-alist
+             '(("bridge" . "<\\(.+?\\)>[[:space:]]+")))
+
+   If there is an entry for the current user, ‘rcirc’ will take the
+associated regular expression and try to find a match in the message
+string.  If it manages to find anything, the matching expression is
+deleted from the message.  The regular expression must contain at least
+one group that will match the user name of the bridged message.  This
+will then be used to replace the username of the bridge bot.
 
 
 File: rcirc.info,  Node: GNU Free Documentation License,  Next: Key Index,  Prev: Hacking and Tweaking,  Up: Top
@@ -1257,8 +1303,11 @@ Variable Index
 * Menu:
 
 * rcirc-authinfo:                        Configuration.        (line 68)
+* rcirc-bridge-bot-alist:                Dealing with Bridge Bots.
+                                                               (line 18)
 * rcirc-channel-filter:                  Using rcirc with bouncers.
                                                                (line 10)
+* rcirc-cycle-completion-flag:           Internet Relay Chat.  (line 36)
 * rcirc-default-full-name:               Configuration.        (line 61)
 * rcirc-default-nick:                    Configuration.        (line 46)
 * rcirc-default-port:                    Configuration.        (line 52)
@@ -1314,7 +1363,7 @@ Index
 * abbreviated channel names:             Channels.            (line   6)
 * active channel:                        Channels.            (line   6)
 * addressing other people:               Internet Relay Chat. (line  30)
-* AIM:                                   Configuration.       (line 116)
+* AIM:                                   Configuration.       (line 111)
 * authentication:                        Configuration.       (line  68)
 * automatic spelling:                    Using fly spell mode.
                                                               (line   6)
@@ -1323,12 +1372,15 @@ Index
 * bitlbee authentication:                Configuration.       (line 106)
 * bouncer:                               Using rcirc with bouncers.
                                                               (line   6)
+* bridge:                                Dealing with Bridge Bots.
+                                                              (line   6)
 * brighten nicks:                        People.              (line  23)
 * buddies:                               People.              (line   6)
 * buddies, highlight:                    People.              (line  23)
 * busy channels:                         Channels.            (line  30)
 * call commands:                         rcirc commands.      (line  12)
 * case insensitive commands:             rcirc commands.      (line  30)
+* certfp authentication:                 Configuration.       (line 130)
 * change name:                           rcirc commands.      (line  49)
 * changing nick:                         Getting started with rcirc.
                                                               (line  35)
@@ -1375,7 +1427,7 @@ Index
 * friends:                               People.              (line   6)
 * friends, highlight:                    People.              (line  23)
 * full name:                             Configuration.       (line  61)
-* gateway to other IM services:          Configuration.       (line 116)
+* gateway to other IM services:          Configuration.       (line 111)
 * getting started:                       Getting started with rcirc.
                                                               (line   6)
 * hacking and tweaking:                  Hacking and Tweaking.
@@ -1385,7 +1437,7 @@ Index
 * help about irc:                        Useful IRC commands. (line  15)
 * hide some posts:                       People.              (line  15)
 * highlight other people:                People.              (line  23)
-* ICQ:                                   Configuration.       (line 116)
+* ICQ:                                   Configuration.       (line 111)
 * identification:                        Configuration.       (line  68)
 * identifying people:                    rcirc commands.      (line  55)
 * idiots online:                         People.              (line  15)
@@ -1400,14 +1452,14 @@ Index
 * input line:                            Scrolling conservatively.
                                                               (line   6)
 * instant messaging, comparison:         Internet Relay Chat. (line  11)
-* instant messaging, other services:     Configuration.       (line 116)
+* instant messaging, other services:     Configuration.       (line 111)
 * internet relay chat:                   Internet Relay Chat. (line   6)
 * irc:                                   Internet Relay Chat. (line   6)
 * irc command:                           Getting started with rcirc.
                                                               (line   6)
 * irc commands:                          Useful IRC commands. (line   6)
 * irc resources:                         Useful IRC commands. (line  15)
-* Jabber:                                Configuration.       (line 116)
+* Jabber:                                Configuration.       (line 111)
 * join channels:                         rcirc commands.      (line  37)
 * join notices, how to omit:             Notices.             (line   6)
 * keywords:                              Keywords.            (line   6)
@@ -1426,7 +1478,7 @@ Index
                                                               (line  57)
 * modeline:                              Channels.            (line   6)
 * modeline tracks activity:              Channels.            (line   6)
-* MSN:                                   Configuration.       (line 116)
+* MSN:                                   Configuration.       (line 111)
 * multiline messages:                    Getting started with rcirc.
                                                               (line  57)
 * multiple words as parameters:          rcirc commands.      (line  21)
@@ -1475,7 +1527,7 @@ Index
 * reference:                             Reference.           (line   6)
 * rename yourself:                       rcirc commands.      (line  49)
 * rooms, joining:                        rcirc commands.      (line  37)
-* sasl authentication:                   Configuration.       (line 112)
+* sasl authentication:                   Configuration.       (line 125)
 * scrolling:                             Scrolling conservatively.
                                                               (line   6)
 * server:                                Internet Relay Chat. (line  11)
@@ -1519,7 +1571,7 @@ Index
 * user name:                             Configuration.       (line  56)
 * what channels people are on:           rcirc commands.      (line  55)
 * who are these people:                  rcirc commands.      (line  55)
-* Yahoo!:                                Configuration.       (line 116)
+* Yahoo!:                                Configuration.       (line 111)
 
 
 
@@ -1527,27 +1579,28 @@ Tag Table:
 Node: Top846
 Node: Basics2442
 Node: Internet Relay Chat2712
-Node: Getting started with rcirc4250
-Node: Reference7844
-Node: rcirc commands8190
-Node: Useful IRC commands12138
-Node: Configuration12897
-Node: Fighting Information Overload18145
-Node: Channels18648
-Node: People20434
-Node: Keywords22108
-Node: Notices22627
-Node: Hacking and Tweaking23966
-Node: Skipping /away messages using handlers24418
-Node: Using fly spell mode25171
-Node: Scrolling conservatively25601
-Node: Changing the time stamp format26282
-Node: Defining a new command26669
-Node: Using rcirc with bouncers27460
-Node: GNU Free Documentation License28447
-Node: Key Index53810
-Node: Variable Index55196
-Node: Index57202
+Node: Getting started with rcirc4386
+Node: Reference7986
+Node: rcirc commands8332
+Node: Useful IRC commands12280
+Node: Configuration13039
+Node: Fighting Information Overload18578
+Node: Channels19081
+Node: People20873
+Node: Keywords22547
+Node: Notices23066
+Node: Hacking and Tweaking24409
+Node: Skipping /away messages using handlers24890
+Node: Using fly spell mode25643
+Node: Scrolling conservatively26073
+Node: Changing the time stamp format26754
+Node: Defining a new command27311
+Node: Using rcirc with bouncers28102
+Node: Dealing with Bridge Bots29126
+Node: GNU Free Documentation License30673
+Node: Key Index56036
+Node: Variable Index57422
+Node: Index59641
 
 End Tag Table
 

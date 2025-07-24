@@ -1,8 +1,8 @@
-This is eww.info, produced by makeinfo version 6.7 from eww.texi.
+This is eww.info, produced by makeinfo version 6.8 from eww.texi.
 
 This file documents the GNU Emacs Web Wowser (EWW) package.
 
-   Copyright © 2014–2022 Free Software Foundation, Inc.
+   Copyright © 2014–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -27,7 +27,7 @@ EWW
 
 This file documents the GNU Emacs Web Wowser (EWW) package.
 
-   Copyright © 2014–2022 Free Software Foundation, Inc.
+   Copyright © 2014–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -63,9 +63,13 @@ File: eww.info,  Node: Overview,  Next: Basics,  Prev: Top,  Up: Top
 1 Overview
 **********
 
-“EWW”, the Emacs Web Wowser, is a web browser for GNU Emacs.  It can
-load, parse, and display various web pages using “shr.el”.  However, a
-GNU Emacs with ‘libxml2’ support is required.
+“EWW”, the Emacs Web Wowser, is a web browser for GNU Emacs that
+provides a simple, no-frills experience that focuses on readability.  It
+loads, parses, and displays web pages using “shr.el”.  It can display
+images inline, if Emacs was built with image support, but there is no
+support for CSS or JavaScript.
+
+   To use EWW, you need to use an Emacs built with ‘libxml2’ support.
 
 
 File: eww.info,  Node: Basics,  Next: Advanced,  Prev: Overview,  Up: Top
@@ -254,7 +258,7 @@ point positions or the actual Web page contents.  The latter, however,
 tend to be overly large to preserve in the desktop file, so they get
 omitted, thus rendering the respective entries entirely equivalent.  By
 default, such duplicate entries are not saved.  Setting
-‘eww-desktop-remove-duplicates’ to nil will force EWW to save them
+‘eww-desktop-remove-duplicates’ to ‘nil’ will force EWW to save them
 anyway.
 
    Restoring EWW buffers’ contents may prove to take too long to finish.
@@ -270,6 +274,26 @@ variable.  The value of this variable will be passed through
 ‘substitute-command-keys’ upon each use, thus allowing for the use of
 the usual substitutions, such as ‘\[eww-reload]’ for the current key
 binding of the ‘eww-reload’ command.
+
+   If the ‘eww-auto-rename-buffer’ user option is non-‘nil’, EWW buffers
+will be renamed after rendering a document.  If this is ‘title’, rename
+based on the title of the document.  If this is ‘url’, rename based on
+the URL of the document.  This can also be a user-defined function,
+which is called with no parameters in the EWW buffer, and should return
+a string.
+
+   EWW runs the URLs through ‘eww-url-transformers’ before using them.
+This user option is a list of functions, where each function is called
+with the URL as the parameter, and should return the (possibly)
+transformed URL. By default, this variable contains
+‘eww-remove-tracking’, which removes the common ‘utm_’ trackers from
+links.
+
+   If Emacs has been built with xwidget support, EWW can use that to
+display ‘<video>’ elements.  However, this support is still
+experimental, and on some systems doesn’t work (and even worse) may
+crash your Emacs, so this feature is off by default.  If you wish to
+switch it on, set ‘shr-use-xwidgets-for-media’ to a non-‘nil’ value.
 
 
 File: eww.info,  Node: Command Line,  Next: History and Acknowledgments,  Prev: Advanced,  Up: Top
@@ -827,6 +851,7 @@ is called.  It can be used to alter the contents, for instance.
 
 * browse-url-secondary-browser-function: Basics.              (line  82)
 * eww-after-render-hook:                 Variable Index.      (line   6)
+* eww-auto-rename-buffer:                Advanced.            (line 111)
 * eww-desktop-remove-duplicates:         Advanced.            (line  88)
 * eww-download-directory:                Basics.              (line  47)
 * eww-header-line-format:                Advanced.            (line  42)
@@ -834,8 +859,10 @@ is called.  It can be used to alter the contents, for instance.
 * eww-restore-desktop:                   Advanced.            (line  97)
 * eww-restore-reload-prompt:             Advanced.            (line 104)
 * eww-search-prefix:                     Basics.              (line   6)
+* eww-url-transformers:                  Advanced.            (line 118)
 * eww-use-browse-url:                    Advanced.            (line  37)
 * eww-use-external-browser-for-content-type: Basics.          (line  82)
+* shr-allowed-images:                    Advanced.            (line  52)
 * shr-blocked-images:                    Advanced.            (line  52)
 * shr-color-visible-distance-min:        Advanced.            (line  63)
 * shr-color-visible-luminance-min:       Advanced.            (line  63)
@@ -847,6 +874,7 @@ is called.  It can be used to alter the contents, for instance.
 * shr-max-width:                         Advanced.            (line  69)
 * shr-use-colors:                        Basics.              (line  40)
 * shr-use-fonts:                         Basics.              (line  37)
+* shr-use-xwidgets-for-media:            Advanced.            (line 125)
 * shr-width:                             Advanced.            (line  69)
 
 
@@ -892,39 +920,41 @@ Concept Index
  [index ]
 * Menu:
 
-* aria-hidden, HTML attribute:           Advanced.             (line 75)
-* Bookmarks:                             Basics.               (line 72)
-* Contrast:                              Advanced.             (line 63)
-* Cookies:                               Advanced.             (line 23)
-* Desktop Support:                       Advanced.             (line 83)
-* Download:                              Basics.               (line 47)
-* eww:                                   Basics.               (line  6)
-* External Browser:                      Basics.               (line 82)
-* Header:                                Advanced.             (line 42)
-* History:                               Basics.               (line 53)
-* Image Display:                         Basics.               (line 43)
-* Image Display <1>:                     Advanced.             (line 52)
-* Multiple Buffers:                      Basics.               (line 77)
-* paragraph direction:                   Advanced.             (line 46)
-* PDF:                                   Basics.               (line 68)
-* Saving Sessions:                       Advanced.             (line 83)
-* Viewing Source:                        Advanced.             (line 19)
-* Web Browsing:                          Basics.               (line  6)
+* aria-hidden, HTML attribute:           Advanced.            (line  75)
+* Bookmarks:                             Basics.              (line  72)
+* Contrast:                              Advanced.            (line  63)
+* Cookies:                               Advanced.            (line  23)
+* Desktop Support:                       Advanced.            (line  83)
+* Download:                              Basics.              (line  47)
+* eww:                                   Basics.              (line   6)
+* External Browser:                      Basics.              (line  82)
+* Header:                                Advanced.            (line  42)
+* History:                               Basics.              (line  53)
+* Image Display:                         Basics.              (line  43)
+* Image Display <1>:                     Advanced.            (line  52)
+* Multiple Buffers:                      Basics.              (line  77)
+* paragraph direction:                   Advanced.            (line  46)
+* PDF:                                   Basics.              (line  68)
+* Saving Sessions:                       Advanced.            (line  83)
+* utm:                                   Advanced.            (line 118)
+* video:                                 Advanced.            (line 125)
+* Viewing Source:                        Advanced.            (line  19)
+* Web Browsing:                          Basics.              (line   6)
 
 
 
 Tag Table:
 Node: Top873
 Node: Overview1898
-Node: Basics2192
-Node: Advanced7033
-Node: Command Line12686
-Node: History and Acknowledgments13212
-Node: GNU Free Documentation License13901
-Node: Key Index39251
-Node: Variable Index40789
-Node: Lisp Function Index42758
-Node: Concept Index44664
+Node: Basics2386
+Node: Advanced7227
+Node: Command Line13966
+Node: History and Acknowledgments14492
+Node: GNU Free Documentation License15181
+Node: Key Index40531
+Node: Variable Index42069
+Node: Lisp Function Index44330
+Node: Concept Index46236
 
 End Tag Table
 

@@ -1,7 +1,7 @@
-This is octave-mode.info, produced by makeinfo version 6.7 from
+This is octave-mode.info, produced by makeinfo version 6.8 from
 octave-mode.texi.
 
-Copyright © 1996–2022 Free Software Foundation, Inc.
+Copyright © 1996–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -24,7 +24,7 @@ File: octave-mode.info,  Node: Top,  Next: Overview,  Up: (dir)
 Octave Mode
 ***********
 
-Copyright © 1996–2022 Free Software Foundation, Inc.
+Copyright © 1996–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -121,7 +121,7 @@ addition to the standard Emacs commands.
 ‘C-c C-f’
      Insert a function skeleton, prompting for the function’s name,
      arguments and return values which have to be entered without
-     parentheses (‘octave-insert-defun’).  in one of your Emacs startup
+     parentheses (‘octave-insert-defun’) in one of your Emacs startup
      files.
 
    The following variables can be used to customize Octave mode.
@@ -165,9 +165,9 @@ addition to the standard Emacs commands.
    There is also rudimentary support for Imenu (*note (emacs)Imenu::).
 Currently, function names can be indexed.
 
-   ElDoc mode (*note (emacs)Lisp Doc::) is supported.  By customizing
-‘octave-eldoc-message-style’ it can be changed from displaying one or
-multi line hints.
+   ElDoc mode (*note (emacs)Programming Language Doc::) is supported.
+By customizing ‘octave-eldoc-message-style’ it can be changed from
+displaying one or multi line hints.
 
    Customization of Octave mode can be performed by modification of the
 variable ‘octave-mode-hook’.
@@ -190,8 +190,8 @@ inferior Octave process “as usual”, i.e., by entering Octave commands at
 the prompt.  The buffer is in Inferior Octave mode, which is derived
 from the standard Comint mode, a major mode for interacting with an
 inferior interpreter.  See the documentation for ‘comint-mode’ for more
-details, and use ‘C-h b’ to find out about available special
-keybindings.
+details, and use ‘C-h b’ to find out about available special key
+bindings.
 
    You can also communicate with an inferior Octave process from within
 files with Octave code (i.e., buffers in Octave mode), using the
@@ -927,12 +927,12 @@ Tag Table:
 Node: Top862
 Node: Overview1775
 Node: Using Octave Mode2483
-Node: Running Octave from Within Emacs6664
-Node: GNU Free Documentation License12107
-Node: Key Index37470
-Node: Variable Index40062
-Node: Lisp Function Index42284
-Node: Concept Index44806
+Node: Running Octave from Within Emacs6677
+Node: GNU Free Documentation License12121
+Node: Key Index37484
+Node: Variable Index40076
+Node: Lisp Function Index42298
+Node: Concept Index44820
 
 End Tag Table
 

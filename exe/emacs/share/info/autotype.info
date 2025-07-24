@@ -1,7 +1,7 @@
-This is autotype.info, produced by makeinfo version 6.7 from
+This is autotype.info, produced by makeinfo version 6.8 from
 autotype.texi.
 
-Copyright © 1994–1995, 1999, 2001–2022 Free Software Foundation, Inc.
+Copyright © 1994–1995, 1999, 2001–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -51,7 +51,7 @@ can be defined for inserting and navigating between text more generally.
 A sort of meta-expansion facility can be used to try a set of
 alternative completions and expansions of text at point.
 
-   Copyright © 1994–1995, 1999, 2001–2022 Free Software Foundation, Inc.
+   Copyright © 1994–1995, 1999, 2001–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -75,7 +75,6 @@ alternative completions and expansions of text at point.
 * Copyrights::             Inserting and updating copyrights.
 * Executables::            Turning interpreter scripts into executables.
 * Timestamps::             Updating dates and times in modified files.
-* QuickURL::               Inserting URLs based on text at point.
 * Tempo::                  Flexible template insertion.
 * Hippie Expand::          Expansion of text trying various methods.
 * Skeleton Language::      Making skeleton commands insert what you want.
@@ -387,7 +386,7 @@ such as when Emacs puts a buffer in Shell script mode.  Otherwise you
 are always queried.
 
 
-File: autotype.info,  Node: Timestamps,  Next: QuickURL,  Prev: Executables,  Up: Top
+File: autotype.info,  Node: Timestamps,  Next: Tempo,  Prev: Executables,  Up: Top
 
 8 Maintaining Timestamps in Modified Files
 ******************************************
@@ -421,29 +420,10 @@ look like one of the following:
      Time-stamp: <1998-02-18 10:20:51 gildea>
 
 
-File: autotype.info,  Node: QuickURL,  Next: Tempo,  Prev: Timestamps,  Up: Top
+File: autotype.info,  Node: Tempo,  Next: Hippie Expand,  Prev: Timestamps,  Up: Top
 
-9 QuickURL: Inserting URLs Based on Text at Point
-*************************************************
-
-‘M-x quickurl’ can be used to insert a URL into a buffer based on the
-text at point.  The URLs are stored in an external file defined by the
-variable ‘quickurl-url-file’ as a list of either cons cells of the form
-‘(KEY . URL)’ or lists of the form ‘(KEY URL COMMENT)’.  These specify
-that ‘M-x quickurl’ should insert URL if the word KEY is at point, for
-example:
-
-     (("FSF"      "https://www.fsf.org/" "The Free Software Foundation")
-      ("emacs"  . "https://www.gnu.org/software/emacs/"))
-
-   ‘M-x quickurl-add-url’ can be used to add a new KEY/URL pair.  ‘M-x
-quickurl-list’ provides interactive editing of the URL list.
-
-
-File: autotype.info,  Node: Tempo,  Next: Hippie Expand,  Prev: QuickURL,  Up: Top
-
-10 Tempo: Flexible Template Insertion
-*************************************
+9 Tempo: Flexible Template Insertion
+************************************
 
 The Tempo package provides a simple way to define powerful templates, or
 macros, if you wish.  It is mainly intended for, but not limited to,
@@ -471,7 +451,7 @@ Tempo package.
 
 File: autotype.info,  Node: Hippie Expand,  Next: Skeleton Language,  Prev: Tempo,  Up: Top
 
-11 “Hippie” Expansion
+10 “Hippie” Expansion
 *********************
 
 ‘M-x hippie-expand’ is a single command providing a variety of
@@ -496,7 +476,7 @@ expansion possibilities.
 
 File: autotype.info,  Node: Skeleton Language,  Next: GNU Free Documentation License,  Prev: Hippie Expand,  Up: Top
 
-12 Skeleton Language
+11 Skeleton Language
 ********************
 
 Skeletons are a shorthand extension to the Lisp language, where various
@@ -1090,7 +1070,6 @@ Concept Index
 * skeletons as abbrevs:                  Skeletons as Abbrevs.  (line 6)
 * templates:                             Tempo.                 (line 6)
 * timestamps:                            Timestamps.            (line 6)
-* URLs:                                  QuickURL.              (line 6)
 * using skeletons:                       Using Skeletons.       (line 6)
 * wrapping skeletons:                    Wrapping Skeletons.    (line 6)
 
@@ -1110,9 +1089,6 @@ Command Index
 * define-skeleton:                       Skeleton Language.    (line 89)
 * executable-set-magic:                  Executables.          (line 28)
 * hippie-expand:                         Hippie Expand.        (line  6)
-* quickurl:                              QuickURL.             (line  6)
-* quickurl-add-url:                      QuickURL.             (line 16)
-* quickurl-list:                         QuickURL.             (line 16)
 * skeleton-further-elements:             Skeleton Language.    (line 82)
 * skeleton-insert:                       Skeleton Language.    (line  6)
 * skeleton-pair-insert-maybe:            Inserting Pairs.      (line 15)
@@ -1145,7 +1121,6 @@ Variable Index
 * executable-prefix:                     Executables.          (line  6)
 * executable-query:                      Executables.          (line 28)
 * hippie-expand-try-functions-list:      Hippie Expand.        (line  6)
-* quickurl-url-file:                     QuickURL.             (line  6)
 * skeleton-pair:                         Inserting Pairs.      (line 15)
 * skeleton-pair-alist:                   Inserting Pairs.      (line 28)
 * skeleton-pair-on-word:                 Inserting Pairs.      (line 23)
@@ -1163,22 +1138,21 @@ Variable Index
 
 Tag Table:
 Node: Top933
-Node: Using Skeletons4101
-Node: Wrapping Skeletons5602
-Node: Skeletons as Abbrevs8224
-Node: Inserting Pairs9136
-Node: Autoinserting11647
-Node: Copyrights15553
-Node: Executables17495
-Node: Timestamps19029
-Node: QuickURL20492
-Node: Tempo21334
-Node: Hippie Expand22538
-Node: Skeleton Language23602
-Node: GNU Free Documentation License27967
-Node: Concept Index53334
-Node: Command Index54450
-Node: Variable Index55915
+Node: Using Skeletons4035
+Node: Wrapping Skeletons5536
+Node: Skeletons as Abbrevs8158
+Node: Inserting Pairs9070
+Node: Autoinserting11581
+Node: Copyrights15487
+Node: Executables17429
+Node: Timestamps18963
+Node: Tempo20423
+Node: Hippie Expand21627
+Node: Skeleton Language22691
+Node: GNU Free Documentation License27056
+Node: Concept Index52423
+Node: Command Index53466
+Node: Variable Index54712
 
 End Tag Table
 

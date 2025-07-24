@@ -1,8 +1,8 @@
-This is eieio.info, produced by makeinfo version 6.7 from eieio.texi.
+This is eieio.info, produced by makeinfo version 6.8 from eieio.texi.
 
 This manual documents EIEIO, an object framework for Emacs Lisp.
 
-   Copyright © 2007–2022 Free Software Foundation, Inc.
+   Copyright © 2007–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -32,7 +32,7 @@ writing object-oriented applications in Emacs.
 
    This manual documents EIEIO, an object framework for Emacs Lisp.
 
-   Copyright © 2007–2022 Free Software Foundation, Inc.
+   Copyright © 2007–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -169,7 +169,7 @@ aspects which are mentioned below (also *note CLOS compatibility::).
    EIEIO supports the following features:
 
   1. A structured framework for the creation of basic classes with
-     attributes and methods using singular inheritance similar to CLOS.
+     attributes and methods using inheritance similar to CLOS.
   2. Type checking, and slot unbinding.
   3. Method definitions similar to CLOS.
   4. Simple and complex class browsers.
@@ -185,11 +185,6 @@ aspects which are mentioned below (also *note CLOS compatibility::).
    Due to restrictions in the Emacs Lisp language, CLOS cannot be
 completely supported, and a few functions have been added in place of
 setf.  Here are some important CLOS features that EIEIO presently lacks:
-
-Method dispatch
-     EIEO does not support method dispatch for built-in types and
-     multiple arguments types.  In other words, method dispatch only
-     looks at the first argument, and this one must be an EIEIO type.
 
 Support for metaclasses
      There is just one default metaclass, ‘eieio-default-superclass’,
@@ -630,7 +625,8 @@ following accessors are defined by CLOS to reference or modify slot
 values, and use the previously mentioned set/ref routines.
 
  -- Function: slot-value object slot
-     This function retrieves the value of SLOT from OBJECT.
+     This function retrieves the value of SLOT from OBJECT.  It can also
+     be used on objects defined by ‘cl-defstruct’.
 
      This is a generalized variable that can be used with ‘setf’ to
      modify the value stored in SLOT.  *Note (elisp)Generalized
@@ -639,9 +635,8 @@ values, and use the previously mentioned set/ref routines.
  -- Function: set-slot-value object slot value
      This function sets the value of SLOT from OBJECT.
 
-     This is not a CLOS function, but is the obsolete setter for
-     ‘slot-value’ used by the ‘setf’ macro.  It is therefore recommended
-     to use ‘(setf (slot-value OBJECT SLOT) VALUE)’ instead.
+     This is not a CLOS function.  It is therefore recommended to use
+     ‘(setf (slot-value OBJECT SLOT) VALUE)’ instead.
 
  -- Function: slot-makeunbound object slot
      This function unbinds SLOT in OBJECT.  Referencing an unbound slot
@@ -767,10 +762,6 @@ a function binding and the base documentation for the method symbol
      Methods::).  When a method is created and there is no generic
      method in place with that name, then a new generic will be created,
      and the new method will use it.
-
-   In CLOS, a generic call also be used to provide an argument list and
-dispatch precedence for all the arguments.  In EIEIO, dispatching only
-occurs for the first argument, so the ARGLIST is not used.
 
 
 File: eieio.info,  Node: Methods,  Next: Static Methods,  Prev: Generics,  Up: Writing Methods
@@ -2260,29 +2251,29 @@ Function Index
 * make-instance:                         Making New Objects.   (line 37)
 * make-map:                              eieio-speedbar.       (line 70)
 * my-class:                              Making New Objects.   (line 16)
-* object-add-to-list:                    Accessing Slots.      (line 63)
+* object-add-to-list:                    Accessing Slots.      (line 62)
 * object-assoc:                          Association Lists.    (line 10)
 * object-assoc-list:                     Association Lists.    (line 16)
 * object-of-class-p:                     Predicates.           (line 70)
 * object-print:                          Basic Methods.        (line 14)
-* object-remove-from-list:               Accessing Slots.      (line 70)
+* object-remove-from-list:               Accessing Slots.      (line 69)
 * object-write:                          Basic Methods.        (line 41)
 * object-write on eieio-persistent:      eieio-persistent.     (line 35)
-* oref:                                  Accessing Slots.      (line 33)
-* oref-default:                          Accessing Slots.      (line 41)
-* oset:                                  Accessing Slots.      (line 49)
-* oset-default:                          Accessing Slots.      (line 53)
+* oref:                                  Accessing Slots.      (line 32)
+* oref-default:                          Accessing Slots.      (line 40)
+* oset:                                  Accessing Slots.      (line 48)
+* oset-default:                          Accessing Slots.      (line 52)
 * same-class-p:                          Predicates.           (line 67)
-* set-slot-value:                        Accessing Slots.      (line 17)
+* set-slot-value:                        Accessing Slots.      (line 18)
 * shared-initialize:                     Initialization.       (line 24)
 * slot-boundp:                           Predicates.           (line 21)
 * slot-exists-p:                         Predicates.           (line 18)
-* slot-makeunbound:                      Accessing Slots.      (line 25)
+* slot-makeunbound:                      Accessing Slots.      (line 24)
 * slot-missing:                          Signal Handling.      (line 13)
 * slot-unbound:                          Signal Handling.      (line 31)
 * slot-value:                            Accessing Slots.      (line 10)
 * unbound-slot:                          Signals.              (line 43)
-* with-slots:                            Accessing Slots.      (line 75)
+* with-slots:                            Accessing Slots.      (line 74)
 
 
 
@@ -2290,62 +2281,62 @@ Tag Table:
 Node: Top912
 Node: Quick Start3135
 Node: Introduction6432
-Node: Building Classes9275
-Node: Inheritance12060
-Node: Slot Options14441
-Node: Class Options20144
-Node: Making New Objects22905
-Ref: make-instance24356
-Node: Accessing Slots24661
-Ref: slot-value25032
-Ref: set-slot-value25295
-Ref: oref25881
-Ref: oref-default26211
-Ref: object-add-to-list27055
-Ref: object-remove-from-list27457
-Ref: with-slots27716
-Node: Writing Methods28721
-Node: Generics29469
-Node: Methods30803
-Ref: cl-call-next-method34268
-Ref: cl-next-method-p34656
-Node: Static Methods34791
-Node: Method Invocation35558
-Node: Predicates36889
-Ref: find-class37290
-Ref: class-p37512
-Ref: slot-exists-p37636
-Ref: slot-boundp37723
-Node: Association Lists39989
-Ref: object-assoc40353
-Node: Customizing41332
-Node: Introspection43830
-Node: Base Classes44333
-Node: eieio-instance-inheritor45293
-Node: eieio-instance-tracker46610
-Node: eieio-singleton48038
-Node: eieio-persistent48490
-Node: eieio-named50638
-Node: eieio-speedbar50984
-Node: Browsing54800
-Node: Class Values55525
-Node: Default Superclass56000
-Node: Initialization57151
-Node: Basic Methods58250
-Ref: clone58501
-Ref: object-print58830
-Node: Signal Handling60215
-Ref: slot-missing60751
-Ref: slot-unbound61470
-Ref: cl-no-applicable-method62168
-Ref: cl-no-primary-method62507
-Ref: cl-no-next-method62874
-Node: Signals63352
-Node: Naming Conventions65270
-Node: CLOS compatibility66416
-Node: Wish List68427
-Node: GNU Free Documentation License69130
-Node: Function Index94487
+Node: Building Classes9044
+Node: Inheritance11829
+Node: Slot Options14210
+Node: Class Options19913
+Node: Making New Objects22674
+Ref: make-instance24125
+Node: Accessing Slots24430
+Ref: slot-value24801
+Ref: set-slot-value25132
+Ref: oref25635
+Ref: oref-default25965
+Ref: object-add-to-list26809
+Ref: object-remove-from-list27211
+Ref: with-slots27470
+Node: Writing Methods28475
+Node: Generics29223
+Node: Methods30354
+Ref: cl-call-next-method33819
+Ref: cl-next-method-p34207
+Node: Static Methods34342
+Node: Method Invocation35109
+Node: Predicates36440
+Ref: find-class36841
+Ref: class-p37063
+Ref: slot-exists-p37187
+Ref: slot-boundp37274
+Node: Association Lists39540
+Ref: object-assoc39904
+Node: Customizing40883
+Node: Introspection43381
+Node: Base Classes43884
+Node: eieio-instance-inheritor44844
+Node: eieio-instance-tracker46161
+Node: eieio-singleton47589
+Node: eieio-persistent48041
+Node: eieio-named50189
+Node: eieio-speedbar50535
+Node: Browsing54351
+Node: Class Values55076
+Node: Default Superclass55551
+Node: Initialization56702
+Node: Basic Methods57801
+Ref: clone58052
+Ref: object-print58381
+Node: Signal Handling59766
+Ref: slot-missing60302
+Ref: slot-unbound61021
+Ref: cl-no-applicable-method61719
+Ref: cl-no-primary-method62058
+Ref: cl-no-next-method62425
+Node: Signals62903
+Node: Naming Conventions64821
+Node: CLOS compatibility65967
+Node: Wish List67978
+Node: GNU Free Documentation License68681
+Node: Function Index94038
 
 End Tag Table
 

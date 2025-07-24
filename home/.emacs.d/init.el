@@ -840,7 +840,7 @@
  #'(lambda()
     (c-set-style "K&R")
     (setq tab-width 8)
-    (setq indent-tabs-mode t)
+    (setq indent-tabs-mode nil)
     (setq c-basic-offset 8)
     (setq comment-start "//")
     (setq comment-end "")
@@ -1143,6 +1143,8 @@
 ;;; @ howm                                                          ;;;
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 
+(global-unset-key (kbd "C-x ,"))
+(setq howm-prefix (kbd "C-x ,"))
 (global-set-key (kbd "C-x , ,") 'howm-menu)
 
 (autoload 'howm-menu "howm" "Hitori Otegaru Wiki Modoki" t)
@@ -1153,8 +1155,6 @@
   (setq howm-history-file (concat howm-home-directory ".howm-history"))
   (setq howm-view-use-grep t)
   (setq howm-use-color nil)
-  (global-unset-key (kbd "C-x ,"))
-  (setq howm-prefix (kbd "C-x ,"))
 )
 
 
@@ -1283,7 +1283,10 @@
 ;(setq echo-keystrokes 0.1)
 
 ;; y instead of yes
-(defalias 'yes-or-no-p 'y-or-n-p)
+(if (version< emacs-version "29.0")
+    (defalias 'yes-or-no-p 'y-or-n-p)
+  (setopt use-short-answers t)
+)
 
 ;; key bind for "goto-line"
 (global-set-key "\M-g" 'goto-line)

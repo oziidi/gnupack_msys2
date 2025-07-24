@@ -1,9 +1,9 @@
-This is pgg.info, produced by makeinfo version 6.7 from pgg.texi.
+This is pgg.info, produced by makeinfo version 6.8 from pgg.texi.
 
 This file describes PGG 0.1, an Emacs interface to various PGP
 implementations.
 
-   Copyright © 2001, 2003–2022 Free Software Foundation, Inc.
+   Copyright © 2001, 2003–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -35,7 +35,7 @@ new code we recommend EasyPG instead.  *Note EasyPG: (epa)Top.
    This file describes PGG 0.1, an Emacs interface to various PGP
 implementations.
 
-   Copyright © 2001, 2003–2022 Free Software Foundation, Inc.
+   Copyright © 2001, 2003–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,

@@ -1,6 +1,6 @@
-This is vip.info, produced by makeinfo version 6.7 from vip.texi.
+This is vip.info, produced by makeinfo version 6.8 from vip.texi.
 
-Copyright © 1987, 2001–2022 Free Software Foundation, Inc.
+Copyright © 1987, 2001–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -41,7 +41,7 @@ before you start using VIP.  Other nodes may be visited as needed.
 ‘ms@Sail.Stanford.Edu’ if you are outside of Japan and to
 ‘masahiko@sato.riec.tohoku.junet’ if you are in Japan.
 
-   Copyright © 1987, 2001–2022 Free Software Foundation, Inc.
+   Copyright © 1987, 2001–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -983,10 +983,10 @@ count will repeat the effect.
      Move point backward to the character CH on the line.  Signal error
      if CH could not be found (‘vip-find-char-backward’).
 ‘t CH’
-     Move point forward upto the character CH on the line.  Signal error
-     if CH could not be found (‘vip-goto-char-forward’).
+     Move point forward up to the character CH on the line.  Signal
+     error if CH could not be found (‘vip-goto-char-forward’).
 ‘T CH’
-     Move point backward upto the character CH on the line.  Signal
+     Move point backward up to the character CH on the line.  Signal
      error if CH could not be found (‘vip-goto-char-backward’).
 ‘;’
      Repeat previous ‘f’, ‘t’, ‘F’ or ‘T’ command (‘vip-repeat-find’).
@@ -2440,21 +2440,21 @@ Node: Files27601
 Node: Viewing the Buffer30994
 Node: Mark Commands32999
 Node: Motion Commands33880
-Node: Searching and Replacing39745
-Node: Modifying Commands42141
-Node: Delete Commands43584
-Node: Yank Commands45352
-Node: Put Back Commands46289
-Node: Change Commands47783
-Node: Repeating and Undoing Modifications48851
-Node: Other Vi Commands49685
-Node: Commands in Insert Mode53470
-Node: Ex Commands55645
-Node: Ex Command Reference56852
-Node: Customization63553
-Node: Customizing Constants63994
-Node: Customizing Key Bindings65417
-Node: GNU Free Documentation License66504
+Node: Searching and Replacing39747
+Node: Modifying Commands42143
+Node: Delete Commands43586
+Node: Yank Commands45354
+Node: Put Back Commands46291
+Node: Change Commands47785
+Node: Repeating and Undoing Modifications48853
+Node: Other Vi Commands49687
+Node: Commands in Insert Mode53472
+Node: Ex Commands55647
+Node: Ex Command Reference56854
+Node: Customization63555
+Node: Customizing Constants63996
+Node: Customizing Key Bindings65419
+Node: GNU Free Documentation License66506
 
 End Tag Table
 

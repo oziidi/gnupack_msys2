@@ -1,9 +1,9 @@
-This is remember.info, produced by makeinfo version 6.7 from
+This is remember.info, produced by makeinfo version 6.8 from
 remember.texi.
 
-This manual is for Remember Mode, as distributed with Emacs 28.2.
+This manual is for Remember Mode, as distributed with Emacs 29.4.
 
-   Copyright © 2001, 2004–2005, 2007–2022 Free Software Foundation, Inc.
+   Copyright © 2001, 2004–2005, 2007–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -26,9 +26,9 @@ File: remember.info,  Node: Top,  Next: Preface,  Up: (dir)
 Remember
 ********
 
-This manual is for Remember Mode, as distributed with Emacs 28.2.
+This manual is for Remember Mode, as distributed with Emacs 29.4.
 
-   Copyright © 2001, 2004–2005, 2007–2022 Free Software Foundation, Inc.
+   Copyright © 2001, 2004–2005, 2007–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -294,7 +294,7 @@ File: remember.info,  Node: Keystrokes,  Next: Backends,  Prev: Function Referen
 6 Keystroke Reference
 *********************
 
-‘remember.el’ defines the following keybindings by default:
+‘remember.el’ defines the following key bindings by default:
 
 ‘C-c C-c’
 ‘C-x C-s’
@@ -927,14 +927,14 @@ Node: Implementation5402
 Node: Quick Start7771
 Node: Function Reference10567
 Node: Keystrokes12838
-Node: Backends13239
-Node: Text File13724
-Node: Separate Text Files14144
-Node: Diary14766
-Node: Mailbox15188
-Node: Org15624
-Node: GNU Free Documentation License15845
-Node: Concept Index41203
+Node: Backends13240
+Node: Text File13725
+Node: Separate Text Files14145
+Node: Diary14767
+Node: Mailbox15189
+Node: Org15625
+Node: GNU Free Documentation License15846
+Node: Concept Index41204
 
 End Tag Table
 

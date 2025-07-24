@@ -1,8 +1,8 @@
-This is cl.info, produced by makeinfo version 6.7 from cl.texi.
+This is cl.info, produced by makeinfo version 6.8 from cl.texi.
 
 This file documents the GNU Emacs Common Lisp emulation package.
 
-   Copyright © 1993, 2001–2022 Free Software Foundation, Inc.
+   Copyright © 1993, 2001–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -27,7 +27,7 @@ GNU Emacs Common Lisp Emulation
 
 This file documents the GNU Emacs Common Lisp emulation package.
 
-   Copyright © 1993, 2001–2022 Free Software Foundation, Inc.
+   Copyright © 1993, 2001–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -387,7 +387,7 @@ the function uses both ‘&rest’ and ‘&key’ at the same time, the “rest�
 argument is bound to the keyword list as it appears in the call.  For
 example:
 
-     (cl-defun find-thing (thing &rest rest &key need &allow-other-keys)
+     (cl-defun find-thing (thing thing-list &rest rest &key need &allow-other-keys)
        (or (apply 'cl-member thing thing-list :allow-other-keys t rest)
            (if need (error "Thing not found"))))
 
@@ -735,6 +735,7 @@ facility, and a number of looping and conditional constructs.
 * Iteration::              ‘cl-do’, ‘cl-dotimes’, ‘cl-dolist’, ‘cl-do-symbols’.
 * Loop Facility::          The Common Lisp ‘loop’ macro.
 * Multiple Values::        ‘cl-values’, ‘cl-multiple-value-bind’, etc.
+* Macro-Writing Macros::   ‘cl-with-gensyms’, ‘cl-once-only’.
 
 
 File: cl.info,  Node: Assignment,  Next: Generalized Variables,  Up: Control Structure
@@ -807,61 +808,6 @@ handlers for several additional functions:
 
      Note that for ‘cl-getf’ (as for ‘nthcdr’), the list argument of the
      function must itself be a valid PLACE form.
-
-   • General Emacs Lisp functions:
-          buffer-file-name                   getenv
-          buffer-modified-p                  global-key-binding
-          buffer-name                        local-key-binding
-          buffer-string                      mark
-          buffer-substring                   mark-marker
-          current-buffer                     marker-position
-          current-case-table                 mouse-position
-          current-column                     point
-          current-global-map                 point-marker
-          current-input-mode                 point-max
-          current-local-map                  point-min
-          current-window-configuration       read-mouse-position
-          default-file-modes                 screen-height
-          documentation-property             screen-width
-          face-background                    selected-window
-          face-background-pixmap             selected-screen
-          face-font                          selected-frame
-          face-foreground                    standard-case-table
-          face-underline-p                   syntax-table
-          file-modes                         visited-file-modtime
-          frame-height                       window-height
-          frame-parameters                   window-width
-          frame-visible-p                    x-get-secondary-selection
-          frame-width                        x-get-selection
-          get-register
-
-     Most of these have directly corresponding “set” functions, like
-     ‘use-local-map’ for ‘current-local-map’, or ‘goto-char’ for
-     ‘point’.  A few, like ‘point-min’, expand to longer sequences of
-     code when they are used with ‘setf’ (‘(narrow-to-region x
-     (point-max))’ in this case).
-
-   • A call of the form ‘(substring SUBPLACE N [M])’, where SUBPLACE is
-     itself a valid generalized variable whose current value is a
-     string, and where the value stored is also a string.  The new
-     string is spliced into the specified part of the destination
-     string.  For example:
-
-          (setq a (list "hello" "world"))
-               ⇒ ("hello" "world")
-          (cadr a)
-               ⇒ "world"
-          (substring (cadr a) 2 4)
-               ⇒ "rl"
-          (setf (substring (cadr a) 2 4) "o")
-               ⇒ "o"
-          (cadr a)
-               ⇒ "wood"
-          a
-               ⇒ ("hello" "wood")
-
-     The generalized variable ‘buffer-substring’, listed above, also
-     works in this way by replacing a portion of the current buffer.
 
    • A macro call, in which case the macro is expanded and ‘setf’ is
      applied to the resulting form.
@@ -1050,6 +996,11 @@ other macros like ‘cl-incf’, and ‘cl-pushnew’.  The ‘cl-letf’ and
 ‘cl-letf*’ macros are used in the processing of symbol macros; *note
 Macro Bindings::.
 
+ -- Macro: with-memoization PLACE CODE...
+     This macro provides a simple way to do memoization.  CODE is
+     evaluated and then stashed in PLACE.  If PLACE’s value is
+     non-‘nil’, return that value instead of evaluating CODE.
+
 
 File: cl.info,  Node: Variable Bindings,  Next: Conditionals,  Prev: Generalized Variables,  Up: Control Structure
 
@@ -1097,9 +1048,14 @@ These forms make ‘let’-like bindings to functions instead of variables.
 
  -- Macro: cl-flet (bindings...) forms...
      This form establishes ‘let’-style bindings for functions rather
-     than values.  Each BINDING must be a list of the form ‘(NAME
-     ARGLIST BODY...)’.  Within FORMS, any reference to the function
-     NAME uses the local definition instead of the global one.
+     than values.  Each BINDING must be a list of one of two forms:
+     either ‘(NAME EXPR)’ or ‘(NAME ARGLIST BODY...)’.  The NAME is the
+     name of the function, EXPR is an expression which returns the
+     function value to which the corresponding NAME should be bound, and
+     ARGLIST and BODY are the argument list and the body of the function
+     to bind to NAME.  Within FORMS, any reference to the function NAME
+     uses the local definition provided by BINDINGS instead of the
+     global one.
 
      A “reference” to a function name is either a call to that function,
      or a use of its name quoted by ‘function’ to be passed on to, say,
@@ -1168,17 +1124,9 @@ These forms create local macros and “symbol macros”.
 
      A ‘setq’ of a symbol macro is treated the same as a ‘setf’.  I.e.,
      ‘(setq foo 4)’ in the above would be equivalent to ‘(setf foo 4)’,
-     which in turn expands to ‘(setf (car bar) 4)’.
-
-     Likewise, a ‘let’ or ‘let*’ binding a symbol macro is treated like
-     a ‘cl-letf’ or ‘cl-letf*’.  This differs from true Common Lisp,
-     where the rules of lexical scoping cause a ‘let’ binding to shadow
-     a ‘symbol-macrolet’ binding.  In this package, such shadowing does
-     not occur, even when ‘lexical-binding’ is ‘t’.  (This behavior
-     predates the addition of lexical binding to Emacs Lisp, and may
-     change in future to respect ‘lexical-binding’.)  At present in this
-     package, only ‘lexical-let’ and ‘lexical-let*’ will shadow a symbol
-     macro.  *Note Obsolete Lexical Binding::.
+     which in turn expands to ‘(setf (car bar) 4)’.  A ‘let’ (or ‘let*’,
+     ‘lambda’, ...)  binding of the same symbol will locally shadow the
+     symbol macro as is the case in Common Lisp.
 
      There is no analogue of ‘defmacro’ for symbol macros; all symbol
      macros are local.  A typical use of ‘cl-symbol-macrolet’ is in the
@@ -2116,7 +2064,7 @@ keymaps, overlays, intervals, frames, windows, and buffers are
 Emacs-specific extensions.
 
 
-File: cl.info,  Node: Multiple Values,  Prev: Loop Facility,  Up: Control Structure
+File: cl.info,  Node: Multiple Values,  Next: Macro-Writing Macros,  Prev: Loop Facility,  Up: Control Structure
 
 4.8 Multiple Values
 ===================
@@ -2146,6 +2094,80 @@ for example, is a synonym for ‘list’ in Emacs.
 
    Since a perfect emulation is not feasible in Emacs Lisp, this package
 opts to keep it as simple and predictable as possible.
+
+
+File: cl.info,  Node: Macro-Writing Macros,  Prev: Multiple Values,  Up: Control Structure
+
+4.9 Macro-Writing Macros
+========================
+
+This package includes two classic Common Lisp macro-writing macros to
+help render complex macrology easier to read.
+
+ -- Macro: cl-with-gensyms names... body
+     This macro expands to code that executes BODY with each of the
+     variables in NAMES bound to a fresh uninterned symbol, or “gensym”,
+     in Common Lisp parlance.  For macros requiring more than one
+     gensym, use of ‘cl-with-gensyms’ shortens the code and renders
+     one’s intentions clearer.  Compare:
+
+          (defmacro my-macro (foo)
+            (let ((bar (gensym "bar"))
+                  (baz (gensym "baz"))
+                  (quux (gensym "quux")))
+              `(let ((,bar (+ ...)))
+                 ...)))
+
+          (defmacro my-macro (foo)
+            (cl-with-gensyms (bar baz quux)
+              `(let ((,bar (+ ...)))
+                 ...)))
+
+ -- Macro: cl-once-only ((variable form)...) body
+     This macro is primarily to help the macro programmer ensure that
+     forms supplied by the user of the macro are evaluated just once by
+     its expansion even though the result of evaluating the form is to
+     occur more than once.  Less often, this macro is used to ensure
+     that forms supplied by the macro programmer are evaluated just
+     once.
+
+     Each VARIABLE may be used to refer to the result of evaluating FORM
+     in BODY.  ‘cl-once-only’ binds each VARIABLE to a fresh uninterned
+     symbol during the evaluation of BODY.  Then, ‘cl-once-only’ wraps
+     the final expansion in code to evaluate each FORM and bind the
+     result to the corresponding uninterned symbol.  Thus, when the
+     macro writer substitutes the value for VARIABLE into the expansion
+     they are effectively referring to the result of evaluating FORM,
+     rather than FORM itself.  Another way to put this is that each
+     VARIABLE is bound to an expression for the (singular) result of
+     evaluating FORM.
+
+     The most common case is where VARIABLE is one of the arguments to
+     the macro being written, so ‘(variable variable)’ may be
+     abbreviated to just ‘variable’.
+
+     For example, consider this macro:
+
+          (defmacro my-list (x y &rest forms)
+            (let ((x-result (gensym))
+                  (y-result (gensym)))
+              `(let ((,x-result ,x)
+                     (,y-result ,y))
+                 (list ,x-result ,y-result ,x-result ,y-result
+                       (progn ,@forms))))
+
+     In a call like ‘(my-list (pop foo) ...)’ the intermediate binding
+     to ‘x-result’ ensures that the ‘pop’ is not done twice.  But as a
+     result the code is rather complex: the reader must keep track of
+     how ‘x-result’ really just means the first parameter of the call to
+     the macro, and the required use of multiple gensyms to avoid
+     variable capture by ‘(progn ,@forms)’ obscures things further.
+     ‘cl-once-only’ takes care of these details:
+
+          (defmacro my-list (x y &rest forms)
+            (cl-once-only (x y)
+              `(list ,x ,y ,x ,y
+                     (progn ,@forms))))
 
 
 File: cl.info,  Node: Macros,  Next: Declarations,  Prev: Control Structure,  Up: Top
@@ -2919,8 +2941,8 @@ function ‘mapcar’.
  -- Function: cl-reduce function seq &key :from-end :start :end
           :initial-value :key
      This function returns the result of calling FUNCTION on the first
-     and second element of SEQ, then calling FUNCTION with that result
-     and the third element of SEQ, then with that result and the third
+     and second elements of SEQ, then calling FUNCTION with that result
+     and the third element of SEQ, then with that result and the fourth
      element of SEQ, etc.
 
      Here is an example.  Suppose FUNCTION is ‘*’ and SEQ is the list
@@ -3503,9 +3525,9 @@ symbol to identify them.
      keywords can be used:
 
      ‘:read-only’
-          A non-nil value means the slot should not be ‘setf’-able; the
-          slot’s value is determined when the object is created and does
-          not change afterward.
+          A non-‘nil’ value means the slot should not be ‘setf’-able;
+          the slot’s value is determined when the object is created and
+          does not change afterward.
 
      ‘:type’
           The expected type of the values held in this slot.
@@ -4374,7 +4396,7 @@ Generalized Variables::.
      The above ‘incf’ example could be written using ‘gv-letplace’ as:
           (defmacro incf (place &optional n)
             (gv-letplace (getter setter) place
-              (macroexp-let2 nil v (or n 1)
+              (cl-once-only ((v (or n 1)))
                 (funcall setter `(+ ,v ,getter)))))
 
  -- Macro: defsetf access-fn update-fn
@@ -5052,7 +5074,7 @@ Function Index
 * cl-intersection:                       Lists as Sets.       (line  51)
 * cl-isqrt:                              Numerical Functions. (line  18)
 * cl-iter-defun:                         Argument Lists.      (line  22)
-* cl-labels:                             Function Bindings.   (line  30)
+* cl-labels:                             Function Bindings.   (line  35)
 * cl-lcm:                                Numerical Functions. (line  13)
 * cl-ldiff:                              List Functions.      (line  34)
 * cl-letf:                               Modify Macros.       (line  88)
@@ -5110,6 +5132,8 @@ Function Index
 * cl-nunion:                             Lists as Sets.       (line  47)
 * cl-oddp:                               Predicates on Numbers.
                                                               (line  17)
+* cl-once-only:                          Macro-Writing Macros.
+                                                              (line  28)
 * cl-pairlis:                            Association Lists.   (line  33)
 * cl-parse-integer:                      Numerical Functions. (line  71)
 * cl-plusp:                              Predicates on Numbers.
@@ -5177,6 +5201,8 @@ Function Index
 * cl-typecase:                           Conditionals.        (line  42)
 * cl-typep:                              Type Predicates.     (line   6)
 * cl-union:                              Lists as Sets.       (line  37)
+* cl-with-gensyms:                       Macro-Writing Macros.
+                                                              (line   9)
 * define-modify-macro:                   Obsolete Setf Customization.
                                                               (line  12)
 * define-setf-method:                    Obsolete Setf Customization.
@@ -5192,6 +5218,7 @@ Function Index
                                                               (line  10)
 * lexical-let*:                          Obsolete Lexical Binding.
                                                               (line  94)
+* with-memoization:                      Modify Macros.       (line 163)
 
 
 File: cl.info,  Node: Variable Index,  Next: Concept Index,  Prev: Function Index,  Up: Top
@@ -5243,6 +5270,7 @@ Concept Index
 * function binding:                      Function Bindings.   (line   6)
 * generalized variable:                  Generalized Variables.
                                                               (line   6)
+* gensym:                                Creating Symbols.    (line   6)
 * iteration:                             Iteration.           (line   6)
 * loop facility:                         Loop Facility.       (line   6)
 * macro binding:                         Macro Bindings.      (line   6)
@@ -5259,64 +5287,65 @@ Node: Organization6001
 Node: Naming Conventions8812
 Node: Program Structure10157
 Node: Argument Lists10608
-Node: Time of Evaluation20432
-Node: Predicates26574
-Node: Type Predicates26918
-Node: Equality Predicates31928
-Node: Control Structure33361
-Node: Assignment34278
-Node: Generalized Variables35573
-Node: Setf Extensions36363
-Node: Modify Macros40636
-Node: Variable Bindings47697
-Node: Dynamic Bindings48284
-Node: Function Bindings49134
-Node: Macro Bindings51267
-Node: Conditionals54770
-Node: Blocks and Exits57486
-Node: Iteration61301
-Node: Loop Facility66760
-Node: Loop Basics67744
-Node: Loop Examples70374
-Node: For Clauses72779
-Node: Iteration Clauses84854
-Node: Accumulation Clauses86976
-Node: Other Clauses89428
-Node: Multiple Values95859
-Node: Macros97432
-Node: Declarations100768
-Node: Symbols109006
-Node: Property Lists109353
-Node: Creating Symbols112716
-Node: Numbers114295
-Node: Predicates on Numbers114789
-Node: Numerical Functions115782
-Node: Random Numbers119644
-Node: Implementation Parameters122286
-Node: Sequences125425
-Node: Sequence Basics126177
-Node: Mapping over Sequences129902
-Node: Sequence Functions136442
-Node: Searching Sequences142216
-Node: Sorting Sequences145424
-Node: Lists148179
-Node: List Functions148655
-Node: Substitution of Expressions151056
-Node: Lists as Sets153045
-Node: Association Lists157010
-Node: Structures158561
-Node: Assertions175875
-Node: Efficiency Concerns178473
-Node: Common Lisp Compatibility183142
-Node: Porting Common Lisp185439
-Node: Obsolete Features194643
-Node: Obsolete Lexical Binding195318
-Node: Obsolete Macros199198
-Node: Obsolete Setf Customization202486
-Node: GNU Free Documentation License209108
-Node: Function Index234470
-Node: Variable Index249698
-Node: Concept Index250974
+Node: Time of Evaluation20443
+Node: Predicates26585
+Node: Type Predicates26929
+Node: Equality Predicates31939
+Node: Control Structure33372
+Node: Assignment34359
+Node: Generalized Variables35654
+Node: Setf Extensions36444
+Node: Modify Macros38099
+Node: Variable Bindings45400
+Node: Dynamic Bindings45987
+Node: Function Bindings46837
+Node: Macro Bindings49285
+Node: Conditionals52282
+Node: Blocks and Exits54998
+Node: Iteration58813
+Node: Loop Facility64272
+Node: Loop Basics65256
+Node: Loop Examples67886
+Node: For Clauses70291
+Node: Iteration Clauses82366
+Node: Accumulation Clauses84488
+Node: Other Clauses86940
+Node: Multiple Values93371
+Node: Macro-Writing Macros94973
+Node: Macros98201
+Node: Declarations101537
+Node: Symbols109775
+Node: Property Lists110122
+Node: Creating Symbols113485
+Node: Numbers115064
+Node: Predicates on Numbers115558
+Node: Numerical Functions116551
+Node: Random Numbers120413
+Node: Implementation Parameters123055
+Node: Sequences126194
+Node: Sequence Basics126946
+Node: Mapping over Sequences130671
+Node: Sequence Functions137213
+Node: Searching Sequences142987
+Node: Sorting Sequences146195
+Node: Lists148950
+Node: List Functions149426
+Node: Substitution of Expressions151827
+Node: Lists as Sets153816
+Node: Association Lists157781
+Node: Structures159332
+Node: Assertions176652
+Node: Efficiency Concerns179250
+Node: Common Lisp Compatibility183919
+Node: Porting Common Lisp186216
+Node: Obsolete Features195420
+Node: Obsolete Lexical Binding196095
+Node: Obsolete Macros199975
+Node: Obsolete Setf Customization203263
+Node: GNU Free Documentation License209884
+Node: Function Index235246
+Node: Variable Index250819
+Node: Concept Index252095
 
 End Tag Table
 

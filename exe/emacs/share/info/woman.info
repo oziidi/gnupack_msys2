@@ -1,9 +1,9 @@
-This is woman.info, produced by makeinfo version 6.7 from woman.texi.
+This is woman.info, produced by makeinfo version 6.8 from woman.texi.
 
 This file documents WoMan: A program to browse Unix manual pages “W.O.
 (without) man”.
 
-Copyright © 2001–2022 Free Software Foundation, Inc.
+Copyright © 2001–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -26,7 +26,7 @@ File: woman.info,  Node: Top,  Next: Introduction,  Up: (dir)
 WoMan: Browse Unix Manual Pages “W.O. (without) Man”
 ****************************************************
 
-     As distributed with Emacs 28.2.
+     As distributed with Emacs 29.4.
 
      Francis J. Wright <F.J.Wright@qmw.ac.uk>
      School of Mathematical Sciences (http://centaur.maths.qmw.ac.uk/)
@@ -36,7 +36,7 @@ WoMan: Browse Unix Manual Pages “W.O. (without) Man”
 This file documents WoMan: A program to browse Unix manual pages “W.O.
 (without) man”.
 
-Copyright © 2001–2022 Free Software Foundation, Inc.
+Copyright © 2001–2024 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
