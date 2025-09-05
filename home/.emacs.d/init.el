@@ -351,8 +351,13 @@
 
 (require 'tabbar)
 
-;; tabbar有効化（有効：t、無効：nil）
-(call-interactively 'tabbar-mode t)
+;; ORG BEGIN "For the case after M-x eval-buffer"
+;; ;; tabbar有効化（有効：t、無効：nil）
+;; (call-interactively 'tabbar-mode t)
+;; ORG END
+;; CHG START
+(tabbar-mode)
+;; CHG END
 
 ;; ボタン非表示
 (dolist (btn '(tabbar-buffer-home-button
@@ -429,10 +434,6 @@
 
 ;; hiwin-modeを有効化
 (hiwin-activate)
-
-;; Tune hiwin color to paint an inactive buffer
-;; for busybee
-(set-face-background 'hiwin-face "#282828")
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -610,16 +611,71 @@
 ;; (load-theme 'emacs-21 t)
 ;; (load-theme 'dark-laptop t)
 ;; (load-theme 'badwolf t)
-(load-theme 'busybee t)
+;; (load-theme 'busybee t)
 ;; (load-theme 'high-contrast t)
+;; (load-theme 'monokai t)
+;; (load-theme 'atom-one-dark t)
+(load-theme 'material t)
 
-;; Tune colors on the mode line for busybee
-(set-face-foreground 'mode-line "gray30")
-(set-face-background 'mode-line "gray85")
-(set-face-foreground 'mode-line-inactive "gray30")
-(set-face-background 'mode-line-inactive "gray85")
-(set-face-foreground 'mode-line-buffer-id "gray30")
-(set-face-background 'mode-line-buffer-id "gray85")
+(font-lock-add-keywords
+ 'c-mode
+ '(
+   ("\\<if\\|for\\|while\\|switch\\|return\\|else\\|do\\|case\\|break\\|continue\\>" . font-lock-keyword-face)
+   ("\\<\\([a-zA-Z_]*[a-zA-Z0-9_]+\\)\\([ \t]*\\)(" 1 font-lock-function-name-face)   ;functions()
+   ("\\<\\([A-Z_][A-Z0-9_]*\\)\\>" 1 font-lock-constant-face)             ;CONSTANTS
+   )
+ )
+
+(if (equal custom-enabled-themes '(emacs-21))
+    (progn
+      (set-face-background 'hiwin-face "white")
+      (defface my-face-b-1 '((t (:background "light blue"))) nil)
+      (defface my-face-b-2 '((t (:background "light cyan"))) nil)
+      )
+  nil)
+
+(if (equal custom-enabled-themes '(busybee))
+    (progn
+      (set-face-background 'hiwin-face "#282828")
+      (defface my-face-b-1 '((t (:foreground "gray10" :underline t))) nil)
+      (defface my-face-b-2 '((t (:background "gray14"))) nil)
+
+      ;; Tune colors on the mode line for busybee
+      (set-face-foreground 'mode-line "gray30")
+      (set-face-background 'mode-line "gray85")
+      (set-face-foreground 'mode-line-inactive "gray30")
+      (set-face-background 'mode-line-inactive "gray85")
+      (set-face-foreground 'mode-line-buffer-id "gray30")
+      (set-face-background 'mode-line-buffer-id "gray85")
+     )
+  nil)
+
+(if (equal custom-enabled-themes '(monokai))
+    (progn
+    ;;(set-face-background 'hiwin-face "#272822")
+      (set-face-background 'hiwin-face "#2E2F29")
+      (defface my-face-b-1 '((t (:foreground "#2E2F29" :underline t))) nil)
+      (defface my-face-b-2 '((t (:background "#2E2F29"))) nil)
+      )
+  nil)
+
+(if (equal custom-enabled-themes '(atom-one-dark))
+    (progn
+    ;;(set-face-background 'hiwin-face "#282C34")
+      (set-face-background 'hiwin-face "#2C323C")
+      (defface my-face-b-1 '((t (:foreground "#2C323C" :underline t))) nil)
+      (defface my-face-b-2 '((t (:background "#2C323C"))) nil)
+      )
+  nil)
+
+(if (equal custom-enabled-themes '(material))
+    (progn
+    ;;(set-face-background 'hiwin-face "#263238")
+      (set-face-background 'hiwin-face "#303C42")
+      (defface my-face-b-1 '((t (:foreground "#303C42" :underline t))) nil)
+      (defface my-face-b-2 '((t (:background "#303C42"))) nil)
+      )
+  nil)
 
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
@@ -1299,19 +1355,13 @@
 (setq user-mail-address "oziidi76@gmail.com")
 
 ;; Diplay full-width space, tab, space at the end of line
-;; Dark themes
-(defface my-face-b-1 '((t (:foreground "gray10" :underline t))) nil)
-;; (defface my-face-b-1 '((t (:foreground "gray30" :underline t))) nil)
-(defface my-face-b-2 '((t (:background "gray14"))) nil)
-
-;; emacs-21
-;; (defface my-face-b-2 '((t (:background "light cyan"))) nil)
 
 ;; Meadow
 ;; (defface my-face-b-1 '((t (:background "bisque"))) nil)
 ;; (defface my-face-b-2 '((t (:background "LemonChiffon2"))) nil)
 
 (defface my-face-u-1 '((t (:foreground "SteelBlue" :underline t))) nil)
+
 (defvar my-face-b-1 'my-face-b-1)
 (defvar my-face-b-2 'my-face-b-2)
 (defvar my-face-u-1 'my-face-u-1)
