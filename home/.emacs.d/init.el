@@ -615,12 +615,13 @@
 ;; (load-theme 'high-contrast t)
 ;; (load-theme 'monokai t)
 ;; (load-theme 'atom-one-dark t)
-(load-theme 'material t)
+;; (load-theme 'material t)
+(load-theme 'material-dark t)
 
 (font-lock-add-keywords
  'c-mode
  '(
-   ("\\<if\\|for\\|while\\|switch\\|return\\|else\\|do\\|case\\|break\\|continue\\>" . font-lock-keyword-face)
+   ("\\<if\\|for\\|while\\|(switch)\\|return\\|else\\|(do)\\|case\\|break\\|continue\\>" . font-lock-keyword-face)
    ("\\<\\([a-zA-Z_]*[a-zA-Z0-9_]+\\)\\([ \t]*\\)(" 1 font-lock-function-name-face)   ;functions()
    ("\\<\\([A-Z_][A-Z0-9_]*\\)\\>" 1 font-lock-constant-face)             ;CONSTANTS
    )
@@ -677,6 +678,14 @@
       )
   nil)
 
+(if (equal custom-enabled-themes '(material-dark))
+    (progn
+    ;;(set-face-background 'hiwin-face "#263238")
+      (set-face-background 'hiwin-face "#303C42")
+      (defface my-face-b-1 '((t (:foreground "#303C42" :underline t))) nil)
+      (defface my-face-b-2 '((t (:background "#303C42"))) nil)
+      )
+  nil)
 
 ;;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; ;;;
 ;;; @ server                                                        ;;;
@@ -1387,18 +1396,6 @@
 ;; Disable automatic indent
 (electric-indent-mode -1)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages '(tr-ime)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 
 ;; Set /dev/null as null device instead NUL of Windows default
 (setq null-device "/dev/null")
