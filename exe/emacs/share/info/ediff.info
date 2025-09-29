@@ -1,9 +1,9 @@
-This is ediff.info, produced by makeinfo version 6.8 from ediff.texi.
+This is ediff.info, produced by makeinfo version 7.0.3 from ediff.texi.
 
 This file documents Ediff, a comprehensive visual interface to Unix diff
 and patch utilities.
 
-   Copyright © 1995–2024 Free Software Foundation, Inc.
+   Copyright © 1995–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -30,7 +30,7 @@ Ediff
 This file documents Ediff, a comprehensive visual interface to Unix diff
 and patch utilities.
 
-   Copyright © 1995–2024 Free Software Foundation, Inc.
+   Copyright © 1995–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -1665,8 +1665,8 @@ the fine difference regions):
      This variable specifies the coding system to use when reading the
      output that the programs ‘diff3’ and ‘diff’ send to Emacs.  The
      default is ‘raw-text’, and this should work fine in Unix and in
-     most cases under Windows NT/95/98/2000.  There are ‘diff’ programs
-     for which the default option doesn’t work under Windows.  In such
+     most cases under Windows NT/98/2000.  There are ‘diff’ programs for
+     which the default option doesn’t work under Windows.  In such
      cases, ‘raw-text-dos’ might work.  If not, you will have to
      experiment with other coding systems or use GNU diff.
 
@@ -3077,32 +3077,32 @@ Index
 
 
 Tag Table:
-Node: Top996
-Node: Introduction2397
-Node: Major Entry Points4839
-Node: Session Commands14881
-Node: Quick Help Commands16465
-Node: Other Session Commands35611
-Node: Registry of Ediff Sessions37819
-Node: Session Groups39406
-Node: Remote and Compressed Files45780
-Node: Customization47055
-Node: Hooks49037
-Node: Quick Help Customization54485
-Node: Window and Frame Configuration55533
-Node: Selective Browsing61661
-Node: Highlighting Difference Regions66966
-Node: Narrowing71590
-Node: Refinement of Difference Regions72925
-Node: Patch and Diff Programs75925
-Node: Merging and diff380672
-Node: Support for Version Control90757
-Node: Customizing the Mode Line92421
-Node: Miscellaneous93308
-Node: Notes on Heavy-duty Customization98717
-Node: Credits101382
-Node: GNU Free Documentation License106793
-Node: Index132139
+Node: Top998
+Node: Introduction2399
+Node: Major Entry Points4841
+Node: Session Commands14883
+Node: Quick Help Commands16467
+Node: Other Session Commands35613
+Node: Registry of Ediff Sessions37821
+Node: Session Groups39408
+Node: Remote and Compressed Files45782
+Node: Customization47057
+Node: Hooks49039
+Node: Quick Help Customization54487
+Node: Window and Frame Configuration55535
+Node: Selective Browsing61663
+Node: Highlighting Difference Regions66968
+Node: Narrowing71592
+Node: Refinement of Difference Regions72927
+Node: Patch and Diff Programs75927
+Node: Merging and diff380671
+Node: Support for Version Control90756
+Node: Customizing the Mode Line92420
+Node: Miscellaneous93307
+Node: Notes on Heavy-duty Customization98716
+Node: Credits101381
+Node: GNU Free Documentation License106792
+Node: Index132138
 
 End Tag Table
 

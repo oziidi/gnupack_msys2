@@ -1,6 +1,6 @@
-This is vip.info, produced by makeinfo version 6.8 from vip.texi.
+This is vip.info, produced by makeinfo version 7.0.3 from vip.texi.
 
-Copyright © 1987, 2001–2024 Free Software Foundation, Inc.
+Copyright © 1987, 2001–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -41,7 +41,7 @@ before you start using VIP.  Other nodes may be visited as needed.
 ‘ms@Sail.Stanford.Edu’ if you are outside of Japan and to
 ‘masahiko@sato.riec.tohoku.junet’ if you are in Japan.
 
-   Copyright © 1987, 2001–2024 Free Software Foundation, Inc.
+   Copyright © 1987, 2001–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -2410,51 +2410,51 @@ Concept Index
 
 
 Tag Table:
-Node: Top847
-Node: Survey2679
-Node: Basic Concepts3209
-Node: Loading VIP4901
-Node: Modes in VIP5667
-Node: Emacs Mode8400
-Node: Vi Mode8759
-Node: Insert Mode9095
-Node: Differences from Vi9725
-Node: Undoing10898
-Node: Changing11255
-Node: Searching11915
-Node: z Command12667
-Node: Counts13042
-Node: Marking13600
-Node: Region Commands14131
-Node: New Commands14850
-Node: New Bindings17782
-Node: Window Commands20064
-Node: Buffer Commands20570
-Node: File Commands21094
-Node: Misc Commands21497
-Node: Vi Commands21941
-Node: Numeric Arguments22953
-Node: Important Keys23449
-Node: Buffers and Windows25282
-Node: Files27601
-Node: Viewing the Buffer30994
-Node: Mark Commands32999
-Node: Motion Commands33880
-Node: Searching and Replacing39747
-Node: Modifying Commands42143
-Node: Delete Commands43586
-Node: Yank Commands45354
-Node: Put Back Commands46291
-Node: Change Commands47785
-Node: Repeating and Undoing Modifications48853
-Node: Other Vi Commands49687
-Node: Commands in Insert Mode53472
-Node: Ex Commands55647
-Node: Ex Command Reference56854
-Node: Customization63555
-Node: Customizing Constants63996
-Node: Customizing Key Bindings65419
-Node: GNU Free Documentation License66506
+Node: Top849
+Node: Survey2681
+Node: Basic Concepts3211
+Node: Loading VIP4903
+Node: Modes in VIP5669
+Node: Emacs Mode8402
+Node: Vi Mode8761
+Node: Insert Mode9097
+Node: Differences from Vi9727
+Node: Undoing10900
+Node: Changing11257
+Node: Searching11917
+Node: z Command12669
+Node: Counts13044
+Node: Marking13602
+Node: Region Commands14133
+Node: New Commands14852
+Node: New Bindings17784
+Node: Window Commands20066
+Node: Buffer Commands20572
+Node: File Commands21096
+Node: Misc Commands21499
+Node: Vi Commands21943
+Node: Numeric Arguments22955
+Node: Important Keys23451
+Node: Buffers and Windows25284
+Node: Files27603
+Node: Viewing the Buffer30996
+Node: Mark Commands33001
+Node: Motion Commands33882
+Node: Searching and Replacing39749
+Node: Modifying Commands42145
+Node: Delete Commands43588
+Node: Yank Commands45356
+Node: Put Back Commands46293
+Node: Change Commands47787
+Node: Repeating and Undoing Modifications48855
+Node: Other Vi Commands49689
+Node: Commands in Insert Mode53474
+Node: Ex Commands55649
+Node: Ex Command Reference56856
+Node: Customization63557
+Node: Customizing Constants63998
+Node: Customizing Key Bindings65421
+Node: GNU Free Documentation License66508
 
 End Tag Table
 

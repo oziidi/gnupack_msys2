@@ -1,8 +1,8 @@
-This is eww.info, produced by makeinfo version 6.8 from eww.texi.
+This is eww.info, produced by makeinfo version 7.0.3 from eww.texi.
 
 This file documents the GNU Emacs Web Wowser (EWW) package.
 
-   Copyright © 2014–2024 Free Software Foundation, Inc.
+   Copyright © 2014–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -27,7 +27,7 @@ EWW
 
 This file documents the GNU Emacs Web Wowser (EWW) package.
 
-   Copyright © 2014–2024 Free Software Foundation, Inc.
+   Copyright © 2014–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -83,9 +83,9 @@ via ‘eww-search-prefix’.  The default search engine is DuckDuckGo
 (https://duckduckgo.com).  If you want to open a file either prefix the
 file name with ‘file://’ or use the command ‘M-x eww-open-file’.
 
-   If you invoke ‘eww’ with a prefix argument, as in ‘C-u M-x eww’, it
-will create a new EWW buffer instead of reusing the default one, which
-is normally called ‘*eww*’.
+   If you invoke ‘eww’ or ‘eww-open-file’ with a prefix argument, as in
+‘C-u M-x eww’, they will create a new EWW buffer instead of reusing the
+default one, which is normally called ‘*eww*’.
 
    If loading the URL was successful the buffer ‘*eww*’ is opened and
 the web page is rendered in it.  You can leave EWW by pressing ‘q’ or
@@ -98,15 +98,45 @@ ring.  If point is not on a link, pressing ‘w’ calls
 ‘eww-copy-page-url’, which will copy the current page’s URL to the kill
 ring instead.
 
+   The ‘A’ command (‘eww-copy-alternate-url’) copies the URL of an
+alternate link on the current page into the kill ring.  If the page
+specifies multiple alternate links, this command prompts for one of them
+in the minibuffer, with completion.  Alternate links are references that
+an HTML page may include to point to other documents that act as its
+alternative representations.  Notably, HTML pages can use alternate
+links to point to their translated versions and to RSS feeds.  Alternate
+links appear in the ‘<head>’ section of HTML pages as ‘<link>’ elements
+with ‘rel’ attribute equal to ‘``alternate''’; they are part of the
+page’s metadata and are not visible in its rendered content.
+
    The ‘M-<RET>’ command (‘eww-open-in-new-buffer’) opens the URL at
 point in a new EWW buffer, akin to opening a link in a new “tab” in
-other browsers.  When ‘global-tab-line-mode’ is enabled, this buffer is
-displayed in the tab on the window tab line.  When ‘tab-bar-mode’ is
-enabled, a new tab is created on the frame tab bar.
+other browsers.  If invoked with prefix argument, the command will not
+make the new buffer the current one.  When ‘global-tab-line-mode’ is
+enabled, this buffer is displayed in the tab on the window tab line.
+When ‘tab-bar-mode’ is enabled, a new tab is created on the frame tab
+bar.
 
    The ‘R’ command (‘eww-readable’) will attempt to determine which part
 of the document contains the “readable” text, and will only display this
 part.  This usually gets rid of menus and the like.
+
+   When called interactively, this command toggles the display of the
+readable parts.  With a positive prefix argument, this command always
+displays the readable parts, and with a zero or negative prefix, it
+always displays the full page.
+
+   If you want EWW to render a certain page in “readable” mode by
+default, you can add a regular expression matching its URL to
+‘eww-readable-urls’.  Each entry can either be a regular expression in
+string form or a cons cell of the form ‘(REGEXP . READABILITY)’.  If
+READABILITY is non-‘nil’, this behaves the same as the string form;
+otherwise, URLs matching REGEXP will never be displayed in readable mode
+by default.  For example, you can use this to make all pages default to
+readable mode, except for a few outliers:
+
+     (setq eww-readable-urls '(("https://example\\.com/" . nil)
+                               ".*"))
 
    The ‘F’ command (‘eww-toggle-fonts’) toggles whether to use
 variable-pitch fonts or not.  This sets the ‘shr-use-fonts’ variable.
@@ -131,6 +161,14 @@ If you want an overview of your browsing history press ‘H’
 (‘eww-list-histories’) to open the history buffer ‘*eww history*’.  The
 history is lost when EWW is quit.  If you want to remember websites you
 can use bookmarks.
+
+   By default, when browsing to a new page from a “historical” one (i.e.
+a page loaded by navigating back via ‘eww-back-url’), EWW will first
+delete any history entries newer than the current page.  This is the
+same behavior as most other web browsers.  You can change this by
+customizing ‘eww-before-browse-history-function’ to another value.  For
+example, setting it to ‘ignore’ will preserve the existing history
+entries and simply prepend the new page to the history list.
 
    Along with the URLs visited, EWW also remembers both the rendered
 page (as it appears in the buffer) and its source.  This can take a
@@ -817,25 +855,26 @@ Key Index
  [index ]
 * Menu:
 
-* &:                                     Basics.               (line 82)
-* b:                                     Basics.               (line 72)
-* B:                                     Basics.               (line 72)
-* C:                                     Advanced.             (line 23)
-* d:                                     Basics.               (line 47)
-* F:                                     Basics.               (line 37)
-* g:                                     Basics.               (line 16)
-* H:                                     Basics.               (line 53)
-* l:                                     Basics.               (line 53)
-* M-C:                                   Basics.               (line 40)
-* M-I:                                   Basics.               (line 43)
-* M-RET:                                 Basics.               (line 27)
-* q:                                     Basics.               (line 16)
-* R:                                     Basics.               (line 33)
-* r:                                     Basics.               (line 53)
-* s:                                     Basics.               (line 77)
-* S:                                     Basics.               (line 77)
-* v:                                     Advanced.             (line 19)
-* w:                                     Basics.               (line 16)
+* &:                                     Basics.              (line 120)
+* A:                                     Basics.              (line  27)
+* b:                                     Basics.              (line 110)
+* B:                                     Basics.              (line 110)
+* C:                                     Advanced.            (line  23)
+* d:                                     Basics.              (line  77)
+* F:                                     Basics.              (line  67)
+* g:                                     Basics.              (line  16)
+* H:                                     Basics.              (line  83)
+* l:                                     Basics.              (line  83)
+* M-C:                                   Basics.              (line  70)
+* M-I:                                   Basics.              (line  73)
+* M-RET:                                 Basics.              (line  38)
+* q:                                     Basics.              (line  16)
+* R:                                     Basics.              (line  46)
+* r:                                     Basics.              (line  83)
+* s:                                     Basics.              (line 115)
+* S:                                     Basics.              (line 115)
+* v:                                     Advanced.            (line  19)
+* w:                                     Basics.              (line  16)
 
 
 File: eww.info,  Node: Variable Index,  Next: Lisp Function Index,  Prev: Key Index,  Up: Top
@@ -849,31 +888,33 @@ is called.  It can be used to alter the contents, for instance.
  [index ]
 * Menu:
 
-* browse-url-secondary-browser-function: Basics.              (line  82)
+* browse-url-secondary-browser-function: Basics.              (line 120)
 * eww-after-render-hook:                 Variable Index.      (line   6)
 * eww-auto-rename-buffer:                Advanced.            (line 111)
+* eww-before-browse-history-function:    Basics.              (line  91)
 * eww-desktop-remove-duplicates:         Advanced.            (line  88)
-* eww-download-directory:                Basics.              (line  47)
+* eww-download-directory:                Basics.              (line  77)
 * eww-header-line-format:                Advanced.            (line  42)
-* eww-history-limit:                     Basics.              (line  61)
+* eww-history-limit:                     Basics.              (line  99)
+* eww-readable-urls:                     Basics.              (line  55)
 * eww-restore-desktop:                   Advanced.            (line  97)
 * eww-restore-reload-prompt:             Advanced.            (line 104)
 * eww-search-prefix:                     Basics.              (line   6)
 * eww-url-transformers:                  Advanced.            (line 118)
 * eww-use-browse-url:                    Advanced.            (line  37)
-* eww-use-external-browser-for-content-type: Basics.          (line  82)
+* eww-use-external-browser-for-content-type: Basics.          (line 120)
 * shr-allowed-images:                    Advanced.            (line  52)
 * shr-blocked-images:                    Advanced.            (line  52)
 * shr-color-visible-distance-min:        Advanced.            (line  63)
 * shr-color-visible-luminance-min:       Advanced.            (line  63)
 * shr-cookie-policy:                     Advanced.            (line  27)
 * shr-discard-aria-hidden:               Advanced.            (line  75)
-* shr-inhibit-images:                    Basics.              (line  43)
+* shr-inhibit-images:                    Basics.              (line  73)
 * shr-inhibit-images <1>:                Advanced.            (line  60)
 * shr-max-image-proportion:              Advanced.            (line  52)
 * shr-max-width:                         Advanced.            (line  69)
-* shr-use-colors:                        Basics.              (line  40)
-* shr-use-fonts:                         Basics.              (line  37)
+* shr-use-colors:                        Basics.              (line  70)
+* shr-use-fonts:                         Basics.              (line  67)
 * shr-use-xwidgets-for-media:            Advanced.            (line 125)
 * shr-width:                             Advanced.            (line  69)
 
@@ -886,30 +927,31 @@ Function Index
  [index ]
 * Menu:
 
-* eww:                                   Basics.               (line  6)
-* eww-add-bookmark:                      Basics.               (line 72)
-* eww-back-url:                          Basics.               (line 53)
-* eww-browse-with-external-browser:      Basics.               (line 82)
-* eww-copy-page-url:                     Basics.               (line 16)
-* eww-download:                          Basics.               (line 47)
-* eww-forward-url:                       Basics.               (line 53)
-* eww-list-bookmarks:                    Basics.               (line 72)
-* eww-list-buffers:                      Basics.               (line 77)
-* eww-list-histories:                    Basics.               (line 53)
-* eww-open-file:                         Basics.               (line  6)
-* eww-open-in-new-buffer:                Basics.               (line 27)
-* eww-quit:                              Basics.               (line 16)
-* eww-readable:                          Basics.               (line 33)
-* eww-reload:                            Basics.               (line 16)
-* eww-retrieve-command:                  Advanced.             (line  6)
-* eww-switch-to-buffer:                  Basics.               (line 77)
-* eww-toggle-colors:                     Basics.               (line 40)
-* eww-toggle-fonts:                      Basics.               (line 37)
-* eww-toggle-images:                     Basics.               (line 43)
-* eww-toggle-paragraph-direction:        Advanced.             (line 46)
-* eww-view-source:                       Advanced.             (line 19)
-* shr-maybe-probe-and-copy-url:          Basics.               (line 16)
-* url-cookie-list:                       Advanced.             (line 23)
+* eww:                                   Basics.              (line   6)
+* eww-add-bookmark:                      Basics.              (line 110)
+* eww-back-url:                          Basics.              (line  83)
+* eww-browse-with-external-browser:      Basics.              (line 120)
+* eww-copy-alternate-url:                Basics.              (line  27)
+* eww-copy-page-url:                     Basics.              (line  16)
+* eww-download:                          Basics.              (line  77)
+* eww-forward-url:                       Basics.              (line  83)
+* eww-list-bookmarks:                    Basics.              (line 110)
+* eww-list-buffers:                      Basics.              (line 115)
+* eww-list-histories:                    Basics.              (line  83)
+* eww-open-file:                         Basics.              (line   6)
+* eww-open-in-new-buffer:                Basics.              (line  38)
+* eww-quit:                              Basics.              (line  16)
+* eww-readable:                          Basics.              (line  46)
+* eww-reload:                            Basics.              (line  16)
+* eww-retrieve-command:                  Advanced.            (line   6)
+* eww-switch-to-buffer:                  Basics.              (line 115)
+* eww-toggle-colors:                     Basics.              (line  70)
+* eww-toggle-fonts:                      Basics.              (line  67)
+* eww-toggle-images:                     Basics.              (line  73)
+* eww-toggle-paragraph-direction:        Advanced.            (line  46)
+* eww-view-source:                       Advanced.            (line  19)
+* shr-maybe-probe-and-copy-url:          Basics.              (line  16)
+* url-cookie-list:                       Advanced.            (line  23)
 
 
 File: eww.info,  Node: Concept Index,  Prev: Lisp Function Index,  Up: Top
@@ -921,20 +963,20 @@ Concept Index
 * Menu:
 
 * aria-hidden, HTML attribute:           Advanced.            (line  75)
-* Bookmarks:                             Basics.              (line  72)
+* Bookmarks:                             Basics.              (line 110)
 * Contrast:                              Advanced.            (line  63)
 * Cookies:                               Advanced.            (line  23)
 * Desktop Support:                       Advanced.            (line  83)
-* Download:                              Basics.              (line  47)
+* Download:                              Basics.              (line  77)
 * eww:                                   Basics.              (line   6)
-* External Browser:                      Basics.              (line  82)
+* External Browser:                      Basics.              (line 120)
 * Header:                                Advanced.            (line  42)
-* History:                               Basics.              (line  53)
-* Image Display:                         Basics.              (line  43)
+* History:                               Basics.              (line  83)
+* Image Display:                         Basics.              (line  73)
 * Image Display <1>:                     Advanced.            (line  52)
-* Multiple Buffers:                      Basics.              (line  77)
+* Multiple Buffers:                      Basics.              (line 115)
 * paragraph direction:                   Advanced.            (line  46)
-* PDF:                                   Basics.              (line  68)
+* PDF:                                   Basics.              (line 106)
 * Saving Sessions:                       Advanced.            (line  83)
 * utm:                                   Advanced.            (line 118)
 * video:                                 Advanced.            (line 125)
@@ -944,17 +986,17 @@ Concept Index
 
 
 Tag Table:
-Node: Top873
-Node: Overview1898
-Node: Basics2386
-Node: Advanced7227
-Node: Command Line13966
-Node: History and Acknowledgments14492
-Node: GNU Free Documentation License15181
-Node: Key Index40531
-Node: Variable Index42069
-Node: Lisp Function Index44330
-Node: Concept Index46236
+Node: Top875
+Node: Overview1900
+Node: Basics2388
+Node: Advanced9441
+Node: Command Line16180
+Node: History and Acknowledgments16706
+Node: GNU Free Documentation License17395
+Node: Key Index42745
+Node: Variable Index44356
+Node: Lisp Function Index46763
+Node: Concept Index48742
 
 End Tag Table
 

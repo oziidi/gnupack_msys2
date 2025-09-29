@@ -1,8 +1,8 @@
-This is eieio.info, produced by makeinfo version 6.8 from eieio.texi.
+This is eieio.info, produced by makeinfo version 7.0.3 from eieio.texi.
 
 This manual documents EIEIO, an object framework for Emacs Lisp.
 
-   Copyright © 2007–2024 Free Software Foundation, Inc.
+   Copyright © 2007–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -32,7 +32,7 @@ writing object-oriented applications in Emacs.
 
    This manual documents EIEIO, an object framework for Emacs Lisp.
 
-   Copyright © 2007–2024 Free Software Foundation, Inc.
+   Copyright © 2007–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -193,12 +193,6 @@ Support for metaclasses
      instances of the metaclass, behave differently in EIEIO in that
      they return symbols or plain structures instead.
 
-EQL specialization
-     EIEIO does not support it.
-
-‘:around’ method tag
-     This CLOS method tag is non-functional.
-
 :default-initargs in ‘defclass’
      Each slot can have an ‘:initform’ tag, so this is not really
      necessary.
@@ -330,7 +324,7 @@ then the superclass showing up in the list first defines the slot
 attributes.
 
    Inheritance in EIEIO is more than just combining different slots.  It
-is also important in method invocation.  *note Methods::.
+is also important in method invocation.  *note Writing Methods::.
 
    If a method is called on an instance of ‘my-subclass’, and that
 method only has an implementation on ‘my-baseclass’, or perhaps
@@ -723,150 +717,14 @@ Writing a method in EIEIO is similar to writing a function.  The
 differences are that there are some extra options and there can be
 multiple definitions under the same function symbol.
 
-   Where a method defines an implementation for a particular data type,
-a “generic method” accepts any argument, but contains no code.  It is
-used to provide the dispatching to the defined methods.  A generic
-method has no body, and is merely a symbol upon which methods are
-attached.  It also provides the base documentation for what methods with
-that name do.
+   You do it using Emacs Lisp’s built-in support for CLOS-style generic
+functions via the ‘cl-defgeneric’ and ‘cl-defmethod’ macros (*note
+(elisp)Generic Functions::).
 
-* Menu:
-
-* Generics::
-* Methods::
-* Static Methods::
-
-
-File: eieio.info,  Node: Generics,  Next: Methods,  Up: Writing Methods
-
-6.1 Generics
-============
-
-Each EIEIO method has one corresponding generic.  This generic provides
-a function binding and the base documentation for the method symbol
-(*note (elisp)Symbol Components::).
-
- -- Macro: cl-defgeneric method arglist [doc-string]
-     This macro turns the (unquoted) symbol METHOD into a function.
-     ARGLIST is the default list of arguments to use (not implemented
-     yet).  DOC-STRING is the documentation used for this symbol.
-
-     A generic function acts as a placeholder for methods.  There is no
-     need to call ‘cl-defgeneric’ yourself, as ‘cl-defmethod’ will call
-     it if necessary.  Currently the argument list is unused.
-
-     ‘cl-defgeneric’ signals an error if you attempt to turn an existing
-     Emacs Lisp function into a generic function.
-
-     You can also create a generic method with ‘cl-defmethod’ (*note
-     Methods::).  When a method is created and there is no generic
-     method in place with that name, then a new generic will be created,
-     and the new method will use it.
-
-
-File: eieio.info,  Node: Methods,  Next: Static Methods,  Prev: Generics,  Up: Writing Methods
-
-6.2 Methods
-===========
-
-A method is a function that is executed if the arguments passed to it
-matches the method’s specializers.  Different EIEIO classes may share
-the same method names.
-
-   Methods are created with the ‘cl-defmethod’ macro, which is similar
-to ‘defun’.
-
- -- Macro: cl-defmethod method [:before | :around | :after ] arglist
-          [doc-string] forms
-
-     METHOD is the name of the function to create.
-
-     ‘:before’, ‘:around’, and ‘:after’ specify execution order (i.e.,
-     when this form is called).  If none of these symbols are present,
-     the method is said to be a _primary_.
-
-     ARGLIST is the list of arguments to this method.  The mandatory
-     arguments in this list may have a type specializer (see the example
-     below) which means that the method will only apply when those
-     arguments match the given type specializer.  An argument with no
-     type specializer means that the method applies regardless of its
-     value.
-
-     DOC-STRING is the documentation attached to the implementation.
-     All method doc-strings are incorporated into the generic method’s
-     function documentation.
-
-     FORMS is the body of the function.
-
-In the following example, we create a method ‘mymethod’ for the
-‘classname’ class:
-
-     (cl-defmethod mymethod ((obj classname) secondarg)
-       "Doc string" )
-
-This method only executes if the OBJ argument passed to it is an EIEIO
-object of class ‘classname’.
-
-   A method with no type specializer is a “default method”.  If a given
-class has no implementation, then the default method is called when that
-method is used on a given object of that class.
-
-   Only one method per combination of specializers and qualifiers
-(‘:before’, ‘:around’, or ‘:after’) is kept.  If two ‘cl-defmethod’s
-appear with the same specializers and the same qualifiers, then the
-second implementation replaces the first.
-
-   When a method is called on an object, but there is no method
-specified for that object, but there is a method specified for object’s
-parent class, the parent class’s method is called.  If there is a method
-defined for both, only the child’s method is called.  A child method may
-call a parent’s method using ‘cl-call-next-method’, described below.
-
-   If multiple methods and default methods are defined for the same
-method and class, they are executed in this order:
-
-  1. :around methods The most specific ‘:around’ method is called first,
-     which may invoke the less specific ones via ‘cl-call-next-method’.
-     If it doesn’t invoke ‘cl-call-next-method’, then no other methods
-     will be executed.  When there are no more ‘:around’ methods to
-     call, falls through to run the other (non-‘:around’) methods.
-  2. :before methods Called in sequence from most specific to least
-     specific.
-  3. primary methods The most specific method is called, which may
-     invoke the less specific ones via ‘cl-call-next-method’.
-  4. :after methods Called in sequence from least specific to most
-     specific.
-
-   If no methods exist, Emacs signals a ‘cl-no-applicable-method’ error.
-*Note Signals::.  If methods exist but none of them are primary, Emacs
-signals a ‘cl-no-primary-method’ error.  *Note Signals::.
-
- -- Function: cl-call-next-method &rest replacement-args
-
-     This function calls the superclass method from a subclass method.
-     This is the “next method” specified in the current method list.
-
-     If REPLACEMENT-ARGS is non-‘nil’, then use them instead of the
-     arguments originally provided to the method.
-
-     Can only be used from within the lexical body of a primary or
-     around method.
-
- -- Function: cl-next-method-p
-     Non-‘nil’ if there is a next method.
-
-     Can only be used from within the lexical body of a primary or
-     around method.
-
-
-File: eieio.info,  Node: Static Methods,  Prev: Methods,  Up: Writing Methods
-
-6.3 Static Methods
-==================
-
-Static methods do not depend on an object instance, but instead operate
-on a class.  You can create a static method by using the ‘subclass’
-specializer with ‘cl-defmethod’:
+   EIEIO provides one extension to ‘cl-defmethod’ to allow methods to
+dispatch on a class argument: so-called “static” methods do not depend
+on an object instance, but instead operate on a class.  You can create a
+static method by using the ‘subclass’ specializer with ‘cl-defmethod’:
 
      (cl-defmethod make-instance ((class (subclass mychild)) &rest args)
        (let ((new (cl-call-next-method)))
@@ -1645,10 +1503,10 @@ CLOS.
           instead pre-builds a method that gets the slot’s value.
 
      :type
-          Specifier uses the ‘typep’ function from the ‘cl’ package.
-          *Note (cl)Type Predicates::.  It therefore has the same issues
-          as that package.  Extensions include the ability to provide
-          object names.
+          Specifier uses the ‘cl-typep’ function from the ‘cl-lib’
+          package.  *Note (cl)Type Predicates::.  It therefore has the
+          same issues as that package.  Extensions include the ability
+          to provide object names.
 
      defclass also supports class options, but does not currently use
      values of ‘:metaclass’, and ‘:default-initargs’.
@@ -1692,7 +1550,7 @@ Emacs.
    Some important compatibility features that would be good to add are:
 
   1. Support for metaclasses.
-  2. Improve integration with the ‘cl’ package.
+  2. Improve integration with the ‘cl-lib’ package.
 
    There are also improvements to be made to allow EIEIO to operate
 better in the Emacs environment.
@@ -2193,10 +2051,6 @@ Function Index
 * Menu:
 
 * child-of-class-p:                      Predicates.           (line 74)
-* cl-call-next-method:                   Methods.              (line 78)
-* cl-defgeneric:                         Generics.             (line 10)
-* cl-defmethod:                          Methods.              (line 13)
-* cl-next-method-p:                      Methods.              (line 89)
 * cl-no-applicable-method:               Signal Handling.      (line 44)
 * cl-no-applicable-method <1>:           Signals.              (line 13)
 * cl-no-next-method:                     Signal Handling.      (line 60)
@@ -2278,65 +2132,60 @@ Function Index
 
 
 Tag Table:
-Node: Top912
-Node: Quick Start3135
-Node: Introduction6432
-Node: Building Classes9044
-Node: Inheritance11829
-Node: Slot Options14210
-Node: Class Options19913
-Node: Making New Objects22674
-Ref: make-instance24125
-Node: Accessing Slots24430
-Ref: slot-value24801
-Ref: set-slot-value25132
-Ref: oref25635
-Ref: oref-default25965
-Ref: object-add-to-list26809
-Ref: object-remove-from-list27211
-Ref: with-slots27470
-Node: Writing Methods28475
-Node: Generics29223
-Node: Methods30354
-Ref: cl-call-next-method33819
-Ref: cl-next-method-p34207
-Node: Static Methods34342
-Node: Method Invocation35109
-Node: Predicates36440
-Ref: find-class36841
-Ref: class-p37063
-Ref: slot-exists-p37187
-Ref: slot-boundp37274
-Node: Association Lists39540
-Ref: object-assoc39904
-Node: Customizing40883
-Node: Introspection43381
-Node: Base Classes43884
-Node: eieio-instance-inheritor44844
-Node: eieio-instance-tracker46161
-Node: eieio-singleton47589
-Node: eieio-persistent48041
-Node: eieio-named50189
-Node: eieio-speedbar50535
-Node: Browsing54351
-Node: Class Values55076
-Node: Default Superclass55551
-Node: Initialization56702
-Node: Basic Methods57801
-Ref: clone58052
-Ref: object-print58381
-Node: Signal Handling59766
-Ref: slot-missing60302
-Ref: slot-unbound61021
-Ref: cl-no-applicable-method61719
-Ref: cl-no-primary-method62058
-Ref: cl-no-next-method62425
-Node: Signals62903
-Node: Naming Conventions64821
-Node: CLOS compatibility65967
-Node: Wish List67978
-Node: GNU Free Documentation License68681
-Node: Function Index94038
+Node: Top914
+Node: Quick Start3137
+Node: Introduction6434
+Node: Building Classes8923
+Node: Inheritance11708
+Node: Slot Options14097
+Node: Class Options19800
+Node: Making New Objects22561
+Ref: make-instance24012
+Node: Accessing Slots24317
+Ref: slot-value24688
+Ref: set-slot-value25019
+Ref: oref25522
+Ref: oref-default25852
+Ref: object-add-to-list26696
+Ref: object-remove-from-list27098
+Ref: with-slots27357
+Node: Writing Methods28362
+Node: Method Invocation29635
+Node: Predicates30966
+Ref: find-class31367
+Ref: class-p31589
+Ref: slot-exists-p31713
+Ref: slot-boundp31800
+Node: Association Lists34066
+Ref: object-assoc34430
+Node: Customizing35409
+Node: Introspection37907
+Node: Base Classes38410
+Node: eieio-instance-inheritor39370
+Node: eieio-instance-tracker40687
+Node: eieio-singleton42115
+Node: eieio-persistent42567
+Node: eieio-named44715
+Node: eieio-speedbar45061
+Node: Browsing48877
+Node: Class Values49602
+Node: Default Superclass50077
+Node: Initialization51228
+Node: Basic Methods52327
+Ref: clone52578
+Ref: object-print52907
+Node: Signal Handling54292
+Ref: slot-missing54828
+Ref: slot-unbound55547
+Ref: cl-no-applicable-method56245
+Ref: cl-no-primary-method56584
+Ref: cl-no-next-method56951
+Node: Signals57429
+Node: Naming Conventions59347
+Node: CLOS compatibility60493
+Node: Wish List62512
+Node: GNU Free Documentation License63219
+Node: Function Index88576
 
 End Tag Table
 

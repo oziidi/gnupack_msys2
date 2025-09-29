@@ -1,9 +1,9 @@
-This is woman.info, produced by makeinfo version 6.8 from woman.texi.
+This is woman.info, produced by makeinfo version 7.0.3 from woman.texi.
 
 This file documents WoMan: A program to browse Unix manual pages “W.O.
 (without) man”.
 
-Copyright © 2001–2024 Free Software Foundation, Inc.
+Copyright © 2001–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -26,7 +26,7 @@ File: woman.info,  Node: Top,  Next: Introduction,  Up: (dir)
 WoMan: Browse Unix Manual Pages “W.O. (without) Man”
 ****************************************************
 
-     As distributed with Emacs 29.4.
+     As distributed with Emacs 30.2.
 
      Francis J. Wright <F.J.Wright@qmw.ac.uk>
      School of Mathematical Sciences (http://centaur.maths.qmw.ac.uk/)
@@ -36,7 +36,7 @@ WoMan: Browse Unix Manual Pages “W.O. (without) Man”
 This file documents WoMan: A program to browse Unix manual pages “W.O.
 (without) man”.
 
-Copyright © 2001–2024 Free Software Foundation, Inc.
+Copyright © 2001–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -1812,36 +1812,36 @@ Concept Index
 
 
 Tag Table:
-Node: Top948
-Node: Introduction2714
-Node: Background4819
-Node: Finding11767
-Node: Topic13358
-Node: Cache17866
-Node: Word at point19596
-Node: Filename20558
-Node: Automatic22867
-Node: Browsing24443
-Node: Fonts25686
-Node: Navigation26342
-Node: References27300
-Node: Changing28748
-Node: Convenience30824
-Node: Imenu31612
-Node: Customization32442
-Node: Interface Options34499
-Node: Formatting Options43592
-Node: Faces45244
-Node: Special symbols46564
-Node: Log47829
-Node: Technical48977
-Node: Bugs49697
-Node: Acknowledgments50450
-Node: GNU Free Documentation License51413
-Node: Command Index76766
-Node: Variable Index78756
-Node: Keystroke Index81390
-Node: Concept Index83223
+Node: Top950
+Node: Introduction2716
+Node: Background4821
+Node: Finding11769
+Node: Topic13360
+Node: Cache17868
+Node: Word at point19598
+Node: Filename20560
+Node: Automatic22869
+Node: Browsing24445
+Node: Fonts25688
+Node: Navigation26344
+Node: References27302
+Node: Changing28750
+Node: Convenience30826
+Node: Imenu31614
+Node: Customization32444
+Node: Interface Options34501
+Node: Formatting Options43594
+Node: Faces45246
+Node: Special symbols46566
+Node: Log47831
+Node: Technical48979
+Node: Bugs49699
+Node: Acknowledgments50452
+Node: GNU Free Documentation License51415
+Node: Command Index76768
+Node: Variable Index78758
+Node: Keystroke Index81392
+Node: Concept Index83225
 
 End Tag Table
 

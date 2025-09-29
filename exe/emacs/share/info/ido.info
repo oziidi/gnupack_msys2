@@ -1,8 +1,8 @@
-This is ido.info, produced by makeinfo version 6.8 from ido.texi.
+This is ido.info, produced by makeinfo version 7.0.3 from ido.texi.
 
 This file documents the Ido package for GNU Emacs.
 
-   Copyright © 2013–2024 Free Software Foundation, Inc.
+   Copyright © 2013–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -27,7 +27,7 @@ Interactive Do
 
 This file documents the Ido package for GNU Emacs.
 
-   Copyright © 2013–2024 Free Software Foundation, Inc.
+   Copyright © 2013–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -1154,29 +1154,29 @@ Variable Index
 
 
 Tag Table:
-Node: Top908
-Node: Overview3260
-Node: Activation3972
-Node: Working Directories4470
-Node: Matching5560
-Node: Interactive Substring Matching6062
-Node: Prefix Matching10738
-Node: Flexible Matching11562
-Node: Regexp Matching12703
-Node: Highlighting13388
-Node: Hidden Buffers and Files13747
-Node: Customization14358
-Node: Changing List Order15179
-Node: Find File At Point16030
-Node: Ignoring16670
-Node: Misc Customization18170
-Node: Misc21237
-Node: All Matching22538
-Node: Replacement23459
-Node: Other Packages23885
-Node: GNU Free Documentation License24255
-Node: Function Index49605
-Node: Variable Index50568
+Node: Top910
+Node: Overview3262
+Node: Activation3974
+Node: Working Directories4472
+Node: Matching5562
+Node: Interactive Substring Matching6064
+Node: Prefix Matching10740
+Node: Flexible Matching11564
+Node: Regexp Matching12705
+Node: Highlighting13390
+Node: Hidden Buffers and Files13749
+Node: Customization14360
+Node: Changing List Order15181
+Node: Find File At Point16032
+Node: Ignoring16672
+Node: Misc Customization18172
+Node: Misc21239
+Node: All Matching22540
+Node: Replacement23461
+Node: Other Packages23887
+Node: GNU Free Documentation License24257
+Node: Function Index49607
+Node: Variable Index50570
 
 End Tag Table
 

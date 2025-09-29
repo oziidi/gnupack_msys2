@@ -1,9 +1,9 @@
-This is remember.info, produced by makeinfo version 6.8 from
+This is remember.info, produced by makeinfo version 7.0.3 from
 remember.texi.
 
-This manual is for Remember Mode, as distributed with Emacs 29.4.
+This manual is for Remember Mode, as distributed with Emacs 30.2.
 
-   Copyright © 2001, 2004–2005, 2007–2024 Free Software Foundation, Inc.
+   Copyright © 2001, 2004–2005, 2007–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -26,9 +26,9 @@ File: remember.info,  Node: Top,  Next: Preface,  Up: (dir)
 Remember
 ********
 
-This manual is for Remember Mode, as distributed with Emacs 29.4.
+This manual is for Remember Mode, as distributed with Emacs 30.2.
 
-   Copyright © 2001, 2004–2005, 2007–2024 Free Software Foundation, Inc.
+   Copyright © 2001, 2004–2005, 2007–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -920,21 +920,21 @@ Index
 
 
 Tag Table:
-Node: Top942
-Node: Preface2643
-Node: Introduction2993
-Node: Implementation5402
-Node: Quick Start7771
-Node: Function Reference10567
-Node: Keystrokes12838
-Node: Backends13240
-Node: Text File13725
-Node: Separate Text Files14145
-Node: Diary14767
-Node: Mailbox15189
-Node: Org15625
-Node: GNU Free Documentation License15846
-Node: Concept Index41204
+Node: Top944
+Node: Preface2645
+Node: Introduction2995
+Node: Implementation5404
+Node: Quick Start7773
+Node: Function Reference10569
+Node: Keystrokes12840
+Node: Backends13242
+Node: Text File13727
+Node: Separate Text Files14147
+Node: Diary14769
+Node: Mailbox15191
+Node: Org15627
+Node: GNU Free Documentation License15848
+Node: Concept Index41206
 
 End Tag Table
 

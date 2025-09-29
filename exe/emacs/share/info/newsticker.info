@@ -1,10 +1,10 @@
-This is newsticker.info, produced by makeinfo version 6.8 from
+This is newsticker.info, produced by makeinfo version 7.0.3 from
 newsticker.texi.
 
 This manual documents Newsticker, a feed reader for Emacs.  It
-corresponds to Emacs version 29.4.
+corresponds to Emacs version 30.2.
 
-Copyright © 2004–2024 Free Software Foundation, Inc.
+Copyright © 2004–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -28,9 +28,9 @@ Newsticker
 **********
 
 This manual documents Newsticker, a feed reader for Emacs.  It
-corresponds to Emacs version 29.4.
+corresponds to Emacs version 30.2.
 
-Copyright © 2004–2024 Free Software Foundation, Inc.
+Copyright © 2004–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -273,6 +273,9 @@ messages in a stock-quote ticker, or just changing.  This can be started
 with the command ‘newsticker-start-ticker’.  It can be stopped with
 ‘newsticker-stop-ticker’.
 
+   The ticker by default runs continuously.  To only run it once, at a
+specific time interval, set the ‘newsticker-ticker-period’ variable.
+
 
 File: newsticker.info,  Node: Navigation,  Next: Marking,  Prev: Frontends,  Up: Reading News
 
@@ -439,8 +442,9 @@ some of the most important options.
    • ‘newsticker-ticker’ contains options that define how headlines are
      shown in the echo area, i.e., the “ticker”.
 
-        • ‘newsticker-ticker-interval’ and ‘newsticker-scroll-smoothly’
-          define how headlines are shown in the echo area.
+        • ‘newsticker-ticker-interval’, ‘newsticker-ticker-period’, and
+          ‘newsticker-scroll-smoothly’ define how headlines are shown in
+          the echo area.
 
    • ‘newsticker-reader’ contains options for adjusting the headline
      reader.
@@ -988,7 +992,7 @@ Index
                                                                (line 30)
 * newsticker-display-interval:           Configuration.        (line 46)
 * newsticker-frontend:                   Frontends.            (line  6)
-* newsticker-frontend <1>:               Configuration.        (line 52)
+* newsticker-frontend <1>:               Configuration.        (line 53)
 * newsticker-get-all-news:               More Actions.         (line 23)
 * newsticker-group-add-group:            Frontends.            (line 25)
 * newsticker-group-move-feed:            Frontends.            (line 29)
@@ -1006,7 +1010,7 @@ Index
 * newsticker-next-item:                  Navigation.           (line 18)
 * newsticker-next-new-item:              Navigation.           (line 21)
 * newsticker-obsolete-item-max-age:      Headline Management.  (line 25)
-* newsticker-plainview:                  Configuration.        (line 56)
+* newsticker-plainview:                  Configuration.        (line 57)
 * newsticker-plainview-hooks:            Configuration.        (line 38)
 * newsticker-previous-feed:              Navigation.           (line 15)
 * newsticker-previous-item:              Navigation.           (line 24)
@@ -1021,7 +1025,9 @@ Index
 * newsticker-start-ticker:               Frontends.            (line 87)
 * newsticker-stop:                       Retrieving News.      (line  9)
 * newsticker-stop-ticker:                Frontends.            (line 87)
-* newsticker-treeview:                   Configuration.        (line 58)
+* newsticker-ticker-period:              Frontends.            (line 87)
+* newsticker-ticker-period <1>:          Configuration.        (line 46)
+* newsticker-treeview:                   Configuration.        (line 59)
 * newsticker-treeview-browse-url:        More Actions.         (line 12)
 * newsticker-treeview-get-news:          More Actions.         (line 21)
 * newsticker-treeview-jump:              Navigation.           (line 35)
@@ -1048,21 +1054,21 @@ Index
 
 
 Tag Table:
-Node: Top946
-Node: Overview2427
-Node: Installation3450
-Node: Retrieving News3883
-Node: Headline Management5261
-Node: Reading News6978
-Node: Frontends7493
-Node: Navigation10911
-Node: Marking12106
-Node: More Actions12643
-Node: Automatic Processing13442
-Node: Configuration14576
-Node: Supported Formats17363
-Node: GNU Free Documentation License18049
-Node: Index43410
+Node: Top948
+Node: Overview2429
+Node: Installation3452
+Node: Retrieving News3885
+Node: Headline Management5263
+Node: Reading News6980
+Node: Frontends7495
+Node: Navigation11058
+Node: Marking12253
+Node: More Actions12790
+Node: Automatic Processing13589
+Node: Configuration14723
+Node: Supported Formats17553
+Node: GNU Free Documentation License18239
+Node: Index43600
 
 End Tag Table
 

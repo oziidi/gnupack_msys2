@@ -1,6 +1,6 @@
-This is ert.info, produced by makeinfo version 6.8 from ert.texi.
+This is ert.info, produced by makeinfo version 7.0.3 from ert.texi.
 
-Copyright © 2008, 2010–2024 Free Software Foundation, Inc.
+Copyright © 2008, 2010–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -23,7 +23,7 @@ File: ert.info,  Node: Top,  Next: Introduction,  Up: (dir)
 ERT: Emacs Lisp Regression Testing
 **********************************
 
-Copyright © 2008, 2010–2024 Free Software Foundation, Inc.
+Copyright © 2008, 2010–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -37,15 +37,17 @@ Copyright © 2008, 2010–2024 Free Software Foundation, Inc.
      modify this GNU manual.”
 
    ERT is a tool for automated testing in Emacs Lisp.  Its main features
-are facilities for defining tests, running them and reporting the
-results, and for debugging test failures interactively.
+are facilities for defining and running tests, reporting results, and
+debugging test failures interactively.  Tests are written in Emacs Lisp,
+just like the code under test, making it easy to write expressive and
+concise test cases.
 
-   ERT is similar to tools for other environments such as JUnit, but has
-unique features that take advantage of the dynamic and interactive
-nature of Emacs.  Despite its name, it works well both for test-driven
-development (see
-<https://en.wikipedia.org/wiki/Test-driven_development>) and for
-traditional software development methods.
+   ERT has unique features that take advantage of the dynamic and
+interactive nature of Emacs.  It is unopinionated about when or how
+tests are written: you can use it to verify newly written code,
+reproduce known bugs, prevent regressions, or explore the behavior of
+complex systems.  It can be used for both unit tests and larger
+integration tests.
 
 * Menu:
 
@@ -119,11 +121,11 @@ package ‘pp.el’):
      ;; (pp-to-string '((quote a) (quote b)))  ; expected: "('a 'b)\n"
      ;; (pp-to-string '('a 'b))                ; same as above
 
-   The code contained in these comments can be evaluated from time to
-time to compare the output with the expected output.  ERT formalizes
-this and introduces a common convention, which simplifies Emacs
-development, since programmers no longer have to manually find and
-evaluate such comments.
+   The Lisp forms contained in these comments can be evaluated from time
+to time, e.g.  with ‘C-x C-e’, to compare the output with the expected
+output.  ERT formalizes this and introduces a common convention, which
+simplifies Emacs development, since programmers no longer have to
+manually find and evaluate such comments.
 
    An ERT test definition equivalent to the above comments is this:
 
@@ -188,10 +190,12 @@ File: ert.info,  Node: Running Tests Interactively,  Next: Running Tests in Batc
 ===============================
 
 You can run the tests that are currently defined in your Emacs with the
-command ‘M-x ert <RET> t <RET>’.  (For an explanation of the ‘t’
-argument, *note Test Selectors::.)  ERT will pop up a new buffer, the
-ERT results buffer, showing the results of the tests run.  It looks like
-this:
+command ‘M-x ert <RET> t <RET>’ (which is an alias of
+‘ert-run-tests-interactively’).  The ‘t’ argument means to run all the
+defined tests, see *note Test Selectors::, which also explains how to
+run only some specific part of the tests.  ERT will pop up a new buffer,
+the ERT results buffer, showing the results of the tests run.  It looks
+like this:
 
      Selector: t
      Passed:  31
@@ -399,7 +403,8 @@ Lisp’s type specifier syntax:
      recent result.
    • A string is a regular expression that selects all tests with
      matching names.
-   • A test (i.e., an object of ‘ert-test’ data type) selects that test.
+   • A test (i.e., an object of ‘ert-test’ data type, see its doc string
+     for details) selects that test.
    • A symbol selects the test that the symbol names.
    • ‘(member TESTS...)’ selects the elements of TESTS, a list of tests
      or symbols naming tests.
@@ -446,6 +451,7 @@ where a test was defined if the test was loaded from a file.
 * Tests and Their Environment:: Don’t depend on customizations; no side effects.
 * Useful Techniques::           Some examples.
 * erts files::                  Files containing many buffer tests.
+* Syntax Highlighting Tests::   Tests for face assignment.
 
 
 File: ert.info,  Node: The should Macro,  Next: Expected Failures,  Up: How to Write Tests
@@ -563,8 +569,18 @@ File: ert.info,  Node: Tests and Their Environment,  Next: Useful Techniques,  P
 Sometimes, it doesn’t make sense to run a test due to missing
 preconditions.  A required Emacs feature might not be compiled in, the
 function to be tested could call an external binary which might not be
-available on the test machine, you name it.  In this case, the macro
-‘skip-unless’ could be used to skip the test:
+available on the test machine, you name it.  In this case, the macros
+‘skip-when’ or ‘skip-unless’ could be used to skip the test.(1)
+
+For example, this test is skipped on MS-Windows and macOS:
+
+     (ert-deftest test-gnu-linux ()
+       "A test that is not relevant on MS-Windows and macOS."
+       (skip-when (memq system-type '(windows-nt ns))
+       ...))
+
+This test is skipped if the feature ‘dbusbind’ is not present in the
+running Emacs:
 
      (ert-deftest test-dbus ()
        "A test that checks D-BUS functionality."
@@ -620,6 +636,12 @@ predictable semantics like ‘with-temp-buffer’, ‘insert’ or
 ‘insert-file-contents-literally’, and to activate any desired mode by
 calling the corresponding function directly, after binding the hook
 variables to ‘nil’.  This avoids the above problems.
+
+   ---------- Footnotes ----------
+
+   (1) The ‘skip-when’ macro was added in Emacs 30.1.  If you need your
+tests to be compatible with older versions of Emacs, use ‘skip-unless’
+instead.
 
 
 File: ert.info,  Node: Useful Techniques,  Next: erts files,  Prev: Tests and Their Environment,  Up: How to Write Tests
@@ -698,7 +720,7 @@ code is to restructure the code slightly to provide better interfaces
 for testing.  Usually, this makes the interfaces easier to use as well.
 
 
-File: ert.info,  Node: erts files,  Prev: Useful Techniques,  Up: How to Write Tests
+File: ert.info,  Node: erts files,  Next: Syntax Highlighting Tests,  Prev: Useful Techniques,  Up: How to Write Tests
 
 3.5 erts files
 ==============
@@ -802,6 +824,113 @@ with a space are part of the value).
 
    If you need to use the literal line single line ‘=-=’ in a test
 section, you can quote it with a ‘\’ character.
+
+
+File: ert.info,  Node: Syntax Highlighting Tests,  Prev: erts files,  Up: How to Write Tests
+
+3.6 Syntax Highlighting Tests
+=============================
+
+Syntax highlighting is normally provided by the Font Lock minor mode
+that assigns face properties to parts of the buffer.  The
+‘ert-font-lock’ package makes it possible to introduce unit tests
+checking face assignment.  Test assertions are included in code-level
+comments directly and can be read either from inline strings or files.
+The parser expects the input string to contain at least one assertion.
+
+   The test assertion parser extracts tests from comment-only lines.
+Every comment assertion line starts either with a caret (‘^’) or an
+arrow (‘<-’).  A single caret/arrow or carets should be followed
+immediately by the name of a face or a list of faces to be checked
+against the ‘:face’ property at point.
+
+   The test then checks if the first non-assertion column above the
+caret contains a face expected by the assertion:
+
+     var variable = 11;
+     //   ^ font-lock-variable-name-face
+     //             ^ font-lock-literal-face
+     //               ^ font-lock-punctuation-face
+     // this is not an assertion, it's just a comment
+     //   ^ font-lock-comment-face
+
+     // multiple carets per line
+     // ^^^^     ^    ^ font-lock-comment-face
+
+   Both symbol-only ‘:face’ property values and assertion face values
+are normalized to single element lists so the assertions below are
+equivalent:
+
+     // single
+     // ^ font-lock-comment-face
+     // single
+     // ^ (font-lock-comment-face)
+
+   Assertions can be negated:
+
+     var variable = 11;
+     //  ^ !font-lock-comment-face
+
+   It is possible to specify face lists in assertions:
+
+     // TODO
+     // ^^^^ (font-lock-comment-face hl-todo)
+          var test = 1;
+     // ^    ()
+     // ^    nil
+     //   negation works as expected
+     //   ^  !nil
+
+   The arrow (‘<-’) means that the first non-empty column of the
+assertion line will be used for the check:
+
+     var variable = 1;
+     // <- font-lock-keyword-face
+       11;
+        // <- font-lock-literal-face
+
+   The ‘ert-font-lock-test-string’ function extracts ERT assertions from
+an inline string.  The ‘javascript-mode’ symbol below specifies the
+major mode used for comments and font locking:
+
+     (ert-deftest test-font-lock-test-string--correct ()
+       (ert-font-lock-test-string
+        "
+     var abc = function(d) {
+     // <- font-lock-keyword-face
+     //   ^ font-lock-variable-name-face
+         //        ^ font-lock-keyword-face
+         //             ^ font-lock-variable-name-face
+     };
+     "
+        'javascript-mode))
+
+   It is also possible to extract test assertions from a file:
+
+     (ert-deftest test-font-lock-test-file--correct ()
+       (ert-font-lock-test-file
+        (ert-resource-file "correct.js")
+        'javascript-mode))
+
+   The ‘ert-font-lock-deftest’ macro simplifies inline test definition:
+
+     (ert-font-lock-deftest test-macro-test--inline
+       emacs-lisp-mode
+       "
+     (defun fun ())
+     ;; ^ font-lock-keyword-face
+     ;;      ^ font-lock-function-name-face")
+
+   The ‘ert-font-lock-deftest-file’ macro reads assertions from a file:
+
+     (ert-font-lock-deftest-file test-macro-test--file
+       "Test reading correct assertions from a file."
+       javascript-mode
+       "correct.js")
+
+   The ‘ert-font-lock-deftest’ and ‘ert-font-lock-deftest-file’ macros
+accept the same keyword arguments as ‘ert-deftest’, i.e., ‘:tag’ and
+‘:expected-result’.
 
 
 File: ert.info,  Node: How to Debug Tests,  Next: Extending ERT,  Prev: How to Write Tests,  Up: Top
@@ -1072,26 +1201,26 @@ Index
 * Menu:
 
 * ., in ert results buffer:              Running Tests Interactively.
-                                                              (line  83)
+                                                              (line  85)
 * :expected-result:                      Expected Failures.   (line   6)
 * b, in ert results buffer:              Running Tests Interactively.
-                                                              (line  89)
+                                                              (line  91)
 * backtrace of a failed test:            Running Tests Interactively.
-                                                              (line  89)
+                                                              (line  91)
 * batch-mode testing:                    Running Tests in Batch Mode.
                                                               (line   6)
 * d, in ert results buffer:              Running Tests Interactively.
-                                                              (line  76)
+                                                              (line  78)
 * D, in ert results buffer:              Running Tests Interactively.
-                                                              (line 111)
+                                                              (line 113)
 * debugging failed tests:                Interactive Debugging.
                                                               (line   6)
 * defining explanation functions:        Defining Explanation Functions.
                                                               (line   6)
 * delete all tests:                      Running Tests Interactively.
-                                                              (line 121)
+                                                              (line 123)
 * delete test:                           Running Tests Interactively.
-                                                              (line 111)
+                                                              (line 113)
 * discard obsolete test results:         Interactive Debugging.
                                                               (line  37)
 * EMACS_TEST_JUNIT_REPORT, environment variable: Running Tests in Batch Mode.
@@ -1108,38 +1237,48 @@ Index
                                                               (line  25)
 * ert-deftest:                           How to Write Tests.  (line   6)
 * ert-delete-all-tests:                  Running Tests Interactively.
-                                                              (line 121)
+                                                              (line 123)
 * ert-delete-test:                       Running Tests Interactively.
-                                                              (line 111)
+                                                              (line 113)
 * ert-describe-test:                     Running Tests Interactively.
-                                                              (line 114)
+                                                              (line 116)
 * ert-explainer, property:               Defining Explanation Functions.
                                                               (line  15)
+* ert-font-lock-deftest:                 Syntax Highlighting Tests.
+                                                              (line  87)
+* ert-font-lock-deftest-file:            Syntax Highlighting Tests.
+                                                              (line  96)
+* ert-font-lock-test-file:               Syntax Highlighting Tests.
+                                                              (line  80)
+* ert-font-lock-test-string:             Syntax Highlighting Tests.
+                                                              (line  64)
 * ert-quiet:                             Running Tests in Batch Mode.
                                                               (line  43)
 * ert-results-describe-test-at-point:    Running Tests Interactively.
-                                                              (line 124)
+                                                              (line 126)
 * ert-results-find-test-at-point-other-window: Running Tests Interactively.
-                                                              (line  83)
+                                                              (line  85)
 * ert-results-pop-to-backtrace-for-test-at-point: Running Tests Interactively.
-                                                              (line  89)
+                                                              (line  91)
 * ert-results-pop-to-messages-for-test-at-point: Running Tests Interactively.
-                                                              (line  99)
+                                                              (line 101)
 * ert-results-pop-to-should-forms-for-test-at-point: Running Tests Interactively.
-                                                              (line  95)
+                                                              (line  97)
 * ert-results-pop-to-timings:            Running Tests Interactively.
-                                                              (line 117)
+                                                              (line 119)
 * ert-results-rerun-all-tests:           Running Tests Interactively.
-                                                              (line  80)
+                                                              (line  82)
 * ert-results-rerun-test-at-point:       Running Tests Interactively.
-                                                              (line  72)
+                                                              (line  74)
 * ert-results-rerun-test-at-point-debugging-errors: Running Tests Interactively.
-                                                              (line  76)
+                                                              (line  78)
 * ert-results-toggle-printer-limits-for-test-at-point: Running Tests Interactively.
-                                                              (line 104)
+                                                              (line 106)
 * ert-run-tests-batch:                   Running Tests in Batch Mode.
                                                               (line   6)
 * ert-run-tests-batch-and-exit:          Running Tests in Batch Mode.
+                                                              (line   6)
+* ert-run-tests-interactively:           Running Tests Interactively.
                                                               (line   6)
 * ert-summarize-tests-batch-and-exit:    Running Tests in Batch Mode.
                                                               (line  19)
@@ -1152,7 +1291,7 @@ Index
 * fixtures:                              Fixtures and Test Suites.
                                                               (line   6)
 * h, in ert results buffer:              Running Tests Interactively.
-                                                              (line 114)
+                                                              (line 116)
 * how to run ert tests:                  How to Run Tests.    (line   6)
 * how to write tests:                    How to Write Tests.  (line   6)
 * instrumenting test for Edebug:         Interactive Debugging.
@@ -1166,50 +1305,55 @@ Index
                                                               (line  14)
 * known bugs:                            Expected Failures.   (line   6)
 * l, in ert results buffer:              Running Tests Interactively.
-                                                              (line  95)
+                                                              (line  97)
 * L, in ert results buffer:              Running Tests Interactively.
-                                                              (line 104)
+                                                              (line 106)
 * low-level functions:                   Low-Level Functions for Working with Tests.
                                                               (line   6)
 * m, in ert results buffer:              Running Tests Interactively.
-                                                              (line  99)
+                                                              (line 101)
 * make-ert-test:                         Useful Techniques.   (line  38)
 * mocks and stubs:                       Mocks and Stubs.     (line   6)
 * preconditions of a test:               Tests and Their Environment.
                                                               (line   6)
 * r, in ert results buffer:              Running Tests Interactively.
-                                                              (line  72)
+                                                              (line  74)
 * R, in ert results buffer:              Running Tests Interactively.
-                                                              (line  80)
+                                                              (line  82)
 * re-running a failed test:              Interactive Debugging.
                                                               (line   9)
 * RET, in ert results buffer:            Running Tests Interactively.
-                                                              (line  63)
+                                                              (line  65)
 * running tests in batch mode:           Running Tests in Batch Mode.
                                                               (line   6)
 * running tests interactively:           Running Tests Interactively.
                                                               (line   6)
 * S-TAB, in ert results buffer:          Running Tests Interactively.
-                                                              (line  68)
+                                                              (line  70)
 * selecting tests:                       Test Selectors.      (line   6)
 * should, ert macro:                     The should Macro.    (line   6)
 * should-error, ert macro:               The should Macro.    (line  35)
 * should-not, ert macro:                 The should Macro.    (line  35)
 * show backtrace of failed test:         Interactive Debugging.
                                                               (line  22)
+* skip-unless:                           Tests and Their Environment.
+                                                              (line   6)
+* skip-when:                             Tests and Their Environment.
+                                                              (line   6)
 * skipping tests:                        Tests and Their Environment.
                                                               (line   6)
+* skipping tests, in erts file:          erts files.          (line  99)
 * T, in ert results buffer:              Running Tests Interactively.
-                                                              (line 117)
+                                                              (line 119)
 * TAB, in ert results buffer:            Running Tests Interactively.
-                                                              (line  68)
+                                                              (line  70)
 * test preconditions:                    Tests and Their Environment.
                                                               (line   6)
 * test results buffer:                   Running Tests Interactively.
-                                                              (line  48)
+                                                              (line  50)
 * test selector:                         Test Selectors.      (line   6)
 * tests and their environment:           Tests and Their Environment.
-                                                              (line  17)
+                                                              (line  27)
 * tips and tricks:                       Useful Techniques.   (line   6)
 * understanding explanations:            Understanding Explanations.
                                                               (line   6)
@@ -1700,29 +1844,31 @@ their use in free software.
 
 
 Tag Table:
-Node: Top847
-Node: Introduction3895
-Node: How to Run Tests6828
-Node: Running Tests Interactively7590
-Node: Running Tests in Batch Mode11637
-Node: Test Selectors15216
-Node: How to Write Tests17388
-Node: The should Macro18337
-Node: Expected Failures20433
-Node: Tests and Their Environment22664
-Node: Useful Techniques26249
-Node: erts files30068
-Node: How to Debug Tests33984
-Node: Understanding Explanations34383
-Node: Interactive Debugging36299
-Node: Extending ERT38482
-Node: Defining Explanation Functions38839
-Node: Low-Level Functions for Working with Tests39777
-Node: Other Testing Concepts40606
-Node: Mocks and Stubs40991
-Node: Fixtures and Test Suites41578
-Node: Index44000
-Node: GNU Free Documentation License54445
+Node: Top849
+Node: Introduction4024
+Node: How to Run Tests6990
+Node: Running Tests Interactively7752
+Node: Running Tests in Batch Mode11940
+Node: Test Selectors15519
+Node: How to Write Tests17728
+Node: The should Macro18736
+Node: Expected Failures20832
+Node: Tests and Their Environment23063
+Ref: Tests and Their Environment-Footnote-127022
+Node: Useful Techniques27183
+Node: erts files31002
+Node: Syntax Highlighting Tests34952
+Node: How to Debug Tests38518
+Node: Understanding Explanations38917
+Node: Interactive Debugging40833
+Node: Extending ERT43016
+Node: Defining Explanation Functions43373
+Node: Low-Level Functions for Working with Tests44311
+Node: Other Testing Concepts45140
+Node: Mocks and Stubs45525
+Node: Fixtures and Test Suites46112
+Node: Index48534
+Node: GNU Free Documentation License60045
 
 End Tag Table
 
