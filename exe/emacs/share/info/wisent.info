@@ -1,6 +1,7 @@
-This is wisent.info, produced by makeinfo version 6.8 from wisent.texi.
+This is wisent.info, produced by makeinfo version 7.0.3 from
+wisent.texi.
 
-Copyright © 1988–1993, 1995, 1998–2004, 2007, 2012–2024 Free Software
+Copyright © 1988–1993, 1995, 1998–2004, 2007, 2012–2025 Free Software
 Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
@@ -34,7 +35,7 @@ in Emacs buffers.
    It also describes how Wisent is used with the Semantic tool set
 described in the *note Semantic Manual: (semantic)Top.
 
-   Copyright © 1988–1993, 1995, 1998–2004, 2007, 2012–2024 Free Software
+   Copyright © 1988–1993, 1995, 1998–2004, 2007, 2012–2025 Free Software
 Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
@@ -78,7 +79,7 @@ See the *note Semantic Manual: (semantic)Top.
    • It uses a fast but not so space-efficient encoding for the parse
      tables, described in Corbett’s PhD thesis from Berkeley:
           ‘Static Semantics in Compiler Error Recovery’
-          June 1985, Report No.  UCB/CSD 85/251.
+          June 1985, Report No. UCB/CSD 85/251.
 
    • For generating the lookahead sets, Wisent uses the well-known
      technique of F. DeRemer and T. Pennello described in:
@@ -1297,9 +1298,6 @@ types, classes, includes, grammar rules, etc..
 grammar in “WY” form, a grammar format very close to the one used by
 Bison.
 
-   Please see *note Semantic Grammar Framework Manual: (grammar-fw)top,
-for more information on Semantic grammars.
-
 * Menu:
 
 * Grammar styles::
@@ -1509,7 +1507,7 @@ automagically expanded by Semantic.
 
    Rule delimiters are the colon (‘:’), that follows the nonterminal
 name, and a final semicolon (‘;’).  Unfortunately these delimiters are
-not ‘open-paren’/‘close-paren’ type, and the Emacs’ syntactic analyzer
+not ‘open-paren’/‘close-paren’ type, and the Emacs syntactic analyzer
 can’t easily isolate data between them to produce a ‘RULES_PART’
 parenthesis-block-like lexical token.  Consequently it is not possible
 to use ‘EXPANDFULL’ to iterate in ‘RULES_PART’, like this:
@@ -1652,8 +1650,7 @@ File: wisent.info,  Node: Wisent Lex,  Prev: Grammar styles,  Up: Wisent Semanti
 ========================
 
 The lexical analysis step of Semantic is performed by the general
-function ‘semantic-lex’.  For more information, see *note Semantic
-Language Development: (semantic-langdev)Writing Lexers.
+function ‘semantic-lex’.
 
    ‘semantic-lex’ produces lexical tokens of the form:
 
@@ -2218,7 +2215,7 @@ Index
 * LALR(1) grammar:                       Compiling a grammar. (line  11)
 * lexer:                                 Writing a lexer.     (line  10)
 * lexical analysis:                      Writing a lexer.     (line  10)
-* lexical token mapping:                 Wisent Lex.          (line  28)
+* lexical token mapping:                 Wisent Lex.          (line  27)
 * lexical tokens:                        Writing a lexer.     (line  15)
 * look-ahead token:                      Compiling a grammar. (line  11)
 * middle-rule actions:                   Grammar format.      (line  62)
@@ -2271,9 +2268,9 @@ Index
 * wisent-error <1>:                      Error recovery.      (line  46)
 * wisent-input:                          Actions goodies.     (line   6)
 * wisent-input <1>:                      Actions goodies.     (line   6)
-* wisent-lex:                            Wisent Lex.          (line  30)
-* wisent-lex <1>:                        Wisent Lex.          (line  30)
-* wisent-lex-istream:                    Wisent Lex.          (line  30)
+* wisent-lex:                            Wisent Lex.          (line  29)
+* wisent-lex <1>:                        Wisent Lex.          (line  29)
+* wisent-lex-istream:                    Wisent Lex.          (line  29)
 * wisent-lexer:                          Actions goodies.     (line  10)
 * wisent-lexer <1>:                      Actions goodies.     (line  10)
 * wisent-message:                        Report errors.       (line  12)
@@ -2311,33 +2308,33 @@ Index
 
 
 Tag Table:
-Node: Top885
-Node: Wisent Overview2191
-Node: Wisent Grammar4502
-Node: Grammar format5765
-Ref: action11899
-Node: Example14214
-Node: Compiling a grammar16252
-Node: Conflicts18365
-Node: Grammar Debugging19940
-Node: Understanding the automaton21336
-Node: Wisent Parsing31141
-Node: Writing a lexer33693
-Node: Actions goodies35332
-Node: Report errors36071
-Node: Error recovery37714
-Ref: wisent-skip-token42102
-Node: Debugging actions43319
-Node: Wisent Semantic45198
-Node: Grammar styles46058
-Node: Iterative style46602
-Node: Bison style49047
-Node: Mixed style50748
-Node: Start nonterminals53410
-Node: Useful functions56338
-Node: Wisent Lex56899
-Node: GNU Free Documentation License58416
-Node: Index83771
+Node: Top887
+Node: Wisent Overview2193
+Node: Wisent Grammar4503
+Node: Grammar format5766
+Ref: action11900
+Node: Example14215
+Node: Compiling a grammar16253
+Node: Conflicts18366
+Node: Grammar Debugging19941
+Node: Understanding the automaton21337
+Node: Wisent Parsing31142
+Node: Writing a lexer33694
+Node: Actions goodies35333
+Node: Report errors36072
+Node: Error recovery37715
+Ref: wisent-skip-token42103
+Node: Debugging actions43320
+Node: Wisent Semantic45199
+Node: Grammar styles45943
+Node: Iterative style46487
+Node: Bison style48932
+Node: Mixed style50633
+Node: Start nonterminals53292
+Node: Useful functions56220
+Node: Wisent Lex56781
+Node: GNU Free Documentation License58200
+Node: Index83555
 
 End Tag Table
 

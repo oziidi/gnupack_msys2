@@ -1,6 +1,6 @@
-This is rcirc.info, produced by makeinfo version 6.8 from rcirc.texi.
+This is rcirc.info, produced by makeinfo version 7.0.3 from rcirc.texi.
 
-Copyright © 2006–2024 Free Software Foundation, Inc.
+Copyright © 2006–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -30,7 +30,7 @@ communicate with each other in real-time.  Communication occurs both in
 topic channels which are collections of many users, or privately, with
 just one other user.
 
-   Copyright © 2006–2024 Free Software Foundation, Inc.
+   Copyright © 2006–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -514,7 +514,7 @@ window is showing them), the mode line will now show you the abbreviated
 channel or nick name.  Use ‘C-c C-<SPC>’ to switch to these buffers.
 
    By default the channel names are abbreviated, set
-‘rcirc-track-abbrevate-flag’ to a non-‘nil’ value.  This might be
+‘rcirc-track-abbreviate-flag’ to a non-‘nil’ value.  This might be
 interesting if the IRC activities are not tracked in the mode line, but
 somewhere else.
 
@@ -701,6 +701,9 @@ File: rcirc.info,  Node: Changing the time stamp format,  Next: Defining a new c
 to include the date in the time stamp:
 
      (setopt rcirc-time-format "%Y-%m-%d %H:%M ")
+
+   For log files, a different time format can be specified using the
+‘rcirc-log-time-format’ user option.
 
    If you don’t wish to use verbose time formatting all the time, you
 can use the ‘rcirc-when’ command to display a complete timestamp for the
@@ -1312,6 +1315,8 @@ Variable Index
 * rcirc-default-nick:                    Configuration.        (line 46)
 * rcirc-default-port:                    Configuration.        (line 52)
 * rcirc-default-user-name:               Configuration.        (line 56)
+* rcirc-log-time-format:                 Changing the time stamp format.
+                                                               (line  6)
 * rcirc-mode-hook:                       Channels.             (line 23)
 * rcirc-mode-hook <1>:                   Using fly spell mode. (line  6)
 * rcirc-mode-hook <2>:                   Scrolling conservatively.
@@ -1519,7 +1524,7 @@ Index
 * quotes:                                rcirc commands.      (line  21)
 * rabble online:                         People.              (line  30)
 * rcirc commands:                        rcirc commands.      (line   6)
-* rcirc-track-abbrevate-flag:            Channels.            (line  18)
+* rcirc-track-abbreviate-flag:           Channels.            (line  18)
 * real name:                             Configuration.       (line  61)
 * reason for quitting:                   rcirc commands.      (line  69)
 * reconnect:                             rcirc commands.      (line  75)
@@ -1576,31 +1581,31 @@ Index
 
 
 Tag Table:
-Node: Top846
-Node: Basics2442
-Node: Internet Relay Chat2712
-Node: Getting started with rcirc4386
-Node: Reference7986
-Node: rcirc commands8332
-Node: Useful IRC commands12280
-Node: Configuration13039
-Node: Fighting Information Overload18578
-Node: Channels19081
-Node: People20873
-Node: Keywords22547
-Node: Notices23066
-Node: Hacking and Tweaking24409
-Node: Skipping /away messages using handlers24890
-Node: Using fly spell mode25643
-Node: Scrolling conservatively26073
-Node: Changing the time stamp format26754
-Node: Defining a new command27311
-Node: Using rcirc with bouncers28102
-Node: Dealing with Bridge Bots29126
-Node: GNU Free Documentation License30673
-Node: Key Index56036
-Node: Variable Index57422
-Node: Index59641
+Node: Top848
+Node: Basics2444
+Node: Internet Relay Chat2714
+Node: Getting started with rcirc4388
+Node: Reference7988
+Node: rcirc commands8334
+Node: Useful IRC commands12282
+Node: Configuration13041
+Node: Fighting Information Overload18580
+Node: Channels19083
+Node: People20876
+Node: Keywords22550
+Node: Notices23069
+Node: Hacking and Tweaking24412
+Node: Skipping /away messages using handlers24893
+Node: Using fly spell mode25646
+Node: Scrolling conservatively26076
+Node: Changing the time stamp format26757
+Node: Defining a new command27425
+Node: Using rcirc with bouncers28216
+Node: Dealing with Bridge Bots29240
+Node: GNU Free Documentation License30787
+Node: Key Index56150
+Node: Variable Index57536
+Node: Index59901
 
 End Tag Table
 

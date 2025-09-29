@@ -1,6 +1,6 @@
-This is dbus.info, produced by makeinfo version 6.8 from dbus.texi.
+This is dbus.info, produced by makeinfo version 7.0.3 from dbus.texi.
 
-Copyright © 2007–2024 Free Software Foundation, Inc.
+Copyright © 2007–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -18,7 +18,7 @@ START-INFO-DIR-ENTRY
 END-INFO-DIR-ENTRY
 
 
-File: dbus.info,  Node: Top,  Next: Overview,  Prev: (dir),  Up: (dir)
+File: dbus.info,  Node: Top,  Next: Overview,  Up: (dir)
 
 D-Bus integration in Emacs
 **************************
@@ -28,7 +28,7 @@ message bus system, a simple way for applications to talk to one
 another.  An overview of D-Bus can be found at
 <https://dbus.freedesktop.org/>.
 
-   Copyright © 2007–2024 Free Software Foundation, Inc.
+   Copyright © 2007–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -58,15 +58,18 @@ another.  An overview of D-Bus can be found at
 * GNU Free Documentation License:: The license for this documentation.
 
 
-File: dbus.info,  Node: Overview,  Next: Inspection,  Up: Top
+File: dbus.info,  Node: Overview,  Next: Inspection,  Prev: Top,  Up: Top
 
 1 An overview of D-Bus
 **********************
 
 D-Bus is an inter-process communication mechanism for applications
-residing on the same host.  The communication is based on “messages”.
-Data in the messages is carried in a structured way, it is not just a
-byte stream.
+residing on the same host.  Emacs uses it when it is compiled with the
+respective library, see configuration option ‘--with-dbus’.  At runtime,
+the form ‘(featurep 'dbusbind)’ indicates D-Bus support.
+
+   D-Bus communication is based on “messages”.  Data in the messages is
+carried in a structured way, it is not just a byte stream.
 
    The communication is connection oriented to two kinds of message
 buses: a so called “system bus”, and a “session bus”.  On a given
@@ -961,8 +964,8 @@ this array.  Example:
 
  -- Function: dbus-string-to-byte-array string
      Sometimes, D-Bus methods require as input parameter an array of
-     bytes, instead of a string.  If it is guaranteed, that STRING is a
-     UTF-8 string, this function performs the conversion.  Example:
+     bytes, instead of a string.  This function converts STRING into an
+     array of bytes of the UTF-8 encoding of STRING.  Example:
 
           (dbus-string-to-byte-array "/etc/hosts")
 
@@ -1019,11 +1022,12 @@ here for either ‘nil’ or ‘t’):
 
      (INTEGER ((STRING BOOL BOOL) (STRING BOOL BOOL) ...))
 
- -- Function: dbus-byte-array-to-string byte-array &optional multibyte
+ -- Function: dbus-byte-array-to-string byte-array
      If a D-Bus method or signal returns an array of bytes, which are
      known to represent a UTF-8 string, this function converts
-     BYTE-ARRAY to the corresponding string.  The string is unibyte
-     encoded, unless MULTIBYTE is non-‘nil’.  Example:
+     BYTE-ARRAY to the corresponding Lisp string.  The contents of
+     BYTE-ARRAY should be the byte sequence of a UTF-8 encoded string.
+     Example:
 
           (dbus-byte-array-to-string '(47 101 116 99 47 104 111 115 116 115))
 
@@ -1255,7 +1259,7 @@ the following functions:
           We are not an owner of the name SERVICE.
 
      When SERVICE is not a known name but a unique name, the function
-     returns nil.
+     returns ‘nil’.
 
    When a name has been chosen, Emacs can offer its own methods, which
 can be called by other applications.  These methods could be an
@@ -2022,7 +2026,7 @@ Index
                                                               (line  68)
 * dbus-setenv:                           Alternative Buses.   (line  88)
 * dbus-string-to-byte-array:             Type Conversion.     (line 107)
-* dbus-unescape-from-identifier:         Type Conversion.     (line 177)
+* dbus-unescape-from-identifier:         Type Conversion.     (line 178)
 * dbus-unregister-object:                Register Objects.    (line 304)
 * dbus-unregister-service:               Register Objects.    (line  47)
 * debugging:                             Errors and Events.   (line   6)
@@ -2527,35 +2531,35 @@ their use in free software.
 
 
 Tag Table:
-Node: Top830
-Node: Overview2572
-Node: Inspection4968
-Node: Version5573
-Node: Bus names6299
-Ref: dbus-get-unique-name10106
-Node: Introspection10297
-Ref: Introspection-Footnote-118318
-Ref: Introspection-Footnote-218472
-Node: Nodes and Interfaces18657
-Node: Methods and Signal22927
-Node: Properties and Annotations25932
-Ref: Properties and Annotations-Footnote-134087
-Ref: Properties and Annotations-Footnote-234189
-Ref: Properties and Annotations-Footnote-334294
-Node: Arguments and Signatures34386
-Node: Type Conversion36669
-Node: Synchronous Methods44487
-Ref: dbus-call-method45114
-Node: Asynchronous Methods48719
-Node: Register Objects50582
-Node: Signals63851
-Ref: Signals-Footnote-168914
-Ref: Signals-Footnote-269059
-Node: Alternative Buses69302
-Node: Errors and Events73956
-Node: Monitoring Messages79675
-Node: Index81690
-Node: GNU Free Documentation License89015
+Node: Top832
+Node: Overview2560
+Node: Inspection5156
+Node: Version5761
+Node: Bus names6487
+Ref: dbus-get-unique-name10294
+Node: Introspection10485
+Ref: Introspection-Footnote-118506
+Ref: Introspection-Footnote-218660
+Node: Nodes and Interfaces18845
+Node: Methods and Signal23115
+Node: Properties and Annotations26120
+Ref: Properties and Annotations-Footnote-134275
+Ref: Properties and Annotations-Footnote-234377
+Ref: Properties and Annotations-Footnote-334482
+Node: Arguments and Signatures34574
+Node: Type Conversion36857
+Node: Synchronous Methods44675
+Ref: dbus-call-method45302
+Node: Asynchronous Methods48907
+Node: Register Objects50770
+Node: Signals64045
+Ref: Signals-Footnote-169108
+Ref: Signals-Footnote-269253
+Node: Alternative Buses69496
+Node: Errors and Events74150
+Node: Monitoring Messages79869
+Node: Index81884
+Node: GNU Free Documentation License89209
 
 End Tag Table
 

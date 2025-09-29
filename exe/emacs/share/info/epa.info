@@ -1,8 +1,8 @@
-This is epa.info, produced by makeinfo version 6.8 from epa.texi.
+This is epa.info, produced by makeinfo version 7.0.3 from epa.texi.
 
 This file describes EasyPG Assistant 1.0.0.
 
-   Copyright © 2007–2024 Free Software Foundation, Inc.
+   Copyright © 2007–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -34,7 +34,7 @@ interface called EasyPG Library.
 
    This file describes EasyPG Assistant 1.0.0.
 
-   Copyright © 2007–2024 Free Software Foundation, Inc.
+   Copyright © 2007–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -242,6 +242,13 @@ File: epa.info,  Node: Cryptographic operations on regions,  Next: Cryptographic
      you whether or not to sign the text before encryption and if you
      answered yes, it will let you select the signing keys.
 
+ -- Variable: epa-keys-select-method
+     This variable controls the method used for key selection in
+     ‘epa-select-keys’.  The default value ‘buffer’ pops up a special
+     buffer where you can select the keys.  If the value is
+     ‘minibuffer’, ‘epa-select-keys’ will instead prompt for the keys in
+     the minibuffer, where you should type the keys separated by commas.
+
 
 File: epa.info,  Node: Cryptographic operations on files,  Next: Dired integration,  Prev: Cryptographic operations on regions,  Up: Commands
 
@@ -313,7 +320,8 @@ interface.  Try ‘M-x customize-variable epa-global-mail-mode’.
      Decrypt OpenPGP armors in the current buffer.
 
 ‘C-c C-e C-v and C-c C-e v’
-     Verify OpenPGP cleartext signed messages in the current buffer.
+     Verify OpenPGP cleartext signed messages in the current buffer.  If
+     verification fails for some reason, this command signals an error.
 
 ‘C-c C-e C-s and C-c C-e s’
      Compose a signed message from the current buffer, using your
@@ -524,6 +532,9 @@ enable it:
      (gnupg)Agent Options.
 
   2. Customize variable ‘epg-pinentry-mode’ to ‘loopback’ in Emacs.
+
+   Note that loopback Pinentry does not work with ‘gpgsm’, therefore
+EasyPG will ignore this setting for it.
 
    There are other options available to use Emacs as Pinentry, you might
 come across a Pinentry called ‘pinentry-emacs’ or ‘gpg-agent’ option
@@ -1180,17 +1191,17 @@ Key Index
 * C-c C-e C-d:                           Mail-mode integration.
                                                                (line 20)
 * C-c C-e C-e:                           Mail-mode integration.
-                                                               (line 31)
+                                                               (line 32)
 * C-c C-e C-s:                           Mail-mode integration.
-                                                               (line 26)
+                                                               (line 27)
 * C-c C-e C-v:                           Mail-mode integration.
                                                                (line 23)
 * C-c C-e d:                             Mail-mode integration.
                                                                (line 20)
 * C-c C-e e:                             Mail-mode integration.
-                                                               (line 31)
+                                                               (line 32)
 * C-c C-e s:                             Mail-mode integration.
-                                                               (line 26)
+                                                               (line 27)
 * C-c C-e v:                             Mail-mode integration.
                                                                (line 23)
 
@@ -1233,9 +1244,9 @@ Function Index
 * epa-mail-decrypt:                      Mail-mode integration.
                                                                (line 20)
 * epa-mail-encrypt:                      Mail-mode integration.
-                                                               (line 31)
+                                                               (line 32)
 * epa-mail-sign:                         Mail-mode integration.
-                                                               (line 26)
+                                                               (line 27)
 * epa-mail-verify:                       Mail-mode integration.
                                                                (line 23)
 * epa-sign-file:                         Cryptographic operations on files.
@@ -1269,34 +1280,36 @@ Variable Index
                                                               (line  44)
 * epa-file-select-keys:                  Encrypting/decrypting gpg files.
                                                               (line  68)
+* epa-keys-select-method:                Cryptographic operations on regions.
+                                                              (line  41)
 * epa-mail-aliases:                      Mail-mode integration.
-                                                              (line  31)
+                                                              (line  32)
 * epg-pinentry-mode:                     GnuPG Pinentry.      (line  32)
 
 
 
 Tag Table:
-Node: Top899
-Node: Overview2256
-Node: Quick start2695
-Node: Commands3987
-Node: Key management4393
-Node: Cryptographic operations on regions7118
-Node: Cryptographic operations on files9134
-Node: Dired integration9865
-Node: Mail-mode integration10476
-Node: Encrypting/decrypting gpg files12337
-Ref: Encrypting/decrypting gpg files-Footnote-116988
-Node: Querying a key server17283
-Node: GnuPG version compatibility17866
-Node: GnuPG Pinentry19310
-Node: Caching Passphrases21222
-Node: Bug Reports22726
-Node: GNU Free Documentation License23673
-Node: Concept Index49029
-Node: Key Index55057
-Node: Function Index56579
-Node: Variable Index60018
+Node: Top901
+Node: Overview2258
+Node: Quick start2697
+Node: Commands3989
+Node: Key management4395
+Node: Cryptographic operations on regions7120
+Node: Cryptographic operations on files9531
+Node: Dired integration10262
+Node: Mail-mode integration10873
+Node: Encrypting/decrypting gpg files12810
+Ref: Encrypting/decrypting gpg files-Footnote-117461
+Node: Querying a key server17756
+Node: GnuPG version compatibility18339
+Node: GnuPG Pinentry19783
+Node: Caching Passphrases21809
+Node: Bug Reports23313
+Node: GNU Free Documentation License24260
+Node: Concept Index49616
+Node: Key Index55644
+Node: Function Index57166
+Node: Variable Index60605
 
 End Tag Table
 

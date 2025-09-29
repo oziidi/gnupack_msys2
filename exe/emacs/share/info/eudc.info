@@ -1,11 +1,11 @@
-This is eudc.info, produced by makeinfo version 6.8 from eudc.texi.
+This is eudc.info, produced by makeinfo version 7.0.3 from eudc.texi.
 
 This file documents EUDC version 1.40.0.
 
    EUDC is the Emacs Unified Directory Client, a common interface to
 directory servers and contact information.
 
-   Copyright © 1998, 2000–2024 Free Software Foundation, Inc.
+   Copyright © 1998, 2000–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -33,7 +33,7 @@ This file documents EUDC version 1.40.0.
    EUDC is the Emacs Unified Directory Client, a common interface to
 directory servers and contact information.
 
-   Copyright © 1998, 2000–2024 Free Software Foundation, Inc.
+   Copyright © 1998, 2000–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -83,7 +83,7 @@ protocols.
      inline query
    • Fast minibuffer queries for email addresses and phone numbers
    • Interface to BBDB to let you insert server records into your own
-     BBDB database (*note BBDB: (bbdb)Top.)
+     BBDB database (*note BBDB: (bbdb)BBDB.)
 
 * Menu:
 
@@ -896,10 +896,10 @@ Queries::), or all servers can be tried and all matches returned.
 In addition to providing a dedicated EUDC function for binding to a key
 shortcut (*note Inline Query Expansion::), EUDC also provides a function
 to contribute search results to the Emacs in-buffer completion system
-available via the function ‘completion-at-point’ (*note
-(maintaining)Identifier Inquiries::) in ‘message-mode’ buffers (*note
-Message: (message)Top.).  When using this mechanism, queries are made in
-the multi-server query mode of operation (*note Multi-server Queries::).
+available via the function ‘completion-at-point’ (*note (emacs)List
+Identifiers::) in ‘message-mode’ buffers (*note Message: (message)Top.).
+When using this mechanism, queries are made in the multi-server query
+mode of operation (*note Multi-server Queries::).
 
    When a buffer in ‘message-mode’ is created, EUDC’s inline expansion
 function is automatically added to the variable
@@ -1033,7 +1033,7 @@ File: eudc.info,  Node: Creating BBDB Records,  Next: Server/Protocol Locals,  P
 =========================
 
 With EUDC, you can automatically create BBDB records (*note BBDB:
-(bbdb)Top.) from records you get from a directory server.  You do this
+(bbdb)BBDB.) from records you get from a directory server.  You do this
 by moving point to the appropriate record in a query result display
 buffer and invoking the command ‘M-x
 eudc-insert-record-at-point-into-bbdb’ with the keyboard binding ‘b’(1),
@@ -1824,39 +1824,39 @@ Index
 
 
 Tag Table:
-Node: Top1023
-Node: Overview2263
-Node: LDAP3599
-Node: BBDB4564
-Node: macOS Contacts5583
-Node: ecomplete5999
-Node: mailabbrev7202
-Node: Installation8750
-Node: LDAP Configuration9805
-Node: Emacs-only Configuration11917
-Node: External Configuration13372
-Node: Troubleshooting15123
-Node: macOS Contacts Configuration15804
-Node: ecomplete Configuration17396
-Node: mailabbrev Configuration17888
-Node: Usage18362
-Node: Querying Servers19227
-Node: Selecting a Server19739
-Node: Return Attributes21559
-Node: Duplicate Attributes22663
-Node: Query Form25070
-Node: Display of Query Results27643
-Node: Inline Query Expansion30638
-Node: The Server Hotlist40532
-Node: The Hotlist Edit Buffer43055
-Node: Multi-server Queries44121
-Node: Creating BBDB Records45435
-Ref: Creating BBDB Records-Footnote-149263
-Node: Server/Protocol Locals49400
-Node: Manipulating local bindings49912
-Node: Credits52597
-Node: GNU Free Documentation License52933
-Node: Index78278
+Node: Top1025
+Node: Overview2265
+Node: LDAP3602
+Node: BBDB4567
+Node: macOS Contacts5586
+Node: ecomplete6002
+Node: mailabbrev7205
+Node: Installation8753
+Node: LDAP Configuration9808
+Node: Emacs-only Configuration11920
+Node: External Configuration13375
+Node: Troubleshooting15126
+Node: macOS Contacts Configuration15807
+Node: ecomplete Configuration17399
+Node: mailabbrev Configuration17891
+Node: Usage18365
+Node: Querying Servers19230
+Node: Selecting a Server19742
+Node: Return Attributes21562
+Node: Duplicate Attributes22666
+Node: Query Form25073
+Node: Display of Query Results27646
+Node: Inline Query Expansion30641
+Node: The Server Hotlist40524
+Node: The Hotlist Edit Buffer43047
+Node: Multi-server Queries44113
+Node: Creating BBDB Records45427
+Ref: Creating BBDB Records-Footnote-149256
+Node: Server/Protocol Locals49393
+Node: Manipulating local bindings49905
+Node: Credits52590
+Node: GNU Free Documentation License52926
+Node: Index78271
 
 End Tag Table
 

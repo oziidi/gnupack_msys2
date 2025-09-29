@@ -1,21 +1,21 @@
-This is eintr.info, produced by makeinfo version 6.8 from
+This is eintr.info, produced by makeinfo version 7.0.3 from
 emacs-lisp-intro.texi.
 
 This is ‘An Introduction to Programming in Emacs Lisp’, for people who
 are not programmers.
 
 
-   Distributed with Emacs version 29.4.
+   Distributed with Emacs version 30.2.
 
-   Copyright © 1990–1995, 1997, 2001–2024 Free Software Foundation, Inc.
+   Copyright © 1990–1995, 1997, 2001–2025 Free Software Foundation, Inc.
 
    Printed copies available from <https://shop.fsf.org/>.  Published by:
 
      GNU Press,                        https://www.fsf.org/licensing/gnu-press/
      a division of the                 email: sales@fsf.org
      Free Software Foundation, Inc.    Tel: +1 (617) 542-5942
-     51 Franklin Street, Fifth Floor   Fax: +1 (617) 542-2652
-     Boston, MA 02110-1301 USA
+     31 Milk Street, # 960789          Fax: +1 (617) 542-2652
+     Boston, MA 02196 USA
 
 
    ISBN 1-882114-43-4
@@ -46,17 +46,17 @@ This is ‘An Introduction to Programming in Emacs Lisp’, for people who
 are not programmers.
 
 
-   Distributed with Emacs version 29.4.
+   Distributed with Emacs version 30.2.
 
-   Copyright © 1990–1995, 1997, 2001–2024 Free Software Foundation, Inc.
+   Copyright © 1990–1995, 1997, 2001–2025 Free Software Foundation, Inc.
 
    Printed copies available from <https://shop.fsf.org/>.  Published by:
 
      GNU Press,                        https://www.fsf.org/licensing/gnu-press/
      a division of the                 email: sales@fsf.org
      Free Software Foundation, Inc.    Tel: +1 (617) 542-5942
-     51 Franklin Street, Fifth Floor   Fax: +1 (617) 542-2652
-     Boston, MA 02110-1301 USA
+     31 Milk Street, # 960789          Fax: +1 (617) 542-2652
+     Boston, MA 02196 USA
 
 
    ISBN 1-882114-43-4
@@ -741,18 +741,18 @@ then press and release ‘t’.)
 
    Also, I often refer to one of Emacs’s standard commands by listing
 the keys which you press to invoke the command and then giving the name
-of the command in parentheses, like this: ‘M-C-\’ (‘indent-region’).
+of the command in parentheses, like this: ‘C-M-\’ (‘indent-region’).
 What this means is that the ‘indent-region’ command is customarily
-invoked by typing ‘M-C-\’.  (You can, if you wish, change the keys that
+invoked by typing ‘C-M-\’.  (You can, if you wish, change the keys that
 are typed to invoke the command; this is called “rebinding”.  *Note
-Keymaps: Keymaps.)  The abbreviation ‘M-C-\’ means that you type your
-<META> key, <CTRL> key and ‘\’ key all at the same time.  (On many
+Keymaps: Keymaps.)  The abbreviation ‘C-M-\’ means that you type your
+<CTRL> key, <META> key, and ‘\’ key all at the same time.  (On many
 modern keyboards the <META> key is labeled <ALT>.)  Sometimes a
 combination like this is called a keychord, since it is similar to the
 way you play a chord on a piano.  If your keyboard does not have a
 <META> key, the <ESC> key prefix is used in place of it.  In this case,
-‘M-C-\’ means that you press and release your <ESC> key and then type
-the <CTRL> key and the ‘\’ key at the same time.  But usually ‘M-C-\’
+‘C-M-\’ means that you press and release your <ESC> key and then type
+the <CTRL> key and the ‘\’ key at the same time.  But usually ‘C-M-\’
 means press the <CTRL> key along with the key that is labeled <ALT> and,
 at the same time, press the ‘\’ key.
 
@@ -760,7 +760,7 @@ at the same time, press the ‘\’ key.
 with ‘C-u’, which is called the “universal argument”.  The ‘C-u’
 keychord passes an argument to the subsequent command.  Thus, to indent
 a region of plain text by 6 spaces, mark the region, and then type
-‘C-u 6 M-C-\’.  (If you do not specify a number, Emacs either passes the
+‘C-u 6 C-M-\’.  (If you do not specify a number, Emacs either passes the
 number 4 to the command or otherwise runs the command differently than
 it would otherwise.)  *Note Numeric Arguments: (emacs)Arguments.
 
@@ -988,7 +988,7 @@ Interaction mode or Emacs Lisp mode, you have available to you several
 commands to format the Lisp expression so it is easy to read.  For
 example, pressing the <TAB> key automatically indents the line the
 cursor is on by the right amount.  A command to properly indent the code
-in a region is customarily bound to ‘M-C-\’.  Indentation is designed so
+in a region is customarily bound to ‘C-M-\’.  Indentation is designed so
 that you can see which elements of a list belong to which list—elements
 of a sub-list are indented more than the elements of the enclosing list.
 
@@ -3172,10 +3172,10 @@ the first line of your Emacs Lisp file:
 * Menu:
 
 * Lexical & Dynamic Binding Differences::
-* Lexical vs. Dynamic Binding Example::
+* Lexical vs Dynamic Binding Example::
 
 
-File: eintr.info,  Node: Lexical & Dynamic Binding Differences,  Next: Lexical vs. Dynamic Binding Example,  Up: How let Binds Variables
+File: eintr.info,  Node: Lexical & Dynamic Binding Differences,  Next: Lexical vs Dynamic Binding Example,  Up: How let Binds Variables
 
 Differences Between Lexical and Dynamic Binding
 ...............................................
@@ -3206,7 +3206,7 @@ takes that binding off of the stack, revealing the one it had (if any)
 before the ‘let’ expression.
 
 
-File: eintr.info,  Node: Lexical vs. Dynamic Binding Example,  Prev: Lexical & Dynamic Binding Differences,  Up: How let Binds Variables
+File: eintr.info,  Node: Lexical vs Dynamic Binding Example,  Prev: Lexical & Dynamic Binding Differences,  Up: How let Binds Variables
 
 Example of Lexical vs. Dynamic Binding
 ......................................
@@ -7066,12 +7066,12 @@ the else-part of the condition is executed:
 
      (push string kill-ring)
 
-‘push’ puts its first argument onto the second.  It is similar to the
+   ‘push’ puts its first argument onto the second.  It is similar to the
 older
 
      (setq kill-ring (cons string kill-ring))
 
-or the newer
+   or the newer
 
      (add-to-list kill-ring string)
 
@@ -10785,7 +10785,7 @@ parenthesis and type ‘C-x C-e’ to install it.
 
    If you wish, you can also install this key binding by evaluating it:
 
-     (global-set-key "\C-c=" 'count-words-example)
+     (keymap-global-set "C-c =" 'count-words-example)
 
    To conduct the first test, set mark and point to the beginning and
 end of the following line and then type ‘C-c =’ (or ‘M-x
@@ -11562,7 +11562,7 @@ almost the same code as for the recursive version of
 
 Let’s reuse ‘C-c =’ as a convenient key binding:
 
-     (global-set-key "\C-c=" 'count-words-defun)
+     (keymap-global-set "C-c =" 'count-words-defun)
 
    Now we can try out ‘count-words-defun’: install both
 ‘count-words-in-defun’ and ‘count-words-defun’, and set the key binding.
@@ -13502,7 +13502,7 @@ File: eintr.info,  Node: Key Bindings,  Next: Keymaps,  Prev: Indent Tabs Mode, 
 Now for some personal key bindings:
 
      ;;; Compare windows
-     (global-set-key "\C-cw" 'compare-windows)
+     (keymap-global-set "C-c w" 'compare-windows)
 
    ‘compare-windows’ is a nifty command that compares the text in your
 current window with text in the next window.  It makes the comparison by
@@ -13511,15 +13511,14 @@ as they match.  I use this command all the time.
 
    This also shows how to set a key globally, for all modes.
 
-   The command is ‘global-set-key’.  It is followed by the key binding.
-In a ‘.emacs’ file, the keybinding is written as shown: ‘\C-c’ stands
-for Control-C, which means to press the control key and the ‘c’ key at
-the same time.  The ‘w’ means to press the ‘w’ key.  The key binding is
-surrounded by double quotation marks.  In documentation, you would write
-this as ‘C-c w’.  (If you were binding a <META> key, such as ‘M-c’,
-rather than a <CTRL> key, you would write ‘\M-c’ in your ‘.emacs’ file.
-*Note Rebinding Keys in Your Init File: (emacs)Init Rebinding, for
-details.)
+   The key setting command is ‘keymap-global-set’.  It is followed by
+the key binding.  In a ‘.emacs’ file, the keybinding is written as
+shown: ‘C-c’ stands for Control-C, which means to press the control key
+and the ‘c’ key at the same time.  The ‘w’ means to press the ‘w’ key.
+The key binding is surrounded by double quotation marks.  (If you were
+binding a <META> key, rather than a <CTRL> key, you would write ‘M-c’ in
+your ‘.emacs’ file.  *Note Rebinding Keys in Your Init File: (emacs)Init
+Rebinding, for details.)
 
    The command invoked by the keys is ‘compare-windows’.  Note that
 ‘compare-windows’ is preceded by a single-quote; otherwise, Emacs would
@@ -13544,7 +13543,7 @@ will run out of own keys.
 
      ;;; Key binding for 'occur'
      ; I use occur a lot, so let's bind it to a key:
-     (global-set-key "\C-co" 'occur)
+     (keymap-global-set "C-c o" 'occur)
 
    The ‘occur’ command shows all the lines in the current buffer that
 contain a match for a regular expression.  When the region is active,
@@ -13555,7 +13554,7 @@ buffer serves as a menu to jump to occurrences.
    Here is how to unbind a key, so it does not work:
 
      ;;; Unbind 'C-x f'
-     (global-unset-key "\C-xf")
+     (keymap-global-unset "C-x f")
 
    There is a reason for this unbinding: I found I inadvertently typed
 ‘C-x f’ when I meant to type ‘C-x C-f’.  Rather than find a file, as I
@@ -13566,12 +13565,37 @@ simply unbound the key.
    The following rebinds an existing key:
 
      ;;; Rebind 'C-x C-b' for 'buffer-menu'
-     (global-set-key "\C-x\C-b" 'buffer-menu)
+     (keymap-global-set "C-x C-b" 'buffer-menu)
 
    By default, ‘C-x C-b’ runs the ‘list-buffers’ command.  This command
 lists your buffers in _another_ window.  Since I almost always want to
 do something in that window, I prefer the ‘buffer-menu’ command, which
 not only lists the buffers, but moves point into that window.
+
+16.7.1 Legacy Global Key Binding Commands
+-----------------------------------------
+
+Historically, keys are bound globally using a lower-level function,
+‘global-set-key’, which is now considered legacy.  While you are
+encouraged to use ‘keymap-global-set’, you likely would encounter
+‘global-set-key’ in various places.  The first example in this section
+can be rewritten using ‘global-set-key’ as:
+
+     (global-set-key "\C-cw" 'compare-windows)
+
+   It is very similar to ‘keymap-global-set’, with the keybinding
+following a slightly different format.  Control-C is represented by
+‘\C-c’, instead of ‘C-c’.  There is no space between key strokes, like
+‘\C-c’ and ‘w’ in this example.  Despite the difference, in
+documentation, this is still written as ‘C-c w’ for readability.
+
+   Historically, keys are unbound globally using a lower-function,
+‘global-unset-key’, which is now considered legacy.  Its key binding
+format follows that of ‘global-set-key’.  The key unbinding example in
+this section can be rewritten as:
+
+     ;;; Unbind 'C-x f'
+     (global-unset-key "\C-xf")
 
 
 File: eintr.info,  Node: Keymaps,  Next: Loading Files,  Prev: Key Bindings,  Up: Emacs Initialization
@@ -13580,24 +13604,31 @@ File: eintr.info,  Node: Keymaps,  Next: Loading Files,  Prev: Key Bindings,  Up
 ============
 
 Emacs uses “keymaps” to record which keys call which commands.  When you
-use ‘global-set-key’ to set the key binding for a single command in all
-parts of Emacs, you are specifying the key binding in
+use ‘keymap-global-set’ to set the key binding for a single command in
+all parts of Emacs, you are specifying the key binding in
 ‘current-global-map’.
 
    Specific modes, such as C mode or Text mode, have their own keymaps;
 the mode-specific keymaps override the global map that is shared by all
 buffers.
 
-   The ‘global-set-key’ function binds, or rebinds, the global keymap.
-For example, the following binds the key ‘C-x C-b’ to the function
-‘buffer-menu’:
+   The ‘keymap-global-set’ function binds, or rebinds, the global
+keymap.  For example, the following binds the key ‘C-x C-b’ to the
+function ‘buffer-menu’:
 
-     (global-set-key "\C-x\C-b" 'buffer-menu)
+     (keymap-global-set "C-x C-b" 'buffer-menu)
 
-   Mode-specific keymaps are bound using the ‘define-key’ function,
+   Mode-specific keymaps are bound using the ‘keymap-set’ function,
 which takes a specific keymap as an argument, as well as the key and the
-command.  For example, my ‘.emacs’ file contains the following
-expression to bind the ‘texinfo-insert-@group’ command to ‘C-c C-c g’:
+command.  For example, the following expression binds the
+‘texinfo-insert-@group’ command to ‘C-c C-c g’:
+
+     (keymap-set texinfo-mode-map "C-c C-c g" 'texinfo-insert-@group)
+
+   Historically, keymaps are bound using a lower-level function,
+‘define-key’, which is now considered legacy.  While you are encouraged
+to use ‘keymap-set’, you likely would encounter ‘define-key’ in various
+places.  The above key binding can be rewritten using ‘define-key’ as:
 
      (define-key texinfo-mode-map "\C-c\C-cg" 'texinfo-insert-@group)
 
@@ -13621,9 +13652,9 @@ page; many multi-line examples in this book are surrounded by ‘@group
 write a function to insert a word; but I prefer key strokes consistent
 with other Texinfo mode key bindings.)
 
-   You will see numerous ‘define-key’ expressions in ‘loaddefs.el’ as
-well as in the various mode libraries, such as ‘cc-mode.el’ and
-‘lisp-mode.el’.
+   You will see numerous ‘keymap-set’ and ‘define-key’ expressions in
+‘loaddefs.el’ as well as in the various mode libraries, such as
+‘cc-mode.el’ and ‘lisp-mode.el’.
 
    *Note Customizing Key Bindings: (emacs)Key Bindings, and *note
 Keymaps: (elisp)Keymaps, for more information about keymaps.
@@ -13659,11 +13690,9 @@ buffer in the lower of the new windows and the top half in the upper
 window.
 
    To replace the key binding for the default ‘split-window-vertically’,
-you must also unset that key and bind the keys to
-‘split-window-quietly’, like this:
+you must bind the keys to ‘split-window-quietly’, like this:
 
-     (global-unset-key "\C-x2")
-     (global-set-key "\C-x2" 'split-window-quietly)
+     (keymap-global-set "C-x 2" 'split-window-quietly)
 
    If you load many extensions, as I do, then instead of specifying the
 exact location of the extension file, as shown above, you can specify
@@ -13796,7 +13825,7 @@ are written within square brackets, without quotation marks.
 
    I bind ‘line-to-top-of-window’ to my <F6> function key like this:
 
-     (global-set-key [f6] 'line-to-top-of-window)
+     (keymap-global-set "<f6>" 'line-to-top-of-window)
 
    For more information, see *note Rebinding Keys in Your Init File:
 (emacs)Init Rebinding.
@@ -14705,7 +14734,7 @@ along with a handy global key binding:
          (message "End of buffer")))
 
      ;; Bind 'the-the' to  C-c \
-     (global-set-key "\C-c\\" 'the-the)
+     (keymap-global-set "C-c \\" 'the-the)
 
 
    Here is test text:
@@ -17185,7 +17214,7 @@ Index
                                                               (line   6)
 * Buffer, history of word:               Buffer Names.        (line  66)
 * buffer-file-name:                      Buffer Names.        (line   6)
-* buffer-menu, bound to key:             Key Bindings.        (line  70)
+* buffer-menu, bound to key:             Key Bindings.        (line  69)
 * buffer-name:                           Buffer Names.        (line   6)
 * Bug, most insidious type:              Another Bug.         (line   6)
 * Building robots:                       Building Robots.     (line   6)
@@ -17322,11 +17351,11 @@ Index
 * Functions, primitive:                  Primitive Functions. (line   6)
 * Generate an error message:             Making Errors.       (line   6)
 * Getting a buffer:                      Getting Buffers.     (line   6)
-* Global set key:                        Key Bindings.        (line  18)
+* Global set key:                        Key Bindings.        (line  82)
 * global variable defined:               Determining the Element.
                                                               (line  89)
-* global-set-key:                        Key Bindings.        (line  18)
-* global-unset-key:                      Key Bindings.        (line  59)
+* global-set-key:                        Key Bindings.        (line  82)
+* global-unset-key:                      Key Bindings.        (line  96)
 * Graph prototype:                       Readying a Graph.    (line   6)
 * Graph, printing all:                   Print Whole Graph.   (line   6)
 * graph-body-print:                      graph-body-print.    (line   6)
@@ -17363,7 +17392,10 @@ Index
 * Keep, type of recursive pattern:       Keep.                (line   6)
 * Key bindings, fixing:                  Miscellaneous.       (line  88)
 * Key setting globally:                  Key Bindings.        (line  18)
-* Key unbinding:                         Key Bindings.        (line  59)
+* Key unbinding:                         Key Bindings.        (line  58)
+* Keymap global set:                     Key Bindings.        (line  18)
+* keymap-global-set:                     Key Bindings.        (line  18)
+* keymap-global-unset:                   Key Bindings.        (line  58)
 * Keymaps:                               Keymaps.             (line   6)
 * Keyword:                               Optional Arguments.  (line  11)
 * Kill ring handling:                    Kill Ring.           (line   6)
@@ -17399,10 +17431,10 @@ Index
 * Lisp interpreter, what it does:        Lisp Interpreter.    (line   6)
 * Lisp Lists:                            Lisp Lists.          (line   6)
 * Lisp macro:                            Lisp macro.          (line   6)
-* list-buffers, rebound:                 Key Bindings.        (line  70)
+* list-buffers, rebound:                 Key Bindings.        (line  69)
 * Lists in a computer:                   List Implementation. (line   6)
-* load-library:                          Loading Files.       (line  53)
-* load-path:                             Loading Files.       (line  37)
+* load-library:                          Loading Files.       (line  51)
+* load-path:                             Loading Files.       (line  35)
 * Loading files:                         Loading Files.       (line   6)
 * local variable defined:                Prevent confusion.   (line   6)
 * Local variables list, per-buffer,:     Text and Auto-fill.  (line  22)
@@ -17442,7 +17474,7 @@ Index
 * nthcdr <1>:                            copy-region-as-kill. (line   6)
 * nthcdr, example:                       kill-new function.   (line 149)
 * number-to-string:                      Y Axis Element.      (line  12)
-* occur:                                 Key Bindings.        (line  53)
+* occur:                                 Key Bindings.        (line  52)
 * optional:                              Optional Arguments.  (line  11)
 * Optional arguments:                    Optional Arguments.  (line  11)
 * Options for interactive:               Interactive Options. (line   6)
@@ -17586,7 +17618,7 @@ Index
                                                               (line   6)
 * Truth and falsehood in Emacs Lisp:     Truth & Falsehood.   (line   6)
 * Types of data:                         Data types.          (line   6)
-* Unbinding key:                         Key Bindings.        (line  59)
+* Unbinding key:                         Key Bindings.        (line  58)
 * Uninitialized let variables:           Uninitialized let Variables.
                                                               (line   6)
 * Variable initialization:               defvar.              (line   6)
@@ -17652,322 +17684,322 @@ About the Author
 
 
 Tag Table:
-Node: Top1516
-Node: Preface20889
-Node: Why22188
-Node: On Reading this Text22821
-Node: Who You Are25025
-Node: Lisp History27759
-Node: Note for Novices28526
-Node: Thank You31080
-Node: List Processing31638
-Ref: List Processing-Footnote-133018
-Node: Lisp Lists33162
-Node: Numbers Lists34040
-Node: Lisp Atoms35118
-Node: Whitespace in Lists38895
-Node: Typing Lists40172
-Node: Run a Program41268
-Ref: Run a Program-Footnote-143759
-Node: Making Errors43905
-Node: Names & Definitions48953
-Node: Lisp Interpreter50849
-Node: Complications52014
-Node: Byte Compiling54216
-Node: Evaluation55294
-Node: How the Interpreter Acts55929
-Node: Evaluating Inner Lists57167
-Node: Variables59716
-Node: fill-column Example61249
-Node: Void Function62745
-Node: Void Variable63964
-Node: Arguments65871
-Ref: Arguments-Footnote-167539
-Node: Data types68378
-Node: Args as Variable or List70488
-Node: Variable Number of Arguments72080
-Node: Wrong Type of Argument72930
-Ref: Wrong Type of Argument-Footnote-176538
-Node: message76616
-Ref: message-Footnote-180597
-Node: setq80783
-Node: Using setq81416
-Node: Counting84407
-Node: Summary86430
-Node: Error Message Exercises88228
-Node: Practicing Evaluation88738
-Node: How to Evaluate89909
-Node: Buffer Names91408
-Node: Getting Buffers97259
-Ref: Getting Buffers-Footnote-199827
-Node: Switching Buffers100052
-Ref: Switching Buffers-Footnote-1103405
-Ref: Switching Buffers-Footnote-2103691
-Node: Buffer Size & Locations104388
-Node: Evaluation Exercise106550
-Node: Writing Defuns106826
-Node: Primitive Functions108162
-Node: defun109323
-Node: Install115813
-Node: Effect of installation117164
-Node: Change a defun117978
-Node: Interactive119683
-Node: Interactive multiply-by-seven120753
-Node: multiply-by-seven in detail122626
-Node: Interactive Options125361
-Node: Permanent Installation128559
-Node: let130681
-Node: Prevent confusion132021
-Ref: Prevent confusion-Footnote-1134112
-Node: Parts of let Expression134244
-Node: Sample let Expression135848
-Ref: Sample let Expression-Footnote-1137670
-Node: Uninitialized let Variables137929
-Node: How let Binds Variables139586
-Node: Lexical & Dynamic Binding Differences140663
-Node: Lexical vs. Dynamic Binding Example142492
-Node: if144363
-Node: if in more detail145194
-Node: type-of-animal in detail148009
-Node: else150593
-Node: Truth & Falsehood153493
-Node: nil explained154437
-Node: save-excursion156521
-Node: Point and mark157229
-Node: Template for save-excursion160251
-Node: Review161512
-Node: defun Exercises169137
-Node: Buffer Walk Through169565
-Node: Finding More170671
-Ref: Finding More-Footnote-1173577
-Node: simplified-beginning-of-buffer173769
-Node: mark-whole-buffer178264
-Node: mark-whole-buffer overview179078
-Node: Body of mark-whole-buffer180449
-Node: append-to-buffer183567
-Node: append-to-buffer overview184256
-Node: append interactive186990
-Node: append-to-buffer body189467
-Node: append save-excursion191620
-Ref: let* introduced193413
-Node: Buffer Related Review197012
-Node: Buffer Exercises199266
-Node: More Complex199743
-Node: copy-to-buffer200675
-Ref: copy-to-buffer-Footnote-1203449
-Node: insert-buffer203641
-Node: insert-buffer code204938
-Node: insert-buffer interactive205927
-Node: Read-only buffer206449
-Node: b for interactive207037
-Node: insert-buffer body208192
-Node: if & or209394
-Node: Insert or212434
-Node: Insert let214771
-Node: New insert-buffer218594
-Node: beginning-of-buffer219794
-Node: Optional Arguments221369
-Node: beginning-of-buffer opt arg224750
-Node: Disentangle beginning-of-buffer225611
-Node: Large buffer case226857
-Node: Small buffer case229379
-Node: beginning-of-buffer complete231010
-Node: Second Buffer Related Review234029
-Node: optional Exercise235728
-Node: Narrowing & Widening236200
-Node: Narrowing advantages236809
-Node: save-restriction238674
-Node: what-line240650
-Node: narrow Exercise244865
-Node: car cdr & cons245879
-Node: Strange Names246924
-Node: car & cdr247630
-Node: cons252155
-Node: Build a list253126
-Ref: Build a list-Footnote-1254670
-Node: length254854
-Node: nthcdr256378
-Node: nth259277
-Node: setcar260653
-Node: setcdr263444
-Node: cons Exercise264978
-Node: Cutting & Storing Text265351
-Node: Storing Text266655
-Node: zap-to-char268675
-Node: Complete zap-to-char269274
-Node: zap-to-char interactive271964
-Node: zap-to-char body273467
-Node: search-forward275028
-Node: progn278079
-Node: Summing up zap-to-char279813
-Node: kill-region280966
-Node: Complete kill-region281937
-Node: condition-case286161
-Node: Lisp macro288738
-Node: copy-region-as-kill291209
-Node: Complete copy-region-as-kill292114
-Node: copy-region-as-kill body294919
-Node: last-command & this-command295918
-Node: kill-append function298215
-Node: kill-new function302379
-Node: Digression into C312976
-Node: defvar318360
-Node: See variable current value320072
-Node: defvar and asterisk321980
-Node: cons & search-fwd Review323822
-Node: search Exercises326854
-Node: List Implementation327601
-Node: Lists diagrammed328686
-Node: Symbols as Chest334883
-Node: List Exercise336887
-Node: Yanking337240
-Node: Kill Ring Overview338550
-Node: kill-ring-yank-pointer340246
-Node: yank nthcdr Exercises342669
-Node: Loops & Recursion343413
-Ref: Loops & Recursion-Footnote-1344511
-Node: while344986
-Node: Looping with while346353
-Node: Loop Example348149
-Node: print-elements-of-list351589
-Node: Incrementing Loop354118
-Node: Incrementing Loop Details354681
-Node: Incrementing Example356067
-Node: Inc Example parts358436
-Node: Inc Example altogether362429
-Node: Decrementing Loop365988
-Node: Decrementing Example367448
-Node: Dec Example parts368916
-Node: Dec Example altogether370947
-Node: dolist dotimes373176
-Node: dolist373947
-Node: dotimes377123
-Node: Recursion378623
-Node: Building Robots379720
-Node: Recursive Definition Parts381420
-Node: Recursion with list383846
-Node: Recursive triangle function387427
-Node: Recursive Example arg of 1 or 2388713
-Node: Recursive Example arg of 3 or 4390977
-Node: Recursion with cond394009
-Node: Recursive Patterns396385
-Node: Every396787
-Node: Accumulate399230
-Node: Keep400499
-Node: No Deferment402387
-Node: No deferment solution405086
-Ref: No deferment solution-Footnote-1409047
-Ref: No deferment solution-Footnote-2409153
-Node: Looping exercise409668
-Node: Regexp Search410892
-Node: sentence-end412803
-Node: re-search-forward416706
-Node: forward-sentence419238
-Node: Complete forward-sentence419958
-Node: fwd-sentence while loops423498
-Node: fwd-sentence re-search427133
-Node: forward-paragraph429289
-Node: forward-paragraph in brief431038
-Node: fwd-para let432493
-Node: fwd-para while439084
-Node: Regexp Review447658
-Node: re-search Exercises450063
-Node: Counting Words450835
-Node: Why Count Words451473
-Node: count-words-example452501
-Node: Design count-words-example453747
-Node: Whitespace Bug460285
-Node: recursive-count-words469868
-Node: Counting Exercise481947
-Node: Words in a defun482316
-Node: Divide and Conquer483902
-Node: Words and Symbols485119
-Node: Syntax487168
-Node: count-words-in-defun490784
-Node: Several defuns497065
-Node: Find a File499438
-Node: lengths-list-file502044
-Node: Several files507304
-Node: lengths-list-many-files508013
-Node: append510799
-Node: Several files recursively511421
-Node: Prepare the data514239
-Node: Data for Display in Detail515285
-Node: Sorting516199
-Node: Files List517857
-Ref: Files List-Footnote-1525384
-Node: Counting function definitions525601
-Node: Readying a Graph534920
-Node: Columns of a graph536089
-Node: graph-body-print549729
-Node: recursive-graph-body-print554510
-Node: Printed Axes557176
-Node: Line Graph Exercise557900
-Node: Emacs Initialization558082
-Node: Default Configuration559468
-Ref: Default Configuration-Footnote-1561444
-Node: Site-wide Init561760
-Node: defcustom563806
-Node: Beginning init File569674
-Node: Text and Auto-fill572041
-Ref: Text and Auto-fill-Footnote-1576034
-Ref: Text and Auto-fill-Footnote-2576320
-Node: Mail Aliases576581
-Node: Indent Tabs Mode577494
-Node: Key Bindings578422
-Node: Keymaps582107
-Node: Loading Files584382
-Node: Autoload587703
-Node: Simple Extension590571
-Ref: Simple Extension-Footnote-1593085
-Node: X11 Colors593350
-Ref: X11 Colors-Footnote-1595148
-Node: Miscellaneous595302
-Node: Mode Line599526
-Node: Debugging605070
-Node: debug605887
-Node: debug-on-entry609005
-Node: debug-on-quit612596
-Node: edebug613619
-Node: Debugging Exercises617731
-Node: Conclusion619482
-Node: the-the624837
-Node: Kill Ring627631
-Node: What the Kill Ring Does628343
-Node: current-kill629857
-Node: Code for current-kill630502
-Node: Understanding current-kill633323
-Node: Body of current-kill634063
-Node: Digression concerning error637197
-Node: Determining the Element638388
-Node: yank642093
-Node: yank-pop645298
-Node: ring file647817
-Node: Full Graph648178
-Node: Labeled Example648950
-Node: print-graph Varlist650923
-Node: print-Y-axis652622
-Node: print-Y-axis in Detail653447
-Node: Height of label654242
-Node: Compute a Remainder656246
-Node: Y Axis Element660099
-Node: Y-axis-column663852
-Node: print-Y-axis Penultimate665453
-Node: print-X-axis667422
-Node: Similarities differences668669
-Node: X Axis Tic Marks669488
-Node: Print Whole Graph676483
-Node: The final version677510
-Node: Test print-graph681744
-Node: Graphing words in defuns683393
-Node: lambda685981
-Node: mapcar687629
-Node: Another Bug689666
-Node: Final printed graph695166
-Node: Free Software and Free Manuals696086
-Node: GNU Free Documentation License702364
-Node: Index727733
-Node: About the Author763578
+Node: Top1513
+Node: Preface20881
+Node: Why22180
+Node: On Reading this Text22813
+Node: Who You Are25017
+Node: Lisp History27751
+Node: Note for Novices28518
+Node: Thank You31073
+Node: List Processing31631
+Ref: List Processing-Footnote-133011
+Node: Lisp Lists33155
+Node: Numbers Lists34033
+Node: Lisp Atoms35111
+Node: Whitespace in Lists38888
+Node: Typing Lists40165
+Node: Run a Program41261
+Ref: Run a Program-Footnote-143752
+Node: Making Errors43898
+Node: Names & Definitions48946
+Node: Lisp Interpreter50842
+Node: Complications52007
+Node: Byte Compiling54209
+Node: Evaluation55287
+Node: How the Interpreter Acts55922
+Node: Evaluating Inner Lists57160
+Node: Variables59709
+Node: fill-column Example61242
+Node: Void Function62738
+Node: Void Variable63957
+Node: Arguments65864
+Ref: Arguments-Footnote-167532
+Node: Data types68371
+Node: Args as Variable or List70481
+Node: Variable Number of Arguments72073
+Node: Wrong Type of Argument72923
+Ref: Wrong Type of Argument-Footnote-176531
+Node: message76609
+Ref: message-Footnote-180590
+Node: setq80776
+Node: Using setq81409
+Node: Counting84400
+Node: Summary86423
+Node: Error Message Exercises88221
+Node: Practicing Evaluation88731
+Node: How to Evaluate89902
+Node: Buffer Names91401
+Node: Getting Buffers97252
+Ref: Getting Buffers-Footnote-199820
+Node: Switching Buffers100045
+Ref: Switching Buffers-Footnote-1103398
+Ref: Switching Buffers-Footnote-2103684
+Node: Buffer Size & Locations104381
+Node: Evaluation Exercise106543
+Node: Writing Defuns106819
+Node: Primitive Functions108155
+Node: defun109316
+Node: Install115806
+Node: Effect of installation117157
+Node: Change a defun117971
+Node: Interactive119676
+Node: Interactive multiply-by-seven120746
+Node: multiply-by-seven in detail122619
+Node: Interactive Options125354
+Node: Permanent Installation128552
+Node: let130674
+Node: Prevent confusion132014
+Ref: Prevent confusion-Footnote-1134105
+Node: Parts of let Expression134237
+Node: Sample let Expression135841
+Ref: Sample let Expression-Footnote-1137663
+Node: Uninitialized let Variables137922
+Node: How let Binds Variables139579
+Node: Lexical & Dynamic Binding Differences140655
+Node: Lexical vs Dynamic Binding Example142483
+Node: if144353
+Node: if in more detail145184
+Node: type-of-animal in detail147999
+Node: else150583
+Node: Truth & Falsehood153483
+Node: nil explained154427
+Node: save-excursion156511
+Node: Point and mark157219
+Node: Template for save-excursion160241
+Node: Review161502
+Node: defun Exercises169127
+Node: Buffer Walk Through169555
+Node: Finding More170661
+Ref: Finding More-Footnote-1173567
+Node: simplified-beginning-of-buffer173759
+Node: mark-whole-buffer178254
+Node: mark-whole-buffer overview179068
+Node: Body of mark-whole-buffer180439
+Node: append-to-buffer183557
+Node: append-to-buffer overview184246
+Node: append interactive186980
+Node: append-to-buffer body189457
+Node: append save-excursion191610
+Ref: let* introduced193403
+Node: Buffer Related Review197002
+Node: Buffer Exercises199256
+Node: More Complex199733
+Node: copy-to-buffer200665
+Ref: copy-to-buffer-Footnote-1203439
+Node: insert-buffer203631
+Node: insert-buffer code204928
+Node: insert-buffer interactive205917
+Node: Read-only buffer206439
+Node: b for interactive207027
+Node: insert-buffer body208182
+Node: if & or209384
+Node: Insert or212424
+Node: Insert let214761
+Node: New insert-buffer218584
+Node: beginning-of-buffer219784
+Node: Optional Arguments221359
+Node: beginning-of-buffer opt arg224740
+Node: Disentangle beginning-of-buffer225601
+Node: Large buffer case226847
+Node: Small buffer case229369
+Node: beginning-of-buffer complete231000
+Node: Second Buffer Related Review234019
+Node: optional Exercise235718
+Node: Narrowing & Widening236190
+Node: Narrowing advantages236799
+Node: save-restriction238664
+Node: what-line240640
+Node: narrow Exercise244855
+Node: car cdr & cons245869
+Node: Strange Names246914
+Node: car & cdr247620
+Node: cons252145
+Node: Build a list253116
+Ref: Build a list-Footnote-1254660
+Node: length254844
+Node: nthcdr256368
+Node: nth259267
+Node: setcar260643
+Node: setcdr263434
+Node: cons Exercise264968
+Node: Cutting & Storing Text265341
+Node: Storing Text266645
+Node: zap-to-char268665
+Node: Complete zap-to-char269264
+Node: zap-to-char interactive271954
+Node: zap-to-char body273457
+Node: search-forward275018
+Node: progn278069
+Node: Summing up zap-to-char279803
+Node: kill-region280956
+Node: Complete kill-region281927
+Node: condition-case286151
+Node: Lisp macro288728
+Node: copy-region-as-kill291199
+Node: Complete copy-region-as-kill292104
+Node: copy-region-as-kill body294909
+Node: last-command & this-command295908
+Node: kill-append function298205
+Node: kill-new function302369
+Node: Digression into C312972
+Node: defvar318356
+Node: See variable current value320068
+Node: defvar and asterisk321976
+Node: cons & search-fwd Review323818
+Node: search Exercises326850
+Node: List Implementation327597
+Node: Lists diagrammed328682
+Node: Symbols as Chest334879
+Node: List Exercise336883
+Node: Yanking337236
+Node: Kill Ring Overview338546
+Node: kill-ring-yank-pointer340242
+Node: yank nthcdr Exercises342665
+Node: Loops & Recursion343409
+Ref: Loops & Recursion-Footnote-1344507
+Node: while344982
+Node: Looping with while346349
+Node: Loop Example348145
+Node: print-elements-of-list351585
+Node: Incrementing Loop354114
+Node: Incrementing Loop Details354677
+Node: Incrementing Example356063
+Node: Inc Example parts358432
+Node: Inc Example altogether362425
+Node: Decrementing Loop365984
+Node: Decrementing Example367444
+Node: Dec Example parts368912
+Node: Dec Example altogether370943
+Node: dolist dotimes373172
+Node: dolist373943
+Node: dotimes377119
+Node: Recursion378619
+Node: Building Robots379716
+Node: Recursive Definition Parts381416
+Node: Recursion with list383842
+Node: Recursive triangle function387423
+Node: Recursive Example arg of 1 or 2388709
+Node: Recursive Example arg of 3 or 4390973
+Node: Recursion with cond394005
+Node: Recursive Patterns396381
+Node: Every396783
+Node: Accumulate399226
+Node: Keep400495
+Node: No Deferment402383
+Node: No deferment solution405082
+Ref: No deferment solution-Footnote-1409043
+Ref: No deferment solution-Footnote-2409149
+Node: Looping exercise409664
+Node: Regexp Search410888
+Node: sentence-end412799
+Node: re-search-forward416702
+Node: forward-sentence419234
+Node: Complete forward-sentence419954
+Node: fwd-sentence while loops423494
+Node: fwd-sentence re-search427129
+Node: forward-paragraph429285
+Node: forward-paragraph in brief431034
+Node: fwd-para let432489
+Node: fwd-para while439080
+Node: Regexp Review447654
+Node: re-search Exercises450059
+Node: Counting Words450831
+Node: Why Count Words451469
+Node: count-words-example452497
+Node: Design count-words-example453743
+Node: Whitespace Bug460281
+Node: recursive-count-words469867
+Node: Counting Exercise481946
+Node: Words in a defun482315
+Node: Divide and Conquer483901
+Node: Words and Symbols485118
+Node: Syntax487167
+Node: count-words-in-defun490783
+Node: Several defuns497067
+Node: Find a File499440
+Node: lengths-list-file502046
+Node: Several files507306
+Node: lengths-list-many-files508015
+Node: append510801
+Node: Several files recursively511423
+Node: Prepare the data514241
+Node: Data for Display in Detail515287
+Node: Sorting516201
+Node: Files List517859
+Ref: Files List-Footnote-1525386
+Node: Counting function definitions525603
+Node: Readying a Graph534922
+Node: Columns of a graph536091
+Node: graph-body-print549731
+Node: recursive-graph-body-print554512
+Node: Printed Axes557178
+Node: Line Graph Exercise557902
+Node: Emacs Initialization558084
+Node: Default Configuration559470
+Ref: Default Configuration-Footnote-1561446
+Node: Site-wide Init561762
+Node: defcustom563808
+Node: Beginning init File569676
+Node: Text and Auto-fill572043
+Ref: Text and Auto-fill-Footnote-1576036
+Ref: Text and Auto-fill-Footnote-2576322
+Node: Mail Aliases576583
+Node: Indent Tabs Mode577496
+Node: Key Bindings578424
+Node: Keymaps583185
+Node: Loading Files585826
+Node: Autoload589094
+Node: Simple Extension591962
+Ref: Simple Extension-Footnote-1594481
+Node: X11 Colors594746
+Ref: X11 Colors-Footnote-1596544
+Node: Miscellaneous596698
+Node: Mode Line600922
+Node: Debugging606466
+Node: debug607283
+Node: debug-on-entry610401
+Node: debug-on-quit613992
+Node: edebug615015
+Node: Debugging Exercises619127
+Node: Conclusion620878
+Node: the-the626233
+Node: Kill Ring629030
+Node: What the Kill Ring Does629742
+Node: current-kill631256
+Node: Code for current-kill631901
+Node: Understanding current-kill634722
+Node: Body of current-kill635462
+Node: Digression concerning error638596
+Node: Determining the Element639787
+Node: yank643492
+Node: yank-pop646697
+Node: ring file649216
+Node: Full Graph649577
+Node: Labeled Example650349
+Node: print-graph Varlist652322
+Node: print-Y-axis654021
+Node: print-Y-axis in Detail654846
+Node: Height of label655641
+Node: Compute a Remainder657645
+Node: Y Axis Element661498
+Node: Y-axis-column665251
+Node: print-Y-axis Penultimate666852
+Node: print-X-axis668821
+Node: Similarities differences670068
+Node: X Axis Tic Marks670887
+Node: Print Whole Graph677882
+Node: The final version678909
+Node: Test print-graph683143
+Node: Graphing words in defuns684792
+Node: lambda687380
+Node: mapcar689028
+Node: Another Bug691065
+Node: Final printed graph696565
+Node: Free Software and Free Manuals697485
+Node: GNU Free Documentation License703763
+Node: Index729132
+Node: About the Author765196
 
 End Tag Table
 

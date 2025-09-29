@@ -1,8 +1,8 @@
-This is erc.info, produced by makeinfo version 6.8 from erc.texi.
+This is erc.info, produced by makeinfo version 7.0.3 from erc.texi.
 
-This manual is for ERC 5.5.0.29.1 as distributed with Emacs 29.4.
+This manual is for ERC 5.6.0.30.1 as distributed with Emacs 30.2.
 
-   Copyright © 2005–2024 Free Software Foundation, Inc.
+   Copyright © 2005–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -28,9 +28,9 @@ File: erc.info,  Node: Top,  Next: Introduction,  Up: (dir)
 ERC
 ***
 
-This manual is for ERC 5.5.0.29.1 as distributed with Emacs 29.4.
+This manual is for ERC 5.6.0.30.1 as distributed with Emacs 30.2.
 
-   Copyright © 2005–2024 Free Software Foundation, Inc.
+   Copyright © 2005–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -133,14 +133,13 @@ we suggest starting with “irc.libera.chat”.  There you will find the
 you’re having trouble with ERC, you can join the ‘#erc’ channel and ask
 for help there.
 
-   If you want to place ERC settings in their own file, you can place
-them in ‘~/.emacs.d/.ercrc.el’, creating it if necessary.
-
-   If you would rather use the Customize interface to change how ERC
-works, do ‘M-x customize-group <RET> erc <RET>’.  In particular, ERC
-comes with lots of modules that may be enabled or disabled; to select
-which ones you want, do ‘M-x customize-variable <RET> erc-modules
-<RET>’.
+   At some point in your ERC journey, you’ll inevitably want to change
+how the client looks and behaves.  As with other Emacs applications, the
+typical place to store your settings is your ‘init.el’.  If you would
+rather use the Customize interface, a good place to start is by running
+‘M-x customize-group <RET> erc <RET>’.  In particular, ERC comes with
+lots of modules that may be enabled or disabled; to select which ones
+you want, do ‘M-x customize-variable <RET> erc-modules <RET>’.
 
 * Menu:
 
@@ -153,67 +152,86 @@ File: erc.info,  Node: Sample Session,  Next: Special Features,  Up: Getting Sta
 2.1 Sample Session
 ==================
 
-This is an example ERC session which shows how to connect to the
-‘#emacs’ channel on Libera.Chat.  Another IRC channel on Libera.Chat
-that may be of interest is ‘#erc’, which is a channel where ERC users
-and developers hang out.  These channels used to live on the Freenode
-IRC network until June 2021, when they—along with the official IRC
-channels of the GNU Project, the Free Software Foundation, and many
-other free software communities—relocated to the Libera.Chat network in
-the aftermath of changes in governance and policies of Freenode in May
-and June 2021.  GNU and FSF’s announcements about this are at
-<https://lists.gnu.org/archive/html/info-gnu/2021-06/msg00005.html>,
-<https://lists.gnu.org/archive/html/info-gnu/2021-06/msg00007.html>, and
-<https://lists.gnu.org/archive/html/info-gnu-emacs/2021-06/msg00000.html>.
+This example ERC session describes how to connect to the ‘#emacs’
+channel on Libera.Chat.  Also worth checking out is Libera’s own
+introductory guide to IRC, <https://libera.chat/guides/basics>, which
+presents a more comprehensive overview without instructions specific to
+ERC.
 
    • Connect to Libera.Chat
 
-     Run ‘M-x erc’.  Use “irc.libera.chat” as the IRC server, “6667” as
-     the port, and choose a nickname.
+     Run ‘M-x erc <RET>’.  Use ‘irc.libera.chat’ for the server and
+     ‘6667’ for the port.  Choose a nickname, and hit <y> when asked if
+     you’d prefer to connect over TLS.
 
    • Get used to the interface
 
-     Switch to the “irc.libera.chat:6667” buffer, if you’re not already
-     there.  You will see first some messages about checking for ident,
-     and then a bunch of other messages that describe the current IRC
-     server.
+     Switch to the ‘Libera.Chat’ buffer if you’re not already there.
+     ERC calls this a “server buffer”, and it must exist for the
+     duration of the session.  You will likely see some messages about
+     “ident”, authentication, and the like, followed by information
+     describing the current server and the network.
 
    • Join the #emacs channel
 
-     In that buffer, type “/join <SPC> #emacs” and hit ‘RET’.  Depending
-     on how you’ve set up ERC, either a new buffer for “#emacs” will be
-     displayed, or a new buffer called “#emacs” will be created in the
-     background.  If the latter, switch to the “#emacs” buffer.  You
-     will see the channel topic and a list of the people who are
-     currently on the channel.
+     In the server buffer, type ‘/join #emacs <RET>’ at the prompt.  ERC
+     will create a new buffer called ‘#emacs’.  If you’ve already
+     configured ERC, you may need to switch to it manually.  Once there,
+     you will see the channel’s “topic” in the buffer’s header line
+     (*note (elisp)Header Lines::) and a list of people currently in the
+     channel.  If you can’t see the full topic, mouse over it or type
+     ‘/topic <RET>’ at the prompt.
 
    • Register your nickname with Libera.Chat
 
-     If you would like to be able to talk with people privately on the
-     Libera.Chat network, you will have to “register” your nickname.  To
-     do so, switch to the “irc.libera.chat:6667” buffer and type “/msg
-     NickServ register <password>”, replacing “<password>” with your
-     desired password.  It should tell you that the operation was
-     successful.
+     In order to access essential network features, like speaking in
+     certain channels and participating in private conversations, you’ll
+     likely have to “register” your nickname.  To do so, switch to the
+     ‘Libera.Chat’ buffer and type ‘/msg NickServ register ‘<password>’
+     ‘<email>’ <RET>’, replacing ‘<password>’ and ‘<email>’ with your
+     desired account password and contact email (both sans quotes).  The
+     server should tell you that the operation was successful.  See the
+     official Libera.Chat docs if you encounter problems.
+
+     In addition to creating an account, this process also
+     “authenticates” you to the network’s “account services” system for
+     the duration of the session.  In other words, you’re now logged in.
+     However, when you connect in the future, you’ll need to
+     authenticate again by providing the same credentials somehow.  When
+     you’re finished with this walk through, see “Next Steps”, below, to
+     learn some ways to do that.
 
    • Talk to people in the channel
 
-     If you switch back to the “#emacs” buffer, you can type a message,
-     and everyone on the channel will see it.
+     Switch back to the ‘#emacs’ buffer and type a message at the
+     prompt, hitting ‘RET’ once satisfied.  Everyone in the channel will
+     now see your message.
 
    • Open a query buffer to talk to someone
 
-     If you want to talk with someone in private (this should usually
-     not be done for technical help, only for personal questions), type
-     “/query <nick>”, replacing “<nick>” with the nickname of the person
-     you would like to talk to.  Depending on how ERC is set up, you
-     will either see a new buffer with the name of the person, or such a
-     buffer will be created in the background and you will have to
-     switch to it.  Begin typing messages, and you will be able to have
-     a conversation.
+     If you want to talk with someone in private, type ‘/query ‘<nick>’
+     <RET>’, replacing ‘<nick>’ with the their nickname.  As before,
+     with the server buffer, if this new “query buffer” doesn’t appear
+     in the current window, you may have to switch to it.  Regardless,
+     its name should match ‘<nick>’.  Once there, type something at the
+     prompt and hit ‘RET’, and the other party will see it.
 
-     Note that if the other person is not registered, you will not be
-     able to talk with them.
+     Keep in mind that if either party isn’t authenticated, you may not
+     be able to converse at all.  Also, depending on the network,
+     certain social conventions may apply to the practice of direct
+     messaging.  As a general rule, queries should usually be reserved
+     for personal matters rather than technical help, which can often
+     benefit (and benefit _from_) a larger audience.
+
+   • Next steps
+
+     Try joining another channel, such as ‘#erc’, where ERC users and
+     developers hang out (*note Official IRC channels:: for more on the
+     history of ‘#emacs’).  For ideas on various options to customize,
+     *note Sample Configuration::.  To learn how ERC can authenticate
+     you to the network automatically whenever you connect, *note
+     SASL::.  As always, if you encounter problems, *note Getting Help
+     and Reporting Bugs::.
 
 
 File: erc.info,  Node: Special Features,  Prev: Sample Session,  Up: Getting Started
@@ -372,16 +390,18 @@ File: erc.info,  Node: Modules,  Next: Advanced Usage,  Prev: Keystroke Summary,
 One way to add functionality to ERC is to customize which of its many
 modules are loaded.
 
-   There is a spiffy customize interface, which may be reached by typing
-‘M-x customize-option <RET> erc-modules <RET>’.  When removing a module
-outside of the Custom ecosystem, you may wish to ensure it’s disabled by
-invoking its associated minor-mode toggle with a nonpositive prefix
-argument, for example, ‘C-u - M-x erc-spelling-mode <RET>’.
-Additionally, if you plan on loading third-party modules that perform
-atypical setup on activation, you may need to arrange for calling
-‘erc-update-modules’ in your init file.  Examples of such setup might
-include registering an ‘erc-before-connect’ hook, advising ‘erc-open’,
-and modifying ‘erc-modules’ itself.
+   You can do this by typing ‘C-h v erc-modules <RET>’ and clicking
+‘customize’ near the bottom of the resulting help buffer, where it says
+“You can _customize_ this variable.” When removing a module outside of
+Customize, you may wish to ensure it’s disabled by invoking its
+associated minor-mode toggle with a nonpositive prefix argument, for
+example, ‘C-u - M-x erc-spelling-mode <RET>’.  Additionally, if you plan
+on loading third-party modules that perform atypical setup on
+activation, you may need to arrange for calling ‘erc-update-modules’ in
+your init file.  Examples of such setup might include registering an
+‘erc-before-connect’ hook, advising ‘erc-open’, and modifying
+‘erc-modules’ itself.  On Emacs 29 and greater, you can also run
+‘erc-update-modules’ indirectly, via ‘(setopt erc-modules erc-modules)’.
 
    The following is a list of available modules.
 
@@ -391,8 +411,9 @@ and modifying ‘erc-modules’ itself.
 ‘autojoin’
      Join channels automatically
 
-‘bbdb’
-     Integrate with the Big Brother Database
+‘bufbar’
+     List buffers belonging to a connection in a side window; part of
+     Custom group ‘erc-status-sidebar’
 
 ‘button’
      Buttonize URLs, nicknames, and other text
@@ -400,6 +421,10 @@ and modifying ‘erc-modules’ itself.
 ‘capab-identify’
      Mark unidentified users on freenode and other servers supporting
      CAPAB.
+
+‘command-indicator’
+     Echo command lines for “slash commands”, like ‘/JOIN #erc’ and
+     ‘/HELP join’
 
 ‘completion (aka pcomplete)’
      Complete nicknames and commands (programmable)
@@ -413,6 +438,9 @@ and modifying ‘erc-modules’ itself.
 ‘irccontrols’
      Highlight or remove IRC control characters
 
+‘keep-place’
+     Remember your position in buffers
+
 ‘log’
      Save buffers in logs
 
@@ -424,6 +452,13 @@ and modifying ‘erc-modules’ itself.
 
 ‘netsplit’
      Detect netsplits
+
+‘nicks’
+     Automatically colorize nicks
+
+‘nickbar’
+     List participating nicks for the current target buffer in a side
+     window; part of Custom group ‘erc-speedbar’
 
 ‘noncommands’
      Don’t display non-IRC commands after evaluation
@@ -437,6 +472,9 @@ and modifying ‘erc-modules’ itself.
 
 ‘page’
      Process CTCP PAGE requests from IRC
+
+‘querypoll’
+     Update query participant data by continually polling the server
 
 ‘readonly’
      Make displayed lines read-only
@@ -476,6 +514,25 @@ and modifying ‘erc-modules’ itself.
 
 ‘unmorse’
      Translate morse code in messages
+
+Auxiliary Modules
+-----------------
+
+For various reasons, the following modules aren’t currently listed in
+the Custom interface for ‘erc-modules’, but feel free to add them
+explicitly.  They may be managed by another module or considered more
+useful when toggled interactively or just deemed experimental.
+
+‘fill-wrap’
+     Wrap long lines using ‘visual-line-mode’
+
+‘keep-place-indicator’
+     Remember your place in buffers with a visible reminder; activated
+     interactively or via something like ‘erc-join-hook’
+
+‘services-regain’
+     Automatically ask NickServ to reclaim your nick when reconnecting;
+     experimental as of ERC 5.6
 
 Required Modules
 ----------------
@@ -529,6 +586,54 @@ affects the current buffer, but its “non-mode” cousins, like
 belonging to their connection (when called interactively).  And unlike
 global toggles, none of these ever mutates ‘erc-modules’.
 
+Loading
+-------
+
+ERC loads internal modules in alphabetical order and third-party modules
+as they appear in ‘erc-modules’.  When defining your own module, take
+care to ensure ERC can find it.  An easy way to do that is by mimicking
+the example in the doc string for ‘define-erc-module’ (also shown
+below).  For historical reasons, ERC falls back to ‘require’ing
+features.  For example, if some module ‘my-module’ in ‘erc-modules’
+lacks a corresponding ‘erc-my-module-mode’ command, ERC will attempt to
+load the library ‘erc-my-module’ prior to connecting.  If this fails,
+ERC signals an error.  Users defining personal modules in an init file
+should ‘(provide 'erc-my-module)’ somewhere to placate ERC. Dynamically
+generating modules on the fly is not supported.
+
+   Some older built-in modules have a second name along with a second
+minor-mode toggle, which is just a function alias for its primary
+counterpart.  For practical reasons, ERC does not define a corresponding
+variable alias because contending with indirect variables complicates
+bookkeeping tasks, such as persisting module state across IRC sessions.
+New modules should definitely avoid defining aliases without a good
+reason.
+
+   Some packages have been known to autoload a module’s definition
+instead of its minor-mode command, which severs the link between the
+library and the module.  This means that enabling the mode by invoking
+its command toggle isn’t enough to load its defining library.  As such,
+packages should only supply module-related autoload cookies with an
+actual ‘autoload’ form for their module’s minor-mode command, like so:
+
+     ;;;###autoload(autoload 'erc-my-module-mode "erc-my-module" nil t)
+     (define-erc-module my-module nil
+       "My doc string."
+       ((add-hook 'erc-insert-post-hook #'erc-my-module-on-insert-post))
+       ((remove-hook 'erc-insert-post-hook #'erc-my-module-on-insert-post)))
+
+As implied earlier, packages can usually omit such cookies entirely so
+long as their module’s prefixed name matches that of its defining
+library and the library’s provided feature.
+
+   Finally, packages have also been observed to run ‘erc-update-modules’
+in top-level forms, forcing ERC to take special precautions to avoid
+recursive invocations.  Another unfortunate practice is mutating
+‘erc-modules’ itself upon loading ‘erc’, possibly by way of an autoload.
+Doing this tricks Customize into displaying the widget for ‘erc-modules’
+incorrectly, with built-in modules moved from the predefined checklist
+to the user-provided free-form area.
+
 
 File: erc.info,  Node: Advanced Usage,  Next: Getting Help and Reporting Bugs,  Prev: Modules,  Up: Top
 
@@ -548,7 +653,9 @@ File: erc.info,  Node: Advanced Usage,  Next: Getting Help and Reporting Bugs,  
 Integrations
 
 * URL::                         Opening IRC URLs in ERC.
+* SOCKS::                       Connecting to IRC with a SOCKS proxy.
 * auth-source::                 Retrieving auth-source entries with ERC.
+* display-buffer::              Controlling how ERC displays buffers.
 
 
 
@@ -633,7 +740,8 @@ To connect securely over an encrypted TLS connection, use ‘M-x erc-tls’.
                    :client-certificate t)
 
      In the case of ‘:client-certificate t’, you will need to add a line
-     like the following to your authinfo file (e.g.  ‘~/.authinfo.gpg’):
+     like the following to your authinfo file (for example,
+     ‘~/.authinfo.gpg’):
 
           machine irc.libera.chat key /home/bandali/my-cert.key cert /home/bandali/my-cert.crt
 
@@ -647,8 +755,8 @@ Server
  -- Function: erc-compute-server &optional server
      Return an IRC server name.
 
-     This tries a number of increasingly more default methods until a
-     non-‘nil’ value is found.
+     This tries a progressively greater number of default methods until
+     a non-‘nil’ value is found.
 
         • SERVER (the argument passed to this function)
         • The ‘erc-server’ option
@@ -664,8 +772,8 @@ Port
  -- Function: erc-compute-port &optional port
      Return a port for an IRC server.
 
-     This tries a number of increasingly more default methods until a
-     non-‘nil’ value is found.
+     This tries a progressively greater number of default methods until
+     a non-‘nil’ value is found.
 
         • PORT (the argument passed to this function)
         • The ‘erc-port’ option
@@ -682,8 +790,8 @@ Nick
  -- Function: erc-compute-nick &optional nick
      Return user’s IRC nick.
 
-     This tries a number of increasingly more default methods until a
-     non-‘nil’ value is found.
+     This tries a progressively greater number of default methods until
+     a non-‘nil’ value is found.
 
         • NICK (the argument passed to this function)
         • The ‘erc-nick’ option
@@ -697,12 +805,9 @@ Nick
      case, if the first nick in the list is already in use, other nicks
      are tried in the list order.
 
- -- User Option: erc-format-nick-function
-     A function to format a nickname for message display
-
-     You can set this to ‘erc-format-@nick’ to display user mode prefix
-
-     (setq erc-format-nick-function 'erc-format-@nick)
+ -- User Option: erc-show-speaker-membership-status
+     A boolean for including a channel member’s “status prefix” in their
+     display name when they speak.
 
  -- User Option: erc-nick-uniquifier
      The string to append to the nick if it is already in use.
@@ -765,8 +870,8 @@ Full name
  -- Function: erc-compute-full-name &optional full-name
      Return user’s full name.
 
-     This tries a number of increasingly more default methods until a
-     non-‘nil’ value is found.
+     This tries a progressively greater number of default methods until
+     a non-‘nil’ value is found.
 
         • FULL-NAME (the argument passed to this function)
         • The ‘erc-user-full-name’ option
@@ -806,26 +911,30 @@ File: erc.info,  Node: SASL,  Next: Sample Configuration,  Prev: Connecting,  Up
 5.2 Authenticating via SASL
 ===========================
 
-Regardless of the mechanism or the network, you’ll likely have to be
-registered before first use.  Please refer to the network’s own
-instructions for details.  If you’re new to IRC and using a bouncer,
-know that you probably won’t be needing SASL for the client-to-bouncer
-connection.  To get started, just add ‘sasl’ to ‘erc-modules’ like any
-other module.  But before that, please explore all custom options
-pertaining to your chosen mechanism.
+If you’ve used SASL elsewhere, you can probably skip to the examples
+below.  Otherwise, if you haven’t already registered with your network,
+please do so now, referring to the network’s own instructions for
+details.  If you’re new to IRC and using a bouncer, know that you
+probably won’t be needing this for the client-to-bouncer connection.
+
+   When you’re ready to get started, add ‘sasl’ to ‘erc-modules’, like
+you would any other module.  If unsure which “mechanism” to choose,
+stick with the default of ‘PLAIN’.  Then try ‘C-u M-x erc-tls <RET>’,
+and give your account name for the ‘user’ parameter and your account
+password for the ‘server password’.
 
  -- User Option: erc-sasl-mechanism
      The name of an SASL subprotocol type as a _lowercase_ symbol.  The
      value can be one of the following:
 
-     ‘plain’ and ‘scram’ (“password-based”)
+     ‘plain’ or ‘scram’ (“password-based”)
           Here, “password” refers to your account password, which is
           usually your ‘NickServ’ password.  To make this work,
           customize ‘erc-sasl-user’ and ‘erc-sasl-password’ or specify
           the ‘:user’ and ‘:password’ keyword arguments when invoking
-          ‘erc-tls’.  Note that ‘:user’ cannot be given interactively.
+          ‘erc-tls’.
 
-     ‘external’ (via Client TLS Certificate)
+     ‘external’ (via client TLS certificate)
           This works in conjunction with the ‘:client-certificate’
           keyword offered by ‘erc-tls’.  Just ensure you’ve registered
           your fingerprint with the network beforehand.  The fingerprint
@@ -951,24 +1060,29 @@ Examples
 
           (defun my-erc-up (network)
             (interactive "Snetwork: ")
-
-            (pcase network
-              ('libera
-               (let ((erc-sasl-mechanism 'external))
-                 (erc-tls :server "irc.libera.chat" :port 6697
-                          :client-certificate t)))
-              ('example
-               (let ((erc-sasl-auth-source-function
-                      #'erc-sasl-auth-source-password-as-host))
-                 (erc-tls :server "irc.example.net" :port 6697
-                          :user "alyssa"
-                          :password "Example.Net")))))
+            (require 'erc-sasl)
+            (or (let ((erc-modules (cons 'sasl erc-modules)))
+                  (pcase network
+                    ('libera
+                     (let ((erc-sasl-mechanism 'external))
+                       (erc-tls :server "irc.libera.chat"
+                                :client-certificate t)))
+                    ('example
+                     (let ((erc-sasl-auth-source-function
+                            #'erc-sasl-auth-source-password-as-host))
+                       (erc-tls :server "irc.example.net"
+                                :user "alyssa"
+                                :password "Example.Net")))))
+                ;; Non-SASL
+                (call-interactively #'erc-tls)))
 
      You’ve started storing your credentials with auth-source and have
      decided to try SASL on another network as well.  But there’s a
      catch: this network doesn’t support ‘EXTERNAL’.  You use
-     ‘let’-binding to get around this and successfully authenticate to
-     both networks.
+     ‘let’-binding to work around this and successfully authenticate to
+     both networks.  (Note that this example assumes you’ve removed
+     ‘sasl’ from ‘erc-modules’ globally and have instead opted to add it
+     locally when connecting to preconfigured networks.)
 
 Troubleshooting
 ---------------
@@ -997,73 +1111,271 @@ File: erc.info,  Node: Sample Configuration,  Next: Integrations,  Prev: SASL,  
 5.3 Sample Configuration
 ========================
 
-Here is an example of configuration settings for ERC.  This can go into
-your Emacs configuration file.  Everything after the ‘(require 'erc)’
-command can optionally go into ‘~/.emacs.d/.ercrc.el’.
+Here is an example configuration for ERC.  *Don’t panic* if you aren’t
+familiar with ‘use-package’ or have no interest in learning it.  For our
+purposes, it’s just a means of presenting configuration details in a
+tidy, standardized format.  If it helps, just pretend it’s some
+make-believe, pseudo configuration language.  And while the syntax below
+is easy enough to intuit and adapt to your setup, you may wish to keep
+the following in mind:
 
-     ;;; Sample ERC configuration
+   • Each ‘use-package’ “declaration” focuses on a library “feature”,
+     which is just a symbol you’d normally ‘require’ in your config.
 
-     ;; Load authentication info from an external source.  Put sensitive
-     ;; passwords and the like in here.
-     (load "~/.emacs.d/.erc-auth")
+   • Emacs loads anything in a ‘:config’ section _after_ loading
+     whatever library ‘provide’s the declaration’s feature.
 
-     ;; This is an example of how to make a new command.  Type "/uptime" to
-     ;; use it.
-     (defun erc-cmd-UPTIME (&rest ignore)
-       "Display the uptime of the system, as well as some load-related
-     stuff, to the current ERC buffer."
-       (let ((uname-output
-              (replace-regexp-in-string
-               ", load average: " "] {Load average} ["
-               ;; Collapse spaces, remove
-               (replace-regexp-in-string
-                " +" " "
-                ;; Remove beginning and trailing whitespace
-                (replace-regexp-in-string
-                 "^ +\\|[ \n]+$" ""
-                 (shell-command-to-string "uptime"))))))
-         (erc-send-message
-          (concat "{Uptime} [" uname-output "]"))))
+   • Everything in a ‘:custom’ or ‘:custom-face’ section is basically
+     something you’d find in your ‘custom-file’.
 
-     ;; This causes ERC to connect to the Libera.Chat network upon hitting
-     ;; C-c e f.  Replace MYNICK with your IRC nick.
-     (global-set-key "\C-cef" (lambda () (interactive)
-                                (erc :server "irc.libera.chat" :port "6667"
-                                     :nick "MYNICK")))
+   • For more info, *note (elisp)Named Features::, or *note
+     (use-package)Top::.
 
-     ;; This causes ERC to connect to the IRC server on your own machine (if
-     ;; you have one) upon hitting C-c e b.  Replace MYNICK with your IRC
-     ;; nick.  Often, people like to run bitlbee (https://bitlbee.org/) as an
-     ;; AIM/Jabber/MSN to IRC gateway, so that they can use ERC to chat with
-     ;; people on those networks.
-     (global-set-key "\C-ceb" (lambda () (interactive)
-                                (erc :server "localhost" :port "6667"
-                                     :nick "MYNICK")))
+The following would typically go in your init file.  Experienced users
+may opt to keep any non-settings, like commands and functions, in a
+dedicated ‘~/.emacs.d/.ercrc.el’.  Whatever the case, please keep in
+mind that you can replace nearly all of the following with Custom
+settings (*note Sample configuration via Customize::).
 
-     ;; Make C-c RET (or C-c C-RET) send messages instead of RET.  This has
-     ;; been commented out to avoid confusing new users.
-     ;; (define-key erc-mode-map (kbd "RET") nil)
-     ;; (define-key erc-mode-map (kbd "C-c RET") 'erc-send-current-line)
-     ;; (define-key erc-mode-map (kbd "C-c C-RET") 'erc-send-current-line)
+     ;;; My ERC configuration -*- lexical-binding: t -*-
 
-     ;;; Options
+     (use-package erc
+       :config
+       ;; Prefer SASL to NickServ, colorize nicknames, and show side panels
+       ;; with joined channels and members
+       (setopt erc-modules
+               (seq-union '(sasl nicks bufbar nickbar scrolltobottom)
+                          erc-modules))
 
-     ;; Join the #emacs and #erc channels whenever connecting to
-     ;; Libera.Chat.
-     (setq erc-autojoin-channels-alist
-           '(("Libera.Chat" "#emacs" "#erc")))
+       :custom
+       ;; Protect me from accidentally sending excess lines.
+       (erc-inhibit-multiline-input t)
+       (erc-send-whitespace-lines t)
+       (erc-ask-about-multiline-input t)
+       ;; Scroll all windows to prompt when submitting input.
+       (erc-scrolltobottom-all t)
 
-     ;; Interpret mIRC-style color commands in IRC chats
-     (setq erc-interpret-mirc-color t)
+       ;; Reconnect automatically using a fancy strategy.
+       (erc-server-reconnect-function #'erc-server-delayed-check-reconnect)
+       (erc-server-reconnect-timeout 30)
 
-     ;; The following are commented out by default, but users of other
-     ;; non-Emacs IRC clients might find them useful.
-     ;; Kill buffers for channels after /part
-     ;; (setq erc-kill-buffer-on-part t)
-     ;; Kill buffers for private queries after quitting the server
-     ;; (setq erc-kill-queries-on-quit t)
-     ;; Kill buffers for server messages after quitting the server
-     ;; (setq erc-kill-server-buffer-on-quit t)
+       ;; Show new buffers in the current window instead of a split.
+       (erc-interactive-display 'buffer)
+
+       ;; Insert a newline when I hit <RET> at the prompt, and prefer
+       ;; something more deliberate for actually sending messages.
+       :bind (:map erc-mode-map
+                   ("RET" . nil)
+                   ("C-c C-c" . #'erc-send-current-line))
+
+       ;; Emphasize buttonized text in notices.
+       :custom-face (erc-notice-face ((t (:slant italic :weight unspecified)))))
+
+     (use-package erc-sasl
+       ;; Since my account name is the same as my nick, free me from having
+       ;; to hit C-u before M-x erc to trigger a username prompt.
+       :custom (erc-sasl-user :nick))
+
+     (use-package erc-join
+       ;; Join #emacs and #erc whenever I connect to Libera.Chat.
+       :custom (erc-autojoin-channels-alist '((Libera.Chat "#emacs" "#erc"))))
+
+     (use-package erc-fill
+       :custom
+       ;; Prefer one message per line without continuation indicators.
+       (erc-fill-function #'erc-fill-wrap)
+       (erc-fill-static-center 18)
+
+       :bind (:map erc-fill-wrap-mode-map ("C-c =" . #'erc-fill-wrap-nudge)))
+
+     (use-package erc-track
+       ;; Prevent JOINs and PARTs from lighting up the mode-line.
+       :config (setopt erc-track-faces-priority-list
+                       (remq 'erc-notice-face erc-track-faces-priority-list))
+
+       :custom (erc-track-priority-faces-only 'all))
+
+     (use-package erc-goodies
+       ;; Turn on read indicators when joining channels.
+       :hook (erc-join . my-erc-enable-keep-place-indicator-on-join))
+
+     (defvar my-erc-read-indicator-channels '("#emacs")
+       "Channels in which to show a `keep-place-indicator'.")
+
+     (defun my-erc-enable-keep-place-indicator-on-join ()
+       "Enable read indicators for certain queries or channels."
+       (when (member (erc-default-target) my-erc-read-indicator-channels)
+         (erc-keep-place-indicator-mode +1)))
+
+     ;; Handy commands from the Emacs Wiki.
+     (defun erc-cmd-TRACK (&optional target)
+       "Start tracking TARGET or that of current buffer."
+       (setq erc-track-exclude
+             (delete (or target (erc-default-target) (current-buffer))
+                     erc-track-exclude)))
+
+     (defun erc-cmd-UNTRACK (&optional target)
+       "Stop tracking TARGET or that of current buffer."
+       (setq erc-track-exclude
+             (cl-pushnew (or target (erc-default-target) (current-buffer))
+                         erc-track-exclude
+                         :test #'equal)))
+
+
+Those familiar with ‘use-package’ may have noticed the lack of ‘:defer’
+keyword args.  This was done to conserve space, but you can just pretend
+that this user has enabled ‘use-package-always-defer’ elsewhere.
+
+Via Customize
+-------------
+
+As mentioned, Customize users can accomplish nearly all of the above via
+the Customize interface.  Start by running ‘M-x customize-group <RET>
+erc <RET>’, and search for “Modules” with ‘C-s modules <RET>’.  Toggle
+open the flyout menu to reveal the full “widget” panel, a web-form-like
+interface for “Erc Modules”.  Tick the boxes for ‘bufbar’, ‘nickbar’,
+‘nicks’, ‘sasl’, and ‘scrolltobottom’.
+
+   Next, search for the phrases “Erc Ask About Multiline Input”, “Erc
+Inhibit Multiline Input”, and “Erc Send Whitespace Lines”.  These are
+the print names of three boolean options that control how ERC treats
+prompt input containing line breaks.  When visiting each option’s
+section, twirl open its triangle icon to reveal its widget UI, and click
+its ‘[Toggle]’ button to set its value to ‘t’.  While going about this,
+you may find it helpful to glance at the descriptions just in case you
+want to disable them later.  When finished, hit ‘C-x C-s’ or click
+‘[Apply and Save]’ atop the buffer.
+
+   Now do the same for another couple options, this time having to do
+with automatic reconnection.  But instead of searching for their print
+names, try running ‘M-x customize-option <RET> ‘<option>’ <RET>’,
+replacing ‘<option>’ with:
+
+   • ‘erc-server-reconnect-function’, a function
+   • ‘erc-server-reconnect-timeout’, a number
+
+(If it helps, hit <TAB> for completion.)  As you may have noticed, when
+customizing options individually, each buffer displays but a single
+option’s widget.  When you get to the buffer for “Erc Server Reconnect
+Function”, you’ll see that ‘[Toggle]’ has been replaced with ‘[Value
+Menu]’ and that clicking it reveals three choices in a pop-up window.
+Enter ‘1’ to select ‘erc-server-delayed-check-reconnect’ before
+<TAB>’ing over to ‘[State]’ and hitting <RET>.  Enter ‘1’ again, this
+time to persists your changes.
+
+   For the final option, ‘erc-server-reconnect-timeout’, you’ll
+encounter a text field (instead of a button), which works like those in
+a typical web form.  Enter ‘30’ and hit ‘C-x C-s’ to save.  Just for
+fun, click the group link for ‘Erc Server’ at the bottom of the buffer.
+You could just as well have set the last two options from this “custom
+group” buffer alone, which very much resembles the one for the ‘Erc’
+group, which is actually the “parent” of this group (note the
+“breadcrumb” for group ‘Erc’ atop the buffer).  Indeed, you can always
+get back here by running ‘M-x customize-group <RET> erc-server <RET>’
+from almost anywhere in Emacs.
+
+   To make sure you’ve got this, try quickly customizing the option
+‘erc-interactive-display’, which lives in the ‘Erc Buffers’ group (‘M-x
+customize-group <RET> erc-buffers <RET>’).  As its doc string explains,
+the option controls where new buffers show up when you do ‘M-x erc-tls
+<RET>’ or issue certain “slash commands”, like ‘/JOIN #emacs-beginners
+<RET>’, at ERC’s prompt.  Change its value to the symbol ‘buffer’ by
+choosing ‘Use current window’ (item ‘5’) from the option’s ‘[Value
+Menu]’.  Don’t forget to save.
+
+   If you need more practice, try enabling the boolean option
+‘erc-scrolltobottom-all’, which lives in the ‘Erc Display’ group (‘M-x
+customize-group <RET> erc-display <RET>’).  When enabled, this option
+tells the ‘scrolltobottom’ module to adjust all ERC windows instead of
+just the one you’re currently typing in.
+
+   Now it’s time to set some key bindings for ‘erc-mode-map’, a
+major-mode keymap active in all ERC buffers.  In general, it’s best to
+do this part either entirely or in conjunction with some lisp code in
+you init file.  However, to keep things “simple”, we’ll do it all in
+customization buffers.  To get started, hit ‘M-x customize-group <RET>
+erc-hooks <RET>’ and search for “Erc Mode Hook”.  In the widget form,
+click ‘[INS]’, and paste the following into the value field in place of
+the default text.
+
+     (lambda ()
+       (keymap-set erc-mode-map "RET" nil)
+       (keymap-set erc-mode-map "C-c C-c" 'erc-send-current-line))
+
+Don’t worry about the line breaks.  Emacs is smart enough to handle
+those.  When you’re ready, click ‘[Apply and Save]’.
+
+   Next, try tweaking the face ERC uses to stylize server messages that
+say things like “SoAndSo has joined channel #chan”.  Type ‘M-x
+customize-face <RET> erc-notice-face <RET>’.  Click the “link”-looking
+button at the very bottom that says something like “Show All
+Attributes”.  Untick ‘Weight’ and tick ‘Slant’.  Then, in the latter’s
+‘[Value Menu]’, enter ‘0’ for ‘italic’.  Hit ‘C-x C-s’ to save.
+
+   Time for some more involved configuring.  From now on, if something
+isn’t applicable to your setup, just skip ahead.  Also, note that if
+you’ve installed ERC from GNU ELPA, you may need to load libraries for
+groups and options you’d like to customize before Emacs can create a
+customization buffer.  For example, to do this for the group ‘erc-sasl’,
+run ‘M-: (require 'erc-sasl) <RET>’.
+
+   Speaking of SASL, those already authenticating with it may have
+noticed that connecting interactively requires running ‘C-u M-x erc-tls
+<RET>’ in order to receive a “User” prompt for your account name.
+However, if your nickname happens to be the same as your account name,
+you can avoid the leading ‘C-u’ by customizing the option
+‘erc-sasl-user’ to the keyword symbol ‘:nick’.  At the time of writing,
+you’d hit ‘2’ when prompted by the option’s ‘[Value menu]’.  Hit ‘C-x
+C-s’ to save your changes.
+
+   One of ERC’s most configured options lives in ‘erc-join’, and it
+determines the channels you join upon connecting.  To make it work for
+you, customize the option ‘erc-autojoin-channels-alist’.  In the
+customization widget, hit ‘[INS]’ to create a new entry.  In the
+‘Network:’ field, type ‘Libera.Chat’.  Under ‘Channels:’, hit ‘[INS]’
+again, this time to create a field to enter a channel name, and enter
+‘#emacs’.  Now, find and click on the lowermost ‘[INS]’, and this time
+enter ‘#erc’ in the ‘Name:’ field.  Save your changes.
+
+   If you’re new to ERC, you may not be familiar with the various ways
+it can “fill” message text by inserting line breaks.  The most modern
+fill style is called ‘fill-wrap’, and it’s available by customizing
+‘erc-fill-function’ to ‘erc-fill-wrap’, which appears as ‘Dynamic
+word-wrap’ in the option’s ‘[Value Menu]’.  After setting this, change
+the related option ‘erc-fill-static-center’ to the integer ‘18’.  Save
+your changes.  As a bonus exercise, try binding the key ‘C-c =’ to the
+function ‘erc-fill-wrap-nudge’ in the minor-mode keymap
+‘erc-fill-wrap-mode-map’ (hint: the minor mode’s hook is called
+‘erc-fill-wrap-mode-hook’, and it’s not a member of any customization
+group).
+
+   ERC users tend to be picky about the mode line.  If you find that
+you’d rather not see changes when people join and leave channels,
+customize the option ‘erc-track-faces-priority-list’.  When visiting its
+customization buffer, you’ll notice it’s quite busy.  Ignore everything
+and type ‘C-s erc-notice-face <RET>’.  Click the ‘[DEL]’ button at the
+beginning of the line you end up on, and save your changes.  Next,
+customize the related option ‘erc-track-priority-faces-only’ to the
+‘[Value Menu]’ choice ‘all’.  Once again, save your changes.
+
+   Let’s say you’d like to enable a “local module” (ERC’s version of a
+local minor mode) in a specific channel.  One way to do that is by
+running some code to activate the module if the channel’s name matches.
+Try that now by customizing the option ‘erc-join-hook’.  Add the
+following in the value field before saving your changes:
+
+     (lambda ()
+       (require 'erc-goodies)
+       (when (equal (erc-default-target) "#emacs")
+         (erc-keep-place-indicator-mode +1)))
+
+   Lastly, if you really want the two “slash commands” defined at the
+end of the previous section, you can put them in any file listed in
+‘erc-startup-file-list’, such as ‘~/.emacs.d/.ercrc.el’.  Make sure to
+put ‘(require 'erc-track)’ near the top of the file.  These will allow
+you to type ‘/TRACK <RET>’ and ‘/UNTRACK <RET>’ in channels and query
+buffers to tell ERC whether to show activity from these buffers in the
+mode line.
 
 
 File: erc.info,  Node: Integrations,  Next: Options,  Prev: Sample Configuration,  Up: Advanced Usage
@@ -1074,6 +1386,7 @@ File: erc.info,  Node: Integrations,  Next: Options,  Prev: Sample Configuration
 * Menu:
 
 * auth-source::                 Retrieving auth-source entries with ERC.
+* display-buffer::              Controlling how ERC displays buffers.
 
 5.4.1 URL
 ---------
@@ -1095,10 +1408,64 @@ like ‘"\\|\\`irc6?s?:"’ onto the end of ‘eww-use-browse-url’.  But with
 
 Users on Emacs 28 and below may need to use ‘browse-url’ instead.
 
-
-File: erc.info,  Node: auth-source,  Up: Integrations
+5.4.2 SOCKS
+-----------
 
-5.4.2 auth-source
+People wanting to connect to IRC through a SOCKS proxy are most likely
+interested in doing so over TOR (The Onion Router).  If that’s _not_
+you, please adapt these instructions accordingly.  Otherwise, keep in
+mind that support for Tor is experimental and thus insufficient for
+safeguarding a user’s identity and location, especially in the case of
+targeted individuals.
+
+   ERC’s preferred Tor setup works by accessing a local Tor service
+through the built-in ‘socks.el’ library that ships with Emacs.  Other
+means of accessing Tor, such as via ‘torsocks’, are not supported.
+Before getting started, check that your Tor service is up and running.
+You can do that with the following command:
+
+     curl --proxy socks5h://localhost:9050 https://check.torproject.org | \
+       grep 'Congratulations'
+
+   Networks and servers differ in how they expose Tor endpoints.  In all
+cases, you’ll want to first set the option ‘socks-server’ to something
+appropriate, like ‘("tor" "127.0.0.1" 9050 5)’.  For some networks,
+setting ‘erc-server-connect-function’ to ‘socks-open-network-stream’
+might be enough.  Others, like ‘Libera.Chat’, involve additional setup.
+At the time of writing, connecting to that network requires both TLS and
+a permitted SASL mechanism, like ‘EXTERNAL’ (*note SASL::), as shown in
+the following example:
+
+     (require 'erc)
+     (require 'socks)
+
+     (defun my-erc-open-socks-tls-stream (&rest args)
+       (let ((socks-username "")
+             (socks-password "")
+             (socks-server '("tor" "localhost" 9050 5)))
+         (apply #'erc-open-socks-tls-stream args)))
+
+     (let* ((erc-modules (cons 'sasl erc-modules))
+            (erc-sasl-mechanism 'external)
+            (erc-server-connect-function #'my-erc-open-socks-tls-stream))
+       (erc-tls
+        :server "libera75jm6of4wxpxt4aynol3xjmbtxgfyjpu34ss4d7r7q2v5zrpyd.onion"
+        :port 6697
+        :nick "jrh"
+        :user "jrandomhacker"
+        :full-name "J. Random Hacker"
+        :client-certificate (list "/home/jrh/key.pem" "/home/jrh/cert.pem")))
+
+Here, the user-provided ‘my-erc-open-socks-tls-stream’ ensures that the
+preferred values for ‘socks-server’ and friends will be available when
+reconnecting.  If you plan on using SOCKS with ERC exclusively, you can
+just set those options and variables globally and bind
+‘erc-server-connect-function’ to ‘erc-open-socks-tls-stream’ instead.
+
+
+File: erc.info,  Node: auth-source,  Next: display-buffer,  Up: Integrations
+
+5.4.3 auth-source
 -----------------
 
 You can configure ERC to use the built-in auth-source library for
@@ -1162,13 +1529,10 @@ Default query behavior
 
 When preparing entries for your backend, it may help to get a feel for
 how ERC and its modules conduct searches, especially when exploring a
-new context, such as channel keys.  (Hint: in such situations, try
-temporarily setting the variable ‘auth-source-debug’ to ‘t’ and checking
-‘*Messages*’ periodically for insights into how auth-source is
-operating.)  Overall, though, ERC tries to be consistent in performing
-queries across various authentication contexts.  Here’s what to expect
-with respect to the ‘host’ field, which, by default, most heavily
-influences the fate of a query:
+new context, such as channel keys.  Overall, though, ERC tries to be
+consistent in performing queries across various authentication contexts.
+Here’s what to expect with respect to the ‘host’ field, which, by
+default, most heavily influences the fate of a query:
 
   1. entries featuring custom identifiers and networks are matched first
      (*note Network Identifier::)
@@ -1236,6 +1600,182 @@ entry for this purpose, put the channel name in the ‘user’ field (for
 example, ‘login "#fsf"’, in netrc’s case).  The actual key goes in the
 ‘password’ (or ‘secret’) field.
 
+Troubleshooting
+---------------
+
+By default, ERC queries ‘auth-source’ for channel keys and server
+passwords (*note auth-source Server Password::), as well as other,
+module-specific credentials.  In general, if you’re having trouble
+calling ‘auth-source-search’ in a custom query function, like
+‘erc-auth-source-server-function’, try temporarily setting the variable
+‘auth-source-debug’ to ‘t’ and checking ‘*Messages*’ periodically for
+insights into how ‘auth-source’ is operating.
+
+   If you’re using a GPG-encrypted file and find that customizing one of
+the function-valued query options doesn’t solve your problem, explore
+options ‘epg-pinentry-mode’ and ‘epg-debug’ in the ‘epg’ Custom group
+(*note (epa)GnuPG Pinentry::).  Additionally, keep an eye out for an
+‘*Error*’ buffer, which may contain more specific clues about your
+situation.  If you use the libsecrets integration (*note (auth)Secret
+Service API::) with something like GNOME Keyring, you may need to check
+the “remember” box in the passphrase popup dialog to avoid being
+prompted for confirmation every time you run ERC. If it doesn’t work at
+first, try logging out.  And when in doubt, try using the Emacs command
+‘secrets-show-secrets’ to browse the ‘Login’ keyring.  There should be a
+‘GnuPG/stored-by’ entry with a value of ‘GnuPG Pinentry’ or similar.
+
+
+File: erc.info,  Node: display-buffer,  Prev: auth-source,  Up: Integrations
+
+5.4.4 display-buffer
+--------------------
+
+ERC supports the “action” interface used by ‘display-buffer’ and friends
+from ‘window.el’.  *Note (elisp)Displaying Buffers::, for specifics.
+When ERC displays a new or “reassociated” buffer, it consults its
+various buffer-display options, such as ‘erc-buffer-display’, to decide
+whether and how the buffer ought to appear in a window.  Exactly which
+one it consults depends on the context in which the buffer is being
+manifested.
+
+   For some buffer-display options, the context is pretty cut and dry.
+For instance, in the case of ‘erc-receive-query-display’, you’re
+receiving a query from someone you haven’t yet chatted with in the
+current session.  For other options, like ‘erc-interactive-display’, the
+precise context varies.  For example, you might be opening a query
+buffer with the command ‘/QUERY bob <RET>’ or joining a new channel with
+‘/JOIN #chan <RET>’.  Power users wishing to distinguish between such
+nuanced contexts or just exercise more control over buffer-display
+behavior generally can elect to override these options by setting one or
+more to a “‘display-buffer’-like” function that accepts a BUFFER and an
+ACTION argument.
+
+Examples
+........
+
+In this first example, a user-provided buffer-display function displays
+new server buffers in the current window when issuing an ‘M-x erc-tls
+<RET>’ and in a split window for all other interactve contexts covered
+by the option ‘erc-interactive-display’, like clicking an ‘irc://’-style
+URL (*note URL::).
+
+     (defun my-erc-interactive-display-buffer (buffer action)
+       "Pop to BUFFER when running \\[erc-tls], clicking a link, etc."
+       (when-let ((alist (cdr action))
+                  (found (alist-get 'erc-interactive-display alist)))
+         (if (eq found 'erc-tls)
+             (pop-to-buffer-same-window buffer action)
+           (pop-to-buffer buffer action))))
+
+     (setopt erc-interactive-display #'my-erc-interactive-display-buffer)
+
+Observe that ERC supplies the names of buffer-display options as ACTION
+alist keys and pairs them with contextual constants, like the symbols
+‘erc-tls’ or ‘url’, the full lineup of which are listed below.
+
+   In this second example, for Emacs 29 and above, the user writes three
+predicates that somewhat resemble the “‘display-buffer’-like” function
+above.  These too look for ACTION alist keys sharing the names of ERC’s
+buffer-display options (and, in one case, a module’s minor mode).
+
+     (defun my-erc-disp-entry-p (_ action)
+       (memq (cdr (or (assq 'erc-buffer-display action)
+                      (assq 'erc-interactive-display action)))
+             '(erc-tls url)))
+
+     (defun my-erc-disp-query-p (_ action)
+       (or (eq (cdr (assq 'erc-interactive-display action)) '/QUERY)
+           (and (eq (cdr (assq 'erc-receive-query-display action)) 'PRIVMSG)
+                (member (erc-default-target) '("bob" "alice")))))
+
+     (defun my-erc-disp-chan-p (_ action)
+       (or (assq 'erc-autojoin-mode action)
+           (and (eq (cdr (assq 'erc-buffer-display action)) 'JOIN)
+                (member (erc-default-target) '("#emacs" "#fsf")))))
+
+You’ll notice we ignore the BUFFER parameter of these predicates because
+ERC ensures that BUFFER is already current (which is why we can freely
+call ‘erc-default-target’).  Note also that we cheat a little by
+treating the ACTION parameter like an alist when it’s really a cons of
+one or more functions and an alist.
+
+To complement our predicates, we set all three buffer-display options
+referenced in their ACTION-alist lookups to ‘display-buffer’.  This
+tells ERC to defer to that function in the display contexts covered by
+these options.
+
+     (setopt erc-buffer-display #'display-buffer
+             erc-interactive-display #'display-buffer
+             erc-receive-query-display #'display-buffer
+             ;;
+             erc-auto-reconnect-display 'bury)
+
+The last option above just tells ERC to avoid any buffer-display
+machinery when auto-reconnecting.  (For historical reasons, ERC’s
+buffer-display options use the term “bury” to mean “ignore” rather than
+‘bury-buffer’.)
+
+   Finally, we compose our predicates into ‘buffer-match-p’ conditions
+and pair them with various well known ‘display-buffer’ action functions
+and action-alist members.
+
+     (setopt display-buffer-alist
+
+             ;; Create new frame with M-x erc-tls RET or (erc-tls ...)
+             '(((and (major-mode . erc-mode) my-erc-disp-entry-p)
+                display-buffer-pop-up-frame
+                (reusable-frames . visible))
+
+               ;; Show important chans and queries in a split.
+               ((and (major-mode . erc-mode)
+                     (or my-erc-disp-chan-p my-erc-disp-query-p))
+                display-buffer-pop-up-window)
+
+               ;; Ignore everything else.
+               ((major-mode . erc-mode)
+                display-buffer-no-window
+                (allow-no-window . t))))
+
+Of course, we could just as well set our buffer-display options to one
+or more homespun functions instead of bothering with
+‘display-buffer-alist’ at all (in what would make for a more complicated
+version of our first example).  But perhaps we already have a growing
+menagerie of similar predicates and like to keep everything in one place
+in our ‘init.el’.
+
+Action alist items
+..................
+
+Option-based keys:
+     All keys are symbols, as are values, unless otherwise noted.
+
+        • ‘erc-buffer-display’
+             − ‘JOIN’
+             − ‘NOTICE’
+             − ‘PRIVMSG’
+             − ‘erc’ (entry point called non-interactively)
+             − ‘erc-tls’
+
+        • ‘erc-interactive-display’
+             − ‘/QUERY’
+             − ‘/JOIN’
+             − ‘/RECONNECT’
+             − ‘url’ (hyperlink clicked)
+             − ‘erc’ (entry point called interactively)
+             − ‘erc-tls’
+
+        • ‘erc-receive-query-display’
+             − ‘NOTICE’
+             − ‘PRIVMSG’
+
+        • ‘erc-auto-reconnect-display’
+             − something non-‘nil’
+
+Module-based (minor-mode) keys:
+
+        • ‘erc-autojoin-mode’
+             − channel name as a string, e.g., ‘"#chan"’
+
 
 File: erc.info,  Node: Options,  Prev: Integrations,  Up: Advanced Usage
 
@@ -1284,7 +1824,9 @@ or if you have bugs to report, there are several places you can go.
      help keep it up to date.
 
    • You can ask questions about using ERC on the Emacs mailing list,
-     <https://lists.gnu.org/mailman/listinfo/help-gnu-emacs>.
+     <https://lists.gnu.org/mailman/listinfo/help-gnu-emacs>, as well as
+     on ERC’s own low-volume list,
+     <https://lists.gnu.org/mailman/listinfo/emacs-erc>.
 
    • You can visit the IRC Libera.Chat channel ‘#emacs’.  Many of the
      contributors are frequently around and willing to answer your
@@ -1302,8 +1844,17 @@ or if you have bugs to report, there are several places you can go.
      ‘help-mode’ buffer, confirm the version and click ‘Install’.  Make
      sure to restart Emacs before reconnecting to IRC, and don’t forget
      that you can roll back to the previous version by running ‘M-x
-     package-delete <RET>’.  *Note (emacs)Packages:: for more
+     package-delete <RET>’.  *Note (emacs)Packages::, for more
      information.
+
+     Note that a bug affecting Emacs’s packaging machinery may prevent
+     the above method from working on Emacs versions 29 and below.
+     Users on 29 can try running ‘C-u M-x package-install <RET>’
+     instead.  Users on 28 and below can click on the _installed_ ‘erc’
+     line item in the ‘*Packages*’ buffer instead of the newest one, and
+     then, in the resulting ‘help-mode’ buffer, find and activate the
+     button for the newest version, which should appear in the summary
+     item ‘Other versions’.
 
      In the rare instance you need an emergency fix or have volunteered
      to test an edge feature between ERC releases, you can try adding
@@ -1384,6 +1935,19 @@ general.
 
      Since about 2009, ERC is no longer developed as a separate project,
      but is maintained as part of Emacs.
+
+Official IRC channels
+---------------------
+
+The official channels for GNU Emacs and ERC lived on the Freenode IRC
+network until June 2021, when they—along with the official IRC channels
+of the GNU Project, the Free Software Foundation, and many other free
+software communities—relocated to the Libera.Chat network in the
+aftermath of changes in governance and policies of Freenode in May and
+June 2021.  GNU and FSF’s announcements about this are at
+<https://lists.gnu.org/archive/html/info-gnu/2021-06/msg00005.html>,
+<https://lists.gnu.org/archive/html/info-gnu/2021-06/msg00007.html>, and
+<https://lists.gnu.org/archive/html/info-gnu-emacs/2021-06/msg00000.html>.
 
 
 File: erc.info,  Node: GNU Free Documentation License,  Next: Concept Index,  Prev: History,  Up: Top
@@ -1878,19 +2442,23 @@ Index
 
 * advanced topics:                       Advanced Usage.      (line   6)
 * auth-source:                           auth-source.         (line   6)
+* auxiliary modules:                     Modules.             (line 137)
 * bugs, reporting:                       Getting Help and Reporting Bugs.
                                                               (line   6)
 * configuration, sample:                 Sample Configuration.
                                                               (line   6)
+* configuration, via customize:          Sample Configuration.
+                                                              (line 124)
 * connecting:                            Connecting.          (line   6)
+* display-buffer:                        display-buffer.      (line   6)
 * erc:                                   Connecting.          (line  10)
-* erc-auth-source-search:                auth-source.         (line 124)
-* erc-compute-full-name:                 Connecting.          (line 211)
-* erc-compute-nick:                      Connecting.          (line 128)
-* erc-compute-port:                      Connecting.          (line 110)
-* erc-compute-server:                    Connecting.          (line  93)
-* erc-compute-user:                      Connecting.          (line 166)
-* erc-sasl-auth-source-password-as-host: SASL.                (line  92)
+* erc-auth-source-search:                auth-source.         (line 121)
+* erc-compute-full-name:                 Connecting.          (line 209)
+* erc-compute-nick:                      Connecting.          (line 129)
+* erc-compute-port:                      Connecting.          (line 111)
+* erc-compute-server:                    Connecting.          (line  94)
+* erc-compute-user:                      Connecting.          (line 164)
+* erc-sasl-auth-source-password-as-host: SASL.                (line  96)
 * erc-tls:                               Connecting.          (line  33)
 * help, getting:                         Getting Help and Reporting Bugs.
                                                               (line   6)
@@ -1898,80 +2466,99 @@ Index
 * history, of ERC:                       History.             (line   6)
 * integrations:                          Integrations.        (line   6)
 * keystrokes:                            Keystroke Summary.   (line   6)
-* local modules:                         Modules.             (line 126)
+* local modules:                         Modules.             (line 165)
+* module loading:                        Modules.             (line 208)
 * modules:                               Modules.             (line   6)
-* modules, autoaway:                     Modules.             (line  22)
-* modules, autojoin:                     Modules.             (line  25)
-* modules, bbdb:                         Modules.             (line  28)
-* modules, button:                       Modules.             (line  31)
-* modules, capab-identify:               Modules.             (line  34)
-* modules, completion:                   Modules.             (line  38)
-* modules, fill:                         Modules.             (line  41)
-* modules, identd:                       Modules.             (line  44)
-* modules, irccontrols:                  Modules.             (line  47)
-* modules, log:                          Modules.             (line  50)
-* modules, match:                        Modules.             (line  53)
-* modules, menu:                         Modules.             (line  56)
-* modules, netsplit:                     Modules.             (line  59)
-* modules, noncommands:                  Modules.             (line  62)
-* modules, notifications:                Modules.             (line  68)
-* modules, notify:                       Modules.             (line  65)
-* modules, page:                         Modules.             (line  72)
-* modules, pcomplete:                    Modules.             (line  38)
-* modules, readonly:                     Modules.             (line  75)
-* modules, replace:                      Modules.             (line  78)
-* modules, ring:                         Modules.             (line  81)
-* modules, sasl:                         Modules.             (line  84)
-* modules, scrolltobottom:               Modules.             (line  87)
-* modules, services:                     Modules.             (line  90)
-* modules, smiley:                       Modules.             (line  93)
-* modules, sound:                        Modules.             (line  96)
-* modules, spelling:                     Modules.             (line  99)
-* modules, stamp:                        Modules.             (line 102)
-* modules, track:                        Modules.             (line 105)
-* modules, truncate:                     Modules.             (line 108)
-* modules, unmorse:                      Modules.             (line 111)
+* modules, autoaway:                     Modules.             (line  24)
+* modules, autojoin:                     Modules.             (line  27)
+* modules, bufbar:                       Modules.             (line  30)
+* modules, button:                       Modules.             (line  34)
+* modules, capab-identify:               Modules.             (line  37)
+* modules, command-indicator:            Modules.             (line  41)
+* modules, completion:                   Modules.             (line  45)
+* modules, fill:                         Modules.             (line  48)
+* modules, fill-wrap:                    Modules.             (line 142)
+* modules, identd:                       Modules.             (line  51)
+* modules, irccontrols:                  Modules.             (line  54)
+* modules, keep-place:                   Modules.             (line  57)
+* modules, keep-place-indicator:         Modules.             (line 145)
+* modules, log:                          Modules.             (line  60)
+* modules, match:                        Modules.             (line  63)
+* modules, menu:                         Modules.             (line  66)
+* modules, netsplit:                     Modules.             (line  69)
+* modules, nickbar:                      Modules.             (line  75)
+* modules, nicks:                        Modules.             (line  72)
+* modules, noncommands:                  Modules.             (line  79)
+* modules, notifications:                Modules.             (line  85)
+* modules, notify:                       Modules.             (line  82)
+* modules, page:                         Modules.             (line  89)
+* modules, pcomplete:                    Modules.             (line  45)
+* modules, querypoll:                    Modules.             (line  92)
+* modules, readonly:                     Modules.             (line  95)
+* modules, replace:                      Modules.             (line  98)
+* modules, ring:                         Modules.             (line 101)
+* modules, sasl:                         Modules.             (line 104)
+* modules, scrolltobottom:               Modules.             (line 107)
+* modules, services:                     Modules.             (line 110)
+* modules, services-regain:              Modules.             (line 149)
+* modules, smiley:                       Modules.             (line 113)
+* modules, sound:                        Modules.             (line 116)
+* modules, spelling:                     Modules.             (line 119)
+* modules, stamp:                        Modules.             (line 122)
+* modules, track:                        Modules.             (line 125)
+* modules, truncate:                     Modules.             (line 128)
+* modules, unmorse:                      Modules.             (line 131)
+* official IRC channels:                 History.             (line  72)
 * options:                               Options.             (line   6)
-* password, server:                      Connecting.          (line 179)
+* password, server:                      Connecting.          (line 177)
 * query buffers:                         Special Features.    (line  13)
-* required modules:                      Modules.             (line 117)
+* required modules:                      Modules.             (line 156)
 * SASL:                                  SASL.                (line   6)
 * settings:                              Getting Started.     (line   6)
-* URL:                                   Integrations.        (line  13)
-* username parameter:                    Connecting.          (line 166)
+* SOCKS:                                 Integrations.        (line  34)
+* URL:                                   Integrations.        (line  14)
+* username parameter:                    Connecting.          (line 164)
 
 
 
 Tag Table:
-Node: Top1042
-Node: Introduction2986
-Node: Getting Started4867
-Node: Sample Session5969
-Node: Special Features9066
-Node: Keystroke Summary11296
-Node: Modules13951
-Ref: Required Modules16649
-Ref: Local Modules16987
-Node: Advanced Usage19307
-Node: Connecting19957
-Ref: client-certificate21629
-Ref: username parameter25589
-Ref: password parameter26184
-Ref: server password26184
-Ref: Network Identifier28227
-Node: SASL29313
-Ref: SASL auth-source function33632
-Node: Sample Configuration38300
-Node: Integrations41486
-Ref: URL41709
-Node: auth-source42609
-Ref: auth-source functions47933
-Node: Options49304
-Node: Getting Help and Reporting Bugs50427
-Ref: Upgrading51330
-Node: History52701
-Node: GNU Free Documentation License54864
-Node: Concept Index80216
+Node: Top1044
+Node: Introduction2988
+Node: Getting Started4869
+Node: Sample Session6051
+Node: Special Features10259
+Node: Keystroke Summary12489
+Node: Modules15144
+Ref: Auxiliary Modules18540
+Ref: Required Modules19207
+Ref: Local Modules19545
+Ref: Module Loading21865
+Node: Advanced Usage24467
+Node: Connecting25257
+Ref: client-certificate26929
+Ref: username parameter30847
+Ref: password parameter31442
+Ref: server password31442
+Ref: Network Identifier33489
+Node: SASL34575
+Ref: SASL auth-source function39073
+Node: Sample Configuration44144
+Ref: Sample configuration via Customize49195
+Node: Integrations57822
+Ref: URL58115
+Ref: SOCKS59015
+Node: auth-source61483
+Ref: auth-source Server Password62122
+Ref: auth-source functions66637
+Ref: auth-source Troubleshooting68008
+Node: display-buffer69407
+Node: Options75848
+Node: Getting Help and Reporting Bugs76971
+Ref: Upgrading77979
+Node: History79891
+Ref: Official IRC channels82054
+Node: GNU Free Documentation License82729
+Node: Concept Index108081
 
 End Tag Table
 

@@ -1,10 +1,10 @@
-This is nxml-mode.info, produced by makeinfo version 6.8 from
+This is nxml-mode.info, produced by makeinfo version 7.0.3 from
 nxml-mode.texi.
 
 This manual documents nXML mode, an Emacs major mode for editing XML
 with RELAX NG support.
 
-   Copyright © 2007–2024 Free Software Foundation, Inc.
+   Copyright © 2007–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -30,7 +30,7 @@ nXML Mode
 This manual documents nXML mode, an Emacs major mode for editing XML
 with RELAX NG support.
 
-   Copyright © 2007–2024 Free Software Foundation, Inc.
+   Copyright © 2007–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -1254,23 +1254,23 @@ their use in free software.
 
 
 Tag Table:
-Node: Top953
-Node: Introduction2018
-Node: Completion4269
-Node: Inserting end-tags8395
-Node: Paragraphs9765
-Node: Outlining12056
-Node: Locating a schema17821
-Node: Commands for locating a schema19309
-Node: Schema locating files21978
-Node: Schema locating file syntax basics22873
-Node: Using the document's URI to locate a schema24821
-Node: Using the document element to locate a schema27465
-Node: Using type identifiers in schema locating files28566
-Node: Using multiple schema locating files31026
-Node: DTDs32879
-Node: Limitations34346
-Node: GNU Free Documentation License34818
+Node: Top955
+Node: Introduction2020
+Node: Completion4271
+Node: Inserting end-tags8397
+Node: Paragraphs9767
+Node: Outlining12058
+Node: Locating a schema17823
+Node: Commands for locating a schema19311
+Node: Schema locating files21980
+Node: Schema locating file syntax basics22875
+Node: Using the document's URI to locate a schema24823
+Node: Using the document element to locate a schema27467
+Node: Using type identifiers in schema locating files28568
+Node: Using multiple schema locating files31028
+Node: DTDs32881
+Node: Limitations34348
+Node: GNU Free Documentation License34820
 
 End Tag Table
 

@@ -1,7 +1,7 @@
-This is octave-mode.info, produced by makeinfo version 6.8 from
+This is octave-mode.info, produced by makeinfo version 7.0.3 from
 octave-mode.texi.
 
-Copyright © 1996–2024 Free Software Foundation, Inc.
+Copyright © 1996–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -24,7 +24,7 @@ File: octave-mode.info,  Node: Top,  Next: Overview,  Up: (dir)
 Octave Mode
 ***********
 
-Copyright © 1996–2024 Free Software Foundation, Inc.
+Copyright © 1996–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -924,15 +924,15 @@ Concept Index
 
 
 Tag Table:
-Node: Top862
-Node: Overview1775
-Node: Using Octave Mode2483
-Node: Running Octave from Within Emacs6677
-Node: GNU Free Documentation License12121
-Node: Key Index37484
-Node: Variable Index40076
-Node: Lisp Function Index42298
-Node: Concept Index44820
+Node: Top864
+Node: Overview1777
+Node: Using Octave Mode2485
+Node: Running Octave from Within Emacs6679
+Node: GNU Free Documentation License12123
+Node: Key Index37486
+Node: Variable Index40078
+Node: Lisp Function Index42300
+Node: Concept Index44822
 
 End Tag Table
 

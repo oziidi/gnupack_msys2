@@ -1,8 +1,9 @@
-This is ccmode.info, produced by makeinfo version 6.8 from cc-mode.texi.
+This is ccmode.info, produced by makeinfo version 7.0.3 from
+cc-mode.texi.
 
 This manual is for CC Mode in Emacs.
 
-   Copyright © 1995–2024 Free Software Foundation, Inc.
+   Copyright © 1995–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -35,7 +36,7 @@ classes, etc.; there are other packages for that.
 
    This manual is for CC Mode in Emacs.
 
-   Copyright © 1995–2024 Free Software Foundation, Inc.
+   Copyright © 1995–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -141,6 +142,7 @@ Syntactic Symbols
 * Multiline Macro Symbols::
 * Objective-C Method Symbols::
 * Java Symbols::
+* Constraint Symbols::
 * Statement Block Symbols::
 * K&R Symbols::
 
@@ -342,7 +344,7 @@ to be editing AWK files, ‘README’ describes how to configure your
 (X)Emacs so that CC Mode will supersede the obsolete ‘awk-mode.el’ which
 might have been supplied with your (X)Emacs.  CC Mode might not work
 with older versions of Emacs or XEmacs.  See the CC Mode release notes
-at <https://cc-mode.sourceforge.net> for the latest information on Emacs
+at <https://www.nongnu.org/cc-mode/> for the latest information on Emacs
 version and package compatibility (*note Updating CC Mode::).
 
  -- Command: c-version
@@ -541,14 +543,14 @@ comment style (*note Minor Modes::).
      for fuller details.  ‘comment-region’ isn’t actually part of CC
      Mode; it is given a CC Mode binding for convenience.
 
-‘M-;’ (‘comment-dwim’ or ‘indent-for-comment’ (1))
+‘M-;’ (‘comment-dwim’ or ‘indent-for-comment’)
      Insert a comment at the end of the current line, if none is there
-     already.  Then reindent the comment according to ‘comment-column’
-     (*note (emacs)Options for Comments::) and the variables below.
-     Finally, position the point after the comment starter.  ‘C-u M-;’
-     kills any comment on the current line, together with any whitespace
-     before it.  This is a standard Emacs command, but CC Mode enhances
-     it a bit with two variables:
+     already(1).  Then reindent the comment according to
+     ‘comment-column’ (*note (emacs)Options for Comments::) and the
+     variables below.  Finally, position the point after the comment
+     starter.  ‘C-u M-;’ kills any comment on the current line, together
+     with any whitespace before it.  This is a standard Emacs command,
+     but CC Mode enhances it a bit with two variables:
 
       -- User Option: c-indent-comment-alist
           This style variable allows you to vary the column that ‘M-;’
@@ -849,11 +851,11 @@ the other modes were enabled, you’d see ‘C/*lahw’(2).
      Toggle auto-newline minor mode.  When the command turns the mode
      on, it also enables electric minor mode.
 
-‘M-x c-toggle-hungry-state’(3)
-     Toggle hungry-delete minor mode.
+‘M-x c-toggle-hungry-state’
+     Toggle hungry-delete minor mode(3).
 
-‘M-x c-toggle-auto-hungry-state’(4)
-     Toggle both auto-newline and hungry delete minor modes.
+‘M-x c-toggle-auto-hungry-state’
+     Toggle both auto-newline and hungry delete minor modes(4).
 
 ‘C-c C-w’ (‘M-x subword-mode’)
      Toggle subword mode.
@@ -1121,12 +1123,12 @@ Using Distinct Bindings
      directly through their key sequences rather than using the minor
      mode toggling.
 
-     ‘C-c C-<DEL>’, or ‘C-c <DEL>’ (‘c-hungry-delete-backwards’)(2)
+     ‘C-c C-<DEL>’, or ‘C-c <DEL>’ (‘c-hungry-delete-backwards’)
           Delete any amount of whitespace in the backwards direction
           (regardless whether hungry-delete mode is enabled or not).
           This command is bound to both ‘C-c C-<DEL>’ and ‘C-c <DEL>’,
           since the more natural one, ‘C-c C-<DEL>’, is sometimes
-          difficult to type at a character terminal.
+          difficult to type at a character terminal(2).
 
      ‘C-c C-d’, ‘C-c C-<DELETE>’, or ‘C-c <DELETE>’ (‘c-hungry-delete-forward’)
           Delete any amount of whitespace in the forward direction
@@ -1571,8 +1573,22 @@ File: ccmode.info,  Node: Misc Font Locking,  Next: AWK Mode Font Locking,  Prev
 5.5 Miscellaneous Font Locking
 ==============================
 
-In some languages, particularly in C++, there are constructs which are
-syntactically ambiguous—they could be either declarations or
+Some compilers, notably GCC, allow the character ‘$’ to be a constituent
+of identifiers in the languages C, C++, and Objective C. CC Mode
+defaults to accepting these ‘$’ characters and fontifying the
+identifiers in which they appear like any others.
+
+   However, the compiler you’re using, or your project coding standards
+may disallow such use.  In such cases, you can set
+‘c-warn-ids-with-dollar’ to non-‘nil’.  This causes these invalid
+identifiers to be fontified distinctively.
+
+ -- Variable: c-warn-ids-with-dollar
+     When this customization option is non-‘nil’, identifiers containing
+     the ‘$’ character are fontified with ‘font-lock-warning-face’.
+
+   In some languages, particularly in C++, there are constructs which
+are syntactically ambiguous—they could be either declarations or
 expressions, and CC Mode cannot tell for sure which.  Often such a
 construct is one of the operators ‘*’ or ‘&’ surrounded by two
 identifiers.
@@ -2477,10 +2493,11 @@ comment, and the rest of the paragraph handling code (e.g., ‘M-q’ and
 ‘adaptive-fill-mode’, ‘adaptive-fill-regexp’, and
 ‘adaptive-fill-first-line-regexp’.
 
-   (2) It’s available from <http://www.wonderworks.com/>.  As of version
-2.12, it does however lack a feature that makes it work suboptimally
-when ‘c-comment-prefix-regexp’ matches the empty string (which it does
-by default).  A patch for that is available from the CC Mode web site.
+   (2) It’s available from
+<https://elpa.gnu.org/packages/filladapt.html>.  As of version 2.12, it
+does however lack a feature that makes it work suboptimally when
+‘c-comment-prefix-regexp’ matches the empty string (which it does by
+default).  A patch for that is available from the CC Mode web site.
 
    (3) In versions before 5.26, this variable was called
 ‘c-comment-continuation-stars’.  As a compatibility measure, CC Mode
@@ -3291,6 +3308,9 @@ by using ‘C-c C-s’.
      Topmost definition continuation lines.  This is only used in the
      parts that aren’t covered by other symbols such as ‘func-decl-cont’
      and ‘knr-argdecl’.  *note Function Symbols::.
+‘constraint-cont’
+     Continuation line of a topmost C++20 concept or requires clause.
+     *note Constraint Symbols::.
 ‘annotation-top-cont’
      Topmost definition continuation lines where all previous items are
      annotations.  *note Java Symbols::.
@@ -3463,6 +3483,7 @@ by using ‘C-c C-s’.
 * Multiline Macro Symbols::
 * Objective-C Method Symbols::
 * Java Symbols::
+* Constraint Symbols::
 * Statement Block Symbols::
 * K&R Symbols::
 
@@ -3534,6 +3555,13 @@ similar semantically), so replacing the ‘class’ keyword in the example
 above with ‘struct’ or ‘union’ would still result in a syntax of
 ‘class-open’ for line 4 (1).  Similarly, line 18 is assigned
 ‘class-close’ syntax.
+
+   Note that ‘class-open’ and ‘class-close’ syntactic elements have two
+anchor points.  The first is the position of the beginning of the
+statement, the second is the position of the keyword which defines the
+construct (e.g.  ‘class’).  These are usually the same position, but
+differ when the statement starts off with ‘template’ (C++ Mode) or
+‘generic’ (Java Mode) or similar.
 
    Line 2 introduces the inheritance list for the class so it is
 assigned the ‘inher-intro’ syntax, and line 3, which continues the
@@ -3988,7 +4016,7 @@ assigned ‘objc-method-args-cont’ syntax.  Lines 5 and 6 are both
 assigned ‘objc-method-call-cont’ syntax.
 
 
-File: ccmode.info,  Node: Java Symbols,  Next: Statement Block Symbols,  Prev: Objective-C Method Symbols,  Up: Syntactic Symbols
+File: ccmode.info,  Node: Java Symbols,  Next: Constraint Symbols,  Prev: Objective-C Method Symbols,  Up: Syntactic Symbols
 
 10.2.11 Java Symbols
 --------------------
@@ -4021,9 +4049,38 @@ preceding the current line.  Similarly, line 4 is assigned the
 variable declaration where preceding the declaration is an annotation.
 
 
-File: ccmode.info,  Node: Statement Block Symbols,  Next: K&R Symbols,  Prev: Java Symbols,  Up: Syntactic Symbols
+File: ccmode.info,  Node: Constraint Symbols,  Next: Statement Block Symbols,  Prev: Java Symbols,  Up: Syntactic Symbols
 
-10.2.12 Statement Block Symbols
+10.2.12 C++ Constraint Symbols
+------------------------------
+
+The C++20 standard introduced the notion of “concepts” and
+“requirements”, a typical instance of which looks something like this:
+
+      1: template <typename T>
+      2: requires
+      3:   requires (T t) {
+      4:     { ++t; }
+      5:   }
+      6:   && std::is_integral<T>
+      7:   int foo();
+
+   Line 1 is assigned the familiar ‘topmost-intro’.  Line 2 gets
+‘topmost-intro-cont’, being the keyword which introduces a “requires
+clause”.  Lines 3, 6, and 7 are assigned the syntax ‘constraint-cont’,
+being continuations of the requires clause started on line 2.  Lines 4
+and 5 get the syntaxes ‘defun-block-intro’ and ‘defun-close’, being
+analyzed as though part of a function.
+
+   Note that the ‘requires’ on Line 3 begins a “requires expression”,
+not a requires clause, hence its components are not assigned
+‘constraint-cont’.  See
+<https://en.cppreference.com/w/cpp/language/requires>.
+
+
+File: ccmode.info,  Node: Statement Block Symbols,  Next: K&R Symbols,  Prev: Constraint Symbols,  Up: Syntactic Symbols
+
+10.2.13 Statement Block Symbols
 -------------------------------
 
 There are a few occasions where a statement block might be used inside
@@ -4095,7 +4152,7 @@ too to be indented correctly.
 
 File: ccmode.info,  Node: K&R Symbols,  Prev: Statement Block Symbols,  Up: Syntactic Symbols
 
-10.2.13 K&R Symbols
+10.2.14 K&R Symbols
 -------------------
 
 Two other syntactic symbols can appear in old style, non-prototyped C
@@ -4757,7 +4814,7 @@ contained within parentheses.
      first line is also contained in an arglist or an enclosing brace
      _on that line_.
 
-     I.e.  handle something like the following:
+     In other words, handle something like the following:
 
           set_line (line_t {point_t{0.4, 0.2},
                             point_t{0.2, 0.5},       <- brace-list-intro
@@ -4780,13 +4837,13 @@ contained within parentheses.
  -- Function: c-lineup-class-decl-init-+
      Line up the second entry of a class (etc.)  initializer
      ‘c-basic-offset’ characters in from the identifier when:
-       1. The type is a class, struct, union, etc.  (but not an enum);
+       1. The type is a class, struct, union, etc. (but not an enum);
        2. There is a brace block in the type declaration, specifying it;
           and
        3. The first element of the initializer is on the same line as
           its opening brace.
 
-     I.e.  we have a construct like this:
+     In other words, we have a construct like this:
 
           struct STR {
               int i; float f;
@@ -4809,13 +4866,13 @@ contained within parentheses.
  -- Function: c-lineup-class-decl-init-after-brace
      Line up the second entry of a class (etc.)  initializer after its
      opening brace when:
-       1. The type is a class, struct, union, etc.  (but not an enum);
+       1. The type is a class, struct, union, etc. (but not an enum);
        2. There is a brace block in the type declaration, specifying it;
           and
        3. The first element of the initializer is on the same line as
           its opening brace.
 
-     I.e.  we have a construct like this:
+     In other words, we have a construct like this:
 
           struct STR {
               int i; float f;
@@ -4905,6 +4962,12 @@ contained within parentheses.
 
      To allow this function to be used in a list expression, ‘nil’ is
      returned if there’s no template argument on the first line.
+
+     Works with: ‘template-args-cont’.
+
+ -- Function: c-lineup-template-args-indented-from-margin
+     Indent a template argument line ‘c-basic-offset’ from the left-hand
+     margin of the line with the containing <.
 
      Works with: ‘template-args-cont’.
 
@@ -5018,7 +5081,7 @@ line.
      ‘arglist-cont-nonempty’.
 
  -- Function: c-lineup-ternary-bodies
-     Line up true and false branches of a ternary operator (i.e.  ‘?:’).
+     Line up true and false branches of a ternary operator (i.e., ‘?:’).
      More precisely, if the line starts with a colon which is a part of
      a said operator, align it with corresponding question mark.  For
      example:
@@ -5453,7 +5516,7 @@ setting the following user option:
      this is ‘nil’, all lines inside macro definitions are analyzed as
      ‘cpp-macro-cont’.
 
-   Sometimes you may want to indent particular directives (e.g.
+   Sometimes you may want to indent particular directives (e.g.,
 ‘#pragma’) as though they were statements.  To do this, see *note
 Indenting Directives::.
 
@@ -5625,7 +5688,7 @@ File: ccmode.info,  Node: Indenting Directives,  Prev: Noise Macros,  Up: Custom
 =========================
 
 Sometimes you may want to indent particular preprocessor directives
-(e.g.  ‘#pragma’) as though they were statements.  To do this, first set
+(e.g., ‘#pragma’) as though they were statements.  To do this, first set
 up ‘c-cpp-indent-to-body-directives’ to include the directive name(s),
 then enable the “indent to body” feature with
 ‘c-toggle-cpp-indent-to-body’.
@@ -6020,7 +6083,7 @@ have old versions of CC Mode and so should be upgraded.  Access to the
 CC Mode source code, as well as more detailed information on Emacsen
 compatibility, etc. are all available on the web site:
 
-     <https://cc-mode.sourceforge.net/>
+     <https://www.nongnu.org/cc-mode/>
 
 
 File: ccmode.info,  Node: Mailing Lists and Bug Reports,  Next: GNU Free Documentation License,  Prev: Updating CC Mode,  Up: Top
@@ -6049,7 +6112,7 @@ Tracker at <https://debbugs.gnu.org>, then sends it on to
 <bug-cc-mode@gnu.org>.  You can also send reports, other questions, and
 suggestions (kudos? ;-) to that address.  It’s a mailing list which you
 can join or browse an archive of; see the web site at
-<https://cc-mode.sourceforge.net/> for further details.
+<https://www.nongnu.org/cc-mode/> for further details.
 
    If you want to get announcements of new CC Mode releases, send the
 word _subscribe_ in the body of a message to
@@ -6659,13 +6722,14 @@ appears under its ‘c-THING’ name and its ‘THING (c-)’ name.
 * c-lineup-knr-region-comment:           Comment Line-Up.     (line  58)
 * c-lineup-math:                         Operator Line-Up.    (line  77)
 * c-lineup-multi-inher:                  List Line-Up.        (line 124)
-* c-lineup-ObjC-method-args:             List Line-Up.        (line 206)
-* c-lineup-ObjC-method-args-2:           List Line-Up.        (line 213)
-* c-lineup-ObjC-method-call:             List Line-Up.        (line 196)
+* c-lineup-ObjC-method-args:             List Line-Up.        (line 212)
+* c-lineup-ObjC-method-args-2:           List Line-Up.        (line 219)
+* c-lineup-ObjC-method-call:             List Line-Up.        (line 202)
 * c-lineup-runin-statements:             Brace/Paren Line-Up. (line  91)
 * c-lineup-streamop:                     Operator Line-Up.    (line 114)
 * c-lineup-string-cont:                  Operator Line-Up.    (line 119)
 * c-lineup-template-args:                List Line-Up.        (line 186)
+* c-lineup-template-args-indented-from-margin: List Line-Up.  (line 196)
 * c-lineup-ternary-bodies:               Operator Line-Up.    (line  86)
 * c-lineup-topmost-intro-cont:           Misc Line-Up.        (line 111)
 * c-lineup-under-anchor:                 Misc Line-Up.        (line  15)
@@ -6800,13 +6864,15 @@ appears under its ‘c-THING’ name and its ‘THING (c-)’ name.
 * lineup-knr-region-comment (c-):        Comment Line-Up.     (line  59)
 * lineup-math (c-):                      Operator Line-Up.    (line  78)
 * lineup-multi-inher (c-):               List Line-Up.        (line 125)
-* lineup-ObjC-method-args (c-):          List Line-Up.        (line 207)
-* lineup-ObjC-method-args-2 (c-):        List Line-Up.        (line 214)
-* lineup-ObjC-method-call (c-):          List Line-Up.        (line 197)
+* lineup-ObjC-method-args (c-):          List Line-Up.        (line 213)
+* lineup-ObjC-method-args-2 (c-):        List Line-Up.        (line 220)
+* lineup-ObjC-method-call (c-):          List Line-Up.        (line 203)
 * lineup-runin-statements (c-):          Brace/Paren Line-Up. (line  92)
 * lineup-streamop (c-):                  Operator Line-Up.    (line 115)
 * lineup-string-cont (c-):               Operator Line-Up.    (line 120)
 * lineup-template-args (c-):             List Line-Up.        (line 187)
+* lineup-template-args-indented-from-margin (c-): List Line-Up.
+                                                              (line 197)
 * lineup-ternary-bodies (c-):            Operator Line-Up.    (line  87)
 * lineup-topmost-intro-cont (c-):        Misc Line-Up.        (line 112)
 * lineup-whitesmith-in-block (c-):       Brace/Paren Line-Up. (line 151)
@@ -6877,7 +6943,7 @@ appears under its ‘c-THING’ name and its ‘THING (c-)’ name.
                                                               (line  58)
 * adaptive-fill-regexp:                  Custom Filling and Breaking.
                                                               (line  11)
-* asymmetry-fontification-flag (c-):     Misc Font Locking.   (line  24)
+* asymmetry-fontification-flag (c-):     Misc Font Locking.   (line  38)
 * auto-align-backslashes (c-):           Macro Backslashes.   (line  31)
 * awk-mode-hook:                         CC Hooks.            (line  37)
 * backslash-column (c-):                 Macro Backslashes.   (line  11)
@@ -6890,7 +6956,7 @@ appears under its ‘c-THING’ name and its ‘THING (c-)’ name.
 * c++-font-lock-extra-types:             Font Locking Preliminaries.
                                                               (line  58)
 * c++-mode-hook:                         CC Hooks.            (line  32)
-* c-asymmetry-fontification-flag:        Misc Font Locking.   (line  23)
+* c-asymmetry-fontification-flag:        Misc Font Locking.   (line  37)
 * c-auto-align-backslashes:              Macro Backslashes.   (line  30)
 * c-backslash-column:                    Macro Backslashes.   (line  10)
 * c-backslash-max-column:                Macro Backslashes.   (line  11)
@@ -6964,6 +7030,7 @@ appears under its ‘c-THING’ name and its ‘THING (c-)’ name.
 * c-syntactic-indentation-in-macros:     Custom Macros.       (line  16)
 * c-tab-always-indent:                   Indentation Commands.
                                                               (line  66)
+* c-warn-ids-with-dollar:                Misc Font Locking.   (line  16)
 * cleanup-list (c-):                     Clean-ups.           (line  26)
 * comment-column:                        Comment Commands.    (line  27)
 * comment-continuation-stars (c-):       Custom Filling and Breaking.
@@ -7079,6 +7146,7 @@ appears under its ‘c-THING’ name and its ‘THING (c-)’ name.
 * syntactic-indentation-in-macros (c-):  Custom Macros.       (line  17)
 * tab-always-indent (c-):                Indentation Commands.
                                                               (line  67)
+* warn-ids-with-dollar (c-):             Misc Font Locking.   (line  17)
 
 
 File: ccmode.info,  Node: Concept and Key Index,  Prev: Variable Index,  Up: Top
@@ -7108,7 +7176,7 @@ Concept and Key Index
 * {:                                     Electric Keys.       (line  75)
 * }:                                     Electric Keys.       (line  76)
 * Abbrev mode:                           Electric Keys.       (line 124)
-* access-label:                          Class Symbols.       (line  40)
+* access-label:                          Class Symbols.       (line  47)
 * action functions:                      Custom Braces.       (line   6)
 * Adaptive Fill mode:                    Custom Filling and Breaking.
                                                               (line  58)
@@ -7208,6 +7276,7 @@ Concept and Key Index
 * composition-open:                      External Scope Symbols.
                                                               (line  38)
 * Configuration:                         Config Basics.       (line   6)
+* constraint-cont:                       Constraint Symbols.  (line  17)
 * cpp-define-intro:                      Multiline Macro Symbols.
                                                               (line   6)
 * cpp-macro:                             Literal Symbols.     (line  55)
@@ -7248,7 +7317,7 @@ Concept and Key Index
                                                               (line  72)
 * Font Lock mode:                        Font Locking.        (line   6)
 * font locking:                          Font Locking.        (line   6)
-* friend:                                Class Symbols.       (line  93)
+* friend:                                Class Symbols.       (line 100)
 * func-decl-cont:                        Literal Symbols.     (line  31)
 * GNU indent program:                    Indentation Commands.
                                                               (line  12)
@@ -7262,8 +7331,8 @@ Concept and Key Index
                                                               (line   6)
 * history:                               Introduction.        (line   6)
 * hungry-deletion:                       Hungry WS Deletion.  (line   6)
-* in-class inline methods:               Class Symbols.       (line  59)
-* inclass:                               Class Symbols.       (line  40)
+* in-class inline methods:               Class Symbols.       (line  66)
+* inclass:                               Class Symbols.       (line  47)
 * inclass <1>:                           External Scope Symbols.
                                                               (line  15)
 * incomposition:                         External Scope Symbols.
@@ -7288,12 +7357,12 @@ Concept and Key Index
                                                               (line  58)
 * inextern-lang:                         External Scope Symbols.
                                                               (line  15)
-* inher-cont:                            Class Symbols.       (line  36)
-* inher-intro:                           Class Symbols.       (line  36)
+* inher-cont:                            Class Symbols.       (line  43)
+* inher-intro:                           Class Symbols.       (line  43)
 * inlambda:                              Statement Block Symbols.
                                                               (line  51)
-* inline-close:                          Class Symbols.       (line  59)
-* inline-open:                           Class Symbols.       (line  59)
+* inline-close:                          Class Symbols.       (line  66)
+* inline-open:                           Class Symbols.       (line  66)
 * inmodule:                              External Scope Symbols.
                                                               (line  35)
 * innamespace:                           External Scope Symbols.
@@ -7333,8 +7402,8 @@ Concept and Key Index
                                                               (line  26)
 * macros:                                Custom Macros.       (line   6)
 * macros with semicolons:                Macros with ;.       (line   6)
-* member-init-cont:                      Class Symbols.       (line  53)
-* member-init-intro:                     Class Symbols.       (line  53)
+* member-init-cont:                      Class Symbols.       (line  60)
+* member-init-intro:                     Class Symbols.       (line  60)
 * Minor Modes:                           Minor Modes.         (line   6)
 * mode hooks:                            CC Hooks.            (line   6)
 * module-close:                          External Scope Symbols.
@@ -7408,7 +7477,7 @@ Concept and Key Index
                                                               (line   6)
 * TAB:                                   Indentation Commands.
                                                               (line  42)
-* template-args-cont:                    Class Symbols.       (line 103)
+* template-args-cont:                    Class Symbols.       (line 110)
 * text filling:                          Filling and Breaking.
                                                               (line   6)
 * topmost-intro:                         Function Symbols.    (line  18)
@@ -7424,144 +7493,145 @@ Concept and Key Index
 
 
 Tag Table:
-Node: Top968
-Node: Introduction4149
-Ref: Introduction-Footnote-16163
-Node: Overview6297
-Node: Getting Started8242
-Ref: Getting Started-Footnote-112480
-Node: Commands12558
-Node: Indentation Commands13392
-Ref: Indentation Commands-Footnote-120124
-Node: Comment Commands20245
-Ref: Comment Commands-Footnote-122888
-Node: Movement Commands22955
-Ref: Movement Commands-Footnote-128555
-Node: Filling and Breaking28616
-Ref: Filling and Breaking-Footnote-132117
-Ref: Filling and Breaking-Footnote-232262
-Node: Minor Modes32326
-Ref: Minor Modes-Footnote-136594
-Ref: Minor Modes-Footnote-236747
-Ref: Minor Modes-Footnote-336869
-Ref: Minor Modes-Footnote-436941
-Node: Electric Keys37013
-Node: Auto-newlines42820
-Ref: Auto-newlines-Footnote-144682
-Node: Hungry WS Deletion44891
-Ref: Hungry WS Deletion-Footnote-150641
-Ref: Hungry WS Deletion-Footnote-250790
-Node: Subword Movement50859
-Node: Other Commands53267
-Node: Font Locking56770
-Node: Font Locking Preliminaries57668
-Node: Faces61716
-Node: Doc Comments64439
-Node: Wrong Comment Style67655
-Node: Misc Font Locking68495
-Node: AWK Mode Font Locking70083
-Node: Config Basics72580
-Ref: Config Basics-Footnote-179458
-Ref: Config Basics-Footnote-279507
-Node: CC Hooks79649
-Node: Style Variables82080
-Ref: Style Variables-Footnote-185467
-Ref: Style Variables-Footnote-285873
-Node: Styles85918
-Node: Built-in Styles87272
-Ref: Built-in Styles-Footnote-189204
-Ref: Built-in Styles-Footnote-289310
-Node: Choosing a Style89455
-Node: Adding Styles91560
-Ref: Adding Styles-Footnote-194950
-Ref: Adding Styles-Footnote-295024
-Node: Guessing the Style95258
-Node: File Styles99500
-Ref: File Styles-Footnote-1101111
-Node: Custom Filling and Breaking101413
-Ref: Custom Filling and Breaking-Footnote-1108190
-Ref: Custom Filling and Breaking-Footnote-2108446
-Ref: Custom Filling and Breaking-Footnote-3108737
-Ref: Custom Filling and Breaking-Footnote-4108921
-Node: Custom Auto-newlines109200
-Node: Hanging Braces111066
-Ref: Hanging Braces-Footnote-1116613
-Ref: Hanging Braces-Footnote-2116700
-Ref: Hanging Braces-Footnote-3116859
-Node: Custom Braces117076
-Node: Hanging Colons120480
-Node: Hanging Semicolons and Commas122075
-Ref: Hanging Semicolons and Commas-Footnote-1125167
-Node: Clean-ups125218
-Ref: Clean-ups-Footnote-1132038
-Node: Indentation Engine Basics132243
-Node: Syntactic Analysis134561
-Ref: Syntactic Analysis-Footnote-1138492
-Ref: Syntactic Analysis-Footnote-2138769
-Ref: Syntactic Analysis-Footnote-3138872
-Ref: Syntactic Analysis-Footnote-4139007
-Node: Syntactic Symbols139243
-Node: Function Symbols149442
-Node: Class Symbols150618
-Ref: Class Symbols-Footnote-1155068
-Node: Conditional Construct Symbols155295
-Ref: Conditional Construct Symbols-Footnote-1157629
-Node: Switch Statement Symbols157762
-Node: Brace List Symbols158706
-Ref: Brace List Symbols-Footnote-1160616
-Node: External Scope Symbols160937
-Ref: External Scope Symbols-Footnote-1162407
-Node: Paren List Symbols162555
-Node: Literal Symbols164676
-Node: Multiline Macro Symbols167270
-Ref: Multiline Macro Symbols-Footnote-1168866
-Node: Objective-C Method Symbols168928
-Node: Java Symbols169710
-Node: Statement Block Symbols171016
-Ref: Statement Block Symbols-Footnote-1173717
-Node: K&R Symbols174042
-Ref: K&R Symbols-Footnote-1174677
-Node: Indentation Calculation174724
-Node: Customizing Indentation178044
-Node: c-offsets-alist179688
-Ref: c-offsets-alist-Footnote-1186382
-Ref: c-offsets-alist-Footnote-2186501
-Node: Interactive Customization186848
-Ref: Interactive Customization-Footnote-1189856
-Node: Line-Up Functions189999
-Node: Brace/Paren Line-Up191869
-Ref: c-lineup-arglist-close-under-paren192930
-Ref: Brace/Paren Line-Up-Footnote-1198499
-Node: List Line-Up198641
-Node: Operator Line-Up206930
-Node: Comment Line-Up212374
-Node: Misc Line-Up215232
-Ref: Misc Line-Up-Footnote-1220166
-Node: Custom Line-Up220489
-Ref: Custom Line-Up-Footnote-1225145
-Node: Other Indentation225306
-Ref: Other Indentation-Footnote-1227358
-Node: Custom Macros227560
-Node: Macro Backslashes229340
-Node: Macros with ;231319
-Node: Noise Macros233512
-Ref: Noise Macros-Footnote-1235954
-Node: Indenting Directives236064
-Ref: Indenting Directives-Footnote-1237598
-Node: Odds and Ends237715
-Node: Sample Init File239408
-Node: Performance Issues241748
-Ref: Performance Issues-Footnote-1247341
-Ref: Performance Issues-Footnote-2247418
-Node: Limitations and Known Bugs247482
-Node: FAQ250007
-Ref: FAQ-Footnote-1253969
-Node: Updating CC Mode254041
-Node: Mailing Lists and Bug Reports254642
-Node: GNU Free Documentation License256688
-Node: Command and Function Index282078
-Node: Variable Index304185
-Node: Concept and Key Index319683
+Node: Top970
+Node: Introduction4174
+Ref: Introduction-Footnote-16188
+Node: Overview6322
+Node: Getting Started8267
+Ref: Getting Started-Footnote-112505
+Node: Commands12583
+Node: Indentation Commands13417
+Ref: Indentation Commands-Footnote-120149
+Node: Comment Commands20270
+Ref: Comment Commands-Footnote-122913
+Node: Movement Commands22980
+Ref: Movement Commands-Footnote-128580
+Node: Filling and Breaking28641
+Ref: Filling and Breaking-Footnote-132142
+Ref: Filling and Breaking-Footnote-232287
+Node: Minor Modes32351
+Ref: Minor Modes-Footnote-136619
+Ref: Minor Modes-Footnote-236772
+Ref: Minor Modes-Footnote-336894
+Ref: Minor Modes-Footnote-436966
+Node: Electric Keys37038
+Node: Auto-newlines42845
+Ref: Auto-newlines-Footnote-144707
+Node: Hungry WS Deletion44916
+Ref: Hungry WS Deletion-Footnote-150666
+Ref: Hungry WS Deletion-Footnote-250815
+Node: Subword Movement50884
+Node: Other Commands53292
+Node: Font Locking56795
+Node: Font Locking Preliminaries57693
+Node: Faces61741
+Node: Doc Comments64464
+Node: Wrong Comment Style67680
+Node: Misc Font Locking68520
+Node: AWK Mode Font Locking70804
+Node: Config Basics73301
+Ref: Config Basics-Footnote-180179
+Ref: Config Basics-Footnote-280228
+Node: CC Hooks80370
+Node: Style Variables82801
+Ref: Style Variables-Footnote-186188
+Ref: Style Variables-Footnote-286594
+Node: Styles86639
+Node: Built-in Styles87993
+Ref: Built-in Styles-Footnote-189925
+Ref: Built-in Styles-Footnote-290031
+Node: Choosing a Style90176
+Node: Adding Styles92281
+Ref: Adding Styles-Footnote-195671
+Ref: Adding Styles-Footnote-295745
+Node: Guessing the Style95979
+Node: File Styles100221
+Ref: File Styles-Footnote-1101832
+Node: Custom Filling and Breaking102134
+Ref: Custom Filling and Breaking-Footnote-1108911
+Ref: Custom Filling and Breaking-Footnote-2109167
+Ref: Custom Filling and Breaking-Footnote-3109475
+Ref: Custom Filling and Breaking-Footnote-4109659
+Node: Custom Auto-newlines109938
+Node: Hanging Braces111804
+Ref: Hanging Braces-Footnote-1117351
+Ref: Hanging Braces-Footnote-2117438
+Ref: Hanging Braces-Footnote-3117597
+Node: Custom Braces117814
+Node: Hanging Colons121218
+Node: Hanging Semicolons and Commas122813
+Ref: Hanging Semicolons and Commas-Footnote-1125905
+Node: Clean-ups125956
+Ref: Clean-ups-Footnote-1132776
+Node: Indentation Engine Basics132981
+Node: Syntactic Analysis135299
+Ref: Syntactic Analysis-Footnote-1139230
+Ref: Syntactic Analysis-Footnote-2139507
+Ref: Syntactic Analysis-Footnote-3139610
+Ref: Syntactic Analysis-Footnote-4139745
+Node: Syntactic Symbols139981
+Node: Function Symbols150328
+Node: Class Symbols151504
+Ref: Class Symbols-Footnote-1156354
+Node: Conditional Construct Symbols156581
+Ref: Conditional Construct Symbols-Footnote-1158915
+Node: Switch Statement Symbols159048
+Node: Brace List Symbols159992
+Ref: Brace List Symbols-Footnote-1161902
+Node: External Scope Symbols162223
+Ref: External Scope Symbols-Footnote-1163693
+Node: Paren List Symbols163841
+Node: Literal Symbols165962
+Node: Multiline Macro Symbols168556
+Ref: Multiline Macro Symbols-Footnote-1170152
+Node: Objective-C Method Symbols170214
+Node: Java Symbols170996
+Node: Constraint Symbols172297
+Node: Statement Block Symbols173424
+Ref: Statement Block Symbols-Footnote-1176131
+Node: K&R Symbols176456
+Ref: K&R Symbols-Footnote-1177091
+Node: Indentation Calculation177138
+Node: Customizing Indentation180458
+Node: c-offsets-alist182102
+Ref: c-offsets-alist-Footnote-1188796
+Ref: c-offsets-alist-Footnote-2188915
+Node: Interactive Customization189262
+Ref: Interactive Customization-Footnote-1192270
+Node: Line-Up Functions192413
+Node: Brace/Paren Line-Up194283
+Ref: c-lineup-arglist-close-under-paren195344
+Ref: Brace/Paren Line-Up-Footnote-1200913
+Node: List Line-Up201055
+Node: Operator Line-Up209599
+Node: Comment Line-Up215043
+Node: Misc Line-Up217901
+Ref: Misc Line-Up-Footnote-1222835
+Node: Custom Line-Up223158
+Ref: Custom Line-Up-Footnote-1227814
+Node: Other Indentation227975
+Ref: Other Indentation-Footnote-1230027
+Node: Custom Macros230229
+Node: Macro Backslashes232010
+Node: Macros with ;233989
+Node: Noise Macros236182
+Ref: Noise Macros-Footnote-1238624
+Node: Indenting Directives238734
+Ref: Indenting Directives-Footnote-1240268
+Node: Odds and Ends240385
+Node: Sample Init File242078
+Node: Performance Issues244418
+Ref: Performance Issues-Footnote-1250011
+Ref: Performance Issues-Footnote-2250088
+Node: Limitations and Known Bugs250152
+Node: FAQ252677
+Ref: FAQ-Footnote-1256639
+Node: Updating CC Mode256711
+Node: Mailing Lists and Bug Reports257311
+Node: GNU Free Documentation License259356
+Node: Command and Function Index284746
+Node: Variable Index307063
+Node: Concept and Key Index322707
 
 End Tag Table
 

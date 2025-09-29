@@ -1,8 +1,8 @@
-This is auth.info, produced by makeinfo version 6.8 from auth.texi.
+This is auth.info, produced by makeinfo version 7.0.3 from auth.texi.
 
 This file describes the Emacs auth-source library.
 
-   Copyright © 2008–2024 Free Software Foundation, Inc.
+   Copyright © 2008–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -32,7 +32,7 @@ This manual describes the Emacs auth-source library.
 
    This file describes the Emacs auth-source library.
 
-   Copyright © 2008–2024 Free Software Foundation, Inc.
+   Copyright © 2008–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -66,7 +66,7 @@ File: auth.info,  Node: Overview,  Next: Help for users,  Prev: Top,  Up: Top
 **********
 
 The auth-source library is simply a way for Emacs and Gnus, among
-others, to answer the old burning question “What are my user name and
+others, to answer the old burning question “What is my user name and
 password?”
 
    (This is different from the old question about burning “Where is the
@@ -75,11 +75,11 @@ fire extinguisher, please?”.)
    The auth-source library supports more than just the user name or the
 password (known as the secret).
 
-   Similarly, the auth-source library supports multiple storage backend,
-currently either the classic “netrc” backend, examples of which you can
-see later in this document, JSON files, the Secret Service API, and
-pass, the standard unix password manager.  This is done with EIEIO-based
-backends and you can write your own if you want.
+   Similarly, the auth-source library supports multiple storage
+backends, currently either the classic “netrc” backend, examples of
+which you can see later in this document, JSON files, the Secret Service
+API, and ‘pass’, the standard unix password manager.  This is done with
+EIEIO-based backends, and you can write your own if you want.
 
 
 File: auth.info,  Node: Help for users,  Next: Multiple GMail accounts with Gnus,  Prev: Overview,  Up: Top
@@ -325,7 +325,7 @@ such as ‘"login"’.
 
    With GNOME Keyring, there exists a special collection called
 ‘"session"’, which has the lifetime of the user being logged in.  Its
-data are not stored on disk and go away when the user logs out.
+data is not stored on disk and goes away when the user logs out.
 Therefore, it can be used to store and retrieve secret items
 temporarily.  The ‘"session"’ collection is better than a persistent
 collection when the secret items should not live permanently.  The
@@ -333,7 +333,7 @@ collection when the secret items should not live permanently.  The
 ‘"session"’, or by ‘nil’, whenever a collection parameter is needed.
 
    However, other Secret Service provider don’t create this temporary
-‘"session"’ collection.  You shall check first that this collection
+‘"session"’ collection.  You must check first that this collection
 exists, before you use it.
 
  -- Function: secrets-list-items collection
@@ -521,7 +521,7 @@ The auth-source library lets you control logging output easily.
  -- Function: auth-source-search &rest spec &key type max host user port
           secret require create delete &allow-other-keys
      This function searches (or modifies) authentication backends
-     according to SPEC.  See the function’s doc-string for details.
+     according to SPEC.  See the function’s docstring for details.
 
    Let’s take a look at an example of using ‘auth-source-search’ from
 Gnus’s ‘nnimap.el’.
@@ -565,8 +565,6 @@ information we just used, if it was newly created.”
    After the first time it’s called, the ‘:save-function’ will not run
 again (but it will log something if you have set ‘auth-source-debug’ to
 ‘'trivia’).  This is so it won’t ask the same question again, which is
-annoying.  This is so it won’t ask the same question again, which is
-annoying.  This is so it won’t ask the same question again, which is
 annoying.
 
    So the responsibility of the API user that specified ‘:create t’ is
@@ -1108,11 +1106,11 @@ Function Index
  [index ]
 * Menu:
 
-* auth-info-password:                    Help for developers. (line  88)
-* auth-source-delete:                    Help for developers. (line  69)
-* auth-source-forget:                    Help for developers. (line  75)
-* auth-source-forget+:                   Help for developers. (line  80)
-* auth-source-pick-first-password:       Help for developers. (line  84)
+* auth-info-password:                    Help for developers. (line  86)
+* auth-source-delete:                    Help for developers. (line  67)
+* auth-source-forget:                    Help for developers. (line  73)
+* auth-source-forget+:                   Help for developers. (line  78)
+* auth-source-pick-first-password:       Help for developers. (line  82)
 * auth-source-search:                    Help for developers. (line  15)
 * secrets-create-item:                   Secret Service API.  (line  77)
 * secrets-delete-item:                   Secret Service API.  (line 102)
@@ -1148,18 +1146,18 @@ Variable Index
 
 
 Tag Table:
-Node: Top894
-Node: Overview2228
-Node: Help for users3036
-Node: Multiple GMail accounts with Gnus10015
-Node: Secret Service API10837
-Node: The Unix password store18132
-Node: Help for developers21723
-Node: GnuPG and EasyPG Assistant Configuration25711
-Node: GNU Free Documentation License26467
-Node: Index51845
-Node: Function Index51963
-Node: Variable Index53346
+Node: Top896
+Node: Overview2230
+Node: Help for users3045
+Node: Multiple GMail accounts with Gnus10024
+Node: Secret Service API10846
+Node: The Unix password store18141
+Node: Help for developers21732
+Node: GnuPG and EasyPG Assistant Configuration25577
+Node: GNU Free Documentation License26333
+Node: Index51711
+Node: Function Index51829
+Node: Variable Index53212
 
 End Tag Table
 

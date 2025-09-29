@@ -1,9 +1,9 @@
-This is emacs-mime.info, produced by makeinfo version 6.8 from
+This is emacs-mime.info, produced by makeinfo version 7.0.3 from
 emacs-mime.texi.
 
 This file documents the Emacs MIME interface functionality.
 
-   Copyright © 1998–2024 Free Software Foundation, Inc.
+   Copyright © 1998–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -44,7 +44,7 @@ RFC2045 and RFC2047.
 
    This file documents the Emacs MIME interface functionality.
 
-   Copyright © 1998–2024 Free Software Foundation, Inc.
+   Copyright © 1998–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -677,6 +677,10 @@ be used in.
 
 ‘keyfile’
      File containing key and certificate for signer.
+
+‘chainfile’
+     File containing an additional certificate to be included with the
+     message.
 
    Parameters for ‘encrypt=smime’:
 
@@ -2381,41 +2385,41 @@ File: emacs-mime.info,  Node: Index,  Prev: GNU Free Documentation License,  Up:
 
 
 Tag Table:
-Node: Top919
-Node: Decoding and Viewing2971
-Node: Dissection3761
-Node: Non-MIME4144
-Node: Handles5826
-Node: Display6726
-Node: Display Customization7483
-Ref: Display Customization-Footnote-115298
-Node: Files and Directories15378
-Node: New Viewers17201
-Node: Composing18348
-Node: Simple MML Example19322
-Node: MML Definition19980
-Node: Advanced MML Example25142
-Node: Encoding Customization27899
-Node: Charset Translation32373
-Node: Conversion34884
-Node: Flowed text36035
-Node: Interface Functions37331
-Node: Basic Functions43061
-Node: rfc204544125
-Node: rfc223144663
-Node: ietf-drums45995
-Node: rfc204747184
-Node: time-date50126
-Node: qp54447
-Node: base6455438
-Node: binhex56425
-Node: uudecode56837
-Node: yenc57210
-Node: rfc184357500
-Node: mailcap58121
-Node: Standards59894
-Node: GNU Free Documentation License61331
-Node: Index86666
+Node: Top921
+Node: Decoding and Viewing2973
+Node: Dissection3763
+Node: Non-MIME4146
+Node: Handles5828
+Node: Display6728
+Node: Display Customization7485
+Ref: Display Customization-Footnote-115300
+Node: Files and Directories15380
+Node: New Viewers17203
+Node: Composing18350
+Node: Simple MML Example19324
+Node: MML Definition19982
+Node: Advanced MML Example25246
+Node: Encoding Customization28003
+Node: Charset Translation32477
+Node: Conversion34988
+Node: Flowed text36139
+Node: Interface Functions37435
+Node: Basic Functions43165
+Node: rfc204544229
+Node: rfc223144767
+Node: ietf-drums46099
+Node: rfc204747288
+Node: time-date50230
+Node: qp54551
+Node: base6455542
+Node: binhex56529
+Node: uudecode56941
+Node: yenc57314
+Node: rfc184357604
+Node: mailcap58225
+Node: Standards59998
+Node: GNU Free Documentation License61435
+Node: Index86770
 
 End Tag Table
 

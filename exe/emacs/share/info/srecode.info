@@ -1,7 +1,7 @@
-This is srecode.info, produced by makeinfo version 6.8 from
+This is srecode.info, produced by makeinfo version 7.0.3 from
 srecode.texi.
 
-Copyright © 2007–2024 Free Software Foundation, Inc.
+Copyright © 2007–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -36,7 +36,7 @@ in choosing a template to insert, this is not the main goal of SRecode.
 someone can write a complex code generator, and the underlying template
 commonality allows it to work in multiple languages with ease.
 
-   Copyright © 2007–2024 Free Software Foundation, Inc.
+   Copyright © 2007–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -2214,62 +2214,62 @@ Index
 
 
 Tag Table:
-Node: Top847
-Node: Quick Start2933
-Ref: srecode-map-load-path3668
-Ref: srecode-insert3866
-Node: User Templates4271
-Ref: srecode-map-save-file4657
-Node: Parts of SRecode6209
-Node: SRecode Minor Mode10162
-Ref: srecode-insert-ask-variable-method11602
-Node: Template Writing12739
-Ref: SRecode-template-mode12883
-Node: Variables14009
-Node: String Values15038
-Node: Multi-string Values15479
-Node: Section Show16321
-Node: Special Variables16851
-Node: Automatic Loop Variables19975
-Node: Compound Variable Values20619
-Node: Templates21109
-Node: Template Section Dictionaries21986
-Node: Template Macros24516
-Node: Contexts28009
-Node: Prompts29069
-Node: Dictionaries30978
-Node: Create a Dictionary31921
-Ref: srecode-create-dictionary32130
-Node: Setting Dictionary Values32404
-Ref: srecode-dictionary-set-value32880
-Ref: srecode-dictionary-show-section33111
-Ref: srecode-dictionary-add-section-dictionary33278
-Node: Compound Dictionary Values34237
-Ref: srecode-dictionary-compound-value34709
-Ref: srecode-compound-toString35165
-Ref: srecode-dump35541
-Node: Argument Resolution36624
-Ref: srecode-resolve-arguments37094
-Node: Creating new Arguments37208
-Node: Querying a Dictionary38206
-Ref: srecode-dictionary-lookup-name38713
-Node: Template Argument Dictionary Entries38972
-Node: Base Arguments39598
-Node: Semantic Arguments43049
-Ref: srecode-semantic-selected-tag43695
-Node: Language Arguments45488
-Node: Developing Template Functions47909
-Ref: srecode-read-template-name50344
-Ref: srecode-table50723
-Ref: srecode-template-get-table50957
-Ref: srecode-insert-fcn52171
-Node: Template Naming Conventions52282
-Node: Inserting Tag Lists56022
-Ref: srecode-semantic-insert-tag56611
-Node: Application Writing58334
-Ref: srecode-load-tables-for-mode59288
-Node: GNU Free Documentation License59616
-Node: Index84976
+Node: Top849
+Node: Quick Start2935
+Ref: srecode-map-load-path3670
+Ref: srecode-insert3868
+Node: User Templates4273
+Ref: srecode-map-save-file4659
+Node: Parts of SRecode6211
+Node: SRecode Minor Mode10164
+Ref: srecode-insert-ask-variable-method11604
+Node: Template Writing12741
+Ref: SRecode-template-mode12885
+Node: Variables14011
+Node: String Values15040
+Node: Multi-string Values15481
+Node: Section Show16323
+Node: Special Variables16853
+Node: Automatic Loop Variables19977
+Node: Compound Variable Values20621
+Node: Templates21111
+Node: Template Section Dictionaries21988
+Node: Template Macros24518
+Node: Contexts28011
+Node: Prompts29071
+Node: Dictionaries30980
+Node: Create a Dictionary31923
+Ref: srecode-create-dictionary32132
+Node: Setting Dictionary Values32406
+Ref: srecode-dictionary-set-value32882
+Ref: srecode-dictionary-show-section33113
+Ref: srecode-dictionary-add-section-dictionary33280
+Node: Compound Dictionary Values34239
+Ref: srecode-dictionary-compound-value34711
+Ref: srecode-compound-toString35167
+Ref: srecode-dump35543
+Node: Argument Resolution36626
+Ref: srecode-resolve-arguments37096
+Node: Creating new Arguments37210
+Node: Querying a Dictionary38208
+Ref: srecode-dictionary-lookup-name38715
+Node: Template Argument Dictionary Entries38974
+Node: Base Arguments39600
+Node: Semantic Arguments43051
+Ref: srecode-semantic-selected-tag43697
+Node: Language Arguments45490
+Node: Developing Template Functions47911
+Ref: srecode-read-template-name50346
+Ref: srecode-table50725
+Ref: srecode-template-get-table50959
+Ref: srecode-insert-fcn52173
+Node: Template Naming Conventions52284
+Node: Inserting Tag Lists56024
+Ref: srecode-semantic-insert-tag56613
+Node: Application Writing58336
+Ref: srecode-load-tables-for-mode59290
+Node: GNU Free Documentation License59618
+Node: Index84978
 
 End Tag Table
 

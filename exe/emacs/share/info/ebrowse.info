@@ -1,9 +1,9 @@
-This is ebrowse.info, produced by makeinfo version 6.8 from
+This is ebrowse.info, produced by makeinfo version 7.0.3 from
 ebrowse.texi.
 
 This file documents Ebrowse, a C++ class browser for GNU Emacs.
 
-   Copyright © 2000–2024 Free Software Foundation, Inc.
+   Copyright © 2000–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -30,7 +30,7 @@ You can browse C++ class hierarchies from within Emacs by using Ebrowse.
 
    This file documents Ebrowse, a C++ class browser for GNU Emacs.
 
-   Copyright © 2000–2024 Free Software Foundation, Inc.
+   Copyright © 2000–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -1788,52 +1788,52 @@ Concept Index
 
 
 Tag Table:
-Node: Top912
-Node: Overview2285
-Node: Generating browser files5944
-Node: Input files7120
-Node: Output file8367
-Node: Structs and unions9313
-Node: Matching9769
-Node: Verbosity11770
-Node: Loading a Tree12229
-Node: Tree Buffers13268
-Node: Source Display14579
-Node: Member Display15373
-Node: Go to Class17216
-Node: Quitting17962
-Node: File Name Display18173
-Node: Expanding and Collapsing19144
-Node: Tree Indentation20164
-Node: Killing Classes20561
-Node: Saving a Tree20940
-Node: Statistics21324
-Node: Marking Classes21647
-Node: Member Buffers22536
-Node: Switching Member Lists24177
-Node: Finding/Viewing24997
-Node: Inherited Members26096
-Node: Searching Members26425
-Node: Switching to Tree27357
-Node: Filters27718
-Node: Attributes28534
-Node: Long and Short Display29685
-Node: Regexp Display30658
-Node: Switching Classes31221
-Node: Killing/Burying32059
-Node: Column Width32299
-Node: Redisplay32582
-Node: Getting Help32978
-Node: Tags-like Functions33153
-Node: Finding and Viewing33959
-Node: Position Stack35538
-Node: Search & Replace36874
-Node: Members in Files38024
-Node: Apropos38306
-Node: Symbol Completion38940
-Node: Member Buffer Display39178
-Node: GNU Free Documentation License39447
-Node: Concept Index64815
+Node: Top914
+Node: Overview2287
+Node: Generating browser files5946
+Node: Input files7122
+Node: Output file8369
+Node: Structs and unions9315
+Node: Matching9771
+Node: Verbosity11772
+Node: Loading a Tree12231
+Node: Tree Buffers13270
+Node: Source Display14581
+Node: Member Display15375
+Node: Go to Class17218
+Node: Quitting17964
+Node: File Name Display18175
+Node: Expanding and Collapsing19146
+Node: Tree Indentation20166
+Node: Killing Classes20563
+Node: Saving a Tree20942
+Node: Statistics21326
+Node: Marking Classes21649
+Node: Member Buffers22538
+Node: Switching Member Lists24179
+Node: Finding/Viewing24999
+Node: Inherited Members26098
+Node: Searching Members26427
+Node: Switching to Tree27359
+Node: Filters27720
+Node: Attributes28536
+Node: Long and Short Display29687
+Node: Regexp Display30660
+Node: Switching Classes31223
+Node: Killing/Burying32061
+Node: Column Width32301
+Node: Redisplay32584
+Node: Getting Help32980
+Node: Tags-like Functions33155
+Node: Finding and Viewing33961
+Node: Position Stack35540
+Node: Search & Replace36876
+Node: Members in Files38026
+Node: Apropos38308
+Node: Symbol Completion38942
+Node: Member Buffer Display39180
+Node: GNU Free Documentation License39449
+Node: Concept Index64817
 
 End Tag Table
 
