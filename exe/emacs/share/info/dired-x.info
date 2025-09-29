@@ -1,7 +1,7 @@
-This is dired-x.info, produced by makeinfo version 6.8 from
+This is dired-x.info, produced by makeinfo version 7.0.3 from
 dired-x.texi.
 
-Copyright © 1994–1995, 1999, 2001–2024 Free Software Foundation, Inc.
+Copyright © 1994–1995, 1999, 2001–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -29,9 +29,9 @@ provided by the file ‘dired-x.el’.
 
    • Based on ‘dired.texi’ by Sebastian Kremer <sk@thp.uni-koeln.de>
 
-   • For ‘dired-x.el’ as distributed with GNU Emacs 29.4.
+   • For ‘dired-x.el’ as distributed with GNU Emacs 30.2.
 
-   Copyright © 1994–1995, 1999, 2001–2024 Free Software Foundation, Inc.
+   Copyright © 1994–1995, 1999, 2001–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -261,6 +261,15 @@ The following variables can be used to customize omitting.
      non-directory part of the file name.  Set it to ‘nil’ if you need
      to match the whole file name or ‘t’ to match the file name relative
      to the buffer’s top-level directory.
+
+ -- Variable: dired-omit-size-limit
+     If non-‘nil’, ‘dired-omit-mode’ will be effectively disabled in
+     directories whose listing has size (in bytes) larger than the value
+     of this option.  Since omitting can be slow for very large
+     directories, this avoids having to wait before seeing the
+     directory.  This variable is ignored when ‘dired-omit-mode’ is
+     called interactively, such as by ‘C-x M-o’, so you can still enable
+     omitting in the directory after the initial display.
 
  -- Variable: dired-omit-marker-char
      Temporary marker used by Dired to implement omitting.  Should never
@@ -1153,7 +1162,7 @@ Concept Index
 * modified functions:                    Technical Details.    (line  6)
 * multiple Dired directories:            Multiple Dired Directories.
                                                                (line  6)
-* omitting additional files:             Omitting Variables.   (line 64)
+* omitting additional files:             Omitting Variables.   (line 73)
 * omitting dot files in Dired:           Omitting Examples.    (line 27)
 * omitting Files in Dired:               Omitting Files in Dired.
                                                                (line  6)
@@ -1268,8 +1277,9 @@ Variable Index
 * dired-omit-extensions:                 Omitting Variables.   (line 39)
 * dired-omit-files:                      Omitting Variables.   (line 30)
 * dired-omit-localp:                     Omitting Variables.   (line 56)
-* dired-omit-marker-char:                Omitting Variables.   (line 64)
+* dired-omit-marker-char:                Omitting Variables.   (line 73)
 * dired-omit-mode:                       Omitting Variables.   (line  8)
+* dired-omit-size-limit:                 Omitting Variables.   (line 64)
 * dired-patch-unclean-extensions:        Advanced Cleaning Variables.
                                                                (line  9)
 * dired-tex-unclean-extensions:          Advanced Cleaning Variables.
@@ -1283,30 +1293,30 @@ Variable Index
 
 
 Tag Table:
-Node: Top854
-Node: Introduction2168
-Node: Features2498
-Node: Technical Details3210
-Node: Installation3715
-Node: Optional Installation File At Point4687
-Node: Omitting Files in Dired5336
-Node: Omitting Variables6869
-Node: Omitting Examples10550
-Node: Omitting Technical11982
-Node: Virtual Dired12408
-Node: Advanced Mark Commands13994
-Node: Advanced Cleaning Functions16253
-Node: Advanced Cleaning Variables17116
-Node: Special Marking Function18504
-Node: Multiple Dired Directories20174
-Node: Find File At Point21025
-Node: Miscellaneous Commands23938
-Node: Bugs25430
-Node: GNU Free Documentation License25693
-Node: Concept Index51046
-Node: Command Index54144
-Node: Key Index56688
-Node: Variable Index57881
+Node: Top856
+Node: Introduction2170
+Node: Features2500
+Node: Technical Details3212
+Node: Installation3717
+Node: Optional Installation File At Point4689
+Node: Omitting Files in Dired5338
+Node: Omitting Variables6871
+Node: Omitting Examples11073
+Node: Omitting Technical12505
+Node: Virtual Dired12931
+Node: Advanced Mark Commands14517
+Node: Advanced Cleaning Functions16776
+Node: Advanced Cleaning Variables17639
+Node: Special Marking Function19027
+Node: Multiple Dired Directories20697
+Node: Find File At Point21548
+Node: Miscellaneous Commands24461
+Node: Bugs25953
+Node: GNU Free Documentation License26216
+Node: Concept Index51569
+Node: Command Index54667
+Node: Key Index57211
+Node: Variable Index58404
 
 End Tag Table
 

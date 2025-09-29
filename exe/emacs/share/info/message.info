@@ -1,9 +1,9 @@
-This is message.info, produced by makeinfo version 6.8 from
+This is message.info, produced by makeinfo version 7.0.3 from
 message.texi.
 
 This file documents Message, the Emacs message composition mode.
 
-   Copyright © 1996–2024 Free Software Foundation, Inc.
+   Copyright © 1996–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -29,7 +29,7 @@ Message
 
 This file documents Message, the Emacs message composition mode.
 
-   Copyright © 1996–2024 Free Software Foundation, Inc.
+   Copyright © 1996–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -260,12 +260,7 @@ The ‘message-supersede’ command pops up a message buffer that will
 supersede the message in the current buffer.
 
    Headers matching the ‘message-ignored-supersedes-headers’ are removed
-before popping up the new message buffer.  The default is
-‘^Path:\\|^Date\\|^NNTP-Posting-Host:\\|^Xref:\\|^Lines:\\|
-^Received:\\|^X-From-Line:\\|^X-Trace:\\|^X-Complaints-To:\\|
-Return-Path:\\|^Supersedes:\\|^NNTP-Posting-Date:\\|^X-Trace:\\|
-^X-Complaints-To:\\|^Cancel-Lock:\\|^Cancel-Key:\\|^X-Hashcash:\\|
-^X-Payment:\\|^Approved:’.
+before popping up the new message buffer.
 
 
 File: message.info,  Node: Forwarding,  Next: Resending,  Prev: Superseding,  Up: Interface
@@ -1612,27 +1607,29 @@ File: message.info,  Node: Mail Variables,  Next: News Headers,  Prev: Mail Head
 
      If you have a complex SMTP setup, and want some messages to go via
      one mail server, and other messages to go through another, you can
-     use the ‘X-Message-SMTP-Method’ header.  These are the supported
-     values:
+     use the ‘X-Message-SMTP-Method’ header to override the default by
+     using the keyword ‘smtp’ followed by the server information:
 
-     ‘smtpmail’
+          X-Message-SMTP-Method: smtp smtp.fsf.org 587
 
-               X-Message-SMTP-Method: smtp smtp.fsf.org 587
+     This will send the message via ‘smtp.fsf.org’, using port 587.
 
-          This will send the message via ‘smtp.fsf.org’, using port 587.
+          X-Message-SMTP-Method: smtp smtp.fsf.org 587 other-user
 
-               X-Message-SMTP-Method: smtp smtp.fsf.org 587 other-user
+     This is the same as the above, but uses ‘other-user’ as the user
+     name when authenticating.  This is handy if you have several SMTP
+     accounts on the same server.
 
-          This is the same as the above, but uses ‘other-user’ as the
-          user name when authenticating.  This is handy if you have
-          several SMTP accounts on the same server.
+     This header may also be used to specify an alternative MTA by using
+     a ‘mailer’ keyword, where ‘mailer’ is the name of an MTA with a
+     corresponding ‘message-send-mail-with-'mailer'’ function.  For
+     example:
 
-     ‘sendmail’
+          X-Message-SMTP-Method: sendmail
 
-               X-Message-SMTP-Method: sendmail
-
-          This will send the message via the locally installed
-          sendmail/exim/etc installation.
+     will send the message via the locally installed sendmail program.
+     The recognized values of ‘mailer’ are sendmail, qmail, mh, and
+     mailclient.
 
 ‘message-mh-deletable-headers’
      Most versions of MH doesn’t like being fed messages that contain
@@ -2100,7 +2097,7 @@ File: message.info,  Node: Sending Variables,  Next: Message Buffers,  Prev: Var
      function, it will be called in the message buffer without any
      arguments, and the corresponding METHOD will be inserted into the
      message headers as the SMTP Method if the function returns a
-     non-‘nil’ value; if METHOD is nil, the value returned by the
+     non-‘nil’ value; if METHOD is ‘nil’, the value returned by the
      function ‘cond’ is used instead.
 
 
@@ -2910,14 +2907,14 @@ File: message.info,  Node: Index,  Next: Key Index,  Prev: GNU Free Documentatio
 * message-mail-alias-type:               Mail Aliases.        (line   6)
 * message-mail-p:                        Various Message Variables.
                                                               (line 108)
-* message-mailer-swallows-blank-line:    Mail Variables.      (line  83)
+* message-mailer-swallows-blank-line:    Mail Variables.      (line  85)
 * message-make-forward-subject-function: Forwarding.          (line  23)
 * message-mark-insert-begin:             Insertion Variables. (line  84)
 * message-mark-insert-end:               Insertion Variables. (line  87)
 * message-mark-insert-file:              Insertion.           (line  35)
 * message-mark-inserted-region:          Insertion.           (line  29)
 * message-max-buffers:                   Message Buffers.     (line  42)
-* message-mh-deletable-headers:          Mail Variables.      (line  53)
+* message-mh-deletable-headers:          Mail Variables.      (line  55)
 * message-mode-syntax-table:             Various Message Variables.
                                                               (line  92)
 * message-newline-and-reformat:          Various Commands.    (line  34)
@@ -2928,8 +2925,8 @@ File: message.info,  Node: Index,  Next: Key Index,  Prev: GNU Free Documentatio
 * message-post-method:                   News Variables.      (line  11)
 * message-postpone-actions:              Message Actions.     (line  11)
 * message-prune-recipient-rules:         Wide Reply.          (line  21)
-* message-qmail-inject-args:             Mail Variables.      (line  63)
-* message-qmail-inject-program:          Mail Variables.      (line  60)
+* message-qmail-inject-args:             Mail Variables.      (line  65)
+* message-qmail-inject-program:          Mail Variables.      (line  62)
 * message-reduce-to-to-cc:               Header Commands.     (line 124)
 * message-rename-buffer:                 Various Commands.    (line  51)
 * message-reply:                         Reply.               (line   6)
@@ -2948,7 +2945,7 @@ File: message.info,  Node: Index,  Next: Key Index,  Prev: GNU Free Documentatio
 * message-send-mail-function <1>:        Mail Variables.      (line   7)
 * message-send-mail-hook:                Various Message Variables.
                                                               (line  78)
-* message-send-mail-partially-limit:     Mail Variables.      (line  89)
+* message-send-mail-partially-limit:     Mail Variables.      (line  91)
 * message-send-mail-with-mailclient:     Mail Variables.      (line   7)
 * message-send-mail-with-mh:             Mail Variables.      (line   7)
 * message-send-mail-with-qmail:          Mail Variables.      (line   7)
@@ -2963,8 +2960,8 @@ File: message.info,  Node: Index,  Next: Key Index,  Prev: GNU Free Documentatio
                                                               (line 108)
 * message-send-via-news:                 Various Message Variables.
                                                               (line 108)
-* message-sendmail-envelope-from:        Mail Variables.      (line  77)
-* message-sendmail-f-is-evil:            Mail Variables.      (line  73)
+* message-sendmail-envelope-from:        Mail Variables.      (line  79)
+* message-sendmail-f-is-evil:            Mail Variables.      (line  75)
 * message-sent-hook:                     Various Message Variables.
                                                               (line  86)
 * message-server-alist:                  Sending Variables.   (line  34)
@@ -3040,7 +3037,7 @@ File: message.info,  Node: Index,  Next: Key Index,  Prev: GNU Free Documentatio
 * path:                                  News Headers.        (line  62)
 * PGP:                                   Security.            (line   6)
 * PGP/MIME:                              Security.            (line   6)
-* qmail:                                 Mail Variables.      (line  60)
+* qmail:                                 Mail Variables.      (line  62)
 * quoting:                               Insertion Variables. (line  49)
 * quoting <1>:                           Insertion Variables. (line  57)
 * quoting <2>:                           Insertion Variables. (line  62)
@@ -3050,12 +3047,12 @@ File: message.info,  Node: Index,  Next: Key Index,  Prev: GNU Free Documentatio
 * secure:                                Security.            (line   6)
 * Security:                              Security.            (line   6)
 * Sender:                                Message Headers.     (line 200)
-* sendmail:                              Mail Variables.      (line  73)
+* sendmail:                              Mail Variables.      (line  75)
 * sendsys:                               Message Headers.     (line 202)
 * sign:                                  Security.            (line   6)
 * smtpmail-send-it:                      Mail Variables.      (line   7)
 * spelling:                              Spelling.            (line   6)
-* split large message:                   Mail Variables.      (line  89)
+* split large message:                   Mail Variables.      (line  91)
 * Subject:                               Header Commands.     (line 108)
 * Subject <1>:                           News Headers.        (line  17)
 * Sun:                                   News Headers.        (line  35)
@@ -3153,56 +3150,56 @@ File: message.info,  Node: Key Index,  Prev: Index,  Up: Top
 
 
 Tag Table:
-Node: Top971
-Node: Interface2362
-Node: New Mail Message3635
-Node: New News Message4018
-Node: Reply4432
-Node: Wide Reply5843
-Node: Followup7993
-Node: Canceling News8817
-Node: Superseding10036
-Node: Forwarding10707
-Node: Resending12746
-Node: Bouncing13114
-Node: Mailing Lists13712
-Node: System Mailer Setup19041
-Node: Commands20045
-Node: Buffer Entry20788
-Node: Header Commands21473
-Node: Movement26738
-Node: Insertion27330
-Node: MIME28751
-Node: IDNA30445
-Node: Security31814
-Node: Signing and encryption35623
-Node: Using S/MIME38505
-Node: Using OpenPGP43215
-Node: OpenPGP Header43986
-Node: Passphrase caching44839
-Node: PGP Compatibility46573
-Node: Encrypt-to-self48060
-Node: BCC Warning48926
-Node: Various Commands49594
-Node: Sending51480
-Node: Mail Aliases51926
-Node: Spelling53464
-Node: Variables54831
-Node: Message Headers55552
-Node: Mail Headers65089
-Node: Mail Variables66079
-Node: News Headers70136
-Node: News Variables74399
-Node: Insertion Variables74824
-Node: Various Message Variables80481
-Node: Sending Variables86247
-Node: Message Buffers88452
-Node: Message Actions90667
-Node: Appendices92190
-Node: Responses92409
-Node: GNU Free Documentation License93867
-Node: Index119200
-Node: Key Index142859
+Node: Top973
+Node: Interface2364
+Node: New Mail Message3637
+Node: New News Message4020
+Node: Reply4434
+Node: Wide Reply5845
+Node: Followup7995
+Node: Canceling News8819
+Node: Superseding10038
+Node: Forwarding10408
+Node: Resending12447
+Node: Bouncing12815
+Node: Mailing Lists13413
+Node: System Mailer Setup18742
+Node: Commands19746
+Node: Buffer Entry20489
+Node: Header Commands21174
+Node: Movement26439
+Node: Insertion27031
+Node: MIME28452
+Node: IDNA30146
+Node: Security31515
+Node: Signing and encryption35324
+Node: Using S/MIME38206
+Node: Using OpenPGP42916
+Node: OpenPGP Header43687
+Node: Passphrase caching44540
+Node: PGP Compatibility46274
+Node: Encrypt-to-self47761
+Node: BCC Warning48627
+Node: Various Commands49295
+Node: Sending51181
+Node: Mail Aliases51627
+Node: Spelling53165
+Node: Variables54532
+Node: Message Headers55253
+Node: Mail Headers64790
+Node: Mail Variables65780
+Node: News Headers70110
+Node: News Variables74373
+Node: Insertion Variables74798
+Node: Various Message Variables80455
+Node: Sending Variables86221
+Node: Message Buffers88432
+Node: Message Actions90647
+Node: Appendices92170
+Node: Responses92389
+Node: GNU Free Documentation License93847
+Node: Index119180
+Node: Key Index142839
 
 End Tag Table
 

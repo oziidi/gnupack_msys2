@@ -1,7 +1,7 @@
-This is efaq-w32.info, produced by makeinfo version 6.8 from
+This is efaq-w32.info, produced by makeinfo version 7.0.3 from
 efaq-w32.texi.
 
-Copyright © 2008, 2010–2024 Free Software Foundation, Inc.
+Copyright © 2008, 2010–2025 Free Software Foundation, Inc.
 
      This list of frequently asked questions about GNU Emacs on MS
      Windows with answers (“FAQ”) may be translated into other
@@ -30,7 +30,7 @@ GNU Emacs FAQ for MS Windows
 ****************************
 
 This is the FAQ for using GNU Emacs on MS Windows, as distributed with
-Emacs 29.4.
+Emacs 30.2.
 
    This FAQ is maintained by the developers and users of Emacs on MS
 Windows.  If you find any errors, or have any suggestions, please send
@@ -38,9 +38,9 @@ them to the help-emacs-windows
 (https://lists.gnu.org/mailman/listinfo/help-emacs-windows) mailing
 list.
 
-   At time of writing, the latest version of GNU Emacs is version 29.4.
+   At time of writing, the latest version of GNU Emacs is version 30.2.
 
-   Copyright © 2008, 2010–2024 Free Software Foundation, Inc.
+   Copyright © 2008, 2010–2025 Free Software Foundation, Inc.
 
      This list of frequently asked questions about GNU Emacs on MS
      Windows with answers (“FAQ”) may be translated into other
@@ -111,7 +111,7 @@ File: efaq-w32.info,  Node: Which versions of Windows,  Next: Other versions of 
 1.2 Which versions of Windows are supported?
 ============================================
 
-Emacs 29.4 is known to run on all versions of Windows 9X from Windows 98
+Emacs 30.2 is known to run on all versions of Windows 9X from Windows 98
 onward, and all versions of the NT family starting from NT 4.0; this
 includes all the modern versions from Windows XP and on.  The Windows
 port is built using the Win32 API and supports most features of the X
@@ -267,12 +267,12 @@ multiple sources, or use ‘bsdtar’.  *Note Other useful ports::.
 
    The command to unpack a source distribution from the command line is:
 
-     tar xzf emacs-29.4.tar.gz
+     tar xzf emacs-30.2.tar.gz
 
    If this does not work with the versions of tar and gzip that you
 have, you may need to try a two step process:
 
-     gzip -dc emacs-29.4.tar.gz | tar xf -
+     gzip -dc emacs-30.2.tar.gz | tar xf -
 
    You may see many messages from tar complaining about being unable to
 change the modification time on directories, and from gzip complaining
@@ -282,7 +282,7 @@ incomplete ports that are not fully aware of the limitations of Windows.
    And here’s an example of using ‘bsdtar’ (from the ‘libarchive’
 package) to unpack a ‘.tar.xz’ archive:
 
-     bsdtar -xf emacs-29.4.tar.xz
+     bsdtar -xf emacs-30.2.tar.xz
 
    Expect ‘bsdtar’ to unpack the whole distribution without any
 complaints.
@@ -331,20 +331,27 @@ customizations you have made.  You can manually add lisp code to your
 _Options_ menu.  If the file does not exist, Emacs will start with the
 default settings.
 
+   In addition, Emacs 27 and later attempts to load and execute the
+contents of the ‘early-init.el’ file.  As its name suggests, this file,
+if it exists, is loaded and executed early on during the Emacs startup
+sequence, before ‘.emacs’, and is intended to contain the few
+initializations which must be performed before ‘.emacs’ is looked up and
+loaded.
+
 
 File: efaq-w32.info,  Node: Location of init file,  Next: Troubleshooting init file,  Prev: Init file,  Up: Installing Emacs
 
 3.5 Where do I put my init file?
 ================================
 
-On Windows, the ‘.emacs’ file may be called ‘_emacs’ for backward
+On Windows, the ‘.emacs’ init file may be called ‘_emacs’ for backward
 compatibility with DOS and FAT filesystems where filenames could not
 start with a dot.  Some users prefer to continue using such a name due
 to historical problems various Windows tools had in the past with file
 names that begin with a dot.  The init file may also be called
-‘.emacs.d/init.el’.  Many of the other files that are created by Lisp
-packages are stored in the ‘.emacs.d’ directory too, which keeps all
-your Emacs related files in one place.
+‘.emacs.d/init.el’.  The ‘early-init.el’ file and many of the other
+files that are created by Lisp packages are stored in the ‘.emacs.d’
+directory too, which keeps all your Emacs related files in one place.
 
    All the files mentioned above should go in your ‘HOME’ directory.
 The ‘HOME’ directory is determined by following the steps below:
@@ -552,8 +559,8 @@ File: efaq-w32.info,  Node: Swap Caps NT,  Next: Swap Caps 98,  Up: Swap CapsLoc
 
 File: efaq-w32.info,  Node: Swap Caps 98,  Prev: Swap Caps NT,  Up: Swap CapsLock and Control
 
-3.9.2.2 Windows 95/98/ME
-........................
+3.9.2.2 Windows 98/ME
+.....................
 
 Microsoft has a tool called keyremap that is part of their Kernel Toys
 add-ons for Windows 95.  The tool has also been confirmed to work on
@@ -949,7 +956,7 @@ File: efaq-w32.info,  Node: Third-party multibyte,  Next: Localized fonts,  Prev
 ------------------------------------------------------------------------
 
 You probably only need to do this on the non-Unicode versions of Windows
-(95, 98 and ME), and even then, various Windows and Internet Explorer
+(98 and ME), and even then, various Windows and Internet Explorer
 updates have made third party software unnecessary in most cases.  If
 you are having trouble displaying text, try defining a fontset with the
 font for the languages that the third party software handles set to what
@@ -1179,8 +1186,8 @@ problem.
 
 File: efaq-w32.info,  Node: Killing subprocesses,  Next: Subprocess EOF,  Prev: Subprocesses and floppy drive,  Up: Sub-processes
 
-7.5 Killing subprocesses on Windows 95/98/Me
-============================================
+7.5 Killing subprocesses on Windows 98/Me
+=========================================
 
 Emacs cannot guarantee that a subprocess gets killed on Windows 95 and
 its descendants, and it is a difficult limitation to work around.  To
@@ -1914,7 +1921,7 @@ MSYS2 is an independent rewrite of MSYS, based on modern Cygwin and
 MinGW-w64 with the aim of better interoperability with native Windows
 software.  It plays the same role MSYS does in MinGW. Being a
 distribution, MSYS2 provides tools to build software as well as more
-than 2.600 precompiled packages ready for use.
+than 2600 precompiled packages ready for use.
 
 
 File: efaq-w32.info,  Node: EZWinPorts,  Next: MinGW,  Prev: MinGW-w64,  Up: Other useful ports
@@ -1975,7 +1982,7 @@ outdated.  Tools available here that are useful for Emacs include:
    • OpenSSL - used by ‘gnus’ to talk to servers over SSL.
    • Patch - used by ‘ediff-patch-file’ and others to apply patches.
    • Tar - used by ‘tar-mode’ to edit tar files.
-   • TexInfo - used to build Emacs’ manuals.
+   • TexInfo - used to build Emacs’s manuals.
    • Unzip - used by ‘archive-mode’ for extracting zip files.
    • Xpm - library to support XPM images (bundled with Emacs binaries)
    • Zip - used by ‘archive-mode’ for editing zip files.
@@ -2001,7 +2008,7 @@ File: efaq-w32.info,  Node: Read man pages,  Prev: GTK,  Up: Other useful ports
 =============================
 
 Man pages for Emacs and other ported programs that you have can be read
-using Emacs’ built-in manual reader ‘woman’.  This requires no external
+using Emacs’s built-in manual reader ‘woman’.  This requires no external
 programs, but if you do have a port of ‘man’, there is also an Emacs
 wrapper ‘man’ that which may be slightly faster.  A Windows version of
 ‘man’ is available from the EZWinPorts site (*note EZWinPorts::).
@@ -2241,6 +2248,9 @@ Concept Index
 * DOS line ends:                         Line ends.            (line  6)
 * DOS port:                              Other versions of Emacs.
                                                                (line  8)
+* early init file:                       Init file.            (line  6)
+* early-init.el:                         Location of init file.
+                                                               (line  6)
 * echo, suppressing for shell input:     Shell echo.           (line  6)
 * Emacs debugging:                       Debugging.            (line  6)
 * Emacs Development:                     Downloading.          (line 18)
@@ -2335,8 +2345,7 @@ Concept Index
 * jpeg, installing image support in Emacs: Image support.      (line  6)
 * key layout, customizing:               Swap CapsLock and Control.
                                                                (line  6)
-* killing subprocesses, Windows 95/98/ME: Killing subprocesses.
-                                                               (line  6)
+* killing subprocesses, Windows 98/ME:   Killing subprocesses. (line  6)
 * language support, finding fonts:       International fonts.  (line  6)
 * language support, fonts:               Language display.     (line  6)
 * language support, forcing Emacs to use specific fonts: Non-latin display.
@@ -2494,8 +2503,7 @@ Concept Index
 * sub-processes, quoting arguments to:   Quoting issues.       (line  6)
 * subprocess starting causes floppy drive access: Subprocesses and floppy drive.
                                                                (line  6)
-* subprocess, killing on Windows 95/98/ME: Killing subprocesses.
-                                                               (line  6)
+* subprocess, killing on Windows 98/ME:  Killing subprocesses. (line  6)
 * subprocesses:                          Sub-processes.        (line  6)
 * subprocesses, buffering output:        Subprocess buffering. (line  6)
 * subprocesses, cygwin tools:            Cygwin.               (line  6)
@@ -2579,116 +2587,116 @@ Concept Index
 
 
 Tag Table:
-Node: Top1119
-Node: Introduction2850
-Node: Why Emacs on Windows3229
-Node: Which versions of Windows3894
-Node: Other versions of Emacs4544
-Node: Getting Emacs4999
-Node: Downloading5187
-Node: Compiling6111
-Node: Debugging7344
-Ref: Debugging-Footnote-18503
-Node: Installing Emacs8699
-Node: Unpacking9181
-Node: Installing binaries10935
-Node: Image support11488
-Node: Init file12145
-Node: Location of init file12763
-Node: Troubleshooting init file14620
-Node: Associate files with Emacs15638
-Node: Using with Explorer16270
-Node: Find-file and the Desktop17094
-Node: Make Windows more like X18045
-Node: Focus follows mouse18359
-Node: Swap CapsLock and Control19238
-Node: Swap Caps NT19649
-Node: Swap Caps 9822189
-Node: Make Emacs like a Windows app22490
-Node: Highlight selection23131
-Node: CUA24739
-Node: Window operations25486
-Node: Uninstall25989
-Node: Does not run26818
-Node: Virus28047
-Node: Anti-virus28818
-Node: Display Settings29464
-Node: Console window size29732
-Node: Mouse trouble30327
-Node: Cut and paste NUL31163
-Node: Garbled clipboard31645
-Node: Beep sound32037
-Node: Fonts and text translation32435
-Node: Font names32700
-Node: Bold and italic34872
-Node: Multilingual fonts35945
-Node: Language display36254
-Node: Non-latin display36938
-Node: International fonts38870
-Node: Third-party multibyte39504
-Node: Localized fonts40342
-Node: Font menu40717
-Node: Add fonts to menu41054
-Node: Line ends41749
-Node: Automatic line ends42338
-Node: Line ends by file system42981
-Node: Printing43611
-Node: Sub-processes44256
-Node: Quoting issues44686
-Node: Subprocess hang45052
-Node: Subprocess buffering46069
-Node: Perl script buffering48043
-Node: Subprocesses and floppy drive48404
-Node: Killing subprocesses48865
-Node: Subprocess EOF49654
-Node: Using shell50161
-Node: Bash50922
-Node: Cygwin paths51993
-Node: Dired ls52307
-Node: Shell echo52901
-Node: Shell completion forward slash54652
-Node: Incorrect DOS version55097
-Node: Shell commands do nothing56106
-Node: Network access56556
-Node: Mail56784
-Node: Outgoing mail57438
-Node: Incoming mail with Rmail58401
-Node: Incoming mail with Gnus58872
-Node: Incoming mail other59313
-Node: Attachments with Gnus59740
-Node: Using FTP60429
-Node: Tramp ssh61292
-Node: telnet62216
-Node: Text and Utility modes62690
-Node: TeX62932
-Node: Spell check63249
-Node: Encryption64393
-Node: Mouse wheel64669
-Node: Grep65401
-Node: Recursive grep66048
-Node: Developing with Emacs67499
-Node: MSVC68000
-Node: DevStudio68473
-Node: MSVC command line68969
-Node: VC++ environment69529
-Node: Default compile command70710
-Node: Reverting buffers71899
-Node: Edit MSVC72370
-Node: Borland C++ Builder73827
-Node: Version control74162
-Node: Perldb74789
-Node: Other useful ports75790
-Node: Cygwin76053
-Node: MinGW-w6477192
-Node: EZWinPorts77995
-Node: MinGW78489
-Node: GnuWin3279115
-Node: GTK80862
-Node: Read man pages81377
-Node: Further information81890
-Node: More information82090
-Node: Mailing lists82743
-Node: Indexes83279
+Node: Top1121
+Node: Introduction2852
+Node: Why Emacs on Windows3231
+Node: Which versions of Windows3896
+Node: Other versions of Emacs4546
+Node: Getting Emacs5001
+Node: Downloading5189
+Node: Compiling6113
+Node: Debugging7346
+Ref: Debugging-Footnote-18505
+Node: Installing Emacs8701
+Node: Unpacking9183
+Node: Installing binaries10937
+Node: Image support11490
+Node: Init file12147
+Node: Location of init file13132
+Node: Troubleshooting init file15027
+Node: Associate files with Emacs16045
+Node: Using with Explorer16677
+Node: Find-file and the Desktop17501
+Node: Make Windows more like X18452
+Node: Focus follows mouse18766
+Node: Swap CapsLock and Control19645
+Node: Swap Caps NT20056
+Node: Swap Caps 9822596
+Node: Make Emacs like a Windows app22891
+Node: Highlight selection23532
+Node: CUA25140
+Node: Window operations25887
+Node: Uninstall26390
+Node: Does not run27219
+Node: Virus28448
+Node: Anti-virus29219
+Node: Display Settings29865
+Node: Console window size30133
+Node: Mouse trouble30728
+Node: Cut and paste NUL31564
+Node: Garbled clipboard32046
+Node: Beep sound32438
+Node: Fonts and text translation32836
+Node: Font names33101
+Node: Bold and italic35273
+Node: Multilingual fonts36346
+Node: Language display36655
+Node: Non-latin display37339
+Node: International fonts39271
+Node: Third-party multibyte39905
+Node: Localized fonts40739
+Node: Font menu41114
+Node: Add fonts to menu41451
+Node: Line ends42146
+Node: Automatic line ends42735
+Node: Line ends by file system43378
+Node: Printing44008
+Node: Sub-processes44653
+Node: Quoting issues45083
+Node: Subprocess hang45449
+Node: Subprocess buffering46466
+Node: Perl script buffering48440
+Node: Subprocesses and floppy drive48801
+Node: Killing subprocesses49262
+Node: Subprocess EOF50045
+Node: Using shell50552
+Node: Bash51313
+Node: Cygwin paths52384
+Node: Dired ls52698
+Node: Shell echo53292
+Node: Shell completion forward slash55043
+Node: Incorrect DOS version55488
+Node: Shell commands do nothing56497
+Node: Network access56947
+Node: Mail57175
+Node: Outgoing mail57829
+Node: Incoming mail with Rmail58792
+Node: Incoming mail with Gnus59263
+Node: Incoming mail other59704
+Node: Attachments with Gnus60131
+Node: Using FTP60820
+Node: Tramp ssh61683
+Node: telnet62607
+Node: Text and Utility modes63081
+Node: TeX63323
+Node: Spell check63640
+Node: Encryption64784
+Node: Mouse wheel65060
+Node: Grep65792
+Node: Recursive grep66439
+Node: Developing with Emacs67890
+Node: MSVC68391
+Node: DevStudio68864
+Node: MSVC command line69360
+Node: VC++ environment69920
+Node: Default compile command71101
+Node: Reverting buffers72290
+Node: Edit MSVC72761
+Node: Borland C++ Builder74218
+Node: Version control74553
+Node: Perldb75180
+Node: Other useful ports76181
+Node: Cygwin76444
+Node: MinGW-w6477583
+Node: EZWinPorts78385
+Node: MinGW78879
+Node: GnuWin3279505
+Node: GTK81253
+Node: Read man pages81768
+Node: Further information82282
+Node: More information82482
+Node: Mailing lists83135
+Node: Indexes83671
 
 End Tag Table
 

@@ -1,7 +1,7 @@
-This is todo-mode.info, produced by makeinfo version 6.8 from
+This is todo-mode.info, produced by makeinfo version 7.0.3 from
 todo-mode.texi.
 
-Copyright © 2013–2024 Free Software Foundation, Inc.
+Copyright © 2013–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -27,7 +27,7 @@ Todo Mode User Manual
 This manual describes the version of Todo mode first appearing in Emacs
 24.4.
 
-   Copyright © 2013–2024 Free Software Foundation, Inc.
+   Copyright © 2013–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -579,7 +579,14 @@ invocation of ‘todo-insert-item’.
      the highest or lowest priority in the category, if you do not
      explicitly assign it a priority on invoking ‘todo-insert-item’.  By
      default, such new items are given highest priority, i.e., inserted
-     at the top of the list.
+     at the top of the list.  In addition, when setting an item’s
+     priority you can use the minibuffer history to quickly call up the
+     lowest or highest priority number in the minibuffer by typing ‘M-p’
+     or ‘M-n’, and you can scroll through all priority numbers for the
+     current category with these keys.  For example, with the default
+     setting of ‘todo-default-priority’, you can insert a new item as
+     second to last in the category by typing ‘M-p M-p’ at the prompt
+     for setting the priority.
 
    • ‘todo-always-add-time-string’ is for including or omitting the
      current time in the new item’s header.  By default, this time
@@ -918,7 +925,10 @@ There are three ways to change a todo item’s priority:
      items are pushed down by one.  You can also pass the desired
      priority as a numeric prefix argument, e.g., ‘3 #’ gives the item
      third highest priority without prompting.  (Prefix arguments have
-     no effect with ‘r’ or ‘l’.)
+     no effect with ‘r’ or ‘l’.)  And you can type ‘M-p’ and ‘M-n’ in
+     the minibuffer to scroll through all priority numbers for the
+     current category.  If you mistakenly choose the item’s current
+     priority, you will be prompted to choose a different priority.
 
 
 File: todo-mode.info,  Node: Moving and Deleting Items,  Next: Done Items,  Prev: Reprioritizing Items,  Up: Relocating and Removing Items
@@ -2297,53 +2307,53 @@ their use in free software.
 
 
 Tag Table:
-Node: Top847
-Node: Overview3189
-Node: Levels of Organization4279
-Node: Todo Items as Diary Entries6268
-Ref: Todo Items as Diary Entries-Footnote-17680
-Node: Todo Mode Entry Points7972
-Node: Key Binding Conventions10914
-Node: Navigation12399
-Ref: Navigation-Footnote-115959
-Ref: Navigation-Footnote-216104
-Node: Editing16491
-Node: File Editing17392
-Ref: File Editing-Footnote-120340
-Node: Category Editing20535
-Ref: Category Editing-Footnote-122839
-Node: Item Editing23015
-Node: Inserting New Items23515
-Ref: Inserting New Items-Footnote-132545
-Ref: Inserting New Items-Footnote-232672
-Node: Editing Item Headers and Text32843
-Ref: Editing Item Headers and Text-Footnote-140189
-Node: Relocating and Removing Items40462
-Node: Reprioritizing Items41072
-Node: Moving and Deleting Items42211
-Node: Done Items44458
-Ref: todo-item-done45194
-Node: Todo Archives48185
-Node: Creating and Visiting Archives48848
-Node: Todo Archive Mode52492
-Node: Marked Items55254
-Node: Todo Categories Mode57613
-Node: Table of Item Counts59248
-Node: Reordering Categories61557
-Node: Searching for Items64071
-Node: Todo Filtered Items Mode65295
-Node: Filtering Items65835
-Ref: Filtering Items-Footnote-169125
-Node: Todo Filtered Items Mode Commands69350
-Node: Files of Filtered Items71928
-Node: Todo Display Features74551
-Node: Faces74878
-Node: Item Prefix76089
-Node: Other Display Commands and Options78091
-Node: Printing Todo Buffers81016
-Node: Legacy Todo Mode Files81898
-Ref: Legacy Todo Mode Files-Footnote-184528
-Node: GNU Free Documentation License84757
+Node: Top849
+Node: Overview3191
+Node: Levels of Organization4281
+Node: Todo Items as Diary Entries6270
+Ref: Todo Items as Diary Entries-Footnote-17682
+Node: Todo Mode Entry Points7974
+Node: Key Binding Conventions10916
+Node: Navigation12401
+Ref: Navigation-Footnote-115961
+Ref: Navigation-Footnote-216106
+Node: Editing16493
+Node: File Editing17394
+Ref: File Editing-Footnote-120342
+Node: Category Editing20537
+Ref: Category Editing-Footnote-122841
+Node: Item Editing23017
+Node: Inserting New Items23517
+Ref: Inserting New Items-Footnote-133059
+Ref: Inserting New Items-Footnote-233186
+Node: Editing Item Headers and Text33357
+Ref: Editing Item Headers and Text-Footnote-140703
+Node: Relocating and Removing Items40976
+Node: Reprioritizing Items41586
+Node: Moving and Deleting Items42975
+Node: Done Items45222
+Ref: todo-item-done45958
+Node: Todo Archives48949
+Node: Creating and Visiting Archives49612
+Node: Todo Archive Mode53256
+Node: Marked Items56018
+Node: Todo Categories Mode58377
+Node: Table of Item Counts60012
+Node: Reordering Categories62321
+Node: Searching for Items64835
+Node: Todo Filtered Items Mode66059
+Node: Filtering Items66599
+Ref: Filtering Items-Footnote-169889
+Node: Todo Filtered Items Mode Commands70114
+Node: Files of Filtered Items72692
+Node: Todo Display Features75315
+Node: Faces75642
+Node: Item Prefix76853
+Node: Other Display Commands and Options78855
+Node: Printing Todo Buffers81780
+Node: Legacy Todo Mode Files82662
+Ref: Legacy Todo Mode Files-Footnote-185292
+Node: GNU Free Documentation License85521
 
 End Tag Table
 

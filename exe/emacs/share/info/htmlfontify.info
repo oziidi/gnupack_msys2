@@ -1,10 +1,10 @@
-This is htmlfontify.info, produced by makeinfo version 6.8 from
+This is htmlfontify.info, produced by makeinfo version 7.0.3 from
 htmlfontify.texi.
 
 This manual documents Htmlfontify, a source code -> crosslinked +
 formatted + syntax colorized html transformer.
 
-   Copyright © 2002–2024 Free Software Foundation, Inc.
+   Copyright © 2002–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -30,7 +30,7 @@ Htmlfontify
 This manual documents Htmlfontify, a source code -> crosslinked +
 formatted + syntax colorized html transformer.
 
-   Copyright © 2002–2024 Free Software Foundation, Inc.
+   Copyright © 2002–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -568,7 +568,7 @@ provides the following non-interactive ones:
 
           (hfy-face-to-css FN)
 
-     Take FN, a font or ‘defface’ specification (c.f.
+     Take FN, a font or ‘defface’ specification (cf.
      ‘face-attr-construct’) and return a CSS style specification.
 
      See also: *note hfy-face-to-style::
@@ -1692,19 +1692,19 @@ CONCEPTS
 * Menu:
 
 *      Data Structures:                  Data Structures.      (line  6)
-*      Examples:                         Examples.             (line  6)
-*      functions (interactive):          Interactive.          (line  6)
-*      functions (noninteractive):       Non-interactive.      (line  6)
-*      hfy-facemap-assoc:                Data Structures.      (line 48)
-*      hfy-sheet-assoc:                  Data Structures.      (line 39)
-*      hfy-style-assoc:                  Data Structures.      (line 10)
-*      Interactive:                      Interactive.          (line  6)
-*      Introduction:                     Introduction.         (line  6)
-*      Noninteractive:                   Non-interactive.      (line  6)
-*      Requirements, Prerequisites:      Requirements.         (line  6)
-*      Usage & Examples:                 Usage & Examples.     (line  6)
-*      variables:                        Variables.            (line  6)
-*      variables (customization):        Customization.        (line  6)
+* Examples:                              Examples.             (line  6)
+* functions (interactive):               Interactive.          (line  6)
+* functions (noninteractive):            Non-interactive.      (line  6)
+* hfy-facemap-assoc:                     Data Structures.      (line 48)
+* hfy-sheet-assoc:                       Data Structures.      (line 39)
+* hfy-style-assoc:                       Data Structures.      (line 10)
+* Interactive:                           Interactive.          (line  6)
+* Introduction:                          Introduction.         (line  6)
+* Noninteractive:                        Non-interactive.      (line  6)
+* Requirements, Prerequisites:           Requirements.         (line  6)
+* Usage & Examples:                      Usage & Examples.     (line  6)
+* variables:                             Variables.            (line  6)
+* variables (customization):             Customization.        (line  6)
 
 FUNCTIONS
 
@@ -1712,73 +1712,73 @@ FUNCTIONS
 * Menu:
 
 *      hfy-bgcol:                        Non-interactive.     (line 475)
-*      hfy-box:                          Non-interactive.     (line 252)
-*      hfy-box-to-border-assoc:          Non-interactive.     (line 438)
-*      hfy-box-to-style:                 Non-interactive.     (line 259)
-*      hfy-buffer:                       Non-interactive.     (line 277)
-*      hfy-color:                        Non-interactive.     (line 311)
-*      hfy-color-vals:                   Non-interactive.     (line 143)
-*      hfy-combined-face-spec:           Non-interactive.     (line  30)
-*      hfy-compile-face-map:             Non-interactive.     (line 354)
-*      hfy-compile-stylesheet:           Non-interactive.     (line  92)
-*      hfy-copy-and-fontify-file:        Non-interactive.     (line 571)
-*      hfy-css-name:                     Non-interactive.     (line 100)
-*      hfy-decor:                        Non-interactive.     (line 581)
-*      hfy-default-footer:               Non-interactive.     (line 128)
-*      hfy-default-header:               Non-interactive.     (line 223)
-*      hfy-dirname:                      Non-interactive.     (line 551)
-*      hfy-face-at:                      Non-interactive.     (line 466)
-*      hfy-face-attr-for-class:          Non-interactive.     (line 445)
-*      hfy-face-to-css:                  Non-interactive.     (line 402)
-*      hfy-face-to-style:                Non-interactive.     (line  10)
-*      hfy-face-to-style-i:              Non-interactive.     (line 389)
-*      hfy-fallback-color-values:        Non-interactive.     (line  21)
-*      hfy-family:                       Non-interactive.     (line 230)
-*      hfy-flatten-style:                Non-interactive.     (line 318)
-*      hfy-fontified-p:                  Non-interactive.     (line 285)
-*      hfy-fontify-buffer:               Non-interactive.     (line 304)
-*      hfy-force-fontification:          Non-interactive.     (line  50)
-*      hfy-href:                         Non-interactive.     (line 490)
-*      hfy-href-stub:                    Non-interactive.     (line 152)
-*      hfy-html-dekludge-buffer:         Non-interactive.     (line 561)
-*      hfy-html-enkludge-buffer:         Non-interactive.     (line 268)
-*      hfy-html-quote:                   Non-interactive.     (line 412)
-*      hfy-interq:                       Non-interactive.     (line 529)
-*      hfy-kludge-cperl-mode:            Non-interactive.     (line 482)
-*      hfy-line-number:                  Non-interactive.     (line 172)
-*      hfy-link-style:                   Non-interactive.     (line 420)
-*      hfy-link-style-string:            Non-interactive.     (line  67)
-*      hfy-list-files:                   Non-interactive.     (line 135)
-*      hfy-load-tags-cache:              Non-interactive.     (line 513)
-*      hfy-lookup:                       Non-interactive.     (line 296)
-*      hfy-make-directory:               Non-interactive.     (line 110)
-*      hfy-mark-tag-hrefs:               Non-interactive.     (line 238)
-*      hfy-mark-tag-names:               Non-interactive.     (line 198)
-*      hfy-merge-adjacent-spans:         Non-interactive.     (line 179)
-*      hfy-opt:                          Non-interactive.     (line 544)
-*      hfy-p-to-face:                    Non-interactive.     (line 430)
-*      hfy-parse-tags-buffer:            Non-interactive.     (line 521)
-*      hfy-prepare-index:                Non-interactive.     (line 362)
-*      hfy-prepare-index-i:              Non-interactive.     (line  77)
-*      hfy-prepare-tag-map:              Non-interactive.     (line 370)
-*      hfy-relstub:                      Non-interactive.     (line 346)
-*      hfy-shell:                        Non-interactive.     (line 504)
-*      hfy-size:                         Non-interactive.     (line 214)
-*      hfy-size-to-int:                  Non-interactive.     (line 329)
-*      hfy-slant:                        Non-interactive.     (line 589)
-*      hfy-sprintf-stylesheet:           Non-interactive.     (line 337)
-*      hfy-subtract-maps:                Non-interactive.     (line 381)
-*      hfy-tags-for-file:                Non-interactive.     (line 598)
-*      hfy-text-p:                       Non-interactive.     (line 536)
-*      hfy-triplet:                      Non-interactive.     (line 117)
-*      hfy-weight:                       Non-interactive.     (line 206)
-*      hfy-width:                        Non-interactive.     (line 606)
-*      hfy-word-regex:                   Non-interactive.     (line  41)
-*      htmlfontify-buffer:               Interactive.         (line   9)
-*      htmlfontify-copy-and-link-dir:    Interactive.         (line  38)
-*      htmlfontify-load-rgb-file:        Interactive.         (line  50)
-*      htmlfontify-run-etags:            Interactive.         (line  31)
-*      htmlfontify-unload-rgb-file:      Interactive.         (line  65)
+* hfy-box:                               Non-interactive.     (line 252)
+* hfy-box-to-border-assoc:               Non-interactive.     (line 438)
+* hfy-box-to-style:                      Non-interactive.     (line 259)
+* hfy-buffer:                            Non-interactive.     (line 277)
+* hfy-color:                             Non-interactive.     (line 311)
+* hfy-color-vals:                        Non-interactive.     (line 143)
+* hfy-combined-face-spec:                Non-interactive.     (line  30)
+* hfy-compile-face-map:                  Non-interactive.     (line 354)
+* hfy-compile-stylesheet:                Non-interactive.     (line  92)
+* hfy-copy-and-fontify-file:             Non-interactive.     (line 571)
+* hfy-css-name:                          Non-interactive.     (line 100)
+* hfy-decor:                             Non-interactive.     (line 581)
+* hfy-default-footer:                    Non-interactive.     (line 128)
+* hfy-default-header:                    Non-interactive.     (line 223)
+* hfy-dirname:                           Non-interactive.     (line 551)
+* hfy-face-at:                           Non-interactive.     (line 466)
+* hfy-face-attr-for-class:               Non-interactive.     (line 445)
+* hfy-face-to-css:                       Non-interactive.     (line 402)
+* hfy-face-to-style:                     Non-interactive.     (line  10)
+* hfy-face-to-style-i:                   Non-interactive.     (line 389)
+* hfy-fallback-color-values:             Non-interactive.     (line  21)
+* hfy-family:                            Non-interactive.     (line 230)
+* hfy-flatten-style:                     Non-interactive.     (line 318)
+* hfy-fontified-p:                       Non-interactive.     (line 285)
+* hfy-fontify-buffer:                    Non-interactive.     (line 304)
+* hfy-force-fontification:               Non-interactive.     (line  50)
+* hfy-href:                              Non-interactive.     (line 490)
+* hfy-href-stub:                         Non-interactive.     (line 152)
+* hfy-html-dekludge-buffer:              Non-interactive.     (line 561)
+* hfy-html-enkludge-buffer:              Non-interactive.     (line 268)
+* hfy-html-quote:                        Non-interactive.     (line 412)
+* hfy-interq:                            Non-interactive.     (line 529)
+* hfy-kludge-cperl-mode:                 Non-interactive.     (line 482)
+* hfy-line-number:                       Non-interactive.     (line 172)
+* hfy-link-style:                        Non-interactive.     (line 420)
+* hfy-link-style-string:                 Non-interactive.     (line  67)
+* hfy-list-files:                        Non-interactive.     (line 135)
+* hfy-load-tags-cache:                   Non-interactive.     (line 513)
+* hfy-lookup:                            Non-interactive.     (line 296)
+* hfy-make-directory:                    Non-interactive.     (line 110)
+* hfy-mark-tag-hrefs:                    Non-interactive.     (line 238)
+* hfy-mark-tag-names:                    Non-interactive.     (line 198)
+* hfy-merge-adjacent-spans:              Non-interactive.     (line 179)
+* hfy-opt:                               Non-interactive.     (line 544)
+* hfy-p-to-face:                         Non-interactive.     (line 430)
+* hfy-parse-tags-buffer:                 Non-interactive.     (line 521)
+* hfy-prepare-index:                     Non-interactive.     (line 362)
+* hfy-prepare-index-i:                   Non-interactive.     (line  77)
+* hfy-prepare-tag-map:                   Non-interactive.     (line 370)
+* hfy-relstub:                           Non-interactive.     (line 346)
+* hfy-shell:                             Non-interactive.     (line 504)
+* hfy-size:                              Non-interactive.     (line 214)
+* hfy-size-to-int:                       Non-interactive.     (line 329)
+* hfy-slant:                             Non-interactive.     (line 589)
+* hfy-sprintf-stylesheet:                Non-interactive.     (line 337)
+* hfy-subtract-maps:                     Non-interactive.     (line 381)
+* hfy-tags-for-file:                     Non-interactive.     (line 598)
+* hfy-text-p:                            Non-interactive.     (line 536)
+* hfy-triplet:                           Non-interactive.     (line 117)
+* hfy-weight:                            Non-interactive.     (line 206)
+* hfy-width:                             Non-interactive.     (line 606)
+* hfy-word-regex:                        Non-interactive.     (line  41)
+* htmlfontify-buffer:                    Interactive.         (line   9)
+* htmlfontify-copy-and-link-dir:         Interactive.         (line  38)
+* htmlfontify-load-rgb-file:             Interactive.         (line  50)
+* htmlfontify-run-etags:                 Interactive.         (line  31)
+* htmlfontify-unload-rgb-file:           Interactive.         (line  65)
 
 VARIABLES & CUSTOMIZATION
 
@@ -1786,143 +1786,143 @@ VARIABLES & CUSTOMIZATION
 * Menu:
 
 *      hfy-default-face-def:             Customization.       (line  89)
-*      hfy-display-class:                Customization.       (line  28)
-*      hfy-etag-regex:                   Customization.       (line 198)
-*      hfy-etags-bin:                    Customization.       (line 178)
-*      hfy-etags-cmd:                    Customization.       (line 189)
-*      hfy-etags-cmd-alist:              Customization.       (line 172)
-*      hfy-exclude-file-rules:           Customization.       (line  81)
-*      hfy-extn:                         Customization.       (line  85)
-*      hfy-html-quote-map:               Customization.       (line 217)
-*      hfy-html-quote-regex:             Customization.       (line  17)
-*      hfy-index-file:                   Customization.       (line 207)
-*      hfy-init-kludge-hook:             Customization.       (line 100)
-*      hfy-instance-file:                Customization.       (line 212)
-*      hfy-istext-command:               Customization.       (line 165)
-*      hfy-link-extn:                    Customization.       (line 158)
-*      hfy-link-style-fun:               Customization.       (line   9)
-*      hfy-optimizations:                Customization.       (line 113)
-*      hfy-page-footer:                  Customization.       (line  23)
-*      hfy-page-header:                  Customization.       (line  59)
-*      hfy-shell-file-name:              Customization.       (line 106)
-*      hfy-split-index:                  Customization.       (line  74)
-*      hfy-src-doc-link-style:           Customization.       (line  69)
-*      hfy-src-doc-link-unstyle:         Customization.       (line 153)
-*      hfy-tags-cache:                   Variables.           (line   9)
-*      hfy-tags-rmap:                    Variables.           (line  24)
-*      hfy-tags-sortl:                   Variables.           (line  38)
+* hfy-display-class:                     Customization.       (line  28)
+* hfy-etag-regex:                        Customization.       (line 198)
+* hfy-etags-bin:                         Customization.       (line 178)
+* hfy-etags-cmd:                         Customization.       (line 189)
+* hfy-etags-cmd-alist:                   Customization.       (line 172)
+* hfy-exclude-file-rules:                Customization.       (line  81)
+* hfy-extn:                              Customization.       (line  85)
+* hfy-html-quote-map:                    Customization.       (line 217)
+* hfy-html-quote-regex:                  Customization.       (line  17)
+* hfy-index-file:                        Customization.       (line 207)
+* hfy-init-kludge-hook:                  Customization.       (line 100)
+* hfy-instance-file:                     Customization.       (line 212)
+* hfy-istext-command:                    Customization.       (line 165)
+* hfy-link-extn:                         Customization.       (line 158)
+* hfy-link-style-fun:                    Customization.       (line   9)
+* hfy-optimizations:                     Customization.       (line 113)
+* hfy-page-footer:                       Customization.       (line  23)
+* hfy-page-header:                       Customization.       (line  59)
+* hfy-shell-file-name:                   Customization.       (line 106)
+* hfy-split-index:                       Customization.       (line  74)
+* hfy-src-doc-link-style:                Customization.       (line  69)
+* hfy-src-doc-link-unstyle:              Customization.       (line 153)
+* hfy-tags-cache:                        Variables.           (line   9)
+* hfy-tags-rmap:                         Variables.           (line  24)
+* hfy-tags-sortl:                        Variables.           (line  38)
 
 
 
 Tag Table:
-Node: Top967
-Node: Introduction2204
-Node: Usage & Examples3093
-Node: Interactive3783
-Ref: htmlfontify-buffer3993
-Ref: htmlfontify-run-etags4821
-Ref: htmlfontify-copy-and-link-dir4974
-Ref: htmlfontify-load-rgb-file5338
-Ref: htmlfontify-unload-rgb-file5853
-Node: Non-interactive5963
-Ref: hfy-face-to-style6252
-Ref: hfy-fallback-color-values6583
-Ref: hfy-combined-face-spec6882
-Ref: hfy-word-regex7174
-Ref: hfy-force-fontification7415
-Ref: hfy-link-style-string8272
-Ref: hfy-prepare-index-i8578
-Ref: hfy-compile-stylesheet9125
-Ref: hfy-css-name9267
-Ref: hfy-make-directory9589
-Ref: hfy-triplet9697
-Ref: hfy-default-footer10101
-Ref: hfy-list-files10209
-Ref: hfy-color-vals10370
-Ref: hfy-href-stub10628
-Ref: hfy-line-number11340
-Ref: hfy-merge-adjacent-spans11468
-Ref: hfy-mark-tag-names12022
-Ref: hfy-weight12231
-Ref: hfy-size12368
-Ref: hfy-default-header12625
-Ref: hfy-family12735
-Ref: hfy-mark-tag-hrefs12879
-Ref: hfy-box13285
-Ref: hfy-box-to-style13409
-Ref: hfy-html-enkludge-buffer13663
-Ref: hfy-buffer13850
-Ref: hfy-fontified-p14020
-Ref: hfy-lookup14373
-Ref: hfy-fontify-buffer14550
-Ref: hfy-color14678
-Ref: hfy-flatten-style14802
-Ref: hfy-size-to-int15180
-Ref: hfy-sprintf-stylesheet15396
-Ref: hfy-relstub15655
-Ref: hfy-compile-face-map15852
-Ref: hfy-prepare-index15994
-Ref: hfy-prepare-tag-map16201
-Ref: hfy-subtract-maps16534
-Ref: hfy-face-to-style-i16735
-Ref: hfy-face-to-css17271
-Ref: hfy-html-quote17497
-Ref: hfy-link-style17655
-Ref: hfy-p-to-face17843
-Ref: hfy-box-to-border-assoc18012
-Ref: hfy-face-attr-for-class18138
-Ref: hfy-face-at19075
-Ref: hfy-bgcol19323
-Ref: hfy-kludge-cperl-mode19440
-Ref: hfy-href19619
-Ref: hfy-shell20038
-Ref: hfy-load-tags-cache20252
-Ref: hfy-parse-tags-buffer20426
-Ref: hfy-interq20637
-Ref: hfy-text-p20751
-Ref: hfy-opt20887
-Ref: hfy-dirname20996
-Ref: hfy-html-dekludge-buffer21303
-Ref: hfy-copy-and-fontify-file21542
-Ref: hfy-decor21859
-Ref: hfy-slant21993
-Ref: hfy-tags-for-file22220
-Ref: hfy-width22423
-Node: Variables22538
-Ref: hfy-tags-cache22758
-Ref: hfy-tags-rmap23134
-Ref: hfy-tags-sortl23499
-Node: Data Structures23705
-Ref: hfy-style-assoc23955
-Ref: hfy-sheet-assoc25131
-Ref: hfy-facemap-assoc25473
-Node: Examples26749
-Node: Customization29016
-Ref: hfy-link-style-fun29250
-Ref: hfy-html-quote-regex29614
-Ref: hfy-page-footer29828
-Ref: hfy-display-class29967
-Ref: hfy-page-header31046
-Ref: hfy-src-doc-link-style31446
-Ref: hfy-split-index31554
-Ref: hfy-extn31909
-Ref: hfy-default-face-def31981
-Ref: hfy-init-kludge-hook32392
-Ref: hfy-shell-file-name32617
-Ref: hfy-optimizations32896
-Ref: hfy-src-doc-link-unstyle34412
-Ref: hfy-link-extn34522
-Ref: hfy-istext-command34802
-Ref: hfy-etags-cmd-alist35074
-Ref: hfy-etags-bin35258
-Ref: hfy-etags-cmd35589
-Ref: hfy-etag-regex35930
-Ref: hfy-index-file36143
-Ref: hfy-instance-file36267
-Ref: hfy-html-quote-map36402
-Node: Requirements36488
-Node: GNU Free Documentation License37001
-Node: Index62358
+Node: Top969
+Node: Introduction2206
+Node: Usage & Examples3095
+Node: Interactive3785
+Ref: htmlfontify-buffer3995
+Ref: htmlfontify-run-etags4823
+Ref: htmlfontify-copy-and-link-dir4976
+Ref: htmlfontify-load-rgb-file5340
+Ref: htmlfontify-unload-rgb-file5855
+Node: Non-interactive5965
+Ref: hfy-face-to-style6254
+Ref: hfy-fallback-color-values6585
+Ref: hfy-combined-face-spec6884
+Ref: hfy-word-regex7176
+Ref: hfy-force-fontification7417
+Ref: hfy-link-style-string8274
+Ref: hfy-prepare-index-i8580
+Ref: hfy-compile-stylesheet9127
+Ref: hfy-css-name9269
+Ref: hfy-make-directory9591
+Ref: hfy-triplet9699
+Ref: hfy-default-footer10103
+Ref: hfy-list-files10211
+Ref: hfy-color-vals10372
+Ref: hfy-href-stub10630
+Ref: hfy-line-number11342
+Ref: hfy-merge-adjacent-spans11470
+Ref: hfy-mark-tag-names12024
+Ref: hfy-weight12233
+Ref: hfy-size12370
+Ref: hfy-default-header12627
+Ref: hfy-family12737
+Ref: hfy-mark-tag-hrefs12881
+Ref: hfy-box13287
+Ref: hfy-box-to-style13411
+Ref: hfy-html-enkludge-buffer13665
+Ref: hfy-buffer13852
+Ref: hfy-fontified-p14022
+Ref: hfy-lookup14375
+Ref: hfy-fontify-buffer14552
+Ref: hfy-color14680
+Ref: hfy-flatten-style14804
+Ref: hfy-size-to-int15182
+Ref: hfy-sprintf-stylesheet15398
+Ref: hfy-relstub15657
+Ref: hfy-compile-face-map15854
+Ref: hfy-prepare-index15996
+Ref: hfy-prepare-tag-map16203
+Ref: hfy-subtract-maps16536
+Ref: hfy-face-to-style-i16737
+Ref: hfy-face-to-css17273
+Ref: hfy-html-quote17498
+Ref: hfy-link-style17656
+Ref: hfy-p-to-face17844
+Ref: hfy-box-to-border-assoc18013
+Ref: hfy-face-attr-for-class18139
+Ref: hfy-face-at19076
+Ref: hfy-bgcol19324
+Ref: hfy-kludge-cperl-mode19441
+Ref: hfy-href19620
+Ref: hfy-shell20039
+Ref: hfy-load-tags-cache20253
+Ref: hfy-parse-tags-buffer20427
+Ref: hfy-interq20638
+Ref: hfy-text-p20752
+Ref: hfy-opt20888
+Ref: hfy-dirname20997
+Ref: hfy-html-dekludge-buffer21304
+Ref: hfy-copy-and-fontify-file21543
+Ref: hfy-decor21860
+Ref: hfy-slant21994
+Ref: hfy-tags-for-file22221
+Ref: hfy-width22424
+Node: Variables22539
+Ref: hfy-tags-cache22759
+Ref: hfy-tags-rmap23135
+Ref: hfy-tags-sortl23500
+Node: Data Structures23706
+Ref: hfy-style-assoc23956
+Ref: hfy-sheet-assoc25132
+Ref: hfy-facemap-assoc25474
+Node: Examples26750
+Node: Customization29017
+Ref: hfy-link-style-fun29251
+Ref: hfy-html-quote-regex29615
+Ref: hfy-page-footer29829
+Ref: hfy-display-class29968
+Ref: hfy-page-header31047
+Ref: hfy-src-doc-link-style31447
+Ref: hfy-split-index31555
+Ref: hfy-extn31910
+Ref: hfy-default-face-def31982
+Ref: hfy-init-kludge-hook32393
+Ref: hfy-shell-file-name32618
+Ref: hfy-optimizations32897
+Ref: hfy-src-doc-link-unstyle34413
+Ref: hfy-link-extn34523
+Ref: hfy-istext-command34803
+Ref: hfy-etags-cmd-alist35075
+Ref: hfy-etags-bin35259
+Ref: hfy-etags-cmd35590
+Ref: hfy-etag-regex35931
+Ref: hfy-index-file36144
+Ref: hfy-instance-file36268
+Ref: hfy-html-quote-map36403
+Node: Requirements36489
+Node: GNU Free Documentation License37002
+Node: Index62359
 
 End Tag Table
 

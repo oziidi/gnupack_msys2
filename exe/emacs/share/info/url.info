@@ -1,8 +1,8 @@
-This is url.info, produced by makeinfo version 6.8 from url.texi.
+This is url.info, produced by makeinfo version 7.0.3 from url.texi.
 
 This is the manual for the ‘url’ Emacs Lisp library.
 
-   Copyright © 1993–1999, 2002, 2004–2024 Free Software Foundation, Inc.
+   Copyright © 1993–1999, 2002, 2004–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -27,7 +27,7 @@ URL
 
 This is the manual for the ‘url’ Emacs Lisp library.
 
-   Copyright © 1993–1999, 2002, 2004–2024 Free Software Foundation, Inc.
+   Copyright © 1993–1999, 2002, 2004–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -776,15 +776,15 @@ cleared automatically.
  -- Function: url-cache-create-filename-using-md5 url
      Creates a cache file name from URL using MD5 hashing.  This is
      creates entries with very few cache collisions and is fast.
-          (url-cache-create-filename-using-md5 "http://www.example.com/foo/bar")
-            ⇒ "/home/fx/.url/cache/fx/http/com/example/www/b8a35774ad20db71c7c3409a5410e74f"
+          (url-cache-create-filename-using-md5 "https://www.example.com/foo/bar")
+            ⇒ "/home/fx/.url/cache/fx/https/com/example/www/b8a35774ad20db71c7c3409a5410e74f"
 
  -- Function: url-cache-create-filename-human-readable url
      Creates a cache file name from URL more obviously connected to URL
      than for ‘url-cache-create-filename-using-md5’, but more likely to
      conflict with other files.
-          (url-cache-create-filename-human-readable "http://www.example.com/foo/bar")
-            ⇒ "/home/fx/.url/cache/fx/http/com/example/www/foo/bar"
+          (url-cache-create-filename-human-readable "https://www.example.com/foo/bar")
+            ⇒ "/home/fx/.url/cache/fx/https/com/example/www/foo/bar"
 
  -- Function: url-cache-expired
      This function returns non-‘nil’ if a cache entry has expired (or is
@@ -909,15 +909,17 @@ connections is ‘url-open-stream’.
 
  -- User Option: socks-server
      This specifies the default server, it takes the form
-     ‘("Default server" SERVER PORT VERSION)’ where VERSION can be
-     either 4 or 5.
+     ‘("Default server" SERVER PORT VERSION)’ where VERSION can be 4,
+     4a, or 5.
  -- Variable: socks-password
      If this is ‘nil’ then you will be asked for the password, otherwise
      it will be used as the password for authenticating you to the SOCKS
-     server.
+     server.  You can often set this to ‘""’ for servers on your local
+     network.
  -- Variable: socks-username
      This is the username to use when authenticating yourself to the
-     SOCKS server.  By default this is your login name.
+     SOCKS server.  By default, this is your login name.  In versions 4
+     and 4a, ERC uses this for the ‘ID’ field.
  -- Variable: socks-timeout
      This controls how long, in seconds, to wait for responses from the
      SOCKS server; it is 5 by default.
@@ -1021,7 +1023,6 @@ library.
      ‘*URL-DEBUG*’ buffer.  ‘t’ means log all messages.  A number means
      log all messages and show them with ‘message’.  It may also be a
      list of the types of messages to be logged.
- -- User Option: url-personal-mail-address
  -- User Option: url-privacy-level
  -- User Option: url-lastloc-privacy-level
      Provided ‘lastloc’ is not prohibited by ‘url-privacy-level’, this
@@ -1616,18 +1617,18 @@ Variable Index
 * mail-user-agent:                       mailto.               (line 23)
 * NNTPSERVER:                            news/nntp/snews.      (line 32)
 * NO_PROXY:                              Proxies.              (line 18)
-* socks-nslookup-program:                Gateways in general.  (line 77)
+* socks-nslookup-program:                Gateways in general.  (line 79)
 * socks-password:                        Gateways in general.  (line 67)
 * socks-server:                          Gateways in general.  (line 63)
-* socks-timeout:                         Gateways in general.  (line 74)
-* socks-username:                        Gateways in general.  (line 71)
+* socks-timeout:                         Gateways in general.  (line 76)
+* socks-username:                        Gateways in general.  (line 72)
 * url-automatic-caching:                 Disk Caching.         (line 13)
-* url-bad-port-list:                     Customization.        (line 43)
+* url-bad-port-list:                     Customization.        (line 42)
 * url-cache-creation-function:           Disk Caching.         (line 21)
 * url-cache-directory:                   Disk Caching.         (line 17)
 * url-cache-expire-time:                 Disk Caching.         (line 47)
 * url-configuration-directory:           Customization.        (line  9)
-* url-confirmation-func:                 Customization.        (line 46)
+* url-confirmation-func:                 Customization.        (line 45)
 * url-cookie-confirmation:               Cookies.              (line 20)
 * url-cookie-file:                       Cookies.              (line 16)
 * url-cookie-multiple-line:              Cookies.              (line 23)
@@ -1637,7 +1638,7 @@ Variable Index
 * url-debug:                             Customization.        (line 20)
 * url-gateway-local-host-regexp:         Gateways in general.  (line 18)
 * url-gateway-method:                    Gateways in general.  (line 23)
-* url-gateway-method <1>:                Customization.        (line 51)
+* url-gateway-method <1>:                Customization.        (line 50)
 * url-gateway-prompt-pattern:            Gateways in general.  (line 60)
 * url-gateway-telnet-host:               Gateways in general.  (line 44)
 * url-gateway-telnet-login-prompt:       Gateways in general.  (line 53)
@@ -1653,27 +1654,26 @@ Variable Index
 * url-history-track:                     History.              (line 19)
 * url-honor-refresh-requests:            http/https.           (line 16)
 * url-irc-function:                      irc.                  (line 15)
-* url-lastloc-privacy-level:             Customization.        (line 27)
+* url-lastloc-privacy-level:             Customization.        (line 26)
 * url-mail-command:                      mailto.               (line 22)
-* url-max-password-attempts:             Customization.        (line 44)
+* url-max-password-attempts:             Customization.        (line 43)
 * url-mime-charset-string:               HTTP language/coding. (line 17)
 * url-mime-language-string:              HTTP language/coding. (line 28)
 * url-news-server:                       news/nntp/snews.      (line 32)
 * url-nfs-automounter-directory-spec:    nfs.                  (line 12)
-* url-passwd-entry-func:                 Customization.        (line 41)
-* url-personal-mail-address:             Customization.        (line 25)
-* url-privacy-level:                     Customization.        (line 26)
+* url-passwd-entry-func:                 Customization.        (line 40)
+* url-privacy-level:                     Customization.        (line 25)
 * url-proxy-services:                    Proxies.              (line 32)
 * url-queue-parallel-processes:          Retrieving URLs.      (line 71)
 * url-queue-parallel-processes <1>:      Retrieving URLs.      (line 71)
 * url-queue-timeout:                     Retrieving URLs.      (line 77)
 * url-queue-timeout <1>:                 Retrieving URLs.      (line 77)
-* url-show-status:                       Customization.        (line 45)
-* url-standalone-mode:                   Customization.        (line 42)
+* url-show-status:                       Customization.        (line 44)
+* url-standalone-mode:                   Customization.        (line 41)
 * url-tramp-protocols:                   Tramp.                (line  6)
-* url-uncompressor-alist:                Customization.        (line 40)
+* url-uncompressor-alist:                Customization.        (line 39)
 * url-unreserved-chars:                  URI Encoding.         (line 39)
-* url-user-agent:                        Customization.        (line 64)
+* url-user-agent:                        Customization.        (line 63)
 
 
 File: url.info,  Node: Concept Index,  Prev: Variable Index,  Up: Top
@@ -1728,7 +1728,7 @@ Concept Index
 * news:                                  news/nntp/snews.      (line  6)
 * NFS:                                   nfs.                  (line  6)
 * NNTP:                                  news/nntp/snews.      (line  6)
-* nslookup:                              Gateways in general.  (line 78)
+* nslookup:                              Gateways in general.  (line 80)
 * opening a stream:                      Gateways in general.  (line 14)
 * P3P:                                   HTTP URL Options.     (line 29)
 * parsed URI:                            URI Parsing.          (line 26)
@@ -1764,41 +1764,41 @@ Concept Index
 
 
 Tag Table:
-Node: Top907
-Node: Introduction2297
-Node: URI Parsing3586
-Node: Parsed URIs4948
-Node: URI Encoding7083
-Node: Retrieving URLs9532
-Node: Supported URL Types13349
-Node: http/https14270
-Node: Cookies15392
-Node: HTTP language/coding16799
-Node: HTTP URL Options18459
-Node: Dealing with HTTP documents19427
-Node: file/ftp19798
-Node: info20673
-Node: mailto21009
-Node: news/nntp/snews22392
-Node: telnet/tn327024011
-Node: irc24661
-Node: data25600
-Node: nfs26109
-Node: ldap26917
-Node: man27060
-Node: Tramp27330
-Node: General Facilities28028
-Node: Disk Caching28251
-Node: Proxies30811
-Node: Gateways in general32926
-Ref: Gateways in general-Footnote-136437
-Node: Suppressing network connections36512
-Node: History37180
-Node: Customization39075
-Node: GNU Free Documentation License42534
-Node: Function Index67893
-Node: Variable Index70930
-Node: Concept Index75606
+Node: Top909
+Node: Introduction2299
+Node: URI Parsing3588
+Node: Parsed URIs4950
+Node: URI Encoding7085
+Node: Retrieving URLs9534
+Node: Supported URL Types13351
+Node: http/https14272
+Node: Cookies15394
+Node: HTTP language/coding16801
+Node: HTTP URL Options18461
+Node: Dealing with HTTP documents19429
+Node: file/ftp19800
+Node: info20675
+Node: mailto21011
+Node: news/nntp/snews22394
+Node: telnet/tn327024013
+Node: irc24663
+Node: data25602
+Node: nfs26111
+Node: ldap26919
+Node: man27062
+Node: Tramp27332
+Node: General Facilities28030
+Node: Disk Caching28253
+Node: Proxies30817
+Node: Gateways in general32932
+Ref: Gateways in general-Footnote-136584
+Node: Suppressing network connections36659
+Node: History37327
+Node: Customization39222
+Node: GNU Free Documentation License42638
+Node: Function Index67997
+Node: Variable Index71034
+Node: Concept Index75637
 
 End Tag Table
 

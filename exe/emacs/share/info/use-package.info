@@ -1,9 +1,9 @@
-This is use-package.info, produced by makeinfo version 6.8 from
+This is use-package.info, produced by makeinfo version 7.0.3 from
 use-package.texi.
 
-This manual is for use-package 2.4.5 as distributed with Emacs 29.4.
+This manual is for use-package 2.4.5 as distributed with Emacs 30.2.
 
-   Copyright © 2022–2024 Free Software Foundation, Inc.
+   Copyright © 2022–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -27,22 +27,20 @@ use-package User Manual
 ***********************
 
 The ‘use-package’ macro allows you to set up package customization in
-your init file in a declarative way.  It takes care of many things for
-you that would otherwise require a lot of repetitive boilerplate code.
-It can help with common customization, such as binding keys, setting up
-hooks, customizing user options and faces, autoloading, and more.  It
-also helps you keep Emacs startup fast, even when you use many (even
-hundreds) of packages.
+your init file in a declarative way.  It reduces the need for repetitive
+boilerplate code by handling many common customization tasks for you.
+These include binding keys, setting hooks, customizing user options and
+faces, setting up autoloading, and more.  It also helps you keep Emacs
+startup fast, even when you use many (even hundreds) of packages.
 
-   Note that use-package is not a package manager.  Although use-package
-does have the useful capability to interface with the Emacs package
-manager, its primary purpose is help with the configuration and loading
-of packages, not with managing their download, upgrades, and
-installation.
+   Note that use-package is not a package manager.  While it provides
+convenient integration with Emacs’s built-in package manager, its
+primary purpose is to help with configuring and loading packages, not
+with downloading, upgrading, or installing them.
 
-   This manual is for use-package 2.4.5 as distributed with Emacs 29.4.
+   This manual is for use-package 2.4.5 as distributed with Emacs 30.2.
 
-   Copyright © 2022–2024 Free Software Foundation, Inc.
+   Copyright © 2022–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -151,9 +149,9 @@ together:
    The above declarations will load the ‘foo’ package immediately.  In
 most cases, this is not necessary or desirable, as that will slow down
 Emacs startup.  Instead, you should try to set things up so that
-packages are only loaded when they are actually needed (a.k.a.
+packages are only loaded when they are actually needed (this is known as
 “autoloading”).  If you have installed a package from GNU ELPA that
-provides it’s own autoloads, it is often enough to say:
+provides its own autoloads, it is often enough to say:
 
      (use-package foo
        :defer t)
@@ -214,6 +212,7 @@ Emacs start.  *Note Installing packages::, for details.
 * Forcing loading::             Loading packages immediately.
 * Conditional loading::         Loading packages conditionally.
 * Loading sequentially::        Loading packages in sequence.
+* The emacs package::    Customizing built-in variables.
 * Load dependencies::           Don’t load without dependencies.
 * Manual installation::         Loading manually installed packages.
 
@@ -382,7 +381,7 @@ them.
 
    • Window system
 
-     The example below loads a package only on macOS and X. See the
+     The example below loads a package only on macOS and X.  See the
      docstring of ‘window-system’ for valid values.
 
           :if (memq window-system '(ns x))
@@ -415,7 +414,7 @@ itself.  For example:
          :ensure t))
 
 
-File: use-package.info,  Node: Loading sequentially,  Next: Load dependencies,  Prev: Conditional loading,  Up: Loading Packages
+File: use-package.info,  Node: Loading sequentially,  Next: The emacs package,  Prev: Conditional loading,  Up: Loading Packages
 
 3.5 Loading packages in sequence
 ================================
@@ -475,9 +474,39 @@ possible that your package will never be loaded if you do not add
 ‘:demand t’ to those declarations.
 
 
-File: use-package.info,  Node: Load dependencies,  Next: Manual installation,  Prev: Loading sequentially,  Up: Loading Packages
+File: use-package.info,  Node: The emacs package,  Next: Load dependencies,  Prev: Loading sequentially,  Up: Loading Packages
 
-3.6 Prevent loading if dependencies are missing
+3.6 Customizing built-in variables
+==================================
+
+Some users want to put all their customizations in use-package
+declarations, even for variables, hooks, and options that are always
+available, without loading any package.(1)
+
+   For that purpose, you can use the no-op ‘emacs’ package:
+
+     (use-package emacs
+       :init
+       (setq custom-file "~/.emacs.d/emacs-custom.el")
+       (load custom-file)
+       (setq frame-title-format "%b")
+       :custom
+       (use-short-answers t))
+
+   This declaration takes advantage of the fact that ‘(featurep 'emacs)’
+always returns true, and has no special meaning beyond that.  It simply
+provides a way to organize your customizations, without loading
+anything.
+
+   ---------- Footnotes ----------
+
+   (1) In other words, they are either preloaded in Emacs or defined in
+Emacs’s C sources.
+
+
+File: use-package.info,  Node: Load dependencies,  Next: Manual installation,  Prev: The emacs package,  Up: Loading Packages
+
+3.7 Prevent loading if dependencies are missing
 ===============================================
 
 While the ‘:after’ keyword delays loading until the dependencies are
@@ -506,10 +535,10 @@ use ‘:if’ and the appropriate Lisp expression.
 
 File: use-package.info,  Node: Manual installation,  Prev: Load dependencies,  Up: Loading Packages
 
-3.7 Manually installed package
+3.8 Manually installed package
 ==============================
 
-When installing packages manually, without Emacs’ built-in package
+When installing packages manually, without Emacs’s built-in package
 manager (‘package.el’), it will obviously not help you set up autoloads
 or add it to your ‘load-path’.  You must do it yourself.  However,
 use-package makes this more convenient.
@@ -522,7 +551,7 @@ use-package makes this more convenient.
 
 File: use-package.info,  Node: Load path,  Next: Manual autoloads,  Up: Manual installation
 
-3.7.1 Setting a custom ‘load-path’
+3.8.1 Setting a custom ‘load-path’
 ----------------------------------
 
 When installing packages manually, you must make sure its libraries are
@@ -560,7 +589,7 @@ For example:
 
 File: use-package.info,  Node: Manual autoloads,  Prev: Load path,  Up: Manual installation
 
-3.7.2 Setting up autoloads manually
+3.8.2 Setting up autoloads manually
 -----------------------------------
 
 Packages often document how to set up its autoloads when it is being
@@ -789,7 +818,7 @@ Remapping commands
 
 Remapping of commands with ‘:bind’ and ‘bind-key’ works as expected,
 because when the binding is a vector, it is passed straight to
-‘define-key’.  *Note (elisp)Remapping Commands::), for more information
+‘define-key’.  *Note (elisp)Remapping Commands::, for more information
 about command remapping.  For example, the following declaration will
 rebind ‘fill-paragraph’ (bound to ‘M-q’ by default) to ‘unfill-toggle’:
 
@@ -1013,6 +1042,13 @@ applied, the following examples are all equivalent:
        (add-hook 'prog-mode-hook #'company-mode)
        (add-hook 'text-mode-hook #'company-mode))
 
+   To add more than one function to the same hook, add them separately,
+like this:
+
+     (use-package company
+       :hook ((prog-mode . company-mode)
+              (prog-mode . some-other-function)))
+
    One common mistake when using ‘:hook’ is to forget to omit the
 ‘-hook’ suffix, which, as already explained, is appended automatically.
 Therefore, the following will not work, as it attempts to add a function
@@ -1128,6 +1164,13 @@ customized values in the Emacs ‘custom-file’.  Do not use both for the
 same variable, as this risks having conflicting values in your
 use-package declaration and your ‘custom-file’, which can lead to
 problems that are both tricky and tedious to debug.
+
+   Also note that if you use ‘:custom’ in a file that you byte-compile,
+you could have some unexpected results if you later load or ‘require’
+‘use-package’ (e.g., due to lazy loading): the value of the
+corresponding user options could be reset back to their initial values.
+We therefore recommend against byte-compiling files that use
+‘use-package’ with ‘:custom’ settings.
 
 
 File: use-package.info,  Node: Faces,  Next: Hiding minor modes,  Prev: User options,  Up: Configuring Packages
@@ -1275,8 +1318,10 @@ File: use-package.info,  Node: Installing packages,  Next: Byte-compiling,  Prev
 The standard Emacs package manager is documented in the Emacs manual
 (*note (emacs)Package Installation::).  The ‘use-package’ macro provides
 the ‘:ensure’ and ‘:pin’ keywords that interface with that package
-manager to automatically install packages.  This is particularly useful
-if you use your init file on more than one system.
+manager to automatically install packages.  The ‘:vc’ keyword may be
+used to control how package sources are downloaded; e.g., from remote
+hosts (*note (emacs)Fetching Package Sources::).  This is particularly
+useful if you use your init file on more than one system.
 
 * Menu:
 
@@ -1312,6 +1357,43 @@ non-‘nil’ value if you want this behavior to be global for all packages:
 
 You can override the above setting for a single package by adding
 ‘:ensure nil’ to its declaration.
+
+   The ‘:vc’ keyword can be used to control how packages are downloaded
+and/or installed.  More specifically, it allows one to fetch and update
+packages directly from a version control system.  This is especially
+convenient when wanting to install a package that is not on any package
+archive.
+
+   The keyword accepts the same arguments as specified in *note
+(emacs)Fetching Package Sources::, except that a name need not
+explicitly be given: it is inferred from the declaration.  The accepted
+property list is augmented by a ‘:rev’ keyword, which has the same shape
+as the ‘REV’ argument to ‘package-vc-install’.  Notably – even when not
+specified – ‘:rev’ defaults to checking out the last release of the
+package.  You can use ‘:rev :newest’ to check out the latest commit.
+Note that currently, you cannot upgrade built-in packages using ‘:vc’.
+
+   For example,
+
+     (use-package bbdb
+       :vc (:url "https://git.savannah.nongnu.org/git/bbdb.git"
+            :rev :newest))
+
+   would try – by invoking ‘package-vc-install’ – to install the latest
+commit of the package ‘foo’ from the specified remote.
+
+   Alternatively, the ‘use-package-vc-prefer-newest’ user option exists
+to always prefer the latest commit.
+
+   The ‘:vc’ keyword can also be used for local packages, by combining
+it with ‘:load-path’ (*note Load path::):
+
+     ;; Use a local copy of BBDB instead of the one from GNU ELPA.
+     (use-package bbdb
+       :vc t
+       :load-path "/path/to/bbdb/dir/")
+
+   The above dispatches to ‘package-vc-install-from-checkout’.
 
 
 File: use-package.info,  Node: Pinning packages,  Next: Other package managers,  Prev: Install package,  Up: Installing packages
@@ -2305,6 +2387,7 @@ Index
                                                                (line  6)
 * :requires:                             Load dependencies.    (line  6)
 * :unless:                               Conditional loading.  (line  6)
+* :vc:                                   Install package.      (line 29)
 * :when:                                 Conditional loading.  (line  6)
 * auto-mode-alist customization:         Modes and interpreters.
                                                                (line  6)
@@ -2326,6 +2409,7 @@ Index
 * customization of faces:                Faces.                (line  6)
 * customization of variables:            User options.         (line  6)
 * customize package configuration:       Configuring Packages. (line  6)
+* customizing built-in variables:        The emacs package.    (line  6)
 * debugging use-package:                 Troubleshooting.      (line  6)
 * defer loading by default:              Deferring loading.    (line 69)
 * deferring loading of package:          Deferring loading.    (line  6)
@@ -2406,9 +2490,10 @@ Index
                                                                (line 10)
 * use-package-expand-minimally:          Troubleshooting Options.
                                                                (line  6)
-* use-package-hook-name-suffix:          Hooks.                (line 65)
+* use-package-hook-name-suffix:          Hooks.                (line 72)
 * use-package-report:                    Gathering Statistics. (line 19)
 * use-package-reset-statistics:          Gathering Statistics. (line 24)
+* use-package-vc-prefer-newest:          Install package.      (line 53)
 * use-package-verbose:                   Gathering Statistics. (line  6)
 * user options, setting:                 User options.         (line  6)
 * variable customizations:               User options.         (line  6)
@@ -2416,61 +2501,63 @@ Index
 
 
 Tag Table:
-Node: Top937
-Node: Basic Concepts3192
-Node: Getting Started4711
-Node: Loading Packages7754
-Node: Loading basics9070
-Ref: Loading basics-Footnote-110711
-Node: Deferring loading10795
-Node: Forcing loading14050
-Node: Conditional loading14735
-Node: Loading sequentially16993
-Node: Load dependencies19683
-Node: Manual installation20671
-Node: Load path21231
-Node: Manual autoloads22708
-Node: Configuring Packages23534
-Node: Lisp Configuration24292
-Node: Preface keyword25156
-Node: Init keyword26048
-Node: Config keyword26697
-Node: Best practices27422
-Node: Key bindings28981
-Node: Global keybindings29780
-Node: Binding in keymaps32946
-Node: Binding to a keymap34153
-Node: Binding to repeat-maps35191
-Node: Displaying keybindings37589
-Node: Hooks38153
-Node: Modes and interpreters40919
-Node: Magic handlers42490
-Node: User options43458
-Node: Faces44936
-Node: Hiding minor modes45739
-Ref: Hiding minor modes-Footnote-146462
-Node: Diminish46523
-Ref: Diminish-Footnote-147484
-Node: Delight47549
-Ref: Delight-Footnote-149415
-Node: Installing packages49479
-Node: Install package50091
-Node: Pinning packages50929
-Ref: Pinning packages-Footnote-152629
-Node: Other package managers52709
-Node: Byte-compiling53577
-Node: Troubleshooting55597
-Node: Troubleshooting Options56948
-Node: Gathering Statistics58504
-Node: Disabling a package60070
-Node: Keyword extensions60783
-Node: use-package-ensure-system-package61271
-Ref: use-package-ensure-system-package-Footnote-164266
-Ref: use-package-ensure-system-package-Footnote-264591
-Node: Creating an extension64722
-Node: History68155
-Node: GNU Free Documentation License68828
-Node: Index94180
+Node: Top939
+Node: Basic Concepts3139
+Node: Getting Started4658
+Node: Loading Packages7708
+Node: Loading basics9081
+Ref: Loading basics-Footnote-110722
+Node: Deferring loading10806
+Node: Forcing loading14061
+Node: Conditional loading14746
+Node: Loading sequentially17005
+Node: The emacs package19695
+Ref: The emacs package-Footnote-120599
+Node: Load dependencies20693
+Node: Manual installation21678
+Node: Load path22239
+Node: Manual autoloads23716
+Node: Configuring Packages24542
+Node: Lisp Configuration25300
+Node: Preface keyword26164
+Node: Init keyword27056
+Node: Config keyword27705
+Node: Best practices28430
+Node: Key bindings29989
+Node: Global keybindings30788
+Node: Binding in keymaps33953
+Node: Binding to a keymap35160
+Node: Binding to repeat-maps36198
+Node: Displaying keybindings38596
+Node: Hooks39160
+Node: Modes and interpreters42128
+Node: Magic handlers43699
+Node: User options44667
+Node: Faces46540
+Node: Hiding minor modes47343
+Ref: Hiding minor modes-Footnote-148066
+Node: Diminish48127
+Ref: Diminish-Footnote-149088
+Node: Delight49153
+Ref: Delight-Footnote-151019
+Node: Installing packages51083
+Node: Install package51844
+Node: Pinning packages54281
+Ref: Pinning packages-Footnote-155981
+Node: Other package managers56061
+Node: Byte-compiling56929
+Node: Troubleshooting58949
+Node: Troubleshooting Options60300
+Node: Gathering Statistics61856
+Node: Disabling a package63422
+Node: Keyword extensions64135
+Node: use-package-ensure-system-package64623
+Ref: use-package-ensure-system-package-Footnote-167618
+Ref: use-package-ensure-system-package-Footnote-267943
+Node: Creating an extension68074
+Node: History71507
+Node: GNU Free Documentation License72180
+Node: Index97532
 
 End Tag Table
 

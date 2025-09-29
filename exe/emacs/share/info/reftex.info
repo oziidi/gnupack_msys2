@@ -1,9 +1,10 @@
-This is reftex.info, produced by makeinfo version 6.8 from reftex.texi.
+This is reftex.info, produced by makeinfo version 7.0.3 from
+reftex.texi.
 
-This manual documents RefTeX (version 29.4), a package to do labels,
+This manual documents RefTeX (version 30.2), a package to do labels,
 references, citations and indices for LaTeX documents with Emacs.
 
-   Copyright © 1997–2024 Free Software Foundation, Inc.
+   Copyright © 1997–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -27,10 +28,10 @@ File: reftex.info,  Node: Top,  Next: Introduction,  Up: (dir)
 RefTeX
 ******
 
-This manual documents RefTeX (version 29.4), a package to do labels,
+This manual documents RefTeX (version 30.2), a package to do labels,
 references, citations and indices for LaTeX documents with Emacs.
 
-   Copyright © 1997–2024 Free Software Foundation, Inc.
+   Copyright © 1997–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -46,7 +47,7 @@ references, citations and indices for LaTeX documents with Emacs.
    RefTeX is a package for managing Labels, References, Citations and
 index entries with GNU Emacs.
 
-   This manual documents RefTeX version 29.4.
+   This manual documents RefTeX version 30.2.
 
    Don’t be discouraged by the size of this manual, which covers RefTeX
 in great depth.  All you need to know to use RefTeX can be summarized on
@@ -3801,7 +3802,7 @@ File: reftex.info,  Node: Options - Creating Citations,  Next: Options - Index S
      ‘reftex-cite-format’ directly yourself or set it to the _symbol_ of
      one of the predefined styles.  The predefined symbols are those
      which have an association in the constant
-     ‘reftex-cite-format-builtin’) E.g.: ‘(setq reftex-cite-format
+     ‘reftex-cite-format-builtin’, e.g.: ‘(setq reftex-cite-format
      'natbib)’.
 
  -- Hook: reftex-format-cite-function
@@ -4074,7 +4075,8 @@ File: reftex.info,  Node: Options - Viewing Cross-References,  Next: Options - F
      argument of a macro.  Note that crossref viewing for citations,
      references (both ways) and index entries is hard-coded.  This
      variable is only to configure additional structures for which
-     crossreference viewing can be useful.  Each entry has the structure
+     cross-reference viewing can be useful.  Each entry has the
+     structure
           (MACRO-RE SEARCH-RE HIGHLIGHT).
      MACRO-RE is matched against the macro.  SEARCH-RE is the regexp
      used to search for cross references.  ‘%s’ in this regexp is
@@ -5452,7 +5454,7 @@ Index
 * reftex-auto-update-selection-buffers <1>: Options - Optimizations.
                                                               (line  82)
 * reftex-auto-view-crossref:             Options - Viewing Cross-References.
-                                                              (line  19)
+                                                              (line  20)
 * reftex-bib-author-face:                Options - Fontification.
                                                               (line  59)
 * reftex-bib-extra-face:                 Options - Fontification.
@@ -5468,7 +5470,7 @@ Index
 * reftex-bibpath-environment-variables:  Options - Finding Files.
                                                               (line  19)
 * reftex-cache-cite-echo:                Options - Viewing Cross-References.
-                                                              (line  45)
+                                                              (line  46)
 * reftex-change-label:                   Commands.            (line 131)
 * reftex-citation:                       Creating Citations.  (line   6)
 * reftex-citation <1>:                   Commands.            (line  24)
@@ -5488,7 +5490,7 @@ Index
 * reftex-cite-punctuation <1>:           Options - Creating Citations.
                                                               (line 122)
 * reftex-cite-view-format:               Options - Viewing Cross-References.
-                                                              (line  34)
+                                                              (line  35)
 * reftex-comment-citations:              Options - Creating Citations.
                                                               (line 112)
 * reftex-create-bibtex-file:             BibTeX Database Subsets.
@@ -5558,7 +5560,7 @@ Index
                                                               (line  28)
 * reftex-idle-time:                      Table of Contents.   (line 198)
 * reftex-idle-time <1>:                  Options - Viewing Cross-References.
-                                                              (line  30)
+                                                              (line  31)
 * reftex-include-file-commands:          Multifile Documents. (line  43)
 * reftex-include-file-commands <1>:      Options - Table of Contents.
                                                               (line   6)
@@ -5720,7 +5722,7 @@ Index
 * reftex-renumber-simple-labels:         Commands.            (line 136)
 * reftex-reset-mode:                     Commands.            (line 174)
 * reftex-revisit-to-echo:                Options - Viewing Cross-References.
-                                                              (line  38)
+                                                              (line  39)
 * reftex-revisit-to-follow:              Table of Contents.   (line  67)
 * reftex-revisit-to-follow <1>:          Referencing Labels.  (line  89)
 * reftex-revisit-to-follow <2>:          Displaying and Editing the Index.
@@ -5927,84 +5929,84 @@ Index
 
 
 Tag Table:
-Node: Top1040
-Node: Introduction6499
-Node: Installation7375
-Node: RefTeX in a Nutshell8836
-Node: Table of Contents15212
-Node: Labels and References24014
-Node: Creating Labels25444
-Ref: Creating Labels-Footnote-127900
-Node: Referencing Labels28395
-Node: Builtin Label Environments36268
-Node: Defining Label Environments37872
-Node: Theorem and Axiom39240
-Node: Quick Equation44156
-Node: Figure Wrapper45783
-Node: Adding Magic Words47769
-Node: Using \eqref48739
-Node: Non-Standard Environments49603
-Node: Putting it Together53641
-Node: Reference Info54417
-Node: Reference Styles55082
-Ref: Reference Styles-Footnote-159305
-Node: LaTeX xr Package59424
-Node: Citations60588
-Node: Creating Citations61481
-Node: Citation Styles66434
-Node: Citation Info68529
-Node: Chapterbib and Bibunits69194
-Node: Citations Outside LaTeX69872
-Node: BibTeX Database Subsets71016
-Node: Index Support72432
-Node: Creating Index Entries75646
-Node: The Index Phrases File77049
-Node: Collecting Phrases79237
-Ref: Collecting Phrases-Footnote-182156
-Ref: Collecting Phrases-Footnote-282246
-Node: Consistency Checks82335
-Node: Global Indexing83860
-Ref: Global Indexing-Footnote-187126
-Node: Displaying and Editing the Index87273
-Node: Builtin Index Macros93466
-Node: Defining Index Macros94098
-Ref: Defining Index Macros-Footnote-197760
-Node: Viewing Cross-References97825
-Ref: Viewing Cross-References-Footnote-1100548
-Ref: Viewing Cross-References-Footnote-2100633
-Node: RefTeXs Menu100693
-Node: Key Bindings101102
-Node: Faces102702
-Node: Multifile Documents103258
-Node: Language Support105229
-Node: Finding Files106722
-Node: Optimizations109904
-Node: AUCTeX115247
-Node: AUCTeX-RefTeX Interface115904
-Ref: AUCTeX-RefTeX Interface-Footnote-1118269
-Ref: AUCTeX-RefTeX Interface-Footnote-2118391
-Node: Style Files118554
-Ref: Style Files-Footnote-1122549
-Node: Bib-Cite122674
-Node: Problems and Work-Arounds123746
-Node: Imprint127382
-Node: Commands129422
-Node: Options137971
-Node: Options - Table of Contents138996
-Node: Options - Defining Label Environments144092
-Node: Options - Creating Labels155114
-Node: Options - Referencing Labels159625
-Node: Options - Creating Citations164825
-Node: Options - Index Support171641
-Node: Options - Viewing Cross-References181562
-Node: Options - Finding Files184230
-Node: Options - Optimizations188253
-Node: Options - Fontification192880
-Node: Options - Misc196323
-Node: Keymaps and Hooks198190
-Node: Changes198867
-Node: GNU Free Documentation License204349
-Node: Index229696
+Node: Top1042
+Node: Introduction6501
+Node: Installation7377
+Node: RefTeX in a Nutshell8838
+Node: Table of Contents15214
+Node: Labels and References24016
+Node: Creating Labels25446
+Ref: Creating Labels-Footnote-127902
+Node: Referencing Labels28397
+Node: Builtin Label Environments36270
+Node: Defining Label Environments37874
+Node: Theorem and Axiom39242
+Node: Quick Equation44158
+Node: Figure Wrapper45785
+Node: Adding Magic Words47771
+Node: Using \eqref48741
+Node: Non-Standard Environments49605
+Node: Putting it Together53643
+Node: Reference Info54419
+Node: Reference Styles55084
+Ref: Reference Styles-Footnote-159307
+Node: LaTeX xr Package59426
+Node: Citations60590
+Node: Creating Citations61483
+Node: Citation Styles66436
+Node: Citation Info68531
+Node: Chapterbib and Bibunits69196
+Node: Citations Outside LaTeX69874
+Node: BibTeX Database Subsets71018
+Node: Index Support72434
+Node: Creating Index Entries75648
+Node: The Index Phrases File77051
+Node: Collecting Phrases79239
+Ref: Collecting Phrases-Footnote-182158
+Ref: Collecting Phrases-Footnote-282248
+Node: Consistency Checks82337
+Node: Global Indexing83862
+Ref: Global Indexing-Footnote-187128
+Node: Displaying and Editing the Index87275
+Node: Builtin Index Macros93468
+Node: Defining Index Macros94100
+Ref: Defining Index Macros-Footnote-197762
+Node: Viewing Cross-References97827
+Ref: Viewing Cross-References-Footnote-1100550
+Ref: Viewing Cross-References-Footnote-2100635
+Node: RefTeXs Menu100695
+Node: Key Bindings101104
+Node: Faces102704
+Node: Multifile Documents103260
+Node: Language Support105231
+Node: Finding Files106724
+Node: Optimizations109906
+Node: AUCTeX115249
+Node: AUCTeX-RefTeX Interface115906
+Ref: AUCTeX-RefTeX Interface-Footnote-1118271
+Ref: AUCTeX-RefTeX Interface-Footnote-2118393
+Node: Style Files118556
+Ref: Style Files-Footnote-1122551
+Node: Bib-Cite122676
+Node: Problems and Work-Arounds123748
+Node: Imprint127384
+Node: Commands129424
+Node: Options137973
+Node: Options - Table of Contents138998
+Node: Options - Defining Label Environments144094
+Node: Options - Creating Labels155116
+Node: Options - Referencing Labels159627
+Node: Options - Creating Citations164827
+Node: Options - Index Support171643
+Node: Options - Viewing Cross-References181564
+Node: Options - Finding Files184238
+Node: Options - Optimizations188261
+Node: Options - Fontification192888
+Node: Options - Misc196331
+Node: Keymaps and Hooks198198
+Node: Changes198875
+Node: GNU Free Documentation License204357
+Node: Index229704
 
 End Tag Table
 

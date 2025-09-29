@@ -1,9 +1,9 @@
-This is vhdl-mode.info, produced by makeinfo version 6.8 from
+This is vhdl-mode.info, produced by makeinfo version 7.0.3 from
 vhdl-mode.texi.
 
 This file documents VHDL Mode, an Emacs mode for editing VHDL code.
 
-   Copyright © 1995–2008, 2010, 2012, 2015–2024 Free Software
+   Copyright © 1995–2008, 2010, 2012, 2015–2025 Free Software
 Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
@@ -29,7 +29,7 @@ VHDL Mode, an Emacs mode for editing VHDL code
 
 This file documents VHDL Mode, an Emacs mode for editing VHDL code.
 
-   Copyright © 1995–2008, 2010, 2012, 2015–2024 Free Software
+   Copyright © 1995–2008, 2010, 2012, 2015–2025 Free Software
 Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
@@ -1482,34 +1482,34 @@ name.
 
 
 Tag Table:
-Node: Top948
-Node: Introduction2357
-Node: Getting Connected3642
-Node: New Indentation Engine3888
-Node: Syntactic Analysis4795
-Ref: Syntactic Analysis-Footnote-17349
-Node: Indentation Calculation7441
-Node: Customizing Indentation9793
-Node: Interactive Customization12015
-Node: Permanent Customization14407
-Node: Styles15737
-Node: Built-in Styles16733
-Node: Adding Styles17931
-Node: File Styles18996
-Node: Advanced Customizations20146
-Node: Custom Indentation Functions21039
-Node: Other Special Indentations24872
-Node: Syntactic Symbols25554
-Node: Frequently Asked Questions26597
-Node: Getting the latest VHDL Mode release28333
-Node: Sample Init File29024
-Node: Limitations and Known Bugs30716
-Node: Mailing Lists and Submitting Bug Reports30981
-Node: GNU Free Documentation License32133
-Node: Concept Index57524
-Node: Command Index62448
-Node: Key Index64858
-Node: Variable Index66359
+Node: Top950
+Node: Introduction2359
+Node: Getting Connected3644
+Node: New Indentation Engine3890
+Node: Syntactic Analysis4797
+Ref: Syntactic Analysis-Footnote-17351
+Node: Indentation Calculation7443
+Node: Customizing Indentation9795
+Node: Interactive Customization12017
+Node: Permanent Customization14409
+Node: Styles15739
+Node: Built-in Styles16735
+Node: Adding Styles17933
+Node: File Styles18998
+Node: Advanced Customizations20148
+Node: Custom Indentation Functions21041
+Node: Other Special Indentations24874
+Node: Syntactic Symbols25556
+Node: Frequently Asked Questions26599
+Node: Getting the latest VHDL Mode release28335
+Node: Sample Init File29026
+Node: Limitations and Known Bugs30718
+Node: Mailing Lists and Submitting Bug Reports30983
+Node: GNU Free Documentation License32135
+Node: Concept Index57526
+Node: Command Index62450
+Node: Key Index64860
+Node: Variable Index66361
 
 End Tag Table
 

@@ -1,7 +1,7 @@
-This is speedbar.info, produced by makeinfo version 6.8 from
+This is speedbar.info, produced by makeinfo version 7.0.3 from
 speedbar.texi.
 
-Copyright © 1999–2024 Free Software Foundation, Inc.
+Copyright © 1999–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -50,7 +50,7 @@ Expanding refers to clicking on an expansion button to display an
 expanded summary of the entry the expansion button is on.  *Note Basic
 Navigation::.
 
-   Copyright © 1999–2024 Free Software Foundation, Inc.
+   Copyright © 1999–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -1719,34 +1719,34 @@ Concept Index
 
 
 Tag Table:
-Node: Top845
-Node: Introduction3383
-Node: Basic Navigation4949
-Node: Basic Key Bindings5394
-Node: Basic Visuals7583
-Node: Mouse Bindings11606
-Node: Displays Submenu13274
-Node: File Mode13962
-Node: Directory Display14569
-Node: Hidden Files17671
-Node: File Key Bindings18918
-Node: Buffer Mode20409
-Node: Minor Modes21538
-Node: RMAIL22399
-Node: Info23289
-Node: GDB23912
-Node: Customizing24672
-Node: Frames and Faces25497
-Node: Tag Hierarchy Methods26612
-Node: Version Control28876
-Node: Hooks30260
-Node: Extending31467
-Node: Minor Display Modes32542
-Node: Major Display Modes34452
-Node: Tagging Extensions39307
-Node: Creating a display40732
-Node: GNU Free Documentation License45396
-Node: Index70747
+Node: Top847
+Node: Introduction3385
+Node: Basic Navigation4951
+Node: Basic Key Bindings5396
+Node: Basic Visuals7585
+Node: Mouse Bindings11608
+Node: Displays Submenu13276
+Node: File Mode13964
+Node: Directory Display14571
+Node: Hidden Files17673
+Node: File Key Bindings18920
+Node: Buffer Mode20411
+Node: Minor Modes21540
+Node: RMAIL22401
+Node: Info23291
+Node: GDB23914
+Node: Customizing24674
+Node: Frames and Faces25499
+Node: Tag Hierarchy Methods26614
+Node: Version Control28878
+Node: Hooks30262
+Node: Extending31469
+Node: Minor Display Modes32544
+Node: Major Display Modes34454
+Node: Tagging Extensions39309
+Node: Creating a display40734
+Node: GNU Free Documentation License45398
+Node: Index70749
 
 End Tag Table
 

@@ -1,9 +1,9 @@
-This is info.info, produced by makeinfo version 6.8 from info.texi.
+This is info.info, produced by makeinfo version 7.0.3 from info.texi.
 
 This file describes how to use Info, the menu-driven GNU documentation
 system.
 
-   Copyright © 1989, 1992, 1996–2024 Free Software Foundation, Inc.
+   Copyright © 1989, 1992, 1996–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -49,7 +49,7 @@ commands.  In the stand-alone Info reader, type ‘H’ instead.
    This file describes how to use Info, the menu-driven GNU
 documentation system.
 
-   Copyright © 1989, 1992, 1996–2024 Free Software Foundation, Inc.
+   Copyright © 1989, 1992, 1996–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -1717,31 +1717,31 @@ topics discussed in this document.
 
 
 Tag Table:
-Node: Top957
-Node: Getting Started3054
-Node: Help-Small-Screen3898
-Node: Help6054
-Node: Help-P7782
-Node: Help-^L9066
-Ref: Help-^L-Footnote-113681
-Node: Help-Inv14075
-Node: Help-]15803
-Node: Help-M17439
-Node: Help-FOO26260
-Node: Help-Xref27295
-Node: Help-Cross31086
-Node: Help-Int31782
-Node: Help-Q35264
-Node: Advanced36445
-Node: Search Text37668
-Node: Search Index39498
-Node: Go to node42131
-Node: Choose menu subtopic43237
-Node: Create Info buffer44485
-Node: Emacs Info Variables46065
-Node: Further Reading50712
-Node: GNU Free Documentation License51476
-Node: Index76829
+Node: Top959
+Node: Getting Started3056
+Node: Help-Small-Screen3900
+Node: Help6056
+Node: Help-P7784
+Node: Help-^L9068
+Ref: Help-^L-Footnote-113683
+Node: Help-Inv14077
+Node: Help-]15805
+Node: Help-M17441
+Node: Help-FOO26262
+Node: Help-Xref27297
+Node: Help-Cross31088
+Node: Help-Int31784
+Node: Help-Q35266
+Node: Advanced36447
+Node: Search Text37670
+Node: Search Index39500
+Node: Go to node42133
+Node: Choose menu subtopic43239
+Node: Create Info buffer44487
+Node: Emacs Info Variables46067
+Node: Further Reading50714
+Node: GNU Free Documentation License51478
+Node: Index76831
 
 End Tag Table
 

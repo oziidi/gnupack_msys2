@@ -1,7 +1,7 @@
-This is autotype.info, produced by makeinfo version 6.8 from
+This is autotype.info, produced by makeinfo version 7.0.3 from
 autotype.texi.
 
-Copyright © 1994–1995, 1999, 2001–2024 Free Software Foundation, Inc.
+Copyright © 1994–1995, 1999, 2001–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -51,7 +51,7 @@ can be defined for inserting and navigating between text more generally.
 A sort of meta-expansion facility can be used to try a set of
 alternative completions and expansions of text at point.
 
-   Copyright © 1994–1995, 1999, 2001–2024 Free Software Foundation, Inc.
+   Copyright © 1994–1995, 1999, 2001–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -249,9 +249,9 @@ empty file is visited.  This is accomplished by putting
 ‘auto-insert-alist’.  The CAR of each element of this list is either a
 mode name, making the element applicable when a buffer is in that mode,
 or a string, which is a regexp matched against a buffer’s file name (the
-latter allows to distinguish between different kinds of files that have
-the same mode in Emacs).  The CAR of an element may also be a cons cell,
-consisting of mode name or regexp, as above, and an additional
+latter enables you to distinguish between different kinds of files that
+have the same mode in Emacs).  The CAR of an element may also be a cons
+cell, consisting of mode name or regexp, as above, and an additional
 descriptive string.
 
    When a matching element is found, the CDR says what to do.  It may be
@@ -1137,22 +1137,22 @@ Variable Index
 
 
 Tag Table:
-Node: Top933
-Node: Using Skeletons4035
-Node: Wrapping Skeletons5536
-Node: Skeletons as Abbrevs8158
-Node: Inserting Pairs9070
-Node: Autoinserting11581
-Node: Copyrights15487
-Node: Executables17429
-Node: Timestamps18963
-Node: Tempo20423
-Node: Hippie Expand21627
-Node: Skeleton Language22691
-Node: GNU Free Documentation License27056
-Node: Concept Index52423
-Node: Command Index53466
-Node: Variable Index54712
+Node: Top935
+Node: Using Skeletons4037
+Node: Wrapping Skeletons5538
+Node: Skeletons as Abbrevs8160
+Node: Inserting Pairs9072
+Node: Autoinserting11583
+Node: Copyrights15494
+Node: Executables17436
+Node: Timestamps18970
+Node: Tempo20430
+Node: Hippie Expand21634
+Node: Skeleton Language22698
+Node: GNU Free Documentation License27063
+Node: Concept Index52430
+Node: Command Index53473
+Node: Variable Index54719
 
 End Tag Table
 

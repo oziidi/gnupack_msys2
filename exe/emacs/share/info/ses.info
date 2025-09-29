@@ -1,8 +1,8 @@
-This is ses.info, produced by makeinfo version 6.8 from ses.texi.
+This is ses.info, produced by makeinfo version 7.0.3 from ses.texi.
 
 This file documents SES: the Simple Emacs Spreadsheet.
 
-   Copyright © 2002–2024 Free Software Foundation, Inc.
+   Copyright © 2002–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -33,7 +33,7 @@ SES: Simple Emacs Spreadsheet
 
    This file documents SES: the Simple Emacs Spreadsheet.
 
-   Copyright © 2002–2024 Free Software Foundation, Inc.
+   Copyright © 2002–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -71,8 +71,9 @@ File: ses.info,  Node: Sales Pitch,  Next: Quick Tutorial,  Prev: Top,  Up: Top
    • Intuitive keystroke commands: C-o = insert row, M-o = insert
      column, etc.
    • “Spillover” of lengthy cell values into following blank cells.
-   • Header line shows column letters or a selected row.
-   • Completing-read for entering symbols as cell values.
+   • Header line shows column letters.
+   • Completing-read for entering symbols of named cells when editing
+     formulas.
    • Cut, copy, and paste can transfer formulas and printer functions.
    • Import and export of tab-separated values or tab-separated
      formulas.
@@ -87,12 +88,12 @@ File: ses.info,  Node: Quick Tutorial,  Next: The Basics,  Prev: Sales Pitch,  U
 If you want to get started quickly and think that you know what to
 expect from a simple spreadsheet, this chapter may be all that you need.
 
-   First, visit a new file with the ‘.ses’ extension.  Emacs presents
-you with an empty spreadsheet containing a single cell.
+   First, visit a new file with the ‘.ses’ file name extension.  Emacs
+presents you with an empty spreadsheet containing a single cell.
 
-   Begin by inserting a headline: ‘"Income"<RET>’.  The double quotes
-indicate that this is a text cell.  (Notice that Emacs automatically
-inserts the closing quotation mark.)
+   Begin by inserting a headline: ‘"Income<RET>’.  The double quotes
+indicate that you are editing a text cell, it is not part of the cell
+value, and no closing quotation mark is needed.
 
    To insert your first income value, you must first resize the
 spreadsheet.  Press <TAB> to add a new cell and navigate back up to it.
@@ -110,9 +111,9 @@ entries, e.g.:
 
      (+ A2 A3 A4 A5)
 
-   Perhaps you want to add a cell to the right of cell A4 to explain why
-you have a negative entry.  Pressing ‘TAB’ in that cell adds an entire
-new column ‘B’, where you can add such a note.
+   Perhaps you want to add a cell to the right of cell ‘A4’ to explain
+why you have a negative entry.  Pressing ‘TAB’ in that cell adds an
+entire new column ‘B’, where you can add such a note.
 
    The column is fairly narrow by default, but pressing ‘w’ allows you
 to resize it as needed.  Make it 20 characters wide.  You can now add
@@ -126,18 +127,21 @@ descriptive legends for all the entries, e.g.:
           -4          Loan to Joe
        14.01                Total
 
-   By default, the labels in column B are right-justified.  To change
+   By default, the cell value print-out is right aligned, that is the
+reason for such an alignment for the notes in column ‘B’.  To change
 that, you can enter a printer function for the whole column, using e.g.,
-‘M-p ("%s")’.  You can override a column’s printer function in any
-individual cell using ‘p’.
+‘M-p ("%s")’.  Enclosing ‘"%s"’ into a list tells SES to align left.
+You can override a column’s printer function in any individual cell
+using ‘p’.
 
    If Joe pays back his loan, you might blank that entry; e.g., by
-positioning the cursor in cell A5 and pressing ‘C-d’ twice.  If you do
-that, the total cell will display ‘######’.  That is because the regular
-‘+’ operator does not handle a range that contains some empty cells.
-Instead of emptying the cell, you could enter a literal ‘0’, or delete
-the entire row using ‘C-k’.  An alternative is to use the special
-function ‘ses+’ instead of the regular ‘+’:
+positioning the cursor in cell A5 and pressing ‘C-d’.  If you do that,
+the total printed out in cell A6 will display ‘######’.  That is because
+the value in an empty cell is typically ‘nil’, and the regular ‘+’
+operator fails to handle a range that contains that value.  Instead of
+emptying the cell, you could enter a literal ‘0’, or delete the entire
+row using ‘C-k’.  An alternative is to use the special function ‘ses+’
+instead of the regular ‘+’:
 
      (ses+ A2 A3 A4 A5)
 
@@ -151,10 +155,15 @@ end-points, e.g.:
 values.  This allows for more complex possibilities.)
 
    Alternatively you can use the ‘!’ modifier of ‘ses-range’ to remove
-blank cells from the returned list, which allows to use ‘+’ instead of
+blank cells from the returned list, which enables using ‘+’ instead of
 ‘ses+’:
 
      (apply '+ (ses-range A2 A5 !))
+
+   Actually, both options are not exactly equivalent as the former makes
+the summing in reversed order of argument, and the latter in the same
+order.  You can also reverse the order of arguments returned by
+‘ses-range’ with the ‘<’ modifier.
 
 
 File: ses.info,  Node: The Basics,  Next: Advanced Features,  Prev: Quick Tutorial,  Up: Top
@@ -163,7 +172,7 @@ File: ses.info,  Node: The Basics,  Next: Advanced Features,  Prev: Quick Tutori
 ************
 
 To create a new spreadsheet, visit a nonexistent file whose name ends
-with ".ses".  For example, ‘C-x C-f test.ses <RET>’.
+with ‘.ses’.  For example, ‘C-x C-f test.ses <RET>’.
 
    A “cell identifier” is a symbol with a column letter and a row
 number.  Cell B7 is the 2nd column of the 7th row.  For very wide
@@ -175,7 +184,7 @@ with the regular Emacs movement commands.
      Moves point to cell, specified by identifier (‘ses-jump’).  Unless
      the cell is a renamed cell, the identifier is case-insensitive.  A
      prefix argument n move to cell with coordinates (n\div R, n \% C)
-     for a spreadsheet of R rows and C columns, and A1 being of
+     for a spreadsheet of R rows and C columns, and ‘A1’ being of
      coordinates (0,0).  The way the identifier or the command prefix
      argument are interpreted can be customized through variables
      ‘ses-jump-cell-name-function’ and ‘ses-jump-prefix-function’.
@@ -183,8 +192,9 @@ with the regular Emacs movement commands.
    Point is always at the left edge of a cell, or at the empty endline.
 When mark is inactive, the current cell is underlined.  When mark is
 active, the range is the highlighted rectangle of cells (SES always uses
-transient mark mode).  Drag the mouse from A1 to A3 to create the range
-A1-A2.  Many SES commands operate only on single cells, not ranges.
+transient mark mode).  Drag the mouse from ‘A1’ to ‘A3’ to create the
+range ‘A1-A2’.  Many SES commands operate only on single cells, not
+ranges.
 
 ‘C-<SPC>’
 ‘C-@’
@@ -227,11 +237,11 @@ To insert a value into a cell, simply type a numeric expression,
      Self-insert a negative number (‘ses-read-cell’).
 
 ‘.’
-     Self-insert a fractional number (‘ses-read-cell’).
+     Self-insert a decimal number (‘ses-read-cell’).
 
 ‘"’
-     Self-insert a quoted string.  The ending double-quote is inserted
-     for you (‘ses-read-cell’).
+     Self-insert a string.  The ending double-quote is inserted for you
+     (‘ses-read-cell’).
 
 ‘(’
      Self-insert an expression.  The right-parenthesis is inserted for
@@ -245,7 +255,7 @@ To insert a value into a cell, simply type a numeric expression,
           to list the named cells symbols in a help buffer.
 
 ‘' (apostrophe)’
-     Enter a symbol (ses-read-symbol).  SES remembers all symbols that
+     Enter a symbol (‘ses-read-symbol’).  SES remembers all symbols that
      have been used as formulas, so you can type just the beginning of a
      symbol and use ‘<SPC>’, ‘<TAB>’, and ‘?’ to complete it.
 
@@ -338,8 +348,8 @@ the following:
      right-aligned within the print cell.  To get left-alignment, use
      parentheses: ‘("$%.2f")’.
    • A printer can also be a one-argument function, the result of which
-     is a string (right-aligned) or list of one string (left-aligned).
-     Such a function can be in turn configured as:
+     is a string (to get right alignment) or list of one string (to get
+     left alignment).  Such a function can be in turn configured as:
         • A lambda expression, for instance:
 
                (lambda (x)
@@ -399,8 +409,8 @@ File: ses.info,  Node: Standard printer functions,  Next: Local printer function
 
 Except for ‘ses-prin1’, the other standard printers are suitable only
 for cells, not columns or default, because they format the value using
-the column-printer (or default-printer if ‘nil’) and then center the
-result:
+the column-printer (or default-printer if ‘nil’) and then post-process
+the result, eg. center it:
 
 ‘ses-center’
      Just centering.
@@ -409,13 +419,13 @@ result:
      Centering with spill-over to following blank cells.
 
 ‘ses-dashfill’
-     Centering using dashes (-) instead of spaces.
+     Centering using dashes (‘-’) instead of spaces.
 
 ‘ses-dashfill-span’
      Centering with dashes and spill-over.
 
 ‘ses-tildefill-span’
-     Centering with tildes (~) and spill-over.
+     Centering with tildes (‘~’) and spill-over.
 
 ‘ses-prin1’
      This is the fallback printer, used when calling the configured
@@ -448,9 +458,9 @@ init file:
           'euro
           (lambda (x)
             (cond
-     	((null x) "")
-     	((numberp x) (format "%.2f€" x))
-     	(t (ses-center-span x ?# 'ses-prin1)))))))
+             ((null x) "")
+             ((numberp x) (format "%.2f€" x))
+             (t (ses-center-span x ?# 'ses-prin1)))))))
      (add-hook 'ses-mode-hook 'my-ses-mode-hook)
 
    If you replace command ‘ses-define-local-printer’ by function
@@ -497,8 +507,9 @@ when you use a local printer as a column printer, and this local printer
 implicitly calls the current column printer, so it will call itself
 recursively.  Imagine for instance that you want to create some local
 printer ‘=fill’ that would center the content of a cell and surround it
-by equal signs ‘=’, and you do it this way:
+by equal signs ‘=’, and you do it (errounously) this way:
 
+     ;; ERRONEOUS CODE
      (lambda (x)
        (cond
         ((null x) "")
@@ -508,8 +519,9 @@ by equal signs ‘=’, and you do it this way:
 explicitly passing any printer to it, ‘ses-center’ will call the current
 column printer if any, or the spreadsheet default printer otherwise.  So
 using ‘=fill’ as a column printer will result in a stack overflow in
-this column.  SES does not check for that; you just have to be careful.
-For instance, re-write ‘=fill’ like this:
+this column on any non empty cell as ‘ses-center’ will recursively
+recall the function that has called it.  SES does not check for that;
+you just have to be careful.  For instance, re-write ‘=fill’ like this:
 
      (lambda (x)
        (cond
@@ -517,11 +529,15 @@ For instance, re-write ‘=fill’ like this:
         ((stringp x) (ses-center x 0 ?= " %s "))
         (t (ses-center-span x ?# 'ses-prin1))))
 
+   The code above is fixed as ‘ses-center’ and ‘ses-center-span’ are
+both called with an explicit last PRINTER argument, respectively ‘" %s
+"’ and ‘'ses-prin1’.
+
    The code above applies the ‘=’ filling only to strings; it also
 surrounds the string by one space on each side before filling with ‘=’
 signs.  So the string ‘Foo’ will be displayed like ‘=== Foo ===’ in an
-11 character wide column.  Anything other than an empty cell or a
-non-string is displayed as an error by using ‘#’ filling.
+11 character wide column.  Any value that is neither ‘nil’ (ie. an empty
+cell) nor a string is displayed as an error by using ‘#’ filling.
 
 
 File: ses.info,  Node: Clearing cells,  Next: Copy/cut/paste,  Prev: Printer functions,  Up: The Basics
@@ -532,7 +548,7 @@ File: ses.info,  Node: Clearing cells,  Next: Copy/cut/paste,  Prev: Printer fun
 These commands set both formula and printer to ‘nil’:
 
 ‘<DEL>’
-     Clear cell and move left (‘ses-clear-cell-backward’).
+     Move left and clear cell (‘ses-clear-cell-backward’).
 
 ‘C-d’
      Clear cell and move right (‘ses-clear-cell-forward’).
@@ -570,10 +586,10 @@ the copies into non-SES buffers to export the print text.
 ‘[S-insert]’
      Paste from kill ring (‘yank’).  The paste functions behave
      differently depending on the format of the text being inserted:
-        • When pasting cells that were cut from a SES buffer, the print
-          text is ignored and only the attached formula and printer are
-          inserted; cell references in the formula are relocated unless
-          you use ‘C-u’.
+        • When pasting cells that were cut or copied from a SES buffer,
+          the print text is ignored and only the attached formula and
+          printer are inserted; cell references in the formula are
+          relocated unless you use ‘C-u’.
         • The pasted text overwrites a rectangle of cells whose top left
           corner is the current cell.  If part of the rectangle is
           beyond the edges of the spreadsheet, you must confirm the
@@ -609,9 +625,10 @@ By default, a newly-created spreadsheet has 1 row and 1 column.  The
 column width is 7 and the default printer is ‘"%.7g"’.  Each of these
 can be customized.  Look in group “ses”.
 
-   After entering a cell value, point normally moves right to the next
-cell.  You can customize ‘ses-after-entry-functions’ to move left or up
-or down.  For diagonal movement, select two functions from the list.
+   After entering a cell value, normally, ‘forward-char’ is called,
+which moves point right to the next cell .  You can customize
+‘ses-after-entry-functions’ to move left or up or down.  For diagonal
+movement, select two functions from the list.
 
    ‘ses-jump-cell-name-function’ is a customizable variable by default
 set to the ‘upcase’ function.  This function is called when you pass a
@@ -631,8 +648,8 @@ cell name or cell coordinates corresponding to the prefix argument.
 Cell coordinates are in the form of a cons, for instance ‘(1 . 0)’ for
 cell ‘A2’.  The default setting ‘ses-jump-prefix’ will number cells left
 to right and then top down, so assuming a 4x3 spreadsheet prefix
-argument 0 jumps to cell A1, prefix argument 2 jumps to C1, prefix
-argument 3 jumps to A2, etc.
+argument ‘0’ jumps to cell ‘A1’, prefix argument ‘2’ jumps to ‘C1’,
+prefix argument ‘3’ jumps to ‘A2’, etc.
 
    ‘ses-mode-hook’ is a normal mode hook (list of functions to execute
 when starting SES mode for a buffer).
@@ -670,11 +687,10 @@ File: ses.info,  Node: Advanced Features,  Next: For Gurus,  Prev: The Basics,  
      be a valid local variable name (See also *note Nonrelocatable
      references::).
 ‘M-x ses-repair-cell-reference-all’
-     When you interrupt a cell formula update by clicking ‘C-g’, then
-     the cell reference link may be broken, which will jeopardize
-     automatic cell update when any other cell on which it depends is
-     changed.  To repair that use function
-     ‘ses-repair-cell-reference-all’
+     When you interrupt a cell formula update by typing ‘C-g’, then the
+     cell reference link may be broken, which will jeopardize automatic
+     cell update when any other cell on which it depends is changed.  To
+     repair that use function ‘ses-repair-cell-reference-all’
 
 * Menu:
 
@@ -733,23 +749,23 @@ a rectangle of cells.  If your formula is
    While entering or editing a formula in the minibuffer, you can select
 a range in the spreadsheet (using mouse or keyboard), then paste a
 representation of that range into your formula.  Suppose you select
-A1-C1:
+‘A1-C1’:
 
 ‘[S-mouse-3]’
-     Inserts "A1 B1 C1" ‘(ses-insert-range-click’)
+     Inserts ‘A1 B1 C1’ (‘ses-insert-range-click’)
 
 ‘C-c C-r’
      Keyboard version (‘ses-insert-range’).
 
 ‘[C-S-mouse-3]’
-     Inserts "(ses-range A1 C1)" (‘ses-insert-ses-range-click’).
+     Inserts ‘(ses-range A1 C1)’ (‘ses-insert-ses-range-click’).
 
 ‘C-c C-s’
      Keyboard version (‘ses-insert-ses-range’).
 
    If you delete the FROM or TO cell for a range, the nearest
 still-existing cell is used instead.  If you delete the entire range,
-the formula relocator will delete the ses-range from the formula.
+the formula relocator will delete the ‘ses-range’ from the formula.
 
    If you insert a new row just beyond the end of a one-column range, or
 a new column just beyond a one-row range, the new cell is included in
@@ -837,14 +853,14 @@ some useful functions to call from your formulas:
 ‘(ses-delete-blanks &rest ARGS)’
      Returns a list from which all blank cells (value is either ‘nil’ or
      ’*skip*) have been deleted.  Order of args is reverted.  Please
-     note that ‘ses-range’ has a ‘!’ modifier that allows to remove
+     note that ‘ses-range’ has a ‘!’ modifier that enables removing
      blanks, so it is possible to write:
           (ses-range A1 A5 !)
      instead of
           (apply 'ses-delete-blanks (ses-range A1 A5 <))
 
 ‘(ses+ &rest ARGS)’
-     Sum of non-blank arguments.
+     Sum of non-blank arguments taken in reverse order.
 
 ‘(ses-average LIST)’
      Average of non-blank elements in LIST.  Here the list is passed as
@@ -857,8 +873,9 @@ File: ses.info,  Node: More on cell printing,  Next: Import and export,  Prev: S
 =========================
 
 Special cell values:
-   • nil prints the same as "", but allows previous cell to spill over.
-   • ’*skip* replaces nil when the previous cell actually does spill
+   • ‘nil’ prints typically the same as "", but allows previous cell to
+     spill over.
+   • ’*skip* replaces ‘nil’ when the previous cell actually does spill
      over; nothing is printed for it.
    • ’*error* indicates that the formula signaled an error instead of
      producing a value: the print cell is filled with hash marks (#).
@@ -887,11 +904,13 @@ tabs, so these are replaced with question marks.
      this to undo the effect of ‘t’.
 
    When a printer function signals an error, the fallback printer
-‘ses-prin1’ is substituted.  This is useful when your column printer is
+‘ses-prin1’ is substituted.  This is useful when your printer is
 numeric-only and you use a string as a cell value.  Note that the
-standard default printer is ‘"%.7g"’ which is numeric-only, so cells
-that are empty of contain strings will use the fallback printer.  ‘c’ on
-such cells will display “Format specifier doesn’t match argument type”.
+standard default printer is ‘"%.7g"’ which is numeric-only, so cells for
+which the standard default printer applies, and that are not empty and
+do not contain a number will use the fallback printer ‘ses-prin1’, for
+instance cells that contain strings will do that.  ‘c’ on such cells
+will display “Format specifier doesn’t match argument type”.
 
 
 File: ses.info,  Node: Import and export,  Next: Virus protection,  Prev: More on cell printing,  Up: Advanced Features
@@ -922,11 +941,11 @@ spreadsheet, it receives a “needs safety check” marking.  Later, when
 the formula or printer is evaluated for the first time, it is checked
 for safety using the ‘unsafep’ predicate; if found to be “possibly
 unsafe”, the questionable formula or printer is displayed and you must
-press Y to approve it or N to use a substitute.  The substitute always
-signals an error.
+press ‘Y’ to approve it or ‘N’ to use a substitute.  The substitute
+always signals an error.
 
    Formulas or printers that you type in are checked immediately for
-safety.  If found to be possibly unsafe and you press N to disapprove,
+safety.  If found to be possibly unsafe and you press ‘N’ to disapprove,
 the action is canceled and the old formula or printer will remain.
 
    Besides viruses (which try to copy themselves to other files),
@@ -958,8 +977,8 @@ supports this organization via the ‘ses-select’ function.
 
    Example of use:
      (ses-average (ses-select (ses-range A1 A5) 'Smith (ses-range B1 B5)))
-   This computes the average of the B column values for those rows whose
-A column value is the symbol ’Smith.
+   This computes the average of the ‘B’ column values for those rows
+whose ‘A’ column value is the symbol ‘'Smith’.
 
    Arguably one could specify only FROMRANGE plus TO-ROW-OFFSET and
 TO-COLUMN-OFFSET.  The TORANGE is stated explicitly to ensure that the
@@ -980,7 +999,7 @@ File: ses.info,  Node: For Gurus,  Next: Index,  Prev: Advanced Features,  Up: T
 * Nonrelocatable references::
 * The data area::
 * Buffer-local variables in spreadsheets::
-* Uses of defadvice in SES::
+* Uses of advice-add in SES::
 
 
 File: ses.info,  Node: Deferred updates,  Next: Nonrelocatable references,  Up: For Gurus
@@ -992,11 +1011,12 @@ To save time by avoiding redundant computations, cells that need
 recalculation due to changes in other cells are added to a set.  At the
 end of the command, each cell in the set is recalculated once.  This can
 create a new set of cells that need recalculation.  The process is
-repeated until either the set is empty or it stops changing (due to
-circular references among the cells).  In extreme cases, you might see
-progress messages of the form “Recalculating...  (NNN cells left)”.  If
-you interrupt the calculation using ‘C-g’, the spreadsheet will be left
-in an inconsistent state, so use ‘C-_’ or ‘C-c C-l’ to fix it.
+repeated until either the set is empty or a circular references are
+detected.  In extreme cases, and notably if a circular cell reference is
+under detection, you might see progress messages of the form
+“Recalculating...  (NNN cells left)”.  If you interrupt the calculation
+using ‘C-g’, the spreadsheet will be left in an inconsistent state, so
+use ‘C-_’ or ‘C-c C-l’ to fix it.
 
    To save even more time by avoiding redundant writes, cells that have
 changes are added to a set instead of being written immediately to the
@@ -1008,9 +1028,9 @@ to wait.
 
    SES uses ‘run-with-idle-timer’ to move the cell underline when Emacs
 will be scrolling the buffer after the end of a command, and also to
-narrow and underline after ‘C-x C-v’.  This is visible as a momentary
-glitch after C-x C-v and certain scrolling commands.  You can type ahead
-without worrying about the glitch.
+narrow and underline after visiting a file.  This may be visible as a
+momentary glitch after visiting and certain scrolling commands.  You can
+type ahead without worrying about the glitch.
 
 
 File: ses.info,  Node: Nonrelocatable references,  Next: The data area,  Prev: Deferred updates,  Up: For Gurus
@@ -1021,23 +1041,23 @@ File: ses.info,  Node: Nonrelocatable references,  Next: The data area,  Prev: D
 ‘C-y’ relocates all cell-references in a pasted formula, while ‘C-u C-y’
 relocates none of the cell-references.  What about mixed cases?
 
-   The best way is to rename cells that you do not want to be
+   The best way is to rename cells that you do _not_ want to be
 relocatable by using ‘ses-rename-cell’.  Cells that do not have an
 A1-like name style are not relocated on yank.  Using this method, the
 concerned cells won’t be relocated whatever formula they appear in.
 Please note however that when a formula contains some range ‘(ses-range
 CELL1 CELL2)’ then in the yanked formula each range bound CELL1 and
 CELL2 are relocated, or not, independently, depending on whether they
-are A1-like or renamed.
+are ‘A1’-like or renamed.
 
    An alternative method is to use
      (symbol-value 'B3)
    to make an “absolute reference”.  The formula relocator skips over
 quoted things, so this will not be relocated when pasted or when
-rows/columns are inserted/deleted.  However, B3 will not be recorded as
-a dependency of this cell, so this cell will not be updated
-automatically when B3 is changed, this is why using ‘ses-rename-cell’ is
-most of the time preferable.
+rows/columns are inserted/deleted.  However, ‘B3’ will not be recorded
+as a dependency of this cell, so this cell will not be updated
+automatically when ‘B3’ is changed, this is why using ‘ses-rename-cell’
+is most of the time preferable.
 
    The variables ‘row’ and ‘col’ are dynamically bound while a cell
 formula is being evaluated.  You can use
@@ -1051,12 +1071,13 @@ File: ses.info,  Node: The data area,  Next: Buffer-local variables in spreadshe
 5.3 The data area
 =================
 
-Begins with an 014 character, followed by sets of cell-definition macros
-for each row, followed by the set of local printer definitions, followed
-by column-widths, column-printers, default-printer, and header-row.
-Then there’s the global parameters (file-format ID, row count, column
-count, local printer count) and the local variables (specifying SES mode
-for the buffer, etc.).
+Begins with an form feed character (whose ASCII code is 014 in octal
+notation), followed by sets of cell-definition macros for each row,
+followed by the set of local printer definitions, followed by
+column-widths, column-printers, default-printer, and header-row.  Then
+there’s the global parameters (file-format ID, row count, column count,
+local printer count) and the local variables (specifying SES mode for
+the buffer, etc.).
 
    When a SES file is loaded, first the global parameters are loaded,
 then the entire data area is ‘eval’ed, and finally the local variables
@@ -1069,15 +1090,15 @@ the spreadsheet data structures (this does not update the print area,
 use, e.g., ‘C-c C-l’ for that).
 
    The data area is maintained as an image of spreadsheet data
-structures that area stored in buffer-local variables.  If the data area
-gets messed up, you can try reconstructing the data area from the data
-structures:
+structures as stored in buffer-local variables from initially loading
+the area.  If the data area gets messed up in the sequel, you can try
+reconstructing the data area from the data structures:
 
 ‘C-c M-C-l’
      (‘ses-reconstruct-all’).
 
 
-File: ses.info,  Node: Buffer-local variables in spreadsheets,  Next: Uses of defadvice in SES,  Prev: The data area,  Up: For Gurus
+File: ses.info,  Node: Buffer-local variables in spreadsheets,  Next: Uses of advice-add in SES,  Prev: The data area,  Up: For Gurus
 
 5.4 Buffer-local variables in spreadsheets
 ==========================================
@@ -1086,7 +1107,7 @@ You can add additional local variables to the list at the bottom of the
 data area, such as hidden constants you want to refer to in your
 formulas.
 
-   You can override the variable ‘ses--symbolic-formulas’ to be a list
+   You can initialize the variable ‘ses--symbolic-formulas’ to be a list
 of symbols (as parenthesized strings) to show as completions for the ‘'’
 command.  This initial completions list is used instead of the actual
 set of symbols-as-formulas in the spreadsheet.
@@ -1109,24 +1130,19 @@ avoid virus warnings, each function used in a formula needs
      (put 'your-function-name 'safe-function t)
 
 
-File: ses.info,  Node: Uses of defadvice in SES,  Prev: Buffer-local variables in spreadsheets,  Up: For Gurus
+File: ses.info,  Node: Uses of advice-add in SES,  Prev: Buffer-local variables in spreadsheets,  Up: For Gurus
 
-5.5 Uses of defadvice in SES
-============================
-
-‘undo-more’
-     Defines a new undo element format (FUN .  ARGS), which means “undo
-     by applying FUN to ARGS”.  For spreadsheet buffers, it allows undos
-     in the data area even though that’s outside the narrowing.
+5.5 Uses of advice-add in SES
+=============================
 
 ‘copy-region-as-kill’
      When copying from the print area of a spreadsheet, treat the region
-     as a rectangle and attach each cell’s formula and printer as ’ses
+     as a rectangle and attach each cell’s formula and printer as ‘'ses’
      properties.
 
 ‘yank’
      When yanking into the print area of a spreadsheet, first try to
-     yank as cells (if the yank text has ’ses properties), then as
+     yank as cells (if the yank text has ‘'ses’ properties), then as
      tab-separated formulas, then (if all else fails) as a single
      formula for the current cell.
 
@@ -1146,6 +1162,8 @@ Index
 * adding rows or columns:                Resizing.             (line  6)
 * advanced features:                     Advanced Features.    (line  6)
 * advanced features <1>:                 For Gurus.            (line  6)
+* advice-add:                            Uses of advice-add in SES.
+                                                               (line  6)
 * basic commands:                        The Basics.           (line  6)
 * buffer-local variables:                Buffer-local variables in spreadsheets.
                                                                (line  6)
@@ -1158,13 +1176,11 @@ Index
 * clipboard-yank:                        Copy/cut/paste.       (line  6)
 * column, adding or removing:            Resizing.             (line  6)
 * copy:                                  Copy/cut/paste.       (line  6)
-* copy-region-as-kill:                   Uses of defadvice in SES.
+* copy-region-as-kill:                   Uses of advice-add in SES.
                                                                (line  6)
 * customizing:                           Customizing SES.      (line  6)
 * cut:                                   Copy/cut/paste.       (line  6)
 * data area:                             The data area.        (line  6)
-* defadvice:                             Uses of defadvice in SES.
-                                                               (line  6)
 * deferred updates:                      Deferred updates.     (line  6)
 * deleting rows or columns:              Resizing.             (line  6)
 * details and summary:                   Spreadsheets with details and summary.
@@ -1199,7 +1215,7 @@ Index
 * resizing spreadsheets:                 Resizing.             (line  6)
 * row, adding or removing:               Resizing.             (line  6)
 * run-with-idle-timer:                   Deferred updates.     (line  6)
-* safe-functions:                        Customizing SES.      (line 38)
+* safe-functions:                        Customizing SES.      (line 39)
 * ses+:                                  Standard formula functions.
                                                                (line  6)
 * ses-append-row-jump-first-column:      Resizing.             (line  6)
@@ -1234,17 +1250,17 @@ Index
 * ses-insert-ses-range:                  Ranges in formulas.   (line  6)
 * ses-insert-ses-range-click:            Ranges in formulas.   (line  6)
 * ses-jump:                              The Basics.           (line  6)
-* ses-jump-cell-name-function:           Customizing SES.      (line 14)
-* ses-jump-prefix-function:              Customizing SES.      (line 25)
+* ses-jump-cell-name-function:           Customizing SES.      (line 15)
+* ses-jump-prefix-function:              Customizing SES.      (line 26)
 * ses-kill-override:                     Copy/cut/paste.       (line  6)
 * ses-mark-column:                       The Basics.           (line  6)
 * ses-mark-row:                          The Basics.           (line  6)
 * ses-mark-whole-buffer:                 The Basics.           (line  6)
-* ses-mode-hook:                         Customizing SES.      (line 35)
+* ses-mode-hook:                         Customizing SES.      (line 36)
 * ses-prin1:                             Standard printer functions.
                                                                (line 26)
 * ses-prin1 <1>:                         More on cell printing.
-                                                               (line 36)
+                                                               (line 37)
 * ses-read-cell:                         Formulas.             (line  6)
 * ses-read-cell-printer:                 Configuring what printer function applies.
                                                                (line 11)
@@ -1282,8 +1298,6 @@ Index
                                                                (line  6)
 * to:                                    Ranges in formulas.   (line  6)
 * tutorial:                              Quick Tutorial.       (line  6)
-* undo-more:                             Uses of defadvice in SES.
-                                                               (line  6)
 * updates, deferred:                     Deferred updates.     (line  6)
 * values:                                Formulas.             (line  6)
 * variables, buffer-local:               Buffer-local variables in spreadsheets.
@@ -1291,7 +1305,7 @@ Index
 * virus protection:                      Virus protection.     (line  6)
 * widen:                                 The print area.       (line  6)
 * yank:                                  Copy/cut/paste.       (line  6)
-* yank <1>:                              Uses of defadvice in SES.
+* yank <1>:                              Uses of advice-add in SES.
                                                                (line  6)
 
 
@@ -1301,17 +1315,17 @@ Acknowledgments
 ***************
 
 Coding by:
-     Jonathan Yavner, Stefan Monnier, Shigeru Fukaya
+     Jonathan Yavner, Stefan Monnier, Shigeru Fukaya, Vincent Belaïche
 
 Texinfo manual by:
-     Jonathan Yavner, Brad Collins
+     Jonathan Yavner, Brad Collins, Vincent Belaïche
 
 Ideas from:
      Christoph Conrad, CyberBob, Syver Enstad, Ami Fischman, Thomas
      Gehrlein, Chris F.A. Johnson, Yusong Li, Juri Linkov, Harald Maier,
      Alan Nash, François Pinard, Pedro Pinto, Stefan Reichör, Oliver
      Scholz, Richard M. Stallman, Luc Teirlinck, J. Otto Tennant,
-     Jean-Philippe Theberge
+     Jean-Philippe Theberge, Andrés Ramírez
 
 
 File: ses.info,  Node: GNU Free Documentation License,  Prev: Acknowledgments,  Up: Top
@@ -1798,39 +1812,39 @@ their use in free software.
 
 
 Tag Table:
-Node: Top890
-Node: Sales Pitch2432
-Node: Quick Tutorial3272
-Node: The Basics6119
-Node: Formulas7992
-Node: Resizing9645
-Node: Printer functions10867
-Node: Various kinds of printer functions11311
-Node: Configuring what printer function applies12621
-Node: Standard printer functions13900
-Node: Local printer functions14801
-Node: Writing a lambda printer function16347
-Node: Clearing cells19072
-Node: Copy/cut/paste19427
-Node: Customizing SES21759
-Node: Advanced Features24454
-Node: The print area25862
-Node: Ranges in formulas26549
-Node: Sorting by column30003
-Node: Standard formula functions30954
-Node: More on cell printing31912
-Node: Import and export33988
-Node: Virus protection34613
-Node: Spreadsheets with details and summary36038
-Node: For Gurus37251
-Node: Deferred updates37513
-Node: Nonrelocatable references39055
-Node: The data area40584
-Node: Buffer-local variables in spreadsheets41903
-Node: Uses of defadvice in SES43381
-Node: Index44229
-Node: Acknowledgments55516
-Node: GNU Free Documentation License56093
+Node: Top892
+Node: Sales Pitch2434
+Node: Quick Tutorial3283
+Node: The Basics6601
+Node: Formulas8502
+Node: Resizing10151
+Node: Printer functions11373
+Node: Various kinds of printer functions11817
+Node: Configuring what printer function applies13146
+Node: Standard printer functions14425
+Node: Local printer functions15359
+Node: Writing a lambda printer function16926
+Node: Clearing cells19984
+Node: Copy/cut/paste20339
+Node: Customizing SES22681
+Node: Advanced Features25450
+Node: The print area26851
+Node: Ranges in formulas27538
+Node: Sorting by column31012
+Node: Standard formula functions31963
+Node: More on cell printing32944
+Node: Import and export35175
+Node: Virus protection35800
+Node: Spreadsheets with details and summary37243
+Node: For Gurus38472
+Node: Deferred updates38735
+Node: Nonrelocatable references40317
+Node: The data area41866
+Node: Buffer-local variables in spreadsheets43275
+Node: Uses of advice-add in SES44756
+Node: Index45383
+Node: Acknowledgments56533
+Node: GNU Free Documentation License57166
 
 End Tag Table
 

@@ -1,7 +1,7 @@
-This is smtpmail.info, produced by makeinfo version 6.8 from
+This is smtpmail.info, produced by makeinfo version 7.0.3 from
 smtpmail.texi.
 
-Copyright © 2003–2024 Free Software Foundation, Inc.
+Copyright © 2003–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -24,7 +24,7 @@ File: smtpmail.info,  Node: Top,  Next: How Mail Works,  Up: (dir)
 Emacs SMTP Library
 ******************
 
-Copyright © 2003–2024 Free Software Foundation, Inc.
+Copyright © 2003–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -199,7 +199,8 @@ send mail via a server and the SMTP server reports back that it requires
 authentication, Emacs (version 24.1 and later) prompts you for the user
 name and password to use, and then offers to save the information.  By
 default, Emacs stores authentication information in a file
-‘~/.authinfo’.
+‘~/.authinfo’, but this can be changed by customizing ‘auth-sources’
+(*note Persisting Authinfo: (emacs)Authentication.).
 
    Some SMTP servers may bandwidth-limit (or deny) requests from clients
 that try to post without authorization—even if they later do supply that
@@ -873,24 +874,24 @@ File: smtpmail.info,  Node: Index,  Prev: GNU Free Documentation License,  Up: T
  [index ]
 * Menu:
 
-* authinfo:                              Authentication.       (line 23)
+* authinfo:                              Authentication.       (line 24)
 * certificates:                          Encryption.           (line 26)
-* CRAM-MD5:                              Authentication.       (line 43)
+* CRAM-MD5:                              Authentication.       (line 44)
 * Dialup connection:                     Queued delivery.      (line  6)
 * IMAP:                                  How Mail Works.       (line 35)
 * ISP:                                   How Mail Works.       (line 20)
 * keys:                                  Encryption.           (line 26)
-* LOGIN:                                 Authentication.       (line 43)
+* LOGIN:                                 Authentication.       (line 44)
 * Mail Submission:                       Emacs Speaks SMTP.    (line 62)
 * MDA:                                   How Mail Works.       (line 26)
 * MTA:                                   How Mail Works.       (line  6)
 * MUA:                                   How Mail Works.       (line 14)
-* OAuth 2.0:                             Authentication.       (line 43)
-* OAuth2:                                Authentication.       (line 43)
+* OAuth 2.0:                             Authentication.       (line 44)
+* OAuth2:                                Authentication.       (line 44)
 * password:                              Authentication.       (line  6)
-* PLAIN:                                 Authentication.       (line 43)
+* PLAIN:                                 Authentication.       (line 44)
 * POP3:                                  How Mail Works.       (line 35)
-* SASL:                                  Authentication.       (line 43)
+* SASL:                                  Authentication.       (line 44)
 * SMTP:                                  How Mail Works.       (line  6)
 * SSL:                                   Encryption.           (line  6)
 * STARTTLS:                              Encryption.           (line  6)
@@ -913,10 +914,10 @@ File: smtpmail.info,  Node: Index,  Prev: GNU Free Documentation License,  Up: T
 * smtpmail-retries:                      Server workarounds.   (line 10)
 * smtpmail-send-queued-mail:             Queued delivery.      (line 33)
 * smtpmail-sendto-domain:                Server workarounds.   (line 24)
-* smtpmail-servers-requiring-authorization: Authentication.    (line 17)
+* smtpmail-servers-requiring-authorization: Authentication.    (line 18)
 * smtpmail-smtp-server:                  Emacs Speaks SMTP.    (line 43)
 * smtpmail-smtp-service:                 Emacs Speaks SMTP.    (line 68)
-* smtpmail-smtp-user:                    Authentication.       (line 36)
+* smtpmail-smtp-user:                    Authentication.       (line 37)
 * smtpmail-store-queue-variables:        Queued delivery.      (line 21)
 * smtpmail-stream-type:                  Encryption.           (line 15)
 * SMTPSERVER:                            Emacs Speaks SMTP.    (line 43)
@@ -924,17 +925,17 @@ File: smtpmail.info,  Node: Index,  Prev: GNU Free Documentation License,  Up: T
 
 
 Tag Table:
-Node: Top857
-Node: How Mail Works2179
-Node: Emacs Speaks SMTP4961
-Node: Authentication8605
-Node: Encryption11357
-Ref: Encryption-Footnote-113017
-Node: Queued delivery13064
-Node: Server workarounds14852
-Node: Debugging16415
-Node: GNU Free Documentation License17592
-Node: Index42925
+Node: Top859
+Node: How Mail Works2181
+Node: Emacs Speaks SMTP4963
+Node: Authentication8607
+Node: Encryption11470
+Ref: Encryption-Footnote-113130
+Node: Queued delivery13177
+Node: Server workarounds14965
+Node: Debugging16528
+Node: GNU Free Documentation License17705
+Node: Index43038
 
 End Tag Table
 

@@ -1,9 +1,9 @@
-This is emacs-gnutls.info, produced by makeinfo version 6.8 from
+This is emacs-gnutls.info, produced by makeinfo version 7.0.3 from
 emacs-gnutls.texi.
 
 This file describes the Emacs GnuTLS integration.
 
-   Copyright © 2012–2024 Free Software Foundation, Inc.
+   Copyright © 2012–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -34,7 +34,7 @@ files and the ‘gnutls.el’ Emacs Lisp library.
 
    This file describes the Emacs GnuTLS integration.
 
-   Copyright © 2012–2024 Free Software Foundation, Inc.
+   Copyright © 2012–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -735,13 +735,13 @@ Variable Index
 
 
 Tag Table:
-Node: Top910
-Node: Overview2167
-Node: Help For Users2895
-Node: Help For Developers7131
-Node: GNU Free Documentation License10124
-Node: Function Index35498
-Node: Variable Index35965
+Node: Top912
+Node: Overview2169
+Node: Help For Users2897
+Node: Help For Developers7133
+Node: GNU Free Documentation License10126
+Node: Function Index35500
+Node: Variable Index35967
 
 End Tag Table
 

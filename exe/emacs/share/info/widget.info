@@ -1,6 +1,7 @@
-This is widget.info, produced by makeinfo version 6.8 from widget.texi.
+This is widget.info, produced by makeinfo version 7.0.3 from
+widget.texi.
 
-Copyright © 2000–2024 Free Software Foundation, Inc.
+Copyright © 2000–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -24,7 +25,7 @@ File: widget.info,  Node: Top,  Next: Introduction,  Up: (dir)
 The Emacs Widget Library
 ************************
 
-Copyright © 2000–2024 Free Software Foundation, Inc.
+Copyright © 2000–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -720,6 +721,10 @@ of its own, active when events happen at that widget.
 ‘S-<TAB>’
       -- Command: widget-backward &optional count
           Move point COUNT buttons or editing fields backward.
+
+By default, tabbing can put point on an inactive widget.  To skip over
+inactive widgets when tabbing, set the user option
+‘widget-skip-inactive’ to a non-‘nil’ value.  *Note Customization::.
 
    When editing an ‘editable-field’ widget, the following commands are
 available:
@@ -2924,6 +2929,15 @@ for the end user.
  -- Face: widget-inactive
      Face used for inactive widgets.
 
+ -- Face: widget-unselected
+     Face used for unselected widgets.  This face is also used on the
+     text labels of radio-button and checkbox widgets.
+
+     The default value inherits from the ‘widget-inactive’ face.  If you
+     want to visually distinguish the labels of unselected active
+     radio-button or checkbox widgets from the labels of unselected
+     inactive widgets, customize this face to a non-default value.
+
  -- User Option: widget-mouse-face
      Face used for highlighting a button when the mouse pointer moves
      across it.
@@ -2971,6 +2985,14 @@ for the end user.
      If non-‘nil’, toggle when there are just two options.
 
      By default, its value is ‘nil’.
+
+ -- User Option: widget-skip-inactive
+     If non-‘nil’, skip over inactive widgets when using ‘<TAB>’
+     (‘widget-forward’) or ‘S-<TAB>’ (‘widget-backward’, also bound to
+     ‘M-<TAB>’) to navigate between widgets.
+
+     By default, its value is ‘nil’ and tabbing does not skip over
+     inactive widgets.
 
  -- User Option: widget-documentation-links
      If non-‘nil’, add hyperlinks to documentation strings.
@@ -3646,7 +3668,7 @@ variables, and widgets described in this manual.
 * menu-tag keyword:                      default.             (line 218)
 * menu-tag-get keyword:                  default.             (line 222)
 * mouse-2 (on button widgets):           Widgets and the Buffer.
-                                                              (line  73)
+                                                              (line  77)
 * mouse-down-action keyword:             default.             (line 372)
 * mouse-face-get keyword:                default.             (line 299)
 * must-match keyword:                    atoms.               (line  51)
@@ -3730,16 +3752,16 @@ variables, and widgets described in this manual.
 * widget-browse-other-window:            Inspecting Widgets.  (line  17)
 * widget-button:                         Customization.       (line  15)
 * widget-button-click:                   Widgets and the Buffer.
-                                                              (line  74)
+                                                              (line  78)
 * widget-button-click <1>:               Widgets and the Buffer.
-                                                              (line  74)
-* widget-button-prefix:                  Customization.       (line  49)
+                                                              (line  78)
+* widget-button-prefix:                  Customization.       (line  58)
 * widget-button-press:                   Widgets and the Buffer.
-                                                              (line  64)
+                                                              (line  68)
 * widget-button-press <1>:               Widgets and the Buffer.
-                                                              (line  64)
+                                                              (line  68)
 * widget-button-pressed:                 Customization.       (line  18)
-* widget-button-suffix:                  Customization.       (line  52)
+* widget-button-suffix:                  Customization.       (line  61)
 * widget-child-validate:                 Working with Widgets.
                                                               (line 124)
 * widget-child-value-get:                Working with Widgets.
@@ -3750,10 +3772,10 @@ variables, and widgets described in this manual.
                                                               (line 130)
 * widget-children-value-delete:          Setting Up the Buffer.
                                                               (line  89)
-* widget-choice-toggle:                  Customization.       (line  67)
+* widget-choice-toggle:                  Customization.       (line  76)
 * widget-choose:                         Utilities.           (line  24)
 * widget-complete:                       Widgets and the Buffer.
-                                                              (line  51)
+                                                              (line  55)
 * widget-convert:                        Setting Up the Buffer.
                                                               (line 111)
 * widget-copy:                           Setting Up the Buffer.
@@ -3774,16 +3796,16 @@ variables, and widgets described in this manual.
                                                               (line  86)
 * widget-describe:                       Inspecting Widgets.  (line  29)
 * widget-documentation:                  Customization.       (line   9)
-* widget-documentation-link-p:           Customization.       (line  79)
-* widget-documentation-link-regexp:      Customization.       (line  75)
-* widget-documentation-link-type:        Customization.       (line  86)
-* widget-documentation-links:            Customization.       (line  72)
+* widget-documentation-link-p:           Customization.       (line  96)
+* widget-documentation-link-regexp:      Customization.       (line  92)
+* widget-documentation-link-type:        Customization.       (line 103)
+* widget-documentation-links:            Customization.       (line  89)
 * widget-echo-help:                      Utilities.           (line  58)
 * widget-end-of-line:                    Widgets and the Buffer.
-                                                              (line  41)
+                                                              (line  45)
 * widget-field:                          Customization.       (line  12)
 * widget-field-activate:                 Widgets and the Buffer.
-                                                              (line  56)
+                                                              (line  60)
 * widget-field-at:                       Working with Widgets.
                                                               (line  38)
 * widget-field-keymap:                   editable-field.      (line  28)
@@ -3794,9 +3816,9 @@ variables, and widgets described in this manual.
 * widget-get-sibling:                    Utilities.           (line  20)
 * widget-global-map:                     Widgets and the Buffer.
                                                               (line  20)
-* widget-image-conversion:               Customization.       (line  41)
-* widget-image-directory:                Customization.       (line  30)
-* widget-image-enable:                   Customization.       (line  37)
+* widget-image-conversion:               Customization.       (line  50)
+* widget-image-directory:                Customization.       (line  39)
+* widget-image-enable:                   Customization.       (line  46)
 * widget-image-find:                     Utilities.           (line  44)
 * widget-image-insert:                   Utilities.           (line  52)
 * widget-inactive:                       Customization.       (line  21)
@@ -3805,27 +3827,28 @@ variables, and widgets described in this manual.
 * widget-keymap:                         Widgets and the Buffer.
                                                               (line   9)
 * widget-kill-line:                      Widgets and the Buffer.
-                                                              (line  46)
-* widget-link-prefix:                    Customization.       (line  61)
-* widget-link-suffix:                    Customization.       (line  64)
+                                                              (line  50)
+* widget-link-prefix:                    Customization.       (line  70)
+* widget-link-suffix:                    Customization.       (line  73)
 * widget-member:                         Working with Widgets.
                                                               (line  21)
-* widget-menu-max-shortcuts:             Customization.       (line  98)
-* widget-menu-max-size:                  Customization.       (line  92)
-* widget-menu-minibuffer-flag:           Customization.       (line 104)
+* widget-menu-max-shortcuts:             Customization.       (line 115)
+* widget-menu-max-size:                  Customization.       (line 109)
+* widget-menu-minibuffer-flag:           Customization.       (line 121)
 * widget-minor-mode:                     Widget Minor Mode.   (line  10)
 * widget-minor-mode-keymap:              Widget Minor Mode.   (line  14)
-* widget-mouse-face:                     Customization.       (line  24)
+* widget-mouse-face:                     Customization.       (line  33)
 * widget-parent-action:                  Working with Widgets.
                                                               (line 119)
 * widget-prompt-value:                   Utilities.           (line   9)
-* widget-push-button-prefix:             Customization.       (line  55)
-* widget-push-button-suffix:             Customization.       (line  58)
+* widget-push-button-prefix:             Customization.       (line  64)
+* widget-push-button-suffix:             Customization.       (line  67)
 * widget-put:                            Working with Widgets.
                                                               (line  31)
 * widget-radio-add-item:                 radio-button-choice. (line  89)
 * widget-setup:                          Setting Up the Buffer.
                                                               (line  73)
+* widget-skip-inactive:                  Customization.       (line  81)
 * widget-text-keymap:                    text.                (line  18)
 * widget-type:                           Working with Widgets.
                                                               (line  14)
@@ -3839,6 +3862,7 @@ variables, and widgets described in this manual.
                                                               (line 147)
 * widget-types-copy:                     Working with Widgets.
                                                               (line 141)
+* widget-unselected:                     Customization.       (line  24)
 * widget-value:                          Working with Widgets.
                                                               (line  47)
 * widget-value-convert-widget:           Working with Widgets.
@@ -3855,53 +3879,53 @@ variables, and widgets described in this manual.
 
 
 Tag Table:
-Node: Top909
-Node: Introduction2008
-Node: User Interface5216
-Node: Programming Example10004
-Node: Widgets Basics14255
-Node: Setting Up the Buffer17066
-Node: Working with Widgets23031
-Node: Widgets and the Buffer28764
-Node: Widget Gallery31551
-Node: Basic Types32143
-Node: default32652
-Node: item47699
-Node: link49064
-Node: url-link50524
-Node: info-link51817
-Node: function-link52457
-Node: variable-link53113
-Node: face-link53749
-Node: file-link54343
-Node: emacs-library-link55035
-Node: emacs-commentary-link55700
-Node: push-button56440
-Node: editable-field57559
-Node: text60954
-Node: menu-choice61516
-Node: radio-button-choice64303
-Node: choice-item67089
-Node: toggle67797
-Node: radio-button-toggle70003
-Node: checkbox70843
-Node: checklist71905
-Node: editable-list74576
-Node: group77513
-Node: documentation-string78718
-Node: Sexp Types79611
-Node: constants79957
-Node: generic81362
-Node: atoms82775
-Node: composite87078
-Node: Defining New Widgets92150
-Node: Inspecting Widgets95935
-Node: Widget Minor Mode97487
-Node: Utilities98057
-Node: Customization100737
-Node: Widget Wishlist104019
-Node: GNU Free Documentation License105260
-Node: Index130615
+Node: Top911
+Node: Introduction2010
+Node: User Interface5218
+Node: Programming Example10006
+Node: Widgets Basics14257
+Node: Setting Up the Buffer17068
+Node: Working with Widgets23033
+Node: Widgets and the Buffer28766
+Node: Widget Gallery31753
+Node: Basic Types32345
+Node: default32854
+Node: item47901
+Node: link49266
+Node: url-link50726
+Node: info-link52019
+Node: function-link52659
+Node: variable-link53315
+Node: face-link53951
+Node: file-link54545
+Node: emacs-library-link55237
+Node: emacs-commentary-link55902
+Node: push-button56642
+Node: editable-field57761
+Node: text61156
+Node: menu-choice61718
+Node: radio-button-choice64505
+Node: choice-item67291
+Node: toggle67999
+Node: radio-button-toggle70205
+Node: checkbox71045
+Node: checklist72107
+Node: editable-list74778
+Node: group77715
+Node: documentation-string78920
+Node: Sexp Types79813
+Node: constants80159
+Node: generic81564
+Node: atoms82977
+Node: composite87280
+Node: Defining New Widgets92352
+Node: Inspecting Widgets96137
+Node: Widget Minor Mode97689
+Node: Utilities98259
+Node: Customization100939
+Node: Widget Wishlist104993
+Node: GNU Free Documentation License106234
+Node: Index131589
 
 End Tag Table
 

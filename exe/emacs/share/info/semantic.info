@@ -1,9 +1,9 @@
-This is semantic.info, produced by makeinfo version 6.8 from
+This is semantic.info, produced by makeinfo version 7.0.3 from
 semantic.texi.
 
 This manual documents the Semantic library and utilities.
 
-   Copyright © 1999–2024 Free Software Foundation, Inc.
+   Copyright © 1999–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -40,7 +40,7 @@ use the mailing list cedet-semantic@sourceforge.net via the URL:
 
    This manual documents the Semantic library and utilities.
 
-   Copyright © 1999–2024 Free Software Foundation, Inc.
+   Copyright © 1999–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -1605,9 +1605,10 @@ problem to try and solve.
      with the search results format.
 
 ‘semantic/db-ref.el’
-     Tracks crossreferences.  Cross references are needed when buffer is
-     reparsed, and must alert other tables that any dependent caches may
-     need to be flushed.  References are in the form of include files.
+     Tracks cross-references.  Cross-references are needed when buffer
+     is reparsed, and must alert other tables that any dependent caches
+     may need to be flushed.  References are in the form of include
+     files.
 
 
 File: semantic.info,  Node: Analyzer Internals,  Next: Tools,  Prev: Semanticdb Internals,  Up: Semantic Internals
@@ -2376,47 +2377,47 @@ Index
 
 
 Tag Table:
-Node: Top919
-Node: Introduction2484
-Node: Semantic Components5795
-Node: Using Semantic7152
-Node: Semantic mode8588
-Node: Semantic mode user commands11543
-Node: SemanticDB14882
-Node: Semanticdb Tag Storage16274
-Node: Semanticdb Search Configuration18917
-Node: Search Throttle20383
-Node: Semanticdb Roots22634
-Node: Include paths24148
-Node: Semanticdb search debugging commands25465
-Node: Changing Backends26869
-Node: Create System Databases27627
-Node: Idle Scheduler28266
-Node: Reparsing Options29983
-Node: Idle Working Options31484
-Node: Debugging Idle Time Issues32767
-Node: Idle Summary Mode33453
-Node: Idle Completions Mode35101
-Node: Analyzer38173
-Node: Smart Completion38725
-Node: Smart Summary41930
-Node: Smart Jump42847
-Node: Analyzer Debug43912
-Node: Speedbar50488
-Node: SymRef51776
-Node: MRU Bookmarks53804
-Node: Sticky Func Mode54771
-Node: Highlight Func Mode55950
-Node: Tag Decoration Mode57015
-Node: Semantic Internals61123
-Node: Parser code61794
-Node: Tag handling63467
-Node: Semanticdb Internals65193
-Node: Analyzer Internals67365
-Node: Tools69384
-Node: Glossary70880
-Node: GNU Free Documentation License72936
-Node: Index98286
+Node: Top921
+Node: Introduction2486
+Node: Semantic Components5797
+Node: Using Semantic7154
+Node: Semantic mode8590
+Node: Semantic mode user commands11545
+Node: SemanticDB14884
+Node: Semanticdb Tag Storage16276
+Node: Semanticdb Search Configuration18919
+Node: Search Throttle20385
+Node: Semanticdb Roots22636
+Node: Include paths24150
+Node: Semanticdb search debugging commands25467
+Node: Changing Backends26871
+Node: Create System Databases27629
+Node: Idle Scheduler28268
+Node: Reparsing Options29985
+Node: Idle Working Options31486
+Node: Debugging Idle Time Issues32769
+Node: Idle Summary Mode33455
+Node: Idle Completions Mode35103
+Node: Analyzer38175
+Node: Smart Completion38727
+Node: Smart Summary41932
+Node: Smart Jump42849
+Node: Analyzer Debug43914
+Node: Speedbar50490
+Node: SymRef51778
+Node: MRU Bookmarks53806
+Node: Sticky Func Mode54773
+Node: Highlight Func Mode55952
+Node: Tag Decoration Mode57017
+Node: Semantic Internals61125
+Node: Parser code61796
+Node: Tag handling63469
+Node: Semanticdb Internals65195
+Node: Analyzer Internals67373
+Node: Tools69392
+Node: Glossary70888
+Node: GNU Free Documentation License72944
+Node: Index98294
 
 End Tag Table
 

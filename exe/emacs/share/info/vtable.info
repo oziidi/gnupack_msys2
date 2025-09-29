@@ -1,8 +1,9 @@
-This is vtable.info, produced by makeinfo version 6.8 from vtable.texi.
+This is vtable.info, produced by makeinfo version 7.0.3 from
+vtable.texi.
 
 This file documents the GNU vtable.el package.
 
-   Copyright © 2022–2024 Free Software Foundation, Inc.
+   Copyright © 2022–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -27,7 +28,7 @@ vtable
 
 This file documents the GNU vtable.el package.
 
-   Copyright © 2022–2024 Free Software Foundation, Inc.
+   Copyright © 2022–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -256,11 +257,17 @@ zero), and a table argument (the object returned by ‘make-vtable’).
           The name of the column.
 
      ‘width’
-          The width of the column.  This is either a number (the width
-          of that many ‘x’ characters in the table’s face), or a string
-          on the form ‘XeX’, where X is a number of ‘x’ characters, or a
-          string on the form ‘XpX’ (denoting a number of pixels), or a
-          string on the form ‘X%’ (a percentage of the window’s width).
+          The width of the column.  This can be one of the following:
+
+          a number N
+          a string of the form ‘Nex’
+               The width of N ‘x’ characters in the table’s face.
+
+          a string of the form ‘Npx’
+               N pixels.
+
+          a string of the form ‘N%’
+               N percent of the window’s width.
 
      ‘min-width’
           This uses the same format as ‘width’, but specifies the
@@ -305,7 +312,9 @@ zero), and a table argument (the object returned by ‘make-vtable’).
                width (in pixels), and TABLE is the table.
 
      ‘align’
-          Should be either ‘right’ or ‘left’.
+          Should be either ‘right’ or ‘left’.  If not specified,
+          numerical values will be flushed to the right, and all other
+          values will be flushed to the left.
 
 ‘:getter’
      If given, this is a function that should return the values to use
@@ -391,14 +400,19 @@ zero), and a table argument (the object returned by ‘make-vtable’).
      object is.
 
 ‘:separator-width’
-     The width of the blank space between columns.
+     The width of the blank space between columns.  If not specified, it
+     defaults to 1.
 
 ‘:divider-width’
 ‘:divider’
      You can have a divider inserted between the columns.  This can
      either be specified by using ‘:divider’, which should be a string
      to be displayed between the columns, or ‘:divider-width’, which
-     specifies the width of the space to be used as the divider.
+     specifies the width of the space to be used as the divider, in
+     units of characters of the face used to display the table.  If not
+     specified, ‘:divider’ defaults to ‘nil’, but specifying
+     ‘:divider-width’ effectively sets the divider to a whitespace
+     string of that width.
 
 ‘:sort-by’
      This should be a list of tuples, and specifies how the table is to
@@ -502,17 +516,34 @@ chapter describes functions for such interaction.
  -- Function: vtable-remove-object table object
      Remove OBJECT from TABLE.  This also updates the displayed table.
 
- -- Function: vtable-insert-object table object &optional after-object
-     Insert OBJECT into TABLE.  If AFTER-OBJECT, insert the object after
-     this object; otherwise append to TABLE.  This also updates the
-     displayed table.
+ -- Function: vtable-insert-object table object &optional location
+          before
+     Insert OBJECT into TABLE.  LOCATION should be an object in the
+     table, the new object is inserted after this object, or before it
+     if BEFORE is non-‘nil’.  If LOCATION is ‘nil’, OBJECT is appended
+     to TABLE, or prepended if BEFORE is non-‘nil’.
 
- -- Function: vtable-update-object table object old-object
-     Change OLD-OBJECT into OBJECT in TABLE.  This also updates the
-     displayed table.
+     LOCATION can also be an integer, a zero-based index into the table.
+     In this case, OBJECT is inserted at that index.  If the index is
+     out of range, OBJECT is prepended to TABLE if the index is too
+     small, or appended if it is too large.  In this case, BEFORE is
+     ignored.
+
+     This also updates the displayed table.
+
+ -- Function: vtable-update-object table object &optional old-object
+     Update OBJECT’s representation in TABLE.  Optional argument
+     OLD-OBJECT, if non-‘nil’, means to replace OLD-OBJECT with OBJECT
+     and redisplay the associated row in the table.  In either case, if
+     the existing object is not found in the table (being compared with
+     ‘equal’), signal an error.
 
      This has the same effect as calling ‘vtable-remove-object’ and then
      ‘vtable-insert-object’, but is more efficient.
+
+     Note a limitation: if the table’s buffer is not in a visible
+     window, or if its window has changed width since it was updated,
+     updating the table is not possible, and an error is signaled.
 
  -- Function: vtable-column table index
      Return the column name of the INDEXth column in TABLE.
@@ -1008,20 +1039,20 @@ Index
  [index ]
 * Menu:
 
-* column-displayer:                      Making A Table.      (line  87)
-* column-formatter:                      Making A Table.      (line  78)
-* column-getter:                         Making A Table.      (line  71)
-* displayer:                             Making A Table.      (line 124)
+* column-displayer:                      Making A Table.      (line  93)
+* column-formatter:                      Making A Table.      (line  84)
+* column-getter:                         Making A Table.      (line  77)
+* displayer:                             Making A Table.      (line 132)
 * displayer of a vtable:                 Concepts.            (line  18)
-* formatter:                             Making A Table.      (line 112)
+* formatter:                             Making A Table.      (line 120)
 * formatter of a vtable:                 Concepts.            (line  14)
-* getter:                                Making A Table.      (line  99)
+* getter:                                Making A Table.      (line 107)
 * getter of a vtable:                    Concepts.            (line   9)
 * make-vtable:                           Making A Table.      (line   6)
 * vtable:                                Concepts.            (line   6)
 * vtable commands:                       Commands.            (line   6)
 * vtable-beginning-of-table:             Interface Functions. (line  36)
-* vtable-column:                         Interface Functions. (line  57)
+* vtable-column:                         Interface Functions. (line  74)
 * vtable-current-column:                 Interface Functions. (line  19)
 * vtable-current-object:                 Interface Functions. (line  14)
 * vtable-current-table:                  Interface Functions. (line  11)
@@ -1029,7 +1060,7 @@ Index
 * vtable-goto-column:                    Interface Functions. (line  32)
 * vtable-goto-object:                    Interface Functions. (line  27)
 * vtable-goto-table:                     Interface Functions. (line  22)
-* vtable-insert:                         Making A Table.      (line 201)
+* vtable-insert:                         Making A Table.      (line 214)
 * vtable-insert-object:                  Interface Functions. (line  45)
 * vtable-narrow-current-column:          Commands.            (line  16)
 * vtable-next-column:                    Commands.            (line  25)
@@ -1037,20 +1068,20 @@ Index
 * vtable-remove-object:                  Interface Functions. (line  42)
 * vtable-revert-command:                 Commands.            (line  28)
 * vtable-sort-by-current-column:         Commands.            (line   8)
-* vtable-update-object:                  Interface Functions. (line  50)
+* vtable-update-object:                  Interface Functions. (line  60)
 * vtable-widen-current-column:           Commands.            (line  19)
 
 
 
 Tag Table:
-Node: Top877
-Node: Introduction1982
-Node: Concepts7192
-Node: Making A Table8553
-Node: Commands17823
-Node: Interface Functions18871
-Node: GNU Free Documentation License21157
-Node: Index46498
+Node: Top879
+Node: Introduction1984
+Node: Concepts7194
+Node: Making A Table8555
+Node: Commands18225
+Node: Interface Functions19273
+Node: GNU Free Documentation License22471
+Node: Index47812
 
 End Tag Table
 

@@ -1,8 +1,8 @@
-This is sasl.info, produced by makeinfo version 6.8 from sasl.texi.
+This is sasl.info, produced by makeinfo version 7.0.3 from sasl.texi.
 
 This file describes the Emacs SASL library, version 0.2.
 
-   Copyright © 2000, 2004–2024 Free Software Foundation, Inc.
+   Copyright © 2000, 2004–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -30,7 +30,7 @@ between applications using different protocols.
 
    This file describes the Emacs SASL library, version 0.2.
 
-   Copyright © 2000, 2004–2024 Free Software Foundation, Inc.
+   Copyright © 2000, 2004–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
@@ -755,18 +755,18 @@ Variable Index
 
 
 Tag Table:
-Node: Top901
-Node: Overview2150
-Node: How to use2841
-Node: Data types3229
-Node: Mechanisms3537
-Node: Clients4910
-Node: Steps6230
-Node: Back end drivers7433
-Node: GNU Free Documentation License7604
-Node: Index32958
-Node: Function Index33076
-Node: Variable Index34313
+Node: Top903
+Node: Overview2152
+Node: How to use2843
+Node: Data types3231
+Node: Mechanisms3539
+Node: Clients4912
+Node: Steps6232
+Node: Back end drivers7435
+Node: GNU Free Documentation License7606
+Node: Index32960
+Node: Function Index33078
+Node: Variable Index34315
 
 End Tag Table
 

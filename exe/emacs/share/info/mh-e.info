@@ -1,8 +1,8 @@
-This is mh-e.info, produced by makeinfo version 6.8 from mh-e.texi.
+This is mh-e.info, produced by makeinfo version 7.0.3 from mh-e.texi.
 
 This is version 8.6 of ‘The MH-E Manual’, last updated 2016-04-29.
 
-   Copyright © 1995, 2001–2003, 2005–2024 Free Software Foundation, Inc.
+   Copyright © 1995, 2001–2003, 2005–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of either:
@@ -35,7 +35,7 @@ The MH-E Manual
 
 This is version 8.6 of ‘The MH-E Manual’, last updated 2016-04-29.
 
-   Copyright © 1995, 2001–2003, 2005–2024 Free Software Foundation, Inc.
+   Copyright © 1995, 2001–2003, 2005–2025 Free Software Foundation, Inc.
 
      Permission is granted to copy, distribute and/or modify this
      document under the terms of either:
@@ -519,7 +519,7 @@ is MH-Folder.
 Use ‘n’ or ‘p’ to move the cursor to your test message and type <RET> to
 read your message.  You should see something like:
 
-       3 t08/24 root       received fax files on Wed Aug 24 11:00:13 PDT 1
+       3 t08/24 root       received fax files on Wed Aug 24 11:00:13 -0700 1
      # 4+t08/24 To:wohler  Test<<This is a test message to get the wheels
 
      -:%%  {+inbox/select} 4 msgs (1-4)   Bot L4     (MH-Folder Show)---------
@@ -8537,7 +8537,6 @@ Concept Index
 * Gnus <1>:                              Reading PGP.         (line   6)
 * Gnus <2>:                              Procmail.            (line   6)
 * gnus-w3m:                              HTML.                (line  29)
-* gnuserv:                               Incorporating Mail.  (line  71)
 * GPG:                                   Reading PGP.         (line   6)
 * grep:                                  Searching.           (line 191)
 * grep <1>:                              Searching.           (line 336)
@@ -9269,137 +9268,137 @@ Concept Index
 
 
 Tag Table:
-Node: Top1266
-Node: Preface4920
-Ref: Preface-Footnote-16957
-Node: Conventions7116
-Node: Getting Started12817
-Ref: Getting Started-Footnote-117027
-Ref: Getting Started-Footnote-217353
-Node: Tour Through MH-E17468
-Ref: Tour Through MH-E-Footnote-118212
-Node: Sending Mail Tour18454
-Ref: Sending Mail Tour-Footnote-120092
-Ref: Sending Mail Tour-Footnote-220180
-Ref: Sending Mail Tour-Footnote-320366
-Node: Reading Mail Tour20521
-Ref: Reading Mail Tour-Footnote-122179
-Ref: Reading Mail Tour-Footnote-222303
-Node: Processing Mail Tour22445
-Node: Leaving MH-E26430
-Node: More About MH-E27664
-Node: Using This Manual29168
-Ref: Using This Manual-Footnote-131989
-Ref: Using This Manual-Footnote-232077
-Node: Options32275
-Node: Ranges34292
-Node: Folder Selection36123
-Node: Incorporating Mail38480
-Node: Reading Mail42598
-Ref: Reading Mail-Footnote-151369
-Node: Viewing51646
-Ref: Viewing-Footnote-160215
-Ref: Viewing-Footnote-260289
-Ref: Viewing-Footnote-360423
-Node: Viewing Attachments60659
-Ref: Viewing Attachments-Footnote-168717
-Ref: Viewing Attachments-Footnote-268841
-Ref: Viewing Attachments-Footnote-368957
-Ref: Viewing Attachments-Footnote-469171
-Node: HTML69241
-Node: Digests73617
-Ref: Digests-Footnote-175081
-Node: Reading PGP75190
-Ref: Reading PGP-Footnote-177873
-Ref: Reading PGP-Footnote-278070
-Node: Printing78249
-Ref: Printing-Footnote-181149
-Node: Files and Pipes81257
-Node: Navigating83285
-Node: Miscellaneous Commands and Options86097
-Ref: Miscellaneous Commands and Options-Footnote-190085
-Ref: Miscellaneous Commands and Options-Footnote-290399
-Node: Folders90488
-Ref: Folders-Footnote-1106245
-Ref: Folders-Footnote-2106464
-Ref: Folders-Footnote-3106539
-Node: Sending Mail106654
-Node: Composing109846
-Ref: Composing-Footnote-1113278
-Ref: Composing-Footnote-2113532
-Node: Replying113712
-Ref: Replying-Footnote-1116558
-Node: Forwarding116676
-Ref: Forwarding-Footnote-1118685
-Node: Redistributing118802
-Ref: Redistributing-Footnote-1120004
-Ref: Redistributing-Footnote-2120127
-Node: Editing Again120247
-Node: Editing Drafts121378
-Node: Editing Message128605
-Node: Inserting Letter133639
-Ref: Inserting Letter-Footnote-1137725
-Ref: Inserting Letter-Footnote-2137848
-Ref: Inserting Letter-Footnote-3138029
-Node: Inserting Messages138131
-Node: Signature139017
-Node: Picture140763
-Node: Adding Attachments142364
-Ref: Adding Attachments-Footnote-1152347
-Ref: Adding Attachments-Footnote-2152429
-Ref: Adding Attachments-Footnote-3152545
-Ref: Adding Attachments-Footnote-4152602
-Ref: Adding Attachments-Footnote-5152689
-Node: Sending PGP152805
-Node: Checking Recipients154412
-Ref: Checking Recipients-Footnote-1154841
-Node: Sending Message154975
-Ref: Sending Message-Footnote-1155938
-Node: Killing Draft156058
-Node: Aliases156464
-Ref: Aliases-Footnote-1165824
-Node: Identities165922
-Ref: Identities-Footnote-1173266
-Node: Speedbar173319
-Ref: Speedbar-Footnote-1175885
-Node: Menu Bar176017
-Node: Tool Bar177009
-Node: Searching178586
-Node: Threading190838
-Ref: Threading-Footnote-1193881
-Node: Limits194480
-Ref: Limits-Footnote-1196485
-Node: Sequences196620
-Ref: Sequences-Footnote-1202080
-Ref: Sequences-Footnote-2202192
-Ref: Sequences-Footnote-3202226
-Node: Junk202349
-Ref: Junk-Footnote-1213283
-Node: Miscellaneous213623
-Node: Scan Line Formats215526
-Ref: Scan Line Formats-Footnote-1232261
-Ref: Scan Line Formats-Footnote-2232403
-Node: Procmail232527
-Ref: Procmail-Footnote-1238007
-Ref: Procmail-Footnote-2238154
-Ref: Procmail-Footnote-3238316
-Node: Odds and Ends238398
-Node: Bug Reports238816
-Node: Mailing Lists239303
-Node: MH FAQ and Support239821
-Node: Getting MH-E240550
-Node: History241643
-Node: From Brian Reid242319
-Ref: From Brian Reid-Footnote-1243475
-Node: From Jim Larus243956
-Node: From Stephen Gildea246250
-Node: From Bill Wohler248425
-Node: GFDL250363
-Node: GPL275680
-Node: Key Index313434
-Node: Command Index348927
-Node: Option Index378216
-Node: Concept Index410772
+Node: Top1268
+Node: Preface4922
+Ref: Preface-Footnote-16959
+Node: Conventions7118
+Node: Getting Started12819
+Ref: Getting Started-Footnote-117029
+Ref: Getting Started-Footnote-217355
+Node: Tour Through MH-E17470
+Ref: Tour Through MH-E-Footnote-118214
+Node: Sending Mail Tour18456
+Ref: Sending Mail Tour-Footnote-120094
+Ref: Sending Mail Tour-Footnote-220182
+Ref: Sending Mail Tour-Footnote-320368
+Node: Reading Mail Tour20523
+Ref: Reading Mail Tour-Footnote-122183
+Ref: Reading Mail Tour-Footnote-222307
+Node: Processing Mail Tour22449
+Node: Leaving MH-E26434
+Node: More About MH-E27668
+Node: Using This Manual29172
+Ref: Using This Manual-Footnote-131993
+Ref: Using This Manual-Footnote-232081
+Node: Options32279
+Node: Ranges34296
+Node: Folder Selection36127
+Node: Incorporating Mail38484
+Node: Reading Mail42602
+Ref: Reading Mail-Footnote-151373
+Node: Viewing51650
+Ref: Viewing-Footnote-160219
+Ref: Viewing-Footnote-260293
+Ref: Viewing-Footnote-360427
+Node: Viewing Attachments60663
+Ref: Viewing Attachments-Footnote-168721
+Ref: Viewing Attachments-Footnote-268845
+Ref: Viewing Attachments-Footnote-368961
+Ref: Viewing Attachments-Footnote-469175
+Node: HTML69245
+Node: Digests73621
+Ref: Digests-Footnote-175085
+Node: Reading PGP75194
+Ref: Reading PGP-Footnote-177877
+Ref: Reading PGP-Footnote-278074
+Node: Printing78253
+Ref: Printing-Footnote-181153
+Node: Files and Pipes81261
+Node: Navigating83289
+Node: Miscellaneous Commands and Options86101
+Ref: Miscellaneous Commands and Options-Footnote-190089
+Ref: Miscellaneous Commands and Options-Footnote-290403
+Node: Folders90492
+Ref: Folders-Footnote-1106249
+Ref: Folders-Footnote-2106468
+Ref: Folders-Footnote-3106543
+Node: Sending Mail106658
+Node: Composing109850
+Ref: Composing-Footnote-1113282
+Ref: Composing-Footnote-2113536
+Node: Replying113716
+Ref: Replying-Footnote-1116562
+Node: Forwarding116680
+Ref: Forwarding-Footnote-1118689
+Node: Redistributing118806
+Ref: Redistributing-Footnote-1120008
+Ref: Redistributing-Footnote-2120131
+Node: Editing Again120251
+Node: Editing Drafts121382
+Node: Editing Message128609
+Node: Inserting Letter133643
+Ref: Inserting Letter-Footnote-1137729
+Ref: Inserting Letter-Footnote-2137852
+Ref: Inserting Letter-Footnote-3138033
+Node: Inserting Messages138135
+Node: Signature139021
+Node: Picture140767
+Node: Adding Attachments142368
+Ref: Adding Attachments-Footnote-1152351
+Ref: Adding Attachments-Footnote-2152433
+Ref: Adding Attachments-Footnote-3152549
+Ref: Adding Attachments-Footnote-4152606
+Ref: Adding Attachments-Footnote-5152693
+Node: Sending PGP152809
+Node: Checking Recipients154416
+Ref: Checking Recipients-Footnote-1154845
+Node: Sending Message154979
+Ref: Sending Message-Footnote-1155942
+Node: Killing Draft156062
+Node: Aliases156468
+Ref: Aliases-Footnote-1165828
+Node: Identities165926
+Ref: Identities-Footnote-1173270
+Node: Speedbar173323
+Ref: Speedbar-Footnote-1175889
+Node: Menu Bar176021
+Node: Tool Bar177013
+Node: Searching178590
+Node: Threading190842
+Ref: Threading-Footnote-1193885
+Node: Limits194484
+Ref: Limits-Footnote-1196489
+Node: Sequences196624
+Ref: Sequences-Footnote-1202084
+Ref: Sequences-Footnote-2202196
+Ref: Sequences-Footnote-3202230
+Node: Junk202353
+Ref: Junk-Footnote-1213287
+Node: Miscellaneous213627
+Node: Scan Line Formats215530
+Ref: Scan Line Formats-Footnote-1232265
+Ref: Scan Line Formats-Footnote-2232407
+Node: Procmail232531
+Ref: Procmail-Footnote-1238011
+Ref: Procmail-Footnote-2238158
+Ref: Procmail-Footnote-3238320
+Node: Odds and Ends238402
+Node: Bug Reports238820
+Node: Mailing Lists239307
+Node: MH FAQ and Support239825
+Node: Getting MH-E240554
+Node: History241647
+Node: From Brian Reid242323
+Ref: From Brian Reid-Footnote-1243479
+Node: From Jim Larus243960
+Node: From Stephen Gildea246254
+Node: From Bill Wohler248429
+Node: GFDL250367
+Node: GPL275684
+Node: Key Index313438
+Node: Command Index348931
+Node: Option Index378220
+Node: Concept Index410776
 
 End Tag Table
 
