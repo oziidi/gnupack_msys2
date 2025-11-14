@@ -618,14 +618,27 @@
 ;; (load-theme 'material t)
 (load-theme 'material-dark t)
 
+;; 20251114a: Prevent such case that font-lock-keyword-face detects "for" of "format" from occurrence
+;; ORG START "20251114a"
+;; (font-lock-add-keywords
+;;  'c-mode
+;;  '(
+;;    ("\\<if\\|for\\|while\\|(switch)\\|return\\|else\\|(do)\\|case\\|break\\|continue\\>" . font-lock-keyword-face)
+;;    ("\\<\\([a-zA-Z_]*[a-zA-Z0-9_]+\\)\\([ \t]*\\)(" 1 font-lock-function-name-face)   ;functions()
+;;    ("\\<\\([A-Z_][A-Z0-9_]*\\)\\>" 1 font-lock-constant-face)             ;CONSTANTS
+;;    )
+;;  )
+;; ORG END
+;; CHG START "20251114a"
 (font-lock-add-keywords
  'c-mode
  '(
-   ("\\<if\\|for\\|while\\|(switch)\\|return\\|else\\|(do)\\|case\\|break\\|continue\\>" . font-lock-keyword-face)
-   ("\\<\\([a-zA-Z_]*[a-zA-Z0-9_]+\\)\\([ \t]*\\)(" 1 font-lock-function-name-face)   ;functions()
+   ("\\<\\(if\\|for\\|while\\|switch\\|return\\|else\\|do\\|case\\|break\\|continue\\)\\>" . font-lock-keyword-face)
+   ("\\<\\([a-zA-Z_][a-zA-Z0-9_]*\\)\\([ \t]*\\)(" 1 font-lock-function-name-face)   ;functions()
    ("\\<\\([A-Z_][A-Z0-9_]*\\)\\>" 1 font-lock-constant-face)             ;CONSTANTS
    )
  )
+;; CHG END
 
 (if (equal custom-enabled-themes '(emacs-21))
     (progn
